@@ -42,195 +42,79 @@ and surfaces the linked purchases and receipts right from the header.
 
 ![Stock Request detail with approval flow and chatter](docs/readme/detail.png)
 
-## Installation Guide
+## Documentation
 
-### Requirements
+| Guide | What it covers |
+| --- | --- |
+| **[INSTALLATION.md](INSTALLATION.md)** | Install on Ubuntu/Debian — local development and production (dedicated user, systemd, nginx + TLS), plus troubleshooting |
+| [docs/deployment.md](docs/deployment.md) | Docker, Docker Compose, and Kubernetes deployment, worker sizing, backups, and upgrades |
+| [CONTRIBUTING.md](CONTRIBUTING.md) | Pull request guidelines |
+| [SECURITY.md](SECURITY.md) | Reporting security issues |
 
-- Python 3.10 through 3.14
-- PostgreSQL 13 or newer
-- A Python virtual environment for local development
-- System libraries required by dependencies such as `lxml`, `Pillow`, and
-  `psycopg2`
-- `wkhtmltopdf` for PDF report generation
-- Node.js and npm are useful when working on web assets and JavaScript tests
+## Quickstart (local development)
 
-### 1. Clone the repository
+Requires Python 3.10+, PostgreSQL 13+, and `wkhtmltopdf`. For system packages,
+production, and containers, see **[INSTALLATION.md](INSTALLATION.md)**.
 
 ```bash
+# 1. Clone and enter the project
 git clone https://github.com/NextOSP/nwos.git
 cd nwos
-```
 
-### 2. Install system packages
-
-On macOS with Homebrew:
-
-```bash
-brew install python@3.10 postgresql wkhtmltopdf node
-```
-
-On Debian/Ubuntu:
-
-```bash
-sudo apt update
-sudo apt install python3.10 python3.10-venv python3-dev build-essential \
-    libxml2-dev libxslt1-dev libldap2-dev libsasl2-dev libjpeg-dev \
-    zlib1g-dev libpq-dev postgresql wkhtmltopdf nodejs npm
-```
-
-### 3. Create a Python environment
-
-```bash
-python3.10 -m venv venv
+# 2. Python virtual environment
+python3 -m venv venv
 source venv/bin/activate
-python -m pip install --upgrade pip wheel setuptools
+pip install --upgrade pip wheel setuptools
 pip install -r requirements.txt
+
+# 3. PostgreSQL role that can create databases
+sudo -u postgres createuser --createdb --pwprompt nwos
 ```
 
-### 4. Create a PostgreSQL user and database
-
-For local development, create a database user that can create databases:
-
-```bash
-createuser --createdb --pwprompt nwos
-createdb --owner=nwos nwos
-```
-
-If you already use your operating-system PostgreSQL user, you can create only
-the database:
-
-```bash
-createdb nwos
-```
-
-### 5. Create a local configuration file
-
-Create `nwos.local.conf` for machine-specific settings:
+Create `nwos.local.conf` (machine-specific; do not commit real passwords):
 
 ```ini
 [options]
 addons_path = addons,nwos/addons
-data_dir = data
-db_host = localhost
-db_port = 5432
-db_user = nwos
+data_dir    = data
+db_host     = localhost
+db_port     = 5432
+db_user     = nwos
 db_password = change-me
-db_name = nwos
-http_port = 7073
-logfile = logs/nwos.log
+db_name     = nwos
+http_port   = 8069
+logfile     = logs/nwos.log
 ```
 
-Do not commit local configuration files with real passwords.
-
-### 6. Initialize the database
+Initialize the database, then start the server:
 
 ```bash
 ./nwos-bin server -c nwos.local.conf -i base --stop-after-init
-```
-
-### 7. Start the server
-
-```bash
 ./nwos-bin server -c nwos.local.conf
 ```
 
-Open the web client at:
-
-```text
-http://localhost:7073
-```
-
-The default master password is configured in your local config. Change it before
-using a shared or public environment.
-
-### 8. Install business apps
+Open <http://localhost:8069> and log in (default `admin` / `admin` on a fresh
+database). Install business apps at any time:
 
 ```bash
 ./nwos-bin server -c nwos.local.conf -i sale,stock,purchase,account
 ```
 
-To update installed modules after pulling code changes:
-
-```bash
-./nwos-bin server -c nwos.local.conf -u sale,stock,purchase,account --stop-after-init
-```
-
 ## Container Deployment
 
-NextOSP includes a production-oriented `Dockerfile`, a local
-`docker-compose.yml`, and starter Kubernetes manifests in `k8s/`.
-
-Build the image:
-
-```bash
-docker build -t nextosp/nwos:local .
-```
-
-Run PostgreSQL and NextOSP locally with Docker Compose:
+Run PostgreSQL, web, and cron together with Docker Compose, then open
+<http://localhost:7073>:
 
 ```bash
 docker compose up --build
-```
-
-Initialize the Compose database:
-
-```bash
 docker compose run --rm web server -c /etc/nwos/nwos.conf -d nwos -i base --stop-after-init
 ```
 
-Deploy the starter Kubernetes stack:
-
-```bash
-kubectl apply -f k8s/namespace.yaml
-kubectl apply -f k8s/secret.yaml
-kubectl apply -f k8s/configmap.yaml
-kubectl apply -f k8s/postgres.yaml
-kubectl apply -f k8s/web.yaml
-kubectl apply -f k8s/cron.yaml
-kubectl apply -f k8s/backup-cronjob.yaml
-kubectl apply -f k8s/ingress.yaml
-```
-
-Before using Kubernetes in production, change secrets, image names, ingress
-hostnames, storage classes, and resource sizes. See
-[docs/deployment.md](docs/deployment.md) for container, Compose, Kubernetes,
-backup, and production notes.
-
-## Configuration
-
-Most runtime options can be provided on the command line or in an INI-style
-configuration file:
-
-```ini
-[options]
-addons_path = addons,nwos/addons
-data_dir = data
-db_host = localhost
-db_port = 5432
-db_user = nwos
-db_password = nwos
-http_port = 7073
-```
-
-Start with a configuration file by passing `-c`:
-
-```bash
-./nwos-bin server -c nwos.conf
-```
-
-Do not commit production secrets or environment-specific paths.
-
-## Troubleshooting
-
-- `psycopg2` build errors usually mean `libpq-dev` or PostgreSQL headers are
-  missing.
-- `lxml` build errors usually mean `libxml2-dev` and `libxslt1-dev` are
-  missing.
-- If the server cannot connect to PostgreSQL, check `db_host`, `db_port`,
-  `db_user`, and `db_password` in the config file.
-- If port `7073` is already used, change `http_port` in the config file.
-- If PDFs do not render, verify that `wkhtmltopdf` is installed and available
-  on `PATH`.
+Production-oriented Kubernetes manifests live in [`k8s/`](k8s/) (web/cron
+Deployments, PostgreSQL, Ingress, and backup/restore Jobs). See
+**[INSTALLATION.md](INSTALLATION.md)** for the Docker, Kubernetes, and
+**backup & restore** procedures, and [docs/deployment.md](docs/deployment.md)
+for the full deployment reference (worker sizing, topology, upgrades).
 
 ## Common Development Tasks
 
