@@ -1,0 +1,13 @@
+account_accountant
+account_asset
+account_audit_trail
+account_budget
+account_daily_reports
+account_debit_note_sequence
+account_edi_ubl_cii_tax_extension
+account_followup
+account_lock
+account_payment_term
+account_peppol_selfbilling
+accounting_pdf_reports
+fiscal_year

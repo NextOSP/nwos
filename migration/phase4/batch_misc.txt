@@ -1,0 +1,14 @@
+auth_totp_mail_enforce
+auto_database_backup
+auto_database_backup_dropbox
+auto_database_backup_ftp
+auto_database_backup_google_drive
+auto_database_backup_onedrive
+auto_database_backup_sftp
+base_api
+hr_contract
+hr_work_entry_contract
+im_livechat_mail_bot
+openapi
+test_base_import
+test_xlsx_export
