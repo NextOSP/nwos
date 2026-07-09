@@ -5,7 +5,8 @@ This guide installs **NextOSP** (`nwos`, v4.0) from source on **Ubuntu** and
 deployment following best practices (dedicated system user, virtualenv, systemd
 service, nginx reverse proxy, hardened configuration).
 
-It also covers **Docker**, **Kubernetes** (production), and **backup & restore**.
+It also covers **Docker**, **Kubernetes** (production), **reverse proxying with
+Nginx Proxy Manager**, and **backup & restore**.
 
 > NextOSP is an open-source ERP/CRM platform built on a Python server and
 > PostgreSQL. See the [README](README.md) for a feature overview, and
@@ -15,6 +16,7 @@ It also covers **Docker**, **Kubernetes** (production), and **backup & restore**
 ## Contents
 
 - [Requirements](#requirements)
+- [Quick install (automated)](#quick-install-automated)
 - [1. Install system packages](#1-install-system-packages)
 - [2. Set up PostgreSQL](#2-set-up-postgresql)
 - [3. Get the source & create a virtualenv](#3-get-the-source--create-a-virtualenv)
@@ -23,7 +25,9 @@ It also covers **Docker**, **Kubernetes** (production), and **backup & restore**
 - [Path B — Production (native)](#path-b--production-native)
 - [Path C — Docker](#path-c--docker)
 - [Path D — Kubernetes (production)](#path-d--kubernetes-production)
+- [Reverse proxy with Nginx Proxy Manager](#reverse-proxy-with-nginx-proxy-manager)
 - [Backup & restore](#backup--restore)
+- [Managing NextOSP (the nwos CLI)](#managing-nextosp-the-nwos-cli)
 - [Verify the installation](#verify-the-installation)
 - [Troubleshooting](#troubleshooting)
 
@@ -47,7 +51,37 @@ It also covers **Docker**, **Kubernetes** (production), and **backup & restore**
 - **[Path D — Kubernetes (production)](#path-d--kubernetes-production):** web/cron
   Deployments, PostgreSQL, Ingress, and backup Jobs.
 
-Then set up [Backup & restore](#backup--restore) for any production deployment.
+Put any deployment behind TLS with a [reverse proxy](#reverse-proxy-with-nginx-proxy-manager)
+(Nginx Proxy Manager or plain nginx), and set up
+[Backup & restore](#backup--restore) for production.
+
+---
+
+## Quick install (automated)
+
+On a fresh Ubuntu/Debian host, the bundled **[`quick-install.sh`](quick-install.sh)**
+does everything: detects the OS, installs prerequisites, asks a few questions in
+a text (whiptail) menu, and deploys **either** a Docker stack — optionally
+fronted by **Nginx Proxy Manager** for GUI-managed TLS — **or** a native systemd
+service. It finishes by installing the [`nwos` CLI](#managing-nextosp-the-nwos-cli).
+
+```bash
+# From a checkout
+sudo ./quick-install.sh
+
+# Or straight from GitHub
+curl -fsSL https://raw.githubusercontent.com/NextOSP/nwos/master/quick-install.sh | sudo bash
+```
+
+It's interactive by default. To run unattended, preset any `NWOS_*` variables
+(secrets are auto-generated when omitted):
+
+```bash
+sudo NWOS_MODE=docker NWOS_WITH_NPM=yes NWOS_DOMAIN=erp.example.com \
+     NWOS_APPS=sale,stock,account ./quick-install.sh
+```
+
+Want to understand or customize each step instead? Follow the manual paths below.
 
 ---
 
@@ -399,21 +433,112 @@ sudo certbot --nginx -d erp.example.com
 
 ## Path C — Docker
 
-The repo ships a `Dockerfile` and a Compose stack (`db` + `web` + `cron`). From
-the project root:
+The stack is three services — `db` (PostgreSQL) + `web` (HTTP workers) + `cron`
+(scheduler) — and the container defaults to port **7073**. You can run a
+**prebuilt image** from the registry (no source checkout needed) or **build from
+source**.
 
-```bash
-docker compose up --build
+### C.1 Run the published image (no clone)
+
+CI publishes the image to the **GitHub Container Registry (GHCR)** on every push
+to `master`:
+
+- `ghcr.io/nextosp/nwos:latest`
+- `ghcr.io/nextosp/nwos:<commit-sha>` — pin this in production
+
+The image is self-contained (code, addons, and a default `/etc/nwos/nwos.conf`
+are baked in), so you only need a Compose file — no repository clone. Save this
+as `docker-compose.yml` in an empty directory:
+
+```yaml
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: nwos
+      POSTGRES_USER: nwos
+      POSTGRES_PASSWORD: nwos
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U nwos -d nwos"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  web:
+    image: ghcr.io/nextosp/nwos:latest      # or pin :<commit-sha>
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "7073:7073"
+    command: ["server", "-c", "/etc/nwos/nwos.conf", "--max-cron-threads=0"]
+    volumes:
+      - nwos-data:/var/lib/nwos
+    restart: unless-stopped
+
+  cron:
+    image: ghcr.io/nextosp/nwos:latest
+    depends_on:
+      db:
+        condition: service_healthy
+    command: ["server", "-c", "/etc/nwos/nwos.conf", "--workers=0", "--max-cron-threads=2"]
+    volumes:
+      - nwos-data:/var/lib/nwos
+    restart: unless-stopped
+
+volumes:
+  db-data:
+  nwos-data:
 ```
 
-Initialize the database on first run, then open **http://localhost:7073**:
+The `db` service is named `db` because the baked config uses `db_host = db` —
+keep that name and the `web`/`cron` services resolve the database automatically
+(no bind mounts required). Pull and start:
 
 ```bash
+docker compose pull          # fetch the images from GHCR
+docker compose up -d
 docker compose run --rm web server -c /etc/nwos/nwos.conf -d nwos -i base --stop-after-init
 ```
 
-> The container defaults to port **7073**. For the image internals and Compose
-> service breakdown, see [`docs/deployment.md`](docs/deployment.md).
+<details>
+<summary><strong>Authenticating to GHCR (private packages only)</strong></summary>
+
+Public packages need no login. If the package is private, sign in with a
+Personal Access Token that has the `read:packages` scope:
+
+```bash
+echo "$GITHUB_TOKEN" | docker login ghcr.io -u <github-username> --password-stdin
+```
+
+</details>
+
+Open **http://localhost:7073**.
+
+### C.2 Build from source
+
+If you have the repository checked out, the bundled
+[`docker-compose.yml`](docker-compose.yml) both **builds** the image and tags it
+as `ghcr.io/nextosp/nwos:latest`, mounting [`docker/nwos.conf`](docker/nwos.conf)
+so you can tweak config without rebuilding:
+
+```bash
+docker compose up --build -d
+docker compose run --rm web server -c /etc/nwos/nwos.conf -d nwos -i base --stop-after-init
+```
+
+Override the image tag (e.g. to pull a pinned build instead of rebuilding) with
+the `NWOS_IMAGE` variable:
+
+```bash
+NWOS_IMAGE=ghcr.io/nextosp/nwos:<commit-sha> docker compose up -d
+```
+
+> For the image internals and the web/cron service split, see
+> [`docs/deployment.md`](docs/deployment.md).
 
 ---
 
@@ -478,6 +603,135 @@ For worker sizing, `db_maxconn` planning, TLS, and upgrade jobs, see the
 
 ---
 
+## Reverse proxy with Nginx Proxy Manager
+
+[Nginx Proxy Manager](https://nginxproxymanager.com/) (NPM) is a Docker-based
+reverse proxy with a web UI and one-click Let's Encrypt certificates. It's a
+good alternative to the hand-written nginx config in [Path B.4](#b4-nginx-reverse-proxy--tls)
+when you'd rather manage TLS and hosts from a dashboard. It works the same way
+for a native install (Path B) or a Docker install (Path C) — only the *forward
+host and port* differ.
+
+### 1. Run Nginx Proxy Manager
+
+Skip this if you already run NPM. Otherwise, a minimal stack:
+
+```yaml
+# npm-compose.yml
+services:
+  npm:
+    image: jc21/nginx-proxy-manager:latest
+    restart: unless-stopped
+    ports:
+      - "80:80"       # HTTP (ACME challenges)
+      - "443:443"     # HTTPS
+      - "81:81"       # Admin UI
+    volumes:
+      - ./npm-data:/data
+      - ./npm-letsencrypt:/etc/letsencrypt
+    networks: [proxy]
+
+networks:
+  proxy:
+    external: true
+```
+
+```bash
+docker network create proxy          # shared network (once)
+docker compose -f npm-compose.yml up -d
+```
+
+Open the admin UI at `http://<server>:81` and log in with the default
+`admin@example.com` / `changeme` (you'll be forced to change it).
+
+### 2. Make NextOSP reachable from NPM
+
+NPM must be able to reach the NextOSP HTTP port. Pick the row that matches your
+deployment:
+
+| NextOSP runs as | Forward Hostname / IP | Forward Port |
+| --- | --- | --- |
+| Docker Compose (same `proxy` network) | `web` (the compose service name) | `7073` |
+| Native on the same host as NPM | `host.docker.internal` (or the host LAN IP) | `8069` |
+| Native on another server | that server's IP/hostname | `8069` |
+
+<details>
+<summary><strong>Docker Compose: join NextOSP to the shared network</strong></summary>
+
+Add the external `proxy` network to the `web` service in `docker-compose.yml` so
+NPM can resolve `web`. Keep the app port internal — you no longer need to publish
+`7073` on the host:
+
+```yaml
+services:
+  web:
+    # ...existing config...
+    networks: [default, proxy]
+
+networks:
+  proxy:
+    external: true
+```
+
+Then `docker compose up -d`.
+
+</details>
+
+### 3. Set `proxy_mode` on NextOSP
+
+Because NPM terminates TLS and forwards plain HTTP, NextOSP must trust the
+forwarded headers. In `nwos.conf` (or `docker/nwos.conf`):
+
+```ini
+proxy_mode = True
+```
+
+Restart NextOSP after changing it.
+
+### 4. Create the Proxy Host
+
+In NPM: **Hosts → Proxy Hosts → Add Proxy Host**.
+
+**Details tab**
+
+- **Domain Names:** `erp.example.com`
+- **Scheme:** `http`
+- **Forward Hostname / IP** and **Forward Port:** from the table in step 2
+- **Cache Assets:** optional
+- **Block Common Exploits:** on
+- **Websockets Support:** **on** (required — live chat, notifications, and the
+  bus use the `/websocket` endpoint)
+
+**Advanced tab** — paste custom config for large uploads/imports and long
+report/backup requests (NPM already sends `Host`, `X-Forwarded-For`,
+`X-Real-IP`, and `X-Forwarded-Proto`, which `proxy_mode` consumes):
+
+```nginx
+client_max_body_size 100m;
+proxy_read_timeout 720s;
+proxy_connect_timeout 720s;
+proxy_send_timeout 720s;
+```
+
+**SSL tab**
+
+- **SSL Certificate:** *Request a new SSL Certificate* (Let's Encrypt)
+- **Force SSL:** on · **HTTP/2 Support:** on · **HSTS:** optional
+- Enter your email and agree to the Let's Encrypt terms, then **Save**
+
+Port 80 must be reachable from the internet for the certificate challenge to
+succeed. Once saved, browse to `https://erp.example.com`.
+
+### Other reverse proxies
+
+- **Plain nginx** (native): see [Path B.4](#b4-nginx-reverse-proxy--tls) for a
+  full server block.
+- **Traefik / Caddy / Cloudflare Tunnel:** any proxy works — forward to the
+  NextOSP HTTP port, enable WebSocket upgrades for `/websocket`, raise the body
+  size and timeouts as above, and keep `proxy_mode = True`.
+
+---
+
 ## Backup & restore
 
 A complete backup is **both** the PostgreSQL database **and** the filestore
@@ -533,6 +787,40 @@ kubectl -n nextosp scale deploy/nextosp-cron --replicas=1
 Back up the filestore with your storage provider's volume snapshots (or Velero /
 restic). See [`docs/deployment.md`](docs/deployment.md) for the full backup,
 restore, and upgrade procedures.
+
+---
+
+## Managing NextOSP (the `nwos` CLI)
+
+`quick-install.sh` installs a **`nwos`** management command — in the spirit of
+Frappe's `bench` — that wraps day-to-day operations for **both** Docker and
+native deployments. It reads `/etc/nwos/nwosctl.env` (written by the installer)
+to discover your layout, so the same commands work either way. Without the
+installer, run it from a checkout as [`./scripts/nwosctl`](scripts/nwosctl).
+
+| Command | What it does |
+| --- | --- |
+| `nwos start` · `stop` · `restart` | Control the server (systemd or compose) |
+| `nwos status` | Service / container status |
+| `nwos logs [-f]` | Show or follow logs |
+| `nwos backup [dir]` | Dump database **and** filestore (default `/var/backups/nwos`) |
+| `nwos restore <dump> [fs.tgz]` | Restore a database dump and optional filestore |
+| `nwos update` | Pull new code/image + dependencies, then restart |
+| `nwos upgrade [modules\|all]` | Apply module/schema upgrades (like `bench migrate`) |
+| `nwos install-app <mods>` | Install modules, e.g. `sale,stock,account` |
+| `nwos initdb` | Initialize a fresh database with `base` |
+| `nwos shell` · `psql` | NextOSP Python shell · database shell |
+| `nwos config` | Edit the deployment config file |
+| `nwos version` | Show deployment info and version |
+
+Examples:
+
+```bash
+nwos backup                        # → /var/backups/nwos/nwos-db-*.dump (+ filestore .tgz)
+nwos update && nwos upgrade all    # pull latest, then migrate all modules
+nwos install-app crm,project
+nwos logs -f
+```
 
 ---
 

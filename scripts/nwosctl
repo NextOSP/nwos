@@ -1,0 +1,317 @@
+#!/usr/bin/env bash
+#
+# nwos — management CLI for NextOSP (bench-style ops for native & Docker installs)
+#
+# Reads deployment facts written by quick-install.sh at /etc/nwos/nwosctl.env,
+# then dispatches lifecycle, backup/restore, and upgrade commands to either a
+# systemd + virtualenv (native) or a docker compose (docker) deployment.
+#
+set -euo pipefail
+
+# ---------------------------------------------------------------------------
+# State & defaults
+# ---------------------------------------------------------------------------
+STATE_FILE="${NWOS_STATE_FILE:-/etc/nwos/nwosctl.env}"
+
+NWOS_MODE="native"                                  # native | docker
+NWOS_DIR="$(cd "$(dirname "$0")/.." 2>/dev/null && pwd || echo /opt/nwos)"
+NWOS_CONFIG="${NWOS_DIR}/nwos.conf"
+NWOS_COMPOSE="${NWOS_DIR}/docker-compose.yml"
+NWOS_VENV="${NWOS_DIR}/venv"
+NWOS_SERVICE="nwos.service"
+NWOS_OS_USER="nwos"
+NWOS_DB_NAME="nwos"
+NWOS_DB_USER="nwos"
+NWOS_DB_HOST="localhost"
+NWOS_DB_PORT="5432"
+NWOS_DB_PASSWORD=""
+NWOS_DATA_DIR="/var/lib/nwos"
+NWOS_BACKUP_DIR="/var/backups/nwos"
+
+# shellcheck disable=SC1090
+[ -f "$STATE_FILE" ] && . "$STATE_FILE"
+
+# ---------------------------------------------------------------------------
+# Output helpers
+# ---------------------------------------------------------------------------
+if [ -t 1 ]; then
+  C_RESET='\033[0m'; C_BLUE='\033[0;34m'; C_GREEN='\033[0;32m'
+  C_YELLOW='\033[0;33m'; C_RED='\033[0;31m'; C_BOLD='\033[1m'
+else
+  C_RESET=''; C_BLUE=''; C_GREEN=''; C_YELLOW=''; C_RED=''; C_BOLD=''
+fi
+info()  { printf "${C_BLUE}==>${C_RESET} %s\n" "$*"; }
+ok()    { printf "${C_GREEN}✔${C_RESET} %s\n" "$*"; }
+warn()  { printf "${C_YELLOW}!${C_RESET} %s\n" "$*" >&2; }
+die()   { printf "${C_RED}error:${C_RESET} %s\n" "$*" >&2; exit 1; }
+
+timestamp() { date -u +%Y%m%dT%H%M%SZ; }
+
+# ---------------------------------------------------------------------------
+# Backend helpers
+# ---------------------------------------------------------------------------
+
+# docker compose against the deployment's compose file
+dc() { docker compose -f "$NWOS_COMPOSE" "$@"; }
+
+# run nwos-bin (native) as the service user, reading the deployment config
+nbin() {
+  if [ "$(id -u)" -eq 0 ] && id "$NWOS_OS_USER" >/dev/null 2>&1; then
+    sudo -u "$NWOS_OS_USER" "$NWOS_VENV/bin/python" "$NWOS_DIR/nwos-bin" "$@"
+  else
+    "$NWOS_VENV/bin/python" "$NWOS_DIR/nwos-bin" "$@"
+  fi
+}
+
+# export libpq env for direct psql/pg_dump/pg_restore (native mode)
+pg_env() {
+  export PGHOST="$NWOS_DB_HOST" PGPORT="$NWOS_DB_PORT" PGUSER="$NWOS_DB_USER"
+  [ -n "$NWOS_DB_PASSWORD" ] && export PGPASSWORD="$NWOS_DB_PASSWORD"
+}
+
+require_docker() { [ "$NWOS_MODE" = "docker" ] || die "This deployment is '$NWOS_MODE', not docker."; }
+
+# ---------------------------------------------------------------------------
+# Commands
+# ---------------------------------------------------------------------------
+
+cmd_start() {
+  if [ "$NWOS_MODE" = docker ]; then dc up -d; else systemctl start "$NWOS_SERVICE"; fi
+  ok "started"
+}
+
+cmd_stop() {
+  if [ "$NWOS_MODE" = docker ]; then dc stop; else systemctl stop "$NWOS_SERVICE"; fi
+  ok "stopped"
+}
+
+cmd_restart() {
+  if [ "$NWOS_MODE" = docker ]; then dc restart; else systemctl restart "$NWOS_SERVICE"; fi
+  ok "restarted"
+}
+
+cmd_status() {
+  if [ "$NWOS_MODE" = docker ]; then dc ps; else systemctl status "$NWOS_SERVICE" --no-pager; fi
+}
+
+cmd_logs() {
+  local follow=""
+  case "${1:-}" in -f|--follow) follow=1 ;; esac
+  if [ "$NWOS_MODE" = docker ]; then
+    if [ -n "$follow" ]; then dc logs -f --tail=100 web cron; else dc logs --tail=200 web cron; fi
+  else
+    if [ -n "$follow" ]; then journalctl -u "$NWOS_SERVICE" -f; else journalctl -u "$NWOS_SERVICE" -n 200 --no-pager; fi
+  fi
+}
+
+cmd_backup() {
+  local dir="${1:-$NWOS_BACKUP_DIR}" ts db_out fs_out
+  mkdir -p "$dir"
+  ts="$(timestamp)"
+  db_out="$dir/nwos-db-$ts.dump"
+  fs_out="$dir/nwos-filestore-$ts.tgz"
+
+  info "Backing up database → $db_out"
+  if [ "$NWOS_MODE" = docker ]; then
+    dc exec -T db pg_dump -U "$NWOS_DB_USER" -Fc --no-owner --no-acl "$NWOS_DB_NAME" > "$db_out"
+    info "Backing up filestore → $fs_out"
+    dc run --rm --no-deps -T --entrypoint sh web -c "tar czf - -C $NWOS_DATA_DIR ." > "$fs_out" 2>/dev/null || warn "filestore backup skipped"
+  else
+    pg_env
+    pg_dump -Fc --no-owner --no-acl "$NWOS_DB_NAME" > "$db_out"
+    info "Backing up filestore → $fs_out"
+    tar czf "$fs_out" -C "$NWOS_DATA_DIR" . 2>/dev/null || warn "filestore backup skipped"
+  fi
+  ok "Backup complete: $db_out"
+  ok "                 $fs_out"
+}
+
+cmd_restore() {
+  local db_dump="${1:-}" fs_tgz="${2:-}"
+  [ -n "$db_dump" ] || die "usage: nwos restore <db-dump> [filestore.tgz]"
+  [ -f "$db_dump" ] || die "not found: $db_dump"
+
+  warn "This overwrites the '$NWOS_DB_NAME' database. Ctrl-C to abort."
+  sleep 3
+  info "Stopping application..."
+  if [ "$NWOS_MODE" = docker ]; then dc stop web cron || true; else systemctl stop "$NWOS_SERVICE" || true; fi
+
+  info "Restoring database from $db_dump"
+  if [ "$NWOS_MODE" = docker ]; then
+    dc up -d db && sleep 3
+    dc exec -T db pg_restore --clean --if-exists --no-owner --no-acl -U "$NWOS_DB_USER" -d "$NWOS_DB_NAME" < "$db_dump"
+    if [ -n "$fs_tgz" ] && [ -f "$fs_tgz" ]; then
+      info "Restoring filestore from $fs_tgz"
+      dc run --rm --no-deps -T --entrypoint sh web -c "rm -rf $NWOS_DATA_DIR/* && tar xzf - -C $NWOS_DATA_DIR" < "$fs_tgz"
+    fi
+  else
+    pg_env
+    pg_restore --clean --if-exists --no-owner --no-acl -d "$NWOS_DB_NAME" < "$db_dump"
+    if [ -n "$fs_tgz" ] && [ -f "$fs_tgz" ]; then
+      info "Restoring filestore from $fs_tgz"
+      rm -rf "${NWOS_DATA_DIR:?}/"* && tar xzf "$fs_tgz" -C "$NWOS_DATA_DIR"
+      chown -R "$NWOS_OS_USER:$NWOS_OS_USER" "$NWOS_DATA_DIR" 2>/dev/null || true
+    fi
+  fi
+  info "Starting application..."
+  cmd_start
+  ok "restore complete"
+}
+
+cmd_update() {
+  # Pull new code/image and restart (no schema changes — see 'upgrade')
+  if [ "$NWOS_MODE" = docker ]; then
+    info "Pulling latest image..."
+    dc pull
+    dc up -d
+  else
+    if [ -d "$NWOS_DIR/.git" ]; then
+      info "Updating source (git pull)..."
+      git -C "$NWOS_DIR" pull --ff-only
+    else
+      warn "$NWOS_DIR is not a git checkout — skipping source pull."
+      warn "Update the code manually (redeploy/rsync), then re-run 'nwos update'."
+    fi
+    info "Updating Python dependencies..."
+    "$NWOS_VENV/bin/pip" install -q -r "$NWOS_DIR/requirements.txt"
+    cmd_restart
+  fi
+  ok "update complete — run 'nwos upgrade' if modules changed"
+}
+
+cmd_upgrade() {
+  # Apply module/schema upgrades (bench 'migrate' equivalent)
+  local mods="${1:-all}"
+  info "Upgrading modules: $mods"
+  if [ "$NWOS_MODE" = docker ]; then
+    dc stop web cron || true
+    dc run --rm web server -c /etc/nwos/nwos.conf -d "$NWOS_DB_NAME" -u "$mods" --stop-after-init
+  else
+    systemctl stop "$NWOS_SERVICE" || true
+    nbin server -c "$NWOS_CONFIG" -d "$NWOS_DB_NAME" -u "$mods" --stop-after-init
+  fi
+  cmd_start
+  ok "upgrade complete"
+}
+
+cmd_install_app() {
+  local mods="${1:-}"
+  [ -n "$mods" ] || die "usage: nwos install-app <module,module,...>"
+  info "Installing modules: $mods"
+  if [ "$NWOS_MODE" = docker ]; then
+    dc run --rm web server -c /etc/nwos/nwos.conf -d "$NWOS_DB_NAME" -i "$mods" --stop-after-init
+  else
+    nbin server -c "$NWOS_CONFIG" -d "$NWOS_DB_NAME" -i "$mods" --stop-after-init
+  fi
+  cmd_restart
+  ok "installed: $mods"
+}
+
+cmd_initdb() {
+  info "Initializing database '$NWOS_DB_NAME' with base..."
+  if [ "$NWOS_MODE" = docker ]; then
+    dc run --rm web server -c /etc/nwos/nwos.conf -d "$NWOS_DB_NAME" -i base --stop-after-init
+  else
+    nbin server -c "$NWOS_CONFIG" -d "$NWOS_DB_NAME" -i base --stop-after-init
+  fi
+  ok "database initialized"
+}
+
+cmd_shell() {
+  if [ "$NWOS_MODE" = docker ]; then
+    dc run --rm web shell -c /etc/nwos/nwos.conf -d "$NWOS_DB_NAME"
+  else
+    nbin shell -c "$NWOS_CONFIG" -d "$NWOS_DB_NAME"
+  fi
+}
+
+cmd_psql() {
+  if [ "$NWOS_MODE" = docker ]; then
+    dc exec db psql -U "$NWOS_DB_USER" -d "$NWOS_DB_NAME"
+  else
+    pg_env; psql -d "$NWOS_DB_NAME"
+  fi
+}
+
+cmd_config() {
+  local ed="${EDITOR:-nano}"
+  if [ "$NWOS_MODE" = docker ]; then "$ed" "$NWOS_DIR/docker/nwos.conf"; else "$ed" "$NWOS_CONFIG"; fi
+}
+
+cmd_version() {
+  printf "%bNextOSP deployment%b\n" "$C_BOLD" "$C_RESET"
+  printf "  mode:     %s\n" "$NWOS_MODE"
+  printf "  dir:      %s\n" "$NWOS_DIR"
+  printf "  database: %s@%s:%s/%s\n" "$NWOS_DB_USER" "$NWOS_DB_HOST" "$NWOS_DB_PORT" "$NWOS_DB_NAME"
+  if [ "$NWOS_MODE" = docker ]; then
+    dc images web 2>/dev/null | tail -n +1 || true
+  else
+    "$NWOS_VENV/bin/python" - <<PY 2>/dev/null || true
+import sys; sys.path.insert(0, "$NWOS_DIR")
+from nwos import release
+print("  version: ", release.version)
+PY
+  fi
+}
+
+usage() {
+  cat <<'EOF'
+nwos — NextOSP management CLI
+
+Usage: nwos <command> [args]
+
+Lifecycle
+  start                 Start the server
+  stop                  Stop the server
+  restart               Restart the server
+  status                Show service/container status
+  logs [-f]             Show (or follow) logs
+
+Data
+  backup [dir]          Dump database + filestore (default /var/backups/nwos)
+  restore <dump> [fs]   Restore database dump (and optional filestore .tgz)
+
+Maintenance
+  update                Pull new code/image + deps, then restart
+  upgrade [modules|all] Apply module/schema upgrades (default: all)
+  install-app <mods>    Install module(s), e.g. sale,stock,account
+  initdb                Initialize a fresh database with base
+
+Utilities
+  shell                 Open the NextOSP Python shell
+  psql                  Open a psql session on the database
+  config                Edit the deployment config file
+  version               Show deployment info and version
+  help                  Show this help
+
+Deployment mode and paths are read from /etc/nwos/nwosctl.env
+EOF
+}
+
+# ---------------------------------------------------------------------------
+# Dispatch
+# ---------------------------------------------------------------------------
+main() {
+  local cmd="${1:-help}"; shift || true
+  case "$cmd" in
+    start)        cmd_start "$@" ;;
+    stop)         cmd_stop "$@" ;;
+    restart)      cmd_restart "$@" ;;
+    status)       cmd_status "$@" ;;
+    logs)         cmd_logs "$@" ;;
+    backup)       cmd_backup "$@" ;;
+    restore)      cmd_restore "$@" ;;
+    update)       cmd_update "$@" ;;
+    upgrade|migrate) cmd_upgrade "$@" ;;
+    install-app|install) cmd_install_app "$@" ;;
+    initdb)       cmd_initdb "$@" ;;
+    shell|console) cmd_shell "$@" ;;
+    psql|db)      cmd_psql "$@" ;;
+    config)       cmd_config "$@" ;;
+    version|--version|-v) cmd_version "$@" ;;
+    help|--help|-h) usage ;;
+    *) warn "unknown command: $cmd"; usage; exit 1 ;;
+  esac
+}
+
+main "$@"

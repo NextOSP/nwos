@@ -59,6 +59,21 @@ so KPIs and reports match the rest of the interface out of the box.
 | [CONTRIBUTING.md](CONTRIBUTING.md) | Pull request guidelines |
 | [SECURITY.md](SECURITY.md) | Reporting security issues |
 
+## Install
+
+**Fastest path (Ubuntu/Debian):** the interactive installer detects your OS,
+installs everything, and deploys a Docker stack (optionally behind Nginx Proxy
+Manager) or a native systemd service — then installs the `nwos` management CLI:
+
+```bash
+sudo ./quick-install.sh
+# or: curl -fsSL https://raw.githubusercontent.com/NextOSP/nwos/master/quick-install.sh | sudo bash
+```
+
+Once installed, manage it with `nwos` (backup, restore, update, upgrade, logs,
+…). See **[INSTALLATION.md](INSTALLATION.md)** for the full guide and the manual
+quickstart below.
+
 ## Quickstart (local development)
 
 Requires Python 3.10+, PostgreSQL 13+, and `wkhtmltopdf`. For system packages,
@@ -111,11 +126,19 @@ database). Install business apps at any time:
 ## Container Deployment
 
 Run PostgreSQL, web, and cron together with Docker Compose, then open
-<http://localhost:7073>:
+<http://localhost:7073>. Build from the checked-out source:
 
 ```bash
 docker compose up --build
 docker compose run --rm web server -c /etc/nwos/nwos.conf -d nwos -i base --stop-after-init
+```
+
+Or pull the prebuilt image from the GitHub Container Registry — no clone needed
+(`ghcr.io/nextosp/nwos:latest`, published by CI). See the clone-free Compose file
+in **[INSTALLATION.md](INSTALLATION.md)**:
+
+```bash
+docker compose pull && docker compose up -d
 ```
 
 Production-oriented Kubernetes manifests live in [`k8s/`](k8s/) (web/cron

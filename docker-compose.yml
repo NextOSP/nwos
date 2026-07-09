@@ -15,6 +15,7 @@ services:
     restart: unless-stopped
 
   web:
+    image: ${NWOS_IMAGE:-ghcr.io/nextosp/nwos:latest}
     build:
       context: .
     depends_on:
@@ -33,6 +34,7 @@ services:
     restart: unless-stopped
 
   cron:
+    image: ${NWOS_IMAGE:-ghcr.io/nextosp/nwos:latest}
     build:
       context: .
     depends_on:
