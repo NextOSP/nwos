@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nwos>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.product.images</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base_setup.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//block[@name='integration']" position="inside">
+                <setting string="Product Images" id="product_images_settings"
+                         help="Fetch product images from Google based on the barcode">
+                    <div class="content-group mt16 row">
+                        <label string="API Key" for="google_custom_search_key"
+                               class="col-4 col-lg-4 o_light_label"/>
+                        <field name="google_custom_search_key" nolabel="1"/>
+                        <label string="Search Engine ID" for="google_pse_id"
+                               class="col-4 col-lg-4 o_light_label"/>
+                        <field name="google_pse_id" nolabel="1"/>
+                    </div>
+                </setting>
+            </xpath>
+        </field>
+    </record>
+</nwos>
