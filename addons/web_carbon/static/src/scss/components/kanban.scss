@@ -1,0 +1,55 @@
+///
+/// Carbon kanban — flat Layer-02 tiles, subtle borders, no radius,
+/// Blue-60 hover indicator, Carbon status dots.
+///
+
+.o_web_client {
+    .o_kanban_view { background-color: $carbon-layer-01; }  // Gray 10 board
+
+    // Inline x2many kanbans inside a form (e.g. child contacts "Thêm Liên hệ")
+    // must blend with the white sheet — no Gray-10 board and no empty gray block
+    // filling the columns the add-tile doesn't occupy.
+    .o_form_view .o_field_widget .o_kanban_renderer,
+    .o_form_view .o_field_widget .o_kanban_view,
+    .o_field_x2many .o_kanban_renderer,
+    .o_field_x2many .o_kanban_view {
+        background-color: transparent !important;
+    }
+
+    // Real cards only — NOT the invisible .o_kanban_ghost spacer records that
+    // Odoo inserts for grid alignment (giving them a border shows empty boxes).
+    .o_kanban_record:not(.o_kanban_ghost),
+    .o_kanban_card {
+        border-radius: 0;
+        border: 1px solid $carbon-border-subtle;
+        background-color: $carbon-layer-02;               // White tile
+        box-shadow: none;
+        transition: border-color 70ms, box-shadow 70ms;
+
+        &:hover {
+            border-color: $carbon-border-subtle;
+            box-shadow: inset 0 0 0 1px $carbon-interactive;
+        }
+    }
+    .o_kanban_record.o_kanban_ghost {
+        border: 0 !important;
+        background: transparent !important;
+        box-shadow: none !important;
+    }
+
+    // Column headers.
+    .o_kanban_group .o_kanban_header,
+    .o_column_title {
+        color: $carbon-text-primary;
+        font-weight: $carbon-font-weight-semibold;
+        font-size: $carbon-font-size-body;
+    }
+
+    // Kanban color bars / status dots → Carbon support colors.
+    .o_status.o_status_green,  .oe_kanban_bg_green  { color: $carbon-support-success; }
+    .o_status.o_status_red,    .oe_kanban_bg_red    { color: $carbon-support-error; }
+    .o_status.o_status_yellow, .oe_kanban_bg_yellow { color: $carbon-support-warning; }
+
+    // Progress bars flat.
+    .o_kanban_counter_progress { border-radius: 0; }
+}

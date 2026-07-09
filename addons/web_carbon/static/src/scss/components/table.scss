@@ -1,0 +1,56 @@
+///
+/// Carbon data table — Layer surface, Gray-10 zebra/hover, uppercase-free
+/// Gray-70 headers, Blue-20 selected rows, no radius.
+///
+
+.o_web_client {
+    .o_list_view,
+    .table {
+        font-size: $carbon-font-size-body;
+        color: $carbon-text-primary;
+        border-radius: 0;
+    }
+
+    // Column headers → Carbon table header (Gray 10 bg, Gray 100 text, 600).
+    // No fixed height: let core's compact --ListRenderer-thead-padding-y drive
+    // it, so editable x2many headers stay short (a fixed 40px blew up to 72px
+    // under browser zoom and threw the columns off).
+    .o_list_view thead th,
+    .table thead th {
+        background-color: $carbon-layer-01;
+        color: $carbon-text-primary;
+        font-weight: $carbon-font-weight-semibold;
+        border-bottom: 1px solid $carbon-border-subtle;
+        letter-spacing: 0.16px;
+    }
+
+    // Rows — subtle bottom border, Gray-10 hover.
+    .o_list_view tbody tr.o_data_row,
+    .table tbody tr {
+        border-bottom: 1px solid $carbon-border-subtle;
+        > td { border: 0; vertical-align: middle; }
+        &:hover { background-color: $carbon-layer-01; }
+    }
+
+    // Editable x2many list cells: keep tags compact so row height follows the
+    // input line, not a tall pill (fixes the "floating" tax badge).
+    .o_list_table .o_data_cell {
+        .badge, .o_tag, .o_tag.o_badge {
+            min-height: 0;
+            height: auto;
+            padding: 0 $carbon-spacing-02;      // 0 4px
+            font-size: $carbon-font-size-label; // 12px
+            line-height: 1.25;
+        }
+        .o_field_many2many_tags .o_tags_input { padding: 0; }
+    }
+
+    // Selected row → Blue 20.
+    .o_list_view tbody tr.o_data_row.o_row_selected,
+    .o_list_view tbody tr.o_data_row.table-info {
+        background-color: $carbon-highlight;
+    }
+
+    // Optional (settings/footer) → keep flat.
+    .o_list_view .o_list_footer { background-color: $carbon-layer-01; }
+}

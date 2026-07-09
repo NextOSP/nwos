@@ -1,0 +1,35 @@
+$brand-primary: $o-brand-primary;
+$brand-secondary: $o-brand-secondary;
+
+$brand-primary-dark: darken($brand-primary, 10%);
+$brand-secondary-dark: darken($brand-secondary, 10%);
+
+.o_required_modifier {
+    &.o_input, .o_input {
+        background-color: lighten($brand-primary, 100%) !important;
+        border-bottom: 2px solid #666666;
+    }
+}
+
+.o_field_widget {
+    &.o_field_many2one .o_external_button {
+        color: lighten($brand-primary, 30%);
+    }
+}
+
+.form-control:focus {
+    border-color:$primary !important;
+    // Remove Bootstrap's blue focus glow so the focused input shows a single
+    // clean border instead of a doubled blue strip.
+    box-shadow: none !important;
+}
+
+// Inside editable list rows, Odoo core draws one blue box on the *cell* and sets
+// the inner input to `border: none`. The theme's `!important` focus rules above
+// were overriding that, drawing a second border inside the cell edge. Keep only
+// the cell-selection border here.
+.o_list_renderer .o_selected_row .o_field_widget input:focus,
+.o_list_renderer .o_selected_row .o_field_widget textarea:focus {
+    border: 0 !important;
+    box-shadow: none !important;
+}

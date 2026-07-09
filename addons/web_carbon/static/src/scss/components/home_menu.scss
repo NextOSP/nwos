@@ -1,0 +1,57 @@
+///
+/// Carbon home menu (app switcher / #apps_menu) — replace the web_nwos teal
+/// gradient and rounded icon chips with a flat Carbon surface: Gray-10 page,
+/// IBM Plex labels, sharp corners, a Blue-60 focus underline on the search
+/// field, and a restrained hover. Loads after web_nwos so these win.
+///
+
+#apps_menu {
+    // Flat Carbon surface — drop the gradient / background image.
+    background: $carbon-layer-01 !important;
+    background-image: none !important;
+
+    // Search field → Carbon fluid text input (bottom border, Blue-60 focus).
+    .o_app_search {
+        .o_search_box {
+            border: 0;
+            border-bottom: 1px solid $carbon-border-strong;
+            color: $carbon-text-primary;
+            background-color: transparent;
+            font-size: $carbon-font-size-h03;   // 20px
+            &::placeholder { color: $carbon-text-placeholder; }
+            &:focus {
+                border-bottom: $carbon-focus-width solid $carbon-blue-60;
+                outline: none;
+            }
+        }
+        .o_search_icon {
+            color: $carbon-icon-secondary;
+        }
+    }
+
+    .o_apps_container .o_app {
+        // Blue-60 focus ring — Carbon's most recognisable interactive cue.
+        &:focus-visible {
+            outline: $carbon-focus-width solid $carbon-blue-60;
+            outline-offset: -#{$carbon-focus-width};
+        }
+
+        .o_app_name {
+            color: $carbon-text-primary;
+            font-weight: $carbon-font-weight-regular;
+        }
+
+        // Sharp corners, flat white chip, restrained lift on hover (no glow).
+        .o_app_icon {
+            border-radius: 0;
+            background: $carbon-layer-02;   // white
+            &:hover,
+            &:focus {
+                border-radius: 0;
+                background: $carbon-layer-02;
+                box-shadow: 0 $carbon-spacing-03 $carbon-spacing-03 (-$carbon-spacing-03) rgba($carbon-black, 0.2);
+                transform: translateY(-2px);
+            }
+        }
+    }
+}

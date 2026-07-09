@@ -1,0 +1,323 @@
+///
+/// Carbon frontend — login, portal and website.
+/// Tokens ($carbon-* / $o-*) are available via the shared variables layer.
+///
+
+// == Global frontend type & links ============================================
+body {
+    font-family: $o-font-family-sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.o_frontend_to_backend_nav,
+.o_portal,
+.o_website {
+    a:not(.btn) { color: $carbon-link-primary; &:hover { color: $carbon-link-primary-hover; } }
+}
+
+// == Buttons & inputs (shared by login/portal/website) =======================
+.btn {
+    border-radius: 0;
+    min-height: $carbon-field-height;
+    padding: 0 $carbon-spacing-05;
+    display: inline-flex;
+    align-items: center;
+    &.btn-primary {
+        background-color: $carbon-blue-60;
+        border-color: $carbon-blue-60;
+        color: $carbon-text-on-color;
+        &:hover { background-color: $carbon-blue-70; border-color: $carbon-blue-70; }
+    }
+}
+
+.form-control,
+.form-select {
+    border-radius: 0;
+    border: 0;
+    border-bottom: 1px solid $carbon-border-strong;
+    background-color: $carbon-field-01;
+    min-height: $carbon-field-height;
+    &:focus {
+        outline: $carbon-focus-width solid $carbon-focus;
+        outline-offset: -#{$carbon-focus-width};
+        border-bottom-color: transparent;
+        box-shadow: none;
+    }
+}
+
+:focus-visible {
+    outline: $carbon-focus-width solid $carbon-focus;
+    outline-offset: -#{$carbon-focus-width};
+}
+
+// == Login page — full-screen IBM Carbon login ===============================
+// Blue gradient background, dark product header, white "Log in" panel, and a
+// Blue-60 Continue button with an arrow. (Structure comes from the QWeb
+// override in views/login_templates.xml; this is the styling.)
+
+// Full-screen Carbon blue gradient background.
+body.o_carbon_login {
+    min-height: 100vh;
+    background: linear-gradient(127deg, $carbon-blue-60 0%, $carbon-blue-70 55%, #002d9c 100%);
+    background-attachment: fixed;
+
+    #wrapwrap,
+    main {
+        min-height: 100vh;
+        background: transparent;
+    }
+}
+
+// Dark product header bar with the Carbon logo.
+.o_carbon_login_header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 48px;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    padding: 0 $carbon-spacing-05;
+    background-color: $carbon-gray-100;   // Gray 100 shell
+    .o_carbon_login_logo { height: 20px; width: auto; display: block; }
+}
+
+// Center the panel in the viewport.
+body.o_carbon_login .container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: none;
+    padding: calc(48px + #{$carbon-spacing-07}) $carbon-spacing-05 $carbon-spacing-07;
+}
+
+// White login panel.
+body.o_carbon_login .o_carbon_login_panel {
+    background-color: $carbon-white !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: 0 24px 60px rgba($carbon-black, 0.28);
+    width: 100%;
+    max-width: 512px !important;
+
+    .card-body {
+        width: 100%;
+        padding: $carbon-spacing-08 $carbon-spacing-08 $carbon-spacing-07;
+    }
+}
+
+// "Log in" heading (Carbon heading-04).
+.o_carbon_login_head { margin-bottom: $carbon-spacing-06; }
+.o_carbon_login_title {
+    font-family: $o-headings-font-family;
+    font-size: $carbon-font-size-h04;             // 28px
+    font-weight: $carbon-font-weight-regular;
+    color: $carbon-text-primary;
+    margin: 0;
+    letter-spacing: 0;
+}
+
+// Fields, labels, links inside the panel.
+body.o_carbon_login .o_carbon_login_panel {
+    .oe_login_form {
+        margin: 0;
+    }
+
+    .mb-3,
+    .o_caps_lock_warning {
+        margin-bottom: $carbon-spacing-06 !important;
+    }
+
+    label, .col-form-label {
+        color: $carbon-text-secondary;
+        font-size: $carbon-font-size-label;
+        letter-spacing: 0.32px;
+        font-weight: $carbon-font-weight-regular;
+        margin-bottom: $carbon-spacing-03;
+    }
+
+    .form-control,
+    input {
+        border-radius: 0 !important;
+        background-color: $carbon-field-01 !important;
+        border: 0 !important;
+        border-bottom: 1px solid $carbon-border-strong !important;
+        color: $carbon-text-primary;
+        font-size: $carbon-font-size-body-02;
+        min-height: $carbon-field-height-lg !important;
+        padding: 0 $carbon-spacing-05 !important;
+        margin: 0 !important;
+
+        &::placeholder {
+            color: $carbon-text-placeholder;
+            opacity: 1;
+        }
+
+        &:focus {
+            outline: $carbon-focus-width solid $carbon-focus;
+            outline-offset: -#{$carbon-focus-width};
+            border-bottom-color: transparent !important;
+            box-shadow: none;
+        }
+    }
+
+    .input-group {
+        align-items: stretch;
+
+        > .form-control,
+        > input {
+            min-width: 0;
+        }
+
+        > .btn,
+        > a.btn {
+            border-radius: 0 !important;
+            border: 0 !important;
+            border-left: 1px solid $carbon-border-subtle !important;
+            border-bottom: 1px solid $carbon-border-strong !important;
+            background-color: $carbon-field-01 !important;
+            color: $carbon-link-primary !important;
+            min-height: $carbon-field-height-lg !important;
+            padding: 0 $carbon-spacing-05 !important;
+            box-shadow: none !important;
+
+            &:hover {
+                background-color: $carbon-layer-accent-01 !important;
+                color: $carbon-link-primary-hover !important;
+            }
+
+            &:focus {
+                outline: $carbon-focus-width solid $carbon-focus;
+                outline-offset: -#{$carbon-focus-width};
+                box-shadow: none !important;
+            }
+        }
+
+        .o_show_password {
+            min-width: $carbon-field-height-lg;
+            justify-content: center;
+            color: $carbon-icon-primary !important;
+        }
+    }
+
+    a {
+        color: $carbon-link-primary;
+        text-decoration: none;
+
+        &:hover {
+            color: $carbon-link-primary-hover;
+            text-decoration: underline;
+        }
+    }
+
+    .btn-link {
+        min-height: auto;
+        padding: 0 !important;
+        border: 0 !important;
+        background: transparent !important;
+        color: $carbon-link-primary !important;
+        box-shadow: none !important;
+
+        &:hover {
+            color: $carbon-link-primary-hover !important;
+            text-decoration: underline;
+        }
+    }
+
+    .btn-secondary,
+    .btn-outline-primary {
+        width: 100%;
+        min-height: $carbon-field-height-lg !important;
+        border-radius: 0 !important;
+        border: 1px solid $carbon-blue-60 !important;
+        background-color: transparent !important;
+        color: $carbon-blue-60 !important;
+        box-shadow: none !important;
+
+        &:hover {
+            background-color: $carbon-blue-60 !important;
+            color: $carbon-text-on-color !important;
+        }
+    }
+
+    .border-top {
+        border-top-color: $carbon-border-subtle !important;
+    }
+
+    .oe_login_buttons {
+        display: block !important;
+        margin-bottom: 0 !important;
+        padding-top: $carbon-spacing-05 !important;
+    }
+
+    .o_login_auth {
+        margin-top: $carbon-spacing-06;
+
+        em {
+            color: $carbon-text-helper !important;
+            font-size: $carbon-font-size-body;
+            margin: 0 0 $carbon-spacing-05 !important;
+        }
+
+        .list-group {
+            border-radius: 0;
+            gap: $carbon-spacing-03;
+        }
+
+        .list-group-item {
+            min-height: $carbon-field-height-lg;
+            padding: 0 $carbon-spacing-05 !important;
+            border: 1px solid $carbon-border-subtle !important;
+            border-radius: 0 !important;
+            background-color: $carbon-white !important;
+            color: $carbon-link-primary !important;
+            box-shadow: none !important;
+
+            &:hover {
+                background-color: $carbon-layer-01 !important;
+                color: $carbon-link-primary-hover !important;
+            }
+
+            &:focus {
+                outline: $carbon-focus-width solid $carbon-focus;
+                outline-offset: -#{$carbon-focus-width};
+            }
+
+            i {
+                width: $carbon-spacing-05;
+                color: inherit;
+                text-align: center;
+            }
+        }
+    }
+}
+
+// Continue button — full-width Blue-60 block, label left, arrow right, 64px.
+.o_carbon_login_submit {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between !important;
+    width: 100%;
+    min-height: 64px !important;
+    border-radius: 0 !important;
+    background-color: $carbon-blue-60 !important;
+    border-color: $carbon-blue-60 !important;
+    color: $carbon-text-on-color !important;
+    padding: 0 $carbon-spacing-05 !important;
+    font-size: $carbon-font-size-body;
+    text-align: left;
+    &:hover { background-color: $carbon-blue-70 !important; border-color: $carbon-blue-70 !important; }
+    .o_carbon_login_arrow { font-size: 18px; margin-left: auto; }
+}
+body.o_carbon_login .oe_login_buttons { display: block !important; }   // undo the d-grid centering
+
+// == Portal ==================================================================
+// Portal component styling lives in frontend/portal.scss.
+
+// == Website chrome (nav, footer) ============================================
+.o_main_nav,
+header#top .navbar {
+    font-family: $o-font-family-sans-serif;
+    .nav-link { border-radius: 0; }
+}

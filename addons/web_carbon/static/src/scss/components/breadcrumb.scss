@@ -1,0 +1,22 @@
+///
+/// Carbon breadcrumb + control panel — Blue-60 links, Gray-40 separators,
+/// Gray-100 current page, flat control panel on the page background.
+///
+
+.o_web_client {
+    .o_control_panel,
+    .o_control_panel_main {
+        background-color: $carbon-background;
+        border-bottom: 1px solid $carbon-border-subtle;
+        border-radius: 0;
+    }
+
+    .breadcrumb { font-size: $carbon-font-size-body; margin: 0; }
+
+    .breadcrumb-item {
+        a { color: $carbon-link-primary; &:hover { color: $carbon-link-primary-hover; } }
+        &.active { color: $carbon-text-primary; font-weight: $carbon-font-weight-regular; }
+        + .breadcrumb-item::before { color: $carbon-text-placeholder; content: "/"; }
+    }
+    // NOTE: statusbar styling lives in layout.scss.
+}

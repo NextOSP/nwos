@@ -1,0 +1,173 @@
+///
+/// Carbon modal — sharp corners, Gray-10 body, and the signature Carbon
+/// full-bleed footer: action buttons stretch flush to the modal edges, tall
+/// and gapless, with the secondary/cancel actions on the left and the primary
+/// (Blue 60) flush right.
+///
+
+.o_web_client,
+body {
+    .modal-content {
+        border-radius: 0;
+        border: 0;
+        box-shadow: 0 4px 16px rgba($carbon-black, 0.3);
+    }
+    .modal-backdrop.show { background-color: $carbon-gray-100; opacity: 0.5; }
+
+    // Header — title left (heading), close X right.
+    .modal-header {
+        background-color: $carbon-layer-01;               // Gray 10
+        border-bottom: 0;
+        padding: $carbon-spacing-05 $carbon-spacing-05 $carbon-spacing-03;
+        .modal-title {
+            font-family: $o-headings-font-family;
+            font-size: $carbon-font-size-h03;             // heading-03 20px
+            font-weight: $carbon-font-weight-regular;
+            color: $carbon-text-primary;
+        }
+        // Carbon close: square, 48x48 hit area, top-right.
+        .btn-close {
+            border-radius: 0;
+            width: $carbon-spacing-09;    // 48px
+            height: $carbon-spacing-09;
+            margin: (-$carbon-spacing-03) (-$carbon-spacing-03) 0 0;
+            &:hover { background-color: $carbon-layer-accent-01; }
+        }
+    }
+
+    // Body — Carbon Gray-10 surface.
+    .modal-body {
+        background-color: $carbon-layer-01;
+        color: $carbon-text-primary;
+        padding: $carbon-spacing-05;
+    }
+
+    // Footer actions — full-bleed Carbon strip.
+    .modal-footer {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        justify-content: stretch !important;
+        align-items: stretch;
+        padding: 0 !important;
+        margin: 0 !important;
+        border-top: 0 !important;
+        gap: 0 !important;
+
+        // FormViewDialog wraps its buttons in a <div>; flatten it so the
+        // buttons become direct flex children of the footer.
+        > div {
+            display: contents;
+        }
+
+        .btn {
+            flex: 1 1 auto !important;
+            min-width: 25% !important;
+            max-width: none !important;
+            min-height: $carbon-spacing-10 !important;   // 64px, Carbon XL button in modals
+            margin: 0 !important;
+            border: 0 !important;
+            border-radius: 0 !important;
+            display: inline-flex !important;
+            align-items: center;
+            justify-content: flex-start !important;       // Carbon: label left-aligned
+            padding: 0 $carbon-spacing-05 !important;
+            font-size: $carbon-font-size-body;
+            white-space: nowrap;
+            order: 1;                                     // secondaries default to the left
+        }
+
+        // Keep core's hidden default button behaviour. Needs !important to beat
+        // the `.btn { display: inline-flex !important }` rule above.
+        .btn.o-default-button:not(:only-child) { display: none !important; }
+
+        .btn-secondary,
+        .o_form_button_cancel,
+        .btn-outline-secondary {
+            background-color: $carbon-layer-02 !important;   // white surface
+            border-color: $carbon-border-strong !important;
+            color: $carbon-text-primary !important;
+            &:hover { background-color: $carbon-gray-10 !important; }
+        }
+
+        .btn-primary,
+        .o_form_button_save {
+            order: 2;                                        // primary flush right
+            background-color: $carbon-blue-60 !important;
+            border-color: $carbon-blue-60 !important;
+            color: $carbon-text-on-color !important;
+            &:hover { background-color: $carbon-blue-70 !important; }
+        }
+    }
+
+    .modal-content.o_domain_selector_dialog {
+        .modal-footer {
+            justify-content: flex-end !important;
+            align-items: center !important;
+            padding: $carbon-spacing-03 $carbon-spacing-05 $carbon-spacing-05 !important;
+            gap: $carbon-spacing-03 !important;
+
+            .btn {
+                flex: 0 0 auto !important;
+                min-width: auto !important;
+                min-height: $carbon-spacing-07 !important;
+                justify-content: center !important;
+                padding: 0 $carbon-spacing-05 !important;
+            }
+
+            .btn-primary {
+                order: 1;
+            }
+
+            .btn-secondary,
+            .btn-outline-secondary {
+                order: 2;
+            }
+        }
+    }
+
+    // Large embedded-action dialogs (act_window target="new" — e.g. a sale order
+    // or invoice form opened in a dialog) render a big, mostly-empty form. The
+    // full-bleed footer's huge Save block is too heavy there, so give those a
+    // compact right-aligned Carbon footer. `.o_act_window` sits on the modal-body,
+    // so match the containing modal-content via :has().
+    .modal-content:has(> .modal-body.o_act_window) .modal-footer {
+        justify-content: flex-end !important;
+        align-items: center !important;
+        padding: $carbon-spacing-03 $carbon-spacing-05 !important;
+        gap: $carbon-spacing-03 !important;
+        border-top: 1px solid $carbon-border-subtle !important;
+
+        .btn {
+            flex: 0 0 auto !important;
+            min-width: auto !important;
+            min-height: $carbon-spacing-08 !important;   // 40px, productive form button
+            max-width: none !important;
+            justify-content: center !important;
+            padding: 0 $carbon-spacing-05 !important;
+        }
+
+        // Primary (Save) flush right, secondary (Discard) to its left.
+        .btn-secondary,
+        .o_form_button_cancel,
+        .btn-outline-secondary { order: 1; }
+        .btn-primary,
+        .o_form_button_save { order: 2; }
+    }
+
+    // Buttons rendered inside the modal body (not just the footer) must also be
+    // Carbon — overrides web_nwos' `!important` cyan primary (common_style.scss).
+    .modal-body {
+        .btn-primary {
+            background-color: $carbon-blue-60 !important;
+            border-color: $carbon-blue-60 !important;
+            color: $carbon-text-on-color !important;
+            &:hover { background-color: $carbon-blue-70 !important; }
+        }
+        .btn-secondary {
+            background-color: $carbon-layer-02 !important;
+            border-color: $carbon-border-strong !important;
+            color: $carbon-text-primary !important;
+            &:hover { background-color: $carbon-gray-10 !important; }
+        }
+    }
+}

@@ -1,0 +1,275 @@
+@font-face {
+    font-family: "IBM Plex Sans";
+    font-style: normal;
+    font-weight: 400;
+    src: url("/web_carbon/static/src/fonts/IBMPlexSans-Regular.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "IBM Plex Sans";
+    font-style: normal;
+    font-weight: 600;
+    src: url("/web_carbon/static/src/fonts/IBMPlexSans-SemiBold.woff2") format("woff2");
+}
+
+body.o_carbon_database_manager {
+    min-height: 100vh;
+    margin: 0;
+    background: #f4f4f4;
+    color: #161616;
+    font-family: "IBM Plex Sans", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.o_carbon_database_header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    height: 48px;
+    padding: 0 32px;
+    background: #161616;
+    border-bottom: 1px solid #393939;
+}
+
+.o_carbon_database_logo {
+    display: block;
+    width: auto;
+    height: 20px;
+}
+
+body.o_carbon_database_manager > .container {
+    width: 100%;
+    max-width: none;
+    padding: 112px 24px 48px;
+}
+
+body.o_carbon_database_manager .o_database_list {
+    width: min(100%, 680px);
+    margin: 0 auto;
+    padding: 0;
+}
+
+body.o_carbon_database_manager .list-group {
+    border-radius: 0;
+    border: 1px solid #c6c6c6;
+    background: #ffffff;
+}
+
+body.o_carbon_database_manager .list-group-item {
+    min-height: 48px;
+    padding: 0 0 0 16px;
+    border-color: #e0e0e0;
+    border-right: 0;
+    border-left: 0;
+    color: #161616;
+    background: #ffffff;
+}
+
+body.o_carbon_database_manager .list-group-item:first-child,
+body.o_carbon_database_manager .list-group-item:last-child {
+    border-radius: 0;
+}
+
+body.o_carbon_database_manager .list-group-item:hover {
+    background: #f4f4f4;
+}
+
+body.o_carbon_database_manager .list-group-item > a {
+    overflow: hidden;
+    padding: 14px 16px 14px 0;
+    color: #0f62fe;
+    font-size: 16px;
+    line-height: 20px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+body.o_carbon_database_manager .list-group-item > a:hover {
+    color: #0043ce;
+    text-decoration: underline;
+}
+
+body.o_carbon_database_manager .btn,
+body.o_carbon_database_manager .btn-group-sm > .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    padding: 0 16px;
+    border-radius: 0;
+    border-width: 1px;
+    box-shadow: none;
+    font-weight: 400;
+    line-height: 1;
+}
+
+body.o_carbon_database_manager .btn-primary {
+    border-color: #0f62fe;
+    background: #0f62fe;
+    color: #ffffff;
+}
+
+body.o_carbon_database_manager .btn-primary:hover,
+body.o_carbon_database_manager .btn-primary:focus {
+    border-color: #0043ce;
+    background: #0043ce;
+    color: #ffffff;
+}
+
+body.o_carbon_database_manager .btn-secondary {
+    border-color: #393939;
+    background: #393939;
+    color: #ffffff;
+}
+
+body.o_carbon_database_manager .btn-secondary:hover,
+body.o_carbon_database_manager .btn-secondary:focus {
+    border-color: #4c4c4c;
+    background: #4c4c4c;
+    color: #ffffff;
+}
+
+body.o_carbon_database_manager .btn-danger {
+    border-color: #da1e28;
+    background: #da1e28;
+    color: #ffffff;
+}
+
+body.o_carbon_database_manager .btn-danger:hover,
+body.o_carbon_database_manager .btn-danger:focus {
+    border-color: #a2191f;
+    background: #a2191f;
+    color: #ffffff;
+}
+
+body.o_carbon_database_manager .btn:focus-visible,
+body.o_carbon_database_manager .form-control:focus,
+body.o_carbon_database_manager .form-select:focus,
+body.o_carbon_database_manager .form-check-input:focus {
+    outline: 2px solid #0f62fe;
+    outline-offset: -2px;
+    box-shadow: none;
+}
+
+body.o_carbon_database_manager .o_database_list > .d-flex.mt-2 {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+    margin-top: 8px !important;
+}
+
+body.o_carbon_database_manager .o_database_list > .d-flex.mt-2 .btn {
+    width: 100%;
+    min-height: 48px;
+    margin-left: 0 !important;
+    justify-content: center;
+}
+
+body.o_carbon_database_manager .alert {
+    border-radius: 0;
+    border-width: 1px;
+}
+
+body.o_carbon_database_manager .alert-warning {
+    border-color: #f1c21b;
+    background: #fcf4d6;
+    color: #161616;
+}
+
+body.o_carbon_database_manager .alert-danger {
+    border-color: #da1e28;
+    background: #fff1f1;
+    color: #161616;
+}
+
+body.o_carbon_database_manager .alert-info {
+    border-color: #4589ff;
+    background: #edf5ff;
+    color: #161616;
+}
+
+body.o_carbon_database_manager .modal-content {
+    border-radius: 0;
+    border: 0;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.28);
+}
+
+body.o_carbon_database_manager .modal-header,
+body.o_carbon_database_manager .modal-footer {
+    border-color: #e0e0e0;
+}
+
+body.o_carbon_database_manager .modal-title {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 28px;
+}
+
+body.o_carbon_database_manager label,
+body.o_carbon_database_manager .col-form-label {
+    color: #525252;
+    font-size: 12px;
+    letter-spacing: 0.32px;
+}
+
+body.o_carbon_database_manager .form-control,
+body.o_carbon_database_manager .form-select {
+    min-height: 40px;
+    border: 0;
+    border-bottom: 1px solid #8d8d8d;
+    border-radius: 0;
+    background-color: #f4f4f4;
+    color: #161616;
+}
+
+body.o_carbon_database_manager .input-group-text {
+    border: 0;
+    border-bottom: 1px solid #8d8d8d;
+    border-radius: 0;
+    background: #f4f4f4;
+    color: #161616;
+}
+
+body.o_carbon_database_manager .form-check-input {
+    border-radius: 0;
+}
+
+@media (max-width: 767.98px) {
+    .o_carbon_database_header {
+        padding: 0 16px;
+    }
+
+    body.o_carbon_database_manager > .container {
+        padding: 80px 12px 24px;
+    }
+
+    body.o_carbon_database_manager .list-group-item {
+        flex-wrap: wrap;
+        gap: 8px;
+        padding: 12px;
+    }
+
+    body.o_carbon_database_manager .list-group-item > a {
+        flex-basis: 100%;
+        padding: 0;
+    }
+
+    body.o_carbon_database_manager .btn-group {
+        display: grid;
+        width: 100%;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    body.o_carbon_database_manager .btn-group > .btn {
+        width: 100%;
+    }
+
+    body.o_carbon_database_manager .o_database_list > .d-flex.mt-2 {
+        grid-template-columns: 1fr;
+    }
+}

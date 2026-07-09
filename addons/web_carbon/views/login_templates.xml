@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nwos>
+    <!--
+        IBM Carbon login. Restructures web.login_layout / web.login at the source
+        (QWeb inheritance, not CSS hacks): full-screen blue background, a dark
+        product header, a white "Log in" panel, and a Blue-60 Continue button
+        with an arrow. Also removes the "Powered by" brand promotion.
+    -->
+
+    <!-- === Layout: background, header, panel, heading, de-brand ============ -->
+    <template id="carbon_login_layout" inherit_id="web.login_layout"
+              name="Carbon Login Layout">
+        <!-- Blue Carbon gradient background (class styled in frontend.scss). -->
+        <xpath expr="//t[@t-set='body_classname']" position="attributes">
+            <attribute name="t-value">'o_carbon_login'</attribute>
+        </xpath>
+
+        <!-- Dark product header bar with the Carbon logo. -->
+        <xpath expr="//div[hasclass('container')]" position="before">
+            <header class="o_carbon_login_header">
+                <img src="/web_carbon/static/img/nwos_logo_white.svg" alt="NWOS" class="o_carbon_login_logo"/>
+            </header>
+        </xpath>
+
+        <!-- Wider white panel; drop the muted background. (The div uses a dynamic
+             t-attf-class, so match on that rather than hasclass().) -->
+        <xpath expr="//div[contains(@t-attf-class, 'o_database_list')]" position="attributes">
+            <attribute name="t-attf-class">card border-0 mx-auto o_database_list o_carbon_login_panel</attribute>
+            <attribute name="style"/>
+        </xpath>
+
+        <!-- Replace the company-logo block with a Carbon "Log in" heading. -->
+        <xpath expr="//div[hasclass('border-bottom')]" position="replace">
+            <div class="o_carbon_login_head">
+                <h1 class="o_carbon_login_title">Log in</h1>
+            </div>
+        </xpath>
+
+        <!-- Remove the external "Powered by" promotion link. -->
+        <xpath expr="//div[hasclass('border-top')]/a[@target='_blank']" position="replace"/>
+        <!-- Drop the dangling separator on the remaining Manage Databases link.
+             (It sits inside a t-if wrapper, so use a descendant //a.) -->
+        <xpath expr="//div[hasclass('border-top')]//a[hasclass('border-end')]" position="attributes">
+            <attribute name="class"/>
+        </xpath>
+    </template>
+
+    <!-- === Login form: Continue-style primary button with arrow ============ -->
+    <template id="carbon_login_form" inherit_id="web.login"
+              name="Carbon Login Form">
+        <xpath expr="//div[hasclass('oe_login_buttons')]/button[@type='submit']" position="attributes">
+            <attribute name="class">btn btn-primary o_carbon_login_submit</attribute>
+        </xpath>
+        <xpath expr="//div[hasclass('oe_login_buttons')]/button[@type='submit']" position="inside">
+            <i class="fa fa-arrow-right o_carbon_login_arrow" role="img" aria-label="Continue"/>
+        </xpath>
+    </template>
+
+    <!-- === Remove "Powered by …" brand promotion everywhere ================ -->
+    <template id="carbon_no_brand_promotion" inherit_id="web.brand_promotion"
+              name="Carbon: hide brand promotion">
+        <xpath expr="//div[hasclass('o_brand_promotion')]" position="replace"/>
+    </template>
+</nwos>

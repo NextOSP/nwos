@@ -1,0 +1,204 @@
+.o_action_manager > .o_app_launcher.o_action,
+.o_app_launcher.o_action {
+    min-height: 0;
+    height: 100%;
+    max-height: 100%;
+    padding: 28px clamp(18px, 4vw, 48px) 56px;
+    background: $o-view-background-color;
+    overflow-x: hidden;
+    overflow-y: auto !important;
+    overscroll-behavior: contain;
+}
+
+.o_app_launcher_header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    width: MIN(100%, 1120px);
+    margin: 0 auto 28px;
+}
+
+.o_app_launcher_title {
+    margin: 0;
+    font-size: 26px;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+.o_app_launcher_search {
+    position: relative;
+    flex: 0 1 360px;
+
+    .fa {
+        position: absolute;
+        top: 50%;
+        left: 13px;
+        color: $o-gray-500;
+        transform: translateY(-50%);
+        pointer-events: none;
+    }
+
+    .o_input {
+        height: 38px;
+        padding-left: 38px;
+        border-radius: 6px;
+    }
+}
+
+.o_app_launcher_sections {
+    column-gap: 24px;
+    column-width: 330px;
+    width: MIN(100%, 1200px);
+    margin: 0 auto;
+}
+
+.o_app_launcher_section + .o_app_launcher_section {
+    margin-top: 0;
+}
+
+.o_app_launcher_section {
+    display: inline-block;
+    width: 100%;
+    margin: 0 0 24px;
+    padding: 14px;
+    border: 1px solid $o-gray-200;
+    border-radius: 8px;
+    background: mix($o-view-background-color, $o-gray-100, 74%);
+    break-inside: avoid;
+    -webkit-column-break-inside: avoid;
+}
+
+.o_app_launcher_section_title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 14px;
+    color: $o-gray-800;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.25;
+
+    &::before {
+        content: "";
+        flex: 0 0 auto;
+        width: 4px;
+        height: 16px;
+        border-radius: 999px;
+        background: $o-brand-primary;
+    }
+}
+
+.o_app_launcher_grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(108px, 1fr));
+    gap: 10px;
+}
+
+.o_app_launcher_app {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 112px;
+    padding: 13px 9px 11px;
+    color: inherit;
+    text-align: center;
+    text-decoration: none;
+    border: 1px solid $o-gray-200;
+    border-radius: 8px;
+    background: $o-view-background-color;
+    box-shadow: 0 1px 2px rgba($o-black, 0.03);
+
+    &:hover,
+    &:focus-visible {
+        color: inherit;
+        border-color: $o-brand-primary;
+        box-shadow: 0 8px 20px rgba($o-black, 0.08);
+    }
+
+    &:focus-visible {
+        outline: 2px solid rgba($o-brand-primary, 0.35);
+        outline-offset: 2px;
+    }
+}
+
+.o_app_launcher_icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 54px;
+    height: 54px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    overflow: hidden;
+
+    img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+    }
+}
+
+.o_app_launcher_name {
+    display: -webkit-box;
+    overflow: hidden;
+    max-width: 100%;
+    line-height: 1.25;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+.o_app_launcher_empty {
+    width: MIN(100%, 1120px);
+    margin: 0 auto;
+    padding: 28px;
+    color: $o-gray-600;
+    text-align: center;
+    border: 1px dashed $o-gray-300;
+    border-radius: 8px;
+    background: mix($o-view-background-color, $o-gray-100, 70%);
+}
+
+@include media-breakpoint-down(sm) {
+    .o_app_launcher {
+        padding: 18px 14px 44px;
+    }
+
+    .o_app_launcher_header {
+        align-items: stretch;
+        flex-direction: column;
+        gap: 14px;
+        margin-bottom: 18px;
+    }
+
+    .o_app_launcher_title {
+        font-size: 22px;
+    }
+
+    .o_app_launcher_search {
+        flex-basis: auto;
+    }
+
+    .o_app_launcher_grid {
+        grid-template-columns: repeat(auto-fill, minmax(108px, 1fr));
+        gap: 10px;
+    }
+
+    .o_app_launcher_sections {
+        display: block;
+    }
+
+    .o_app_launcher_section + .o_app_launcher_section {
+        margin-top: 24px;
+    }
+
+    .o_app_launcher_section {
+        padding: 12px;
+    }
+
+    .o_app_launcher_app {
+        min-height: 112px;
+        padding: 13px 8px 10px;
+    }
+}

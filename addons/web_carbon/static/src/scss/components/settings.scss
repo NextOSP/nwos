@@ -1,0 +1,107 @@
+///
+/// Carbon Settings app + Apps launcher — flat tiles on Carbon layers.
+///
+
+.o_web_client {
+    // Settings control panel: the "Unsaved changes" warning was wrapping one
+    // word per line (no nowrap) and squeezing the breadcrumb down to "C.".
+    // Keep it on a single line so the Save/Discard row stays tidy.
+    .o_control_panel .o_dirty_warning {
+        white-space: nowrap;
+        flex: 0 0 auto;
+        align-self: center;
+        color: $carbon-text-secondary;
+        font-size: $carbon-font-size-label;
+    }
+
+    // --- Settings form ------------------------------------------------------
+    .o_form_view.o_base_settings,
+    .o_base_settings {
+        .app_settings_block { background-color: $carbon-background; }
+
+        // Settings cards → flat Layer-02 tiles.
+        .o_setting_box,
+        .o_settings_container .o_setting_box {
+            border-radius: 0;
+        }
+
+        // Setting title + description → Carbon type hierarchy.
+        .o_setting_box {
+            .o_form_label,
+            > label,
+            .o_setting_right_pane label {
+                color: $carbon-text-primary;
+                font-weight: $carbon-font-weight-semibold;
+            }
+            .text-muted,
+            .o_light_label,
+            .o_setting_right_pane .text-muted {
+                color: $carbon-text-secondary !important;
+                font-size: $carbon-font-size-body;
+                line-height: 1.4;
+            }
+        }
+
+        // Inline field combos in a setting (e.g. day "3" + month "Tháng 12"):
+        // put them on one baseline with real spacing, and stop the small
+        // integer input from being cramped.
+        .o_setting_box .o_row,
+        .o_setting_box .content-group .row,
+        .o_setting_box div:has(> .o_field_widget + .o_field_widget) {
+            display: flex;
+            align-items: center;
+            gap: $carbon-spacing-03;
+            flex-wrap: wrap;
+        }
+        .o_setting_box .o_field_widget input.o_input,
+        .o_setting_box .o_field_widget .o_input,
+        .o_setting_box .o_field_widget select {
+            height: 36px;
+            min-width: 3.5rem;          // day/number inputs no longer cramped
+            vertical-align: middle;
+        }
+        // Labels between inline fields ("at", "%") stay muted & aligned.
+        .o_setting_box .o_row > span,
+        .o_setting_box .content-group span.mx-2 {
+            color: $carbon-text-secondary;
+            align-self: center;
+        }
+
+        // Settings "tip" left rule → subtle Carbon border.
+        .o_setting_box .o_setting_left_pane,
+        .o_settings_container .o_setting_box::before {
+            border-color: $carbon-border-subtle;
+        }
+
+        // Left settings navigation → Carbon side nav (Blue-60 selected bar).
+        .settings_tab,
+        .o_settings_navigation {
+            background-color: $carbon-layer-01;
+            .selected,
+            .tab.selected {
+                background-color: $carbon-layer-02;
+                box-shadow: inset 3px 0 0 0 $carbon-interactive;
+                color: $carbon-text-primary;
+            }
+        }
+    }
+
+    // --- App launcher (grid of apps) ---------------------------------------
+    .o_app_menu,
+    .o_apps {
+        .o_app,
+        .o_menuitem {
+            border-radius: 0;
+            &:hover,
+            &:focus { background-color: $carbon-layer-01; }
+        }
+        .o_caption { color: $carbon-text-primary; font-size: $carbon-font-size-body; }
+    }
+}
+
+// Home menu background → Carbon Gray 10 (not a gradient).
+.o_home_menu,
+.o_web_client .o_home_menu {
+    background-color: $carbon-layer-01;
+    background-image: none;
+}

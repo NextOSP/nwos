@@ -1,0 +1,22 @@
+///
+/// Carbon UI Shell — dark Gray-100 top bar.
+/// Overrides web's navbar.variables.scss values (all `!default`).
+///
+$o-navbar-height: $carbon-field-height-lg;   // 48px, Carbon UI Shell header height
+$o-navbar-padding-v: 0px;
+
+$o-navbar-background: $carbon-shell-bg;        // Gray 100 #161616
+$o-navbar-border-bottom: 1px solid $carbon-shell-bg;
+
+$o-navbar-entry-padding-h: $carbon-spacing-05; // 16px
+$o-navbar-entry-border-radius: 0;
+$o-navbar-entry-color: $carbon-shell-text;             // Gray 10
+$o-navbar-entry-color--hover: $carbon-shell-text-hover; // White
+$o-navbar-entry-bg--hover: $carbon-shell-hover;         // Gray 80
+
+$o-navbar-entry-color--active: $carbon-shell-text-hover;
+$o-navbar-entry-bg--active: $carbon-shell-hover;
+
+$o-navbar-brand-color: $carbon-shell-text-hover;
+$o-navbar-badge-bg: $carbon-support-error;    // Carbon notification dot
+$o-navbar-badge-color: $carbon-white;

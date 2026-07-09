@@ -1,0 +1,5 @@
+// NWOS 4.0 brand color. Loaded BEFORE web's primary_variables.scss so the
+// whole NWOS 19 brand-color cascade (navbar, buttons, badges, filters, links)
+// derives from NWOS blue instead of NWOS purple.
+$o-community-color: #009efb;
+$o-enterprise-color: #009efb;

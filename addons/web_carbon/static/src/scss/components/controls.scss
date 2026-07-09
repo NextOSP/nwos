@@ -1,0 +1,51 @@
+///
+/// Carbon selection controls — checkbox, radio, toggle.
+///
+
+.o_web_client {
+    // Checkbox — square, Blue-60 when checked, sharp check.
+    .form-check-input[type="checkbox"] {
+        border-radius: 0;
+        border: 1px solid $carbon-icon-primary;
+        width: 16px;
+        height: 16px;
+        vertical-align: middle;
+        margin-top: 0;
+
+        &:checked {
+            background-color: $carbon-interactive;
+            border-color: $carbon-interactive;
+        }
+        &:focus-visible {
+            outline: $carbon-focus-width solid $carbon-focus;
+            outline-offset: 1px;
+        }
+    }
+
+    // Radio — circular (the one exception to sharp corners), Blue-60 dot.
+    .form-check-input[type="radio"] {
+        border: 1px solid $carbon-icon-primary;
+        vertical-align: middle;
+        margin-top: 0;
+        &:checked {
+            background-color: transparent;
+            border-color: $carbon-interactive;
+            box-shadow: inset 0 0 0 4px $carbon-interactive;
+        }
+    }
+
+    // Boolean toggle switch — Gray-50 off, Blue-60 on, pill track.
+    .o_field_boolean_toggle .form-check-input,
+    .form-switch .form-check-input {
+        background-color: $carbon-toggle-off;
+        border-color: $carbon-toggle-off;
+        &:checked {
+            background-color: $carbon-support-success; // Carbon "on" = green
+            border-color: $carbon-support-success;
+        }
+        &:focus-visible {
+            outline: $carbon-focus-width solid $carbon-focus;
+            outline-offset: 1px;
+        }
+    }
+}

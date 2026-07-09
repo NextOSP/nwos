@@ -1,0 +1,431 @@
+///
+/// Clean layout — Salesforce-inspired: light Gray-10 canvas, white sheet cards
+/// with a subtle border + soft lift, an airy control panel, and a light
+/// statusbar. Fixes the flat "white-on-white" and heavy toolbar look.
+///
+
+.o_web_client {
+    // Workspace canvas → Carbon Gray 10, so white cards read as elevated.
+    .o_action_manager,
+    .o_content,
+    .o_view_controller {
+        background-color: $carbon-layer-01;   // #f4f4f4
+    }
+
+    // --- Control panel (breadcrumb + toolbar) -> clean, resilient app bar ----
+    .o_control_panel {
+        background-color: $carbon-white;
+        border-bottom: 1px solid $carbon-border-subtle;
+        gap: $carbon-spacing-02 !important;
+        padding: $carbon-spacing-03 $carbon-spacing-05 !important;
+        box-shadow: none;
+    }
+
+    .o_control_panel .o_control_panel_main,
+    .o_control_panel .o_control_panel_breadcrumbs,
+    .o_control_panel .o_control_panel_actions,
+    .o_control_panel .o_control_panel_navigation,
+    .o_control_panel .o_cp_top {
+        display: flex;
+        align-items: center;
+    }
+
+    .o_control_panel .o_control_panel_main {
+        min-height: $carbon-field-height-lg;
+        gap: $carbon-spacing-03 $carbon-spacing-05 !important;
+        width: 100%;
+    }
+
+    .o_control_panel .o_control_panel_breadcrumbs {
+        flex: 1 1 20rem;
+        min-width: 0;
+        gap: $carbon-spacing-03 !important;
+    }
+
+    // Form breadcrumbs with a parent action should read as a compact one-line
+    // path: parent list -> current record -> action cog. Odoo's default
+    // `flex-md-column` stack makes this look detached from the primary button.
+    .o_control_panel .o_control_panel_breadcrumbs:has(.o_breadcrumb .breadcrumb) {
+        align-items: center !important;
+        flex-wrap: nowrap !important;
+        gap: $carbon-spacing-05 !important;
+    }
+
+    .o_control_panel .o_breadcrumb:has(.breadcrumb) {
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        align-self: center !important;
+        gap: $carbon-spacing-03 !important;
+        min-height: $carbon-field-height;
+    }
+
+    .o_control_panel .o_breadcrumb:has(.breadcrumb) > .d-flex {
+        align-self: center !important;
+        align-items: center !important;
+        min-width: 0;
+    }
+
+    .o_control_panel .o_breadcrumb:has(.breadcrumb) .o_last_breadcrumb_item {
+        padding-left: 0 !important;
+    }
+
+    .o_control_panel .o_breadcrumb:has(.breadcrumb) .breadcrumb {
+        align-items: center;
+        line-height: 1.25;
+        margin-bottom: 0;
+    }
+
+    .o_control_panel .o_breadcrumb:has(.breadcrumb) .breadcrumb-item {
+        display: inline-flex !important;
+        align-items: center;
+    }
+
+    .o_control_panel .o_breadcrumb:has(.breadcrumb) .breadcrumb-item + .breadcrumb-item::before,
+    .o_control_panel .o_breadcrumb:has(.breadcrumb) > .d-flex::before {
+        color: $carbon-text-placeholder;
+        content: "/";
+        padding-right: $carbon-spacing-03;
+    }
+
+    .o_control_panel .o_breadcrumb:has(.breadcrumb) .o_last_breadcrumb_item {
+        color: $carbon-text-primary;
+        font-size: $carbon-font-size-body-02;
+        line-height: $carbon-field-height;
+    }
+
+    .o_control_panel .o_breadcrumb:has(.breadcrumb) .o_control_panel_breadcrumbs_actions,
+    .o_control_panel .o_breadcrumb:has(.breadcrumb) .o_cp_action_menus {
+        align-items: center !important;
+        padding-right: 0 !important;
+    }
+
+    .o_control_panel .o_breadcrumb:has(.breadcrumb) .o_cp_action_menus .btn {
+        width: $carbon-field-height;
+        min-height: $carbon-field-height;
+        color: $carbon-icon-secondary;
+    }
+
+    .o_control_panel .o_control_panel_main_buttons {
+        flex-shrink: 0;
+        align-items: center;
+        gap: $carbon-spacing-02 !important;
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            height: $carbon-field-height;
+            min-height: $carbon-field-height;
+            padding-top: 0;
+            padding-bottom: 0;
+            white-space: nowrap;
+        }
+    }
+
+    .o_control_panel .o_control_panel_actions {
+        flex: 0 1 auto;
+        justify-content: flex-end !important;
+        margin-left: auto;
+        min-width: 0;
+        max-width: 100%;
+    }
+
+    .o_control_panel .o_control_panel_navigation {
+        flex: 0 0 auto !important;
+        margin-left: 0;
+        gap: $carbon-spacing-02 !important;
+    }
+
+    .o_control_panel .o_cp_action_menus .btn,
+    .o_control_panel .o_control_panel_breadcrumbs_actions .btn,
+    .o_control_panel .o_control_panel_navigation .btn {
+        align-self: center;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: $carbon-field-height;
+    }
+
+    // Breadcrumb: Carbon body size only; colours live in breadcrumb.scss. Layout,
+    // separators and truncation are left to Odoo core. An earlier "flatten into
+    // one row" customization here (justify-content/overflow + a custom `/`
+    // separator + forced ellipsis) collided with custom control panels such as
+    // the spreadsheet dashboard, causing the breadcrumb to overlap / over-truncate.
+    .o_control_panel .breadcrumb-item,
+    .o_control_panel .o_last_breadcrumb_item {
+        font-size: $carbon-font-size-body-02;
+        line-height: 1.25;
+    }
+
+    .o_control_panel .o_control_panel_breadcrumbs_actions {
+        align-items: center;
+        flex-shrink: 0;
+        gap: $carbon-spacing-02;
+    }
+
+    // Desktop form smart buttons live in the control panel. Keep them compact
+    // and let translated labels truncate instead of stretching the header.
+    .o_control_panel .o-form-buttonbox {
+        display: flex;
+        flex: 0 1 auto;
+        flex-wrap: nowrap;
+        justify-content: flex-end;
+        min-width: 0;
+        max-width: 48vw;
+        margin-bottom: 0;
+        overflow: hidden;
+
+        .oe_stat_button {
+            flex: 0 1 12rem;
+            min-width: 8.5rem;
+            max-width: 14rem;
+            height: $carbon-field-height-lg;
+            padding: 0 $carbon-spacing-04;
+            // Center the icon + label cluster horizontally. min-width makes the
+            // button wider than its content, so the default flex-start left-aligns
+            // it and leaves dead space on the right.
+            justify-content: center;
+            border-color: $carbon-border-subtle !important;
+            background-color: $carbon-white;
+            color: $carbon-text-primary;
+
+            &:hover,
+            &:focus {
+                background-color: $carbon-layer-01;
+                border-color: $carbon-border-strong !important;
+            }
+
+            .o_button_icon {
+                flex: 0 0 auto;
+                color: $carbon-icon-interactive;
+                font-size: 1.25rem;
+            }
+
+            .o_stat_info,
+            > span,
+            .o_field_statinfo {
+                min-width: 0;
+            }
+
+            .o_stat_text,
+            .o_stat_value {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+            .o_stat_text {
+                color: $carbon-text-primary;
+                font-size: $carbon-font-size-body;
+                font-weight: $carbon-font-weight-regular;
+            }
+
+            .o_stat_value {
+                color: $carbon-link-primary !important;
+                font-size: $carbon-font-size-body;
+                font-weight: $carbon-font-weight-semibold;
+            }
+        }
+    }
+
+    @media (min-width: 1500px) {
+        .o_control_panel .o-form-buttonbox {
+            max-width: 720px;
+        }
+    }
+
+    @media (min-width: 992px) {
+        .o_control_panel:has(.o_cp_searchview) .o_control_panel_main {
+            display: grid;
+            grid-template-columns: minmax(18rem, 1fr) minmax(24rem, 42rem) minmax(12rem, 1fr);
+            align-items: center;
+        }
+
+        .o_control_panel:has(.o_cp_searchview) .o_control_panel_breadcrumbs {
+            grid-column: 1;
+            width: 100%;
+        }
+
+        .o_control_panel:has(.o_cp_searchview) .o_control_panel_actions {
+            grid-column: 2;
+            width: 100% !important;
+            margin-left: 0;
+            justify-content: center !important;
+        }
+
+        .o_control_panel:has(.o_cp_searchview) .o_control_panel_navigation {
+            grid-column: 3;
+            justify-content: flex-end !important;
+            justify-self: stretch;
+            min-width: 0;
+        }
+
+        .o_control_panel:has(.o_cp_searchview) .o_cp_searchview {
+            width: 100%;
+            min-width: 20rem;
+            max-width: 34rem;
+            margin-inline: auto;
+        }
+
+        // Only the search INPUT grows to fill the bar. The caret toggler is a
+        // compact appendage (see below) — if it also grows it becomes a large
+        // empty box that splits the bar in half.
+        .o_control_panel:has(.o_cp_searchview) .o_searchview {
+            flex: 1 1 auto;
+            min-width: 0;
+        }
+    }
+
+    // Search bar → ONE seamless Carbon control. The control-panel search is a
+    // Bootstrap input-group (gray-filled search input + a dropdown-caret button).
+    // The generic .form-control field treatment left the caret as a separately
+    // outlined `btn-outline-secondary` box, so the bar read as two boxes with a
+    // gap. Recolor the caret to match the field (gray fill, single underline, no
+    // side borders) so it merges with the input into a single field.
+    .o_cp_searchview .o_searchview_dropdown_toggler.btn {
+        flex: 0 0 auto;                                  // compact caret, never grow
+        background-color: $carbon-field-01;              // Gray 10, matches input
+        border: 0;
+        border-bottom: 1px solid $carbon-border-strong;  // Gray 50, shared underline
+        border-radius: 0;
+        color: $carbon-text-secondary;
+
+        &:hover { background-color: #e8e8e8; }
+    }
+
+    @media (max-width: 991.98px) {
+        .o_control_panel .o_control_panel_main {
+            align-items: stretch;
+        }
+
+        .o_control_panel .o_control_panel_breadcrumbs {
+            flex-basis: 100%;
+        }
+
+        .o_control_panel .o_control_panel_actions {
+            order: 3;
+            width: 100%;
+            margin-left: 0;
+            justify-content: flex-start !important;
+            overflow-x: auto;
+        }
+
+        .o_control_panel .o-form-buttonbox {
+            max-width: 100%;
+            justify-content: flex-start;
+
+            .oe_stat_button {
+                flex-basis: 11rem;
+            }
+        }
+
+        .o_control_panel .o_control_panel_navigation {
+            margin-left: 0;
+        }
+    }
+
+    // --- Form sheet → white card, subtle border + soft shadow, airy ---------
+    .o_form_view .o_form_sheet_bg {
+        background-color: $carbon-layer-01;
+        padding: $carbon-spacing-06;               // gray gutter so the card floats
+        border: 0;
+    }
+    .o_form_view .o_form_sheet {
+        background-color: $carbon-white;
+        border: 1px solid $carbon-border-subtle;   // Gray 20
+        border-radius: 0;
+        box-shadow: 0 1px 2px rgba($carbon-black, 0.06);
+        padding: $carbon-spacing-07;               // 32px inner padding
+        max-width: 1120px;
+    }
+
+    // A form inside a modal/dialog is ALREADY in a container — the floating-card
+    // treatment (border + shadow + Gray-10 gutter) just nests borders. Flatten
+    // it so the form fills the modal cleanly.
+    .modal .o_form_view .o_form_sheet_bg,
+    .o_dialog .o_form_view .o_form_sheet_bg {
+        background-color: transparent;
+        padding: 0;
+    }
+    .modal .o_form_view .o_form_sheet,
+    .o_dialog .o_form_view .o_form_sheet {
+        border: 0;
+        box-shadow: none;
+        max-width: none;
+    }
+
+    // Group spacing — a touch more air between fields.
+    .o_form_view .o_group .o_cell,
+    .o_form_view .o_inner_group > tbody > tr > td {
+        padding-top: $carbon-spacing-02;
+        padding-bottom: $carbon-spacing-02;
+    }
+
+    // Section separators (SALES / INVOICING …) → Carbon heading-compact.
+    .o_form_view .o_horizontal_separator {
+        color: $carbon-text-secondary;
+        font-weight: $carbon-font-weight-semibold;
+        font-size: $carbon-font-size-label;
+        letter-spacing: 0.32px;
+        text-transform: uppercase;
+        border-bottom: 1px solid $carbon-border-subtle;
+        padding-bottom: $carbon-spacing-02;
+        margin-bottom: $carbon-spacing-04;
+    }
+
+    // --- Chatter → clean white panel with a subtle divider ------------------
+    .o-mail-Form-chatter,
+    .o_form_view .oe_chatter {
+        background-color: $carbon-white;
+        border-left: 1px solid $carbon-border-subtle;
+    }
+
+    // Backstop for $o-mail-Chatter-minWidth (primary_variables.scss): keep the
+    // side-docked chatter narrow so wide editable tables get room even if the
+    // variable override doesn't propagate to core's calc().
+    .o-mail-Form-chatter.o-aside {
+        width: calc(420px + var(--Chatter-asideExtraWidth, 0px));
+    }
+
+    // --- Statusbar (Quotation ▸ Sent ▸ Order) → light, not black ------------
+    .o_statusbar_status {
+        background-color: transparent;
+
+        .o_arrow_button,
+        > button {
+            background-color: $carbon-white !important;
+            color: $carbon-text-secondary !important;
+            border: 1px solid $carbon-border-subtle !important;
+            border-radius: 0 !important;
+            font-weight: $carbon-font-weight-regular;
+
+            &:hover { background-color: $carbon-layer-01 !important; color: $carbon-text-primary !important; }
+        }
+
+        // Current / active step → Blue 60.
+        .o_arrow_button_current,
+        .o_arrow_button.active,
+        > button.o_arrow_button_current {
+            background-color: $carbon-highlight !important;   // Blue 20 wash
+            color: $carbon-blue-70 !important;
+            border-color: $carbon-border-interactive !important;
+            font-weight: $carbon-font-weight-semibold;
+        }
+
+        // Terminal cancelled state → red, not the generic active blue.
+        .o_arrow_button_current[data-value="cancel"],
+        .o_arrow_button.active[data-value="cancel"],
+        > button.o_arrow_button_current[data-value="cancel"] {
+            --o-statusbar-background-active: #{$carbon-notification-error-bg};
+            --o-statusbar-border-active: #{$carbon-support-error};
+            background-color: $carbon-notification-error-bg !important;
+            color: $carbon-support-error !important;
+            border-color: $carbon-support-error !important;
+
+            &::before {
+                background-color: $carbon-support-error !important;
+            }
+        }
+    }
+}

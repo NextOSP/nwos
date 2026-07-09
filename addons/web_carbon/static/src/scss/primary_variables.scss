@@ -1,0 +1,126 @@
+///
+/// Map IBM Carbon tokens onto the NWOS/Odoo `$o-*` primary variables.
+///
+/// Loaded right after `carbon_tokens.scss` and before web's own
+/// `primary_variables.scss`. Because every core variable is declared with
+/// `!default`, the values set here win. Setting the `$o-*` layer also flows
+/// through `bootstrap_overridden.scss` into Bootstrap's `$primary`,
+/// `$font-family-sans-serif`, `$border-radius`, etc.
+///
+
+// == Typography ==============================================================
+// IBM Plex Sans first in the stack; `o-add-unicode-support-font()` (from web's
+// utils.scss, already loaded in _assets_helpers) keeps unicode fallbacks.
+$o-system-fonts: (
+    #{$carbon-font-sans}, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Ubuntu, "Noto Sans", Arial, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"
+);
+$o-headings-font-family: o-add-unicode-support-font($o-system-fonts);
+$o-font-family-monospace: o-add-unicode-support-font(
+    (#{$carbon-font-mono}, SFMono-Regular, Menlo, Monaco, Consolas, "Courier New", monospace)
+);
+
+// Carbon productive base is 14px — matches Odoo's default, kept explicit.
+$o-font-size-base: o-to-rem(14px);
+$o-line-height-base: 1.4;           // Carbon body ~1.29–1.43; comfortable middle
+$o-font-weight-medium: $carbon-font-weight-semibold; // Carbon uses 600 for emphasis
+
+// == Chatter =================================================================
+// Trim the side-docked chatter (core default 530px) so wide editable tables —
+// e.g. the 10-column purchase order lines — keep enough room when the chatter
+// is aside on high-DPI / zoomed displays. Backstopped by a direct width rule
+// in components/layout.scss in case this !default override doesn't propagate.
+$o-mail-Chatter-minWidth: 420px;
+
+// == Grayscale — remap to the IBM gray ramp ==================================
+$o-gray-100: $carbon-gray-10;   // lightest
+$o-gray-200: $carbon-gray-20;
+$o-gray-300: $carbon-gray-30;
+$o-gray-400: $carbon-gray-40;
+$o-gray-500: $carbon-gray-50;
+$o-gray-600: $carbon-gray-60;
+$o-gray-700: $carbon-gray-70;
+$o-gray-800: $carbon-gray-80;
+$o-gray-900: $carbon-gray-100; // darkest
+
+// == Brand & status colors ===================================================
+$o-community-color: $carbon-blue-60;
+$o-enterprise-color: $carbon-blue-60;
+$o-brand-nwos: $carbon-blue-60;
+$o-brand-primary: $carbon-blue-60;
+$o-brand-secondary: $carbon-gray-70;
+$o-brand-lightsecondary: $carbon-gray-10;
+
+$o-action: $carbon-blue-60;
+$o-success: $carbon-support-success;
+$o-info: $carbon-support-info;
+$o-warning: $carbon-support-warning;
+$o-danger: $carbon-support-error;
+
+// Accessible contextual text colors (AA on white).
+$o-theme-text-colors: (
+    "success": $carbon-support-success,
+    "info": $carbon-support-info,
+    "warning": #8a6a00,        // darkened yellow for AA text contrast
+    "danger": $carbon-support-error,
+);
+
+// == Text & links ============================================================
+$o-main-text-color: $carbon-text-primary;
+$o-main-color-muted: $carbon-text-secondary;
+$o-main-headings-color: $carbon-text-primary;
+$o-main-link-color: $carbon-link-primary;
+$o-main-code-color: $carbon-purple-60;
+
+// == Components ==============================================================
+$o-view-background-color: $carbon-white;
+$o-component-active-color: $carbon-text-primary;
+$o-component-active-bg: $carbon-highlight;         // Blue 20
+$o-component-active-border: $carbon-border-interactive;
+$o-input-border-required: $carbon-border-interactive;
+
+// == Sharp corners (Carbon's defining trait) ================================
+$o-border-radius: 0;
+$o-border-radius-sm: 0;
+$o-border-radius-lg: 0;
+
+// == Buttons — Carbon color roles ===========================================
+// Shapes/sizing are handled in components/buttons.scss; colors here.
+$o-btns-bs-override: (
+    "primary": (
+        background: $carbon-blue-60,
+        border: $carbon-blue-60,
+        color: $carbon-text-on-color,
+        hover-background: $carbon-blue-70,
+        hover-border: $carbon-blue-70,
+        hover-color: $carbon-text-on-color,
+        active-background: $carbon-blue-70,
+        active-border: $carbon-blue-70,
+        active-color: $carbon-text-on-color,
+    ),
+    // Neutral (Salesforce-style): white surface, subtle border, dark text —
+    // NOT Carbon's heavy dark-gray, which reads as black-on-black in toolbars.
+    "secondary": (
+        background: $carbon-white,
+        border: $carbon-border-strong,
+        color: $carbon-text-primary,
+        hover-background: $carbon-gray-10,
+        hover-border: $carbon-gray-70,
+        hover-color: $carbon-text-primary,
+        active-background: $carbon-gray-20,
+        active-border: $carbon-border-interactive,
+        active-color: $carbon-text-primary,
+    ),
+    "light": (
+        background: $carbon-white,
+        border: $carbon-gray-30,
+        color: $carbon-text-primary,
+        hover-background: $carbon-gray-10,
+        hover-border: $carbon-gray-30,
+        hover-color: $carbon-text-primary,
+        active-background: $carbon-gray-20,
+        active-border: $carbon-border-interactive,
+        active-color: $carbon-text-primary,
+    ),
+);

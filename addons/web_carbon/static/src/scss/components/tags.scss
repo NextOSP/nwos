@@ -1,0 +1,65 @@
+///
+/// Carbon tags & badges — square (2px), Gray-20 default fill, compact.
+///
+
+.o_web_client {
+    .badge,
+    .o_tag,
+    .o_field_many2manytags .badge {
+        border-radius: 0;
+        font-size: $carbon-font-size-label;           // 12px
+        font-weight: $carbon-font-weight-regular;
+        letter-spacing: 0.32px;
+        padding: 2px $carbon-spacing-03;
+        min-height: 18px;
+        display: inline-flex;
+        align-items: center;
+        background-color: $carbon-layer-accent-01;     // Gray 20
+        color: $carbon-text-primary;
+    }
+
+    // --- Many2many SELECTION tags (o_tag pills inside a tags field) ---------
+    // Odoo renders these with Bootstrap's `.rounded-pill` (border-radius set with
+    // !important) and stretches them to the 36px field height, so the generic
+    // `.o_tag { border-radius: 0 }` above is overridden and the chip reads as a
+    // tall pastel pill. Force the Carbon tag shape: sharp, compact (24px), with a
+    // dismiss "x" that inherits the tag's own text colour (not Odoo's stark blue).
+    .o_field_tags .o_tag.o_badge {
+        border-radius: 0 !important;
+        height: 24px;
+        min-height: 24px;
+        padding: 0 $carbon-spacing-03 !important;   // 0 8px
+        font-size: $carbon-font-size-label;         // 12px
+        letter-spacing: 0.16px;
+        align-self: center;
+        border: 0 !important;
+
+        .o_delete {
+            color: currentColor !important;          // match the tag text
+            opacity: 0.55;
+            padding-left: 6px !important;
+            display: flex;
+            align-items: center;
+
+            i { color: inherit !important; }
+            &:hover { opacity: 1; }
+        }
+    }
+
+    // No-colour tags (o_tag_color_0) → clean Carbon Gray-20 chip. Coloured tags
+    // (o_tag_color_1…11) keep Odoo's colour but still get the shape above.
+    .o_field_tags .o_tag.o_badge.o_tag_color_0 {
+        background-color: $carbon-layer-accent-01 !important;   // Gray 20
+        color: $carbon-text-primary !important;
+    }
+
+    // Status pills map onto Carbon support colors.
+    .badge.text-bg-success,
+    .badge.bg-success { background-color: rgba($carbon-support-success, 0.16); color: #0e6027; }
+    .badge.text-bg-danger,
+    .badge.bg-danger  { background-color: rgba($carbon-support-error, 0.16); color: $carbon-support-error; }
+    .badge.text-bg-warning,
+    .badge.bg-warning { background-color: rgba($carbon-support-warning, 0.24); color: #684e00; }
+    .badge.text-bg-primary,
+    .badge.bg-primary { background-color: $carbon-highlight; color: $carbon-blue-70; }
+}

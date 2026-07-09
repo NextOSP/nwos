@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="24" viewBox="0 0 128 24" fill="none">
+  <!-- Carbon mark: Blue 60 square with a white notch -->
+  <rect width="24" height="24" fill="#0f62fe"/>
+  <rect x="7" y="7" width="10" height="10" fill="#ffffff"/>
+  <!-- Wordmark -->
+  <text x="34" y="17" font-family="'IBM Plex Sans', Arial, sans-serif" font-size="16" font-weight="600" fill="#ffffff" letter-spacing="1.5">NWOS</text>
+</svg>

@@ -1,0 +1,42 @@
+///
+/// Carbon tabs — flat, Gray-70 labels, Blue-60 active underline (no radius).
+///
+
+.o_web_client {
+    .o_notebook .nav-tabs,
+    .nav-tabs {
+        border-bottom: 1px solid $carbon-border-subtle;
+        gap: 0;
+
+        .nav-link {
+            border: 0;
+            border-radius: 0;
+            border-bottom: 2px solid transparent;
+            color: $carbon-text-secondary;
+            font-size: $carbon-font-size-body;
+            padding: $carbon-spacing-03 $carbon-spacing-05;
+            background-color: transparent;
+
+            &:hover { color: $carbon-text-primary; background-color: $carbon-layer-01; }
+
+            &.active {
+                color: $carbon-text-primary;
+                font-weight: $carbon-font-weight-semibold;
+                border-bottom-color: $carbon-interactive; // Blue 60 underline
+                background-color: transparent;
+            }
+        }
+    }
+}
+
+// === Mobile / touch (phones, ≤ 767.98px) ================================
+// Notebook tabs (Order Lines / Other Info) → taller tap target + 16px label.
+@media (max-width: 767.98px) {
+    .o_web_client .o_notebook .nav-tabs .nav-link,
+    .o_web_client .nav-tabs .nav-link {
+        display: flex;
+        align-items: center;
+        min-height: $carbon-field-height;        // 40px tap target
+        font-size: $carbon-font-size-body-02;    // 16px
+    }
+}

@@ -1,0 +1,140 @@
+///
+/// IBM Carbon Design System — token source of truth.
+///
+/// This is the ONE place raw Carbon hex values live. Every other file in this
+/// addon must reference these tokens, never a literal color. Values are taken
+/// from the IBM Design Language palette and the Carbon "White" theme token set.
+/// https://carbondesignsystem.com/elements/color/tokens/
+///
+
+// == IBM Design Language — core palette ======================================
+
+// Blue
+$carbon-blue-20: #d0e2ff;
+$carbon-blue-40: #78a9ff;
+$carbon-blue-50: #4589ff;
+$carbon-blue-60: #0f62fe; // interactive / brand / focus
+$carbon-blue-70: #0043ce; // interactive hover
+
+// Gray
+$carbon-gray-10:  #f4f4f4;
+$carbon-gray-20:  #e0e0e0;
+$carbon-gray-30:  #c6c6c6;
+$carbon-gray-40:  #a8a8a8;
+$carbon-gray-50:  #8d8d8d;
+$carbon-gray-60:  #6f6f6f;
+$carbon-gray-70:  #525252;
+$carbon-gray-80:  #393939;
+$carbon-gray-90:  #262626;
+$carbon-gray-100: #161616;
+
+$carbon-white: #ffffff;
+$carbon-black: #000000;
+
+// Support / status
+$carbon-red-60:    #da1e28; // error
+$carbon-red-50:    #fa4d56;
+$carbon-green-50:  #24a148; // success
+$carbon-green-40:  #42be65;
+$carbon-yellow-30: #f1c21b; // warning
+$carbon-orange-40: #ff832b; // caution major
+$carbon-purple-60: #8a3ffc; // visited links
+$carbon-teal-60:   #007d79; // secondary accent
+
+// == Carbon "White" theme — semantic tokens ==================================
+// Named after Carbon's contextual token roles so component SCSS reads clearly.
+
+$carbon-background:            $carbon-white;
+$carbon-background-inverse:    $carbon-gray-80;
+$carbon-background-brand:      $carbon-blue-60;
+
+$carbon-layer-01:              $carbon-gray-10;
+$carbon-layer-02:              $carbon-white;
+$carbon-layer-accent-01:       $carbon-gray-20;
+
+$carbon-field-01:              $carbon-gray-10;
+$carbon-field-02:              $carbon-white;
+
+$carbon-border-subtle:         $carbon-gray-20;
+$carbon-border-subtle-01:      $carbon-gray-30;
+$carbon-border-strong:         $carbon-gray-50;
+$carbon-border-interactive:    $carbon-blue-60;
+$carbon-border-inverse:        $carbon-gray-100;
+
+$carbon-text-primary:          $carbon-gray-100;
+$carbon-text-secondary:        $carbon-gray-70;
+$carbon-text-helper:           $carbon-gray-60;
+$carbon-text-placeholder:      $carbon-gray-40;
+$carbon-text-on-color:         $carbon-white;
+$carbon-text-error:            $carbon-red-60;
+$carbon-text-inverse:          $carbon-white;
+
+$carbon-link-primary:          $carbon-blue-60;
+$carbon-link-primary-hover:    $carbon-blue-70;
+$carbon-link-visited:          $carbon-purple-60;
+
+$carbon-icon-primary:          $carbon-gray-100;
+$carbon-icon-secondary:        $carbon-gray-70;
+$carbon-icon-on-color:         $carbon-white;
+$carbon-icon-interactive:      $carbon-blue-60;
+
+$carbon-support-error:         $carbon-red-60;
+$carbon-support-success:       $carbon-green-50;
+$carbon-support-warning:       $carbon-yellow-30;
+$carbon-support-info:          $carbon-blue-70;
+$carbon-support-caution:       $carbon-orange-40;
+
+// Notification (low-contrast) backgrounds — Carbon "White" theme
+$carbon-notification-info-bg:    #edf5ff; // Blue 10
+$carbon-notification-success-bg: #defbe6; // Green 10
+$carbon-notification-warning-bg: #fdf6dd; // Yellow 10
+$carbon-notification-error-bg:   #fff1f1; // Red 10
+
+$carbon-focus:                 $carbon-blue-60;
+$carbon-focus-inset:           $carbon-white;
+
+$carbon-interactive:           $carbon-blue-60;
+$carbon-highlight:             $carbon-blue-20;
+$carbon-toggle-off:            $carbon-gray-50;
+$carbon-overlay:               rgba($carbon-gray-100, 0.5);
+$carbon-skeleton:              $carbon-gray-30;
+
+// UI Shell (dark header)
+$carbon-shell-bg:              $carbon-gray-100;
+$carbon-shell-hover:           $carbon-gray-80;
+$carbon-shell-text:            $carbon-gray-10;
+$carbon-shell-text-hover:      $carbon-white;
+$carbon-shell-accent:          $carbon-blue-60;
+
+// == 2x Grid — spacing scale (px) ============================================
+$carbon-spacing-01: 2px;
+$carbon-spacing-02: 4px;
+$carbon-spacing-03: 8px;
+$carbon-spacing-04: 12px;
+$carbon-spacing-05: 16px;
+$carbon-spacing-06: 24px;
+$carbon-spacing-07: 32px;
+$carbon-spacing-08: 40px;
+$carbon-spacing-09: 48px;
+$carbon-spacing-10: 64px;
+
+// == Typography ==============================================================
+$carbon-font-sans: 'IBM Plex Sans';
+$carbon-font-mono: 'IBM Plex Mono';
+
+// Productive type set (fixed sizes)
+$carbon-font-size-label:   0.75rem;   // 12px  label-01
+$carbon-font-size-body:    0.875rem;  // 14px  body-compact-01 / body-01
+$carbon-font-size-body-02: 1rem;      // 16px  body-02
+$carbon-font-size-h03:     1.25rem;   // 20px  heading-03
+$carbon-font-size-h04:     1.75rem;   // 28px  heading-04
+$carbon-font-size-h05:     2rem;      // 32px  heading-05
+
+$carbon-font-weight-light:    300;
+$carbon-font-weight-regular:  400;
+$carbon-font-weight-semibold: 600;
+
+// Component sizing
+$carbon-field-height:    40px; // default field/button height
+$carbon-field-height-lg: 48px; // large field/button, UI Shell height
+$carbon-focus-width:     2px;

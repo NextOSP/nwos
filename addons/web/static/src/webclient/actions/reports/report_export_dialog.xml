@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="web.ReportExportDialog">
+        <Dialog title.translate="Review and Export" size="'xl'" contentClass="'o_report_export_dialog'">
+            <div class="d-flex flex-column gap-3">
+                <div class="row g-3">
+                    <div class="col-12 col-lg-5">
+                        <label class="form-label" for="o_report_export_template">Template</label>
+                        <select
+                            id="o_report_export_template"
+                            class="form-select"
+                            t-att-value="state.selectedReportId"
+                            t-on-change="onReportChange"
+                        >
+                            <option
+                                t-foreach="state.reports"
+                                t-as="report"
+                                t-key="report.id"
+                                t-att-value="report.id"
+                                t-out="report.name"
+                            />
+                        </select>
+                    </div>
+                    <div class="col-12 col-lg-4">
+                        <label class="form-label" for="o_report_export_language">Language</label>
+                        <select
+                            id="o_report_export_language"
+                            class="form-select"
+                            t-att-value="state.selectedLang"
+                            t-on-change="onLanguageChange"
+                        >
+                            <option
+                                t-foreach="state.languages"
+                                t-as="language"
+                                t-key="language[0]"
+                                t-att-value="language[0]"
+                                t-out="language[1]"
+                            />
+                        </select>
+                    </div>
+                    <div class="col-12 col-lg-3">
+                        <label class="form-label" for="o_report_export_paperformat">Paper Format</label>
+                        <select
+                            id="o_report_export_paperformat"
+                            class="form-select"
+                            t-att-value="state.selectedPaperformatId"
+                            t-on-change="onPaperformatChange"
+                        >
+                            <option value="">Report default</option>
+                            <option
+                                t-foreach="state.paperformats"
+                                t-as="paperformat"
+                                t-key="paperformat.id"
+                                t-att-value="paperformat.id"
+                                t-out="paperformat.name"
+                            />
+                        </select>
+                    </div>
+                </div>
+                <div class="border rounded overflow-hidden bg-100" style="height: 65vh;">
+                    <iframe
+                        t-if="state.previewUrl"
+                        class="w-100 h-100 d-block bg-white"
+                        t-att-src="state.previewUrl"
+                    />
+                    <div t-else="" class="h-100 d-flex align-items-center justify-content-center text-muted">
+                        Preview unavailable
+                    </div>
+                </div>
+                <div class="small text-muted">
+                    <t t-out="selectedReport?.name"/> · <t t-out="selectedLanguageName"/>
+                </div>
+            </div>
+            <t t-set-slot="footer">
+                <button class="btn btn-secondary" t-on-click="cancel">Cancel</button>
+                <button
+                    class="btn btn-primary"
+                    t-att-disabled="state.isExporting || !selectedReport"
+                    t-on-click="export"
+                >
+                    <i t-if="state.isExporting" class="fa fa-fw fa-spin fa-circle-o-notch me-1"/>
+                    Export
+                </button>
+            </t>
+        </Dialog>
+    </t>
+
+</templates>

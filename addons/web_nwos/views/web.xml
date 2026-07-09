@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<nwos>
+    <!--
+        Chatter Position - Start
+    -->
+    <template id="webclient_bootstrap" inherit_id="web.webclient_bootstrap" name="Chatter Position">
+        <xpath expr="//t[@t-set='body_classname']" position="attributes">
+            <attribute name="t-value" add="+ ' o_chatter_position_' + (request.env.user.chatter_position or 'sided')"
+                       separator=" "/>
+        </xpath>
+    </template>
+    <!--
+        Chatter Position - End
+    -->
+
+    <template id="webclient_bootstrap_inherit" inherit_id="web.webclient_bootstrap">
+        <xpath expr="//meta[@name='theme-color']" position="replace">
+            <meta name="theme-color" content="#009efb"/>
+        </xpath>
+    </template>
+
+    <template id="webclient_offline_inherit" inherit_id="web.webclient_offline">
+        <xpath expr="//t" position="replace">
+            <t t-call="web.layout">
+                <t t-set="html_data" t-value="{'style': 'height: 100%;'}"/>
+                <t t-set="title">Offline</t>
+                <t t-set="head">
+                    <script type="text/javascript">
+                        window.addEventListener('online', () => location.reload());
+                    </script>
+                    <style>
+                        :root {
+                            --cds-blue-60: #0f62fe;
+                            --cds-blue-70: #0043ce;
+                            --cds-gray-10: #f4f4f4;
+                            --cds-gray-30: #c6c6c6;
+                            --cds-gray-70: #525252;
+                            --cds-gray-80: #393939;
+                            --cds-gray-90: #262626;
+                            --cds-gray-100: #161616;
+                            --cds-white: #ffffff;
+                        }
+
+                        body {
+                            font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Ubuntu, "Noto Sans", Arial, sans-serif;
+                            padding: 0;
+                            margin: 0;
+                            background: var(--cds-gray-100);
+                            color: var(--cds-gray-10);
+                            min-height: 100vh;
+                            width: 100vw;
+                            user-select: none;
+                        }
+
+                        .o_offline_shell {
+                            min-height: 100vh;
+                            display: grid;
+                            grid-template-rows: 48px 1fr;
+                        }
+
+                        .o_offline_header {
+                            display: flex;
+                            align-items: center;
+                            border-bottom: 1px solid var(--cds-gray-80);
+                            background: var(--cds-gray-100);
+                            padding: 0 16px;
+                        }
+
+                        .o_offline_brand {
+                            display: inline-flex;
+                            align-items: center;
+                            gap: 12px;
+                            color: var(--cds-white);
+                            font-size: 16px;
+                            font-weight: 600;
+                            letter-spacing: 1.5px;
+                            line-height: 1;
+                        }
+
+                        .o_offline_brand_mark {
+                            display: grid;
+                            place-items: center;
+                            width: 24px;
+                            height: 24px;
+                            background: var(--cds-blue-60);
+                        }
+
+                        .o_offline_brand_mark::after {
+                            content: "";
+                            width: 10px;
+                            height: 10px;
+                            background: var(--cds-white);
+                        }
+
+                        .o_offline_main {
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            padding: 32px;
+                        }
+
+                        .o_offline_panel {
+                            width: min(100%, 640px);
+                            border-left: 4px solid var(--cds-blue-60);
+                            background: var(--cds-gray-90);
+                            padding: 32px;
+                            text-align: left;
+                        }
+
+                        .o_offline_eyebrow {
+                            margin: 0 0 16px;
+                            color: var(--cds-gray-30);
+                            font-size: 12px;
+                            font-weight: 600;
+                            letter-spacing: 0;
+                            line-height: 16px;
+                        }
+
+                        .o_offline_panel h1 {
+                            margin: 0;
+                            color: var(--cds-white);
+                            font-size: 32px;
+                            font-weight: 400;
+                            letter-spacing: 0;
+                            line-height: 40px;
+                        }
+
+                        .o_offline_panel p {
+                            margin: 16px 0 32px;
+                            color: var(--cds-gray-30);
+                            font-size: 16px;
+                            font-weight: 400;
+                            letter-spacing: 0;
+                            line-height: 24px;
+                        }
+
+                        .o_offline_panel button {
+                            min-height: 48px;
+                            background: var(--cds-blue-60);
+                            color: var(--cds-white);
+                            border: 0;
+                            border-radius: 0;
+                            padding: 0 64px 0 16px;
+                            cursor: pointer;
+                            font-size: 16px;
+                            font-weight: 400;
+                            letter-spacing: 0;
+                            line-height: 20px;
+                            text-align: left;
+                        }
+
+                        .o_offline_panel button:hover {
+                            background: var(--cds-blue-70);
+                        }
+
+                        .o_offline_panel button:focus-visible {
+                            outline: 2px solid var(--cds-white);
+                            outline-offset: 2px;
+                        }
+
+                        @media (max-width: 600px) {
+                            .o_offline_main {
+                                align-items: stretch;
+                                padding: 16px;
+                            }
+
+                            .o_offline_panel {
+                                padding: 24px;
+                            }
+
+                            .o_offline_panel h1 {
+                                font-size: 28px;
+                                line-height: 36px;
+                            }
+
+                            .o_offline_panel button {
+                                width: 100%;
+                            }
+                        }
+                    </style>
+                    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+                </t>
+                <div class="o_offline_shell">
+                    <header class="o_offline_header">
+                        <div class="o_offline_brand" aria-label="NWOS">
+                            <span class="o_offline_brand_mark" aria-hidden="true"/>
+                            <span>NWOS</span>
+                        </div>
+                    </header>
+                    <main class="o_offline_main">
+                        <section class="o_offline_panel" aria-labelledby="offline_title">
+                            <p class="o_offline_eyebrow">Connection status</p>
+                            <h1 id="offline_title">You are offline</h1>
+                            <p>Check your network connection and come back here. NWOS will load as soon as you're back online.</p>
+                            <button onclick="location.reload()">Check again</button>
+                        </section>
+                    </main>
+                </div>
+            </t>
+        </xpath>
+    </template>
+
+</nwos>
