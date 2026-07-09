@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nwos>
+    <!--
+        NWOS19: base l10n_my_edi now provides the "Send To MyInvois" buttons/server
+        action, the invoice-line classification code and the MyInvois page. The old
+        action_invoice_sent/action_l10n_my_edi_reject_bill/external_uuid anchors were
+        removed, so only the genuinely new l10n_my_edi_invoice_long_id field is added.
+    -->
+    <record id="view_move_form_inherit_l10n_my_myinvois_extended" model="ir.ui.view">
+        <field name="name">account.move.form.inherit.l10n_my_myinvois_extended</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="l10n_my_edi.view_move_form_inherit_l10n_my_myinvois"/>
+        <field name="arch" type="xml">
+            <field name="l10n_my_edi_custom_form_reference" position="after">
+                <field name="l10n_my_edi_invoice_long_id" readonly="1" invisible="not l10n_my_edi_invoice_long_id"/>
+            </field>
+        </field>
+    </record>
+</nwos>

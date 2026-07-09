@@ -1,0 +1,23 @@
+{
+    'author': 'NextOSP',
+    'name': "Romania - Synchronize E-Factura",
+    'version': '1.0',
+    'category': 'Accounting/Localizations/EDI',
+    'summary': "Additional module to synchronize bills with the SPV",
+    'countries': ['ro'],
+    'depends': ['l10n_ro_efactura'],
+    'data': [
+        'data/ir_cron.xml',
+        'views/account_move_views.xml',
+        'views/res_config_settings.xml',
+    ],
+    'assets': {
+        'web.assets_backend': [
+            'l10n_ro_efactura_synchronize/static/src/components/*',
+        ],
+    },
+    # NWOS19: depends on l10n_ro_efactura, disabled as obsolete (its E-Factura/SPV
+    # flow was absorbed into the base l10n_ro_edi module). Disabled to match.
+    'installable': False,
+    'license': 'LGPL-3',
+}
