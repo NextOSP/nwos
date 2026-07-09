@@ -1,0 +1,123 @@
+.o_account_move_send_wizard {
+    .o_form_renderer {
+        padding: 0;
+        background: #f6f7f9;
+    }
+
+    #alerts {
+        padding: 16px 20px 0;
+    }
+
+    .o_account_send_options {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px 20px;
+        padding: 18px 22px 10px;
+        background: #fff;
+        border-bottom: 1px solid #e3e7ee;
+    }
+
+    .o_account_send_mail_panel {
+        margin: 18px 20px 14px;
+        padding: 18px;
+        background: #fff;
+        border: 1px solid #d9e0ea;
+        border-radius: 8px;
+        box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+    }
+
+    .o_account_send_ai_strip {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 18px;
+        padding: 14px 16px;
+        border: 1px solid #c8dbff;
+        border-radius: 8px;
+        background: #eef5ff;
+    }
+
+    .o_account_send_ai_title {
+        margin-bottom: 3px;
+        color: #172033;
+        font-size: 15px;
+        font-weight: 600;
+    }
+
+    .o_account_send_ai_text {
+        color: #526070;
+        font-size: 13px;
+        line-height: 1.35;
+    }
+
+    .o_account_send_ai_button {
+        flex: 0 0 auto;
+        white-space: nowrap;
+    }
+
+    .o_group {
+        margin-bottom: 14px;
+    }
+
+    .o_group_label {
+        color: #344054;
+        font-weight: 600;
+    }
+
+    .o_field_many2many_tags_email,
+    .o_field_char[name="subject"] {
+        min-height: 42px;
+    }
+
+    .o_account_send_body {
+        border: 1px solid #cdd6e2;
+        border-radius: 8px;
+        overflow: hidden;
+        background: #fff;
+
+        .note-editable,
+        .o_readonly {
+            min-height: 220px;
+            padding: 16px;
+            color: #1f2937;
+            font-size: 14px;
+            line-height: 1.55;
+        }
+    }
+
+    .o_field_mail_attachments {
+        --fieldWidget-display: block;
+        padding: 0 20px 16px;
+
+        li {
+            max-width: 420px;
+            border-radius: 6px;
+            background: #fff;
+        }
+    }
+
+    footer {
+        padding: 14px 20px;
+        background: #fff;
+        border-top: 1px solid #e3e7ee;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .o_account_move_send_wizard {
+        .o_account_send_mail_panel {
+            margin: 12px;
+            padding: 14px;
+        }
+
+        .o_account_send_ai_strip {
+            align-items: stretch;
+            flex-direction: column;
+        }
+
+        .o_account_send_ai_button {
+            width: 100%;
+        }
+    }
+}

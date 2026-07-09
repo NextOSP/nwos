@@ -1,0 +1,31 @@
+.nwos .oe_force_bold {
+  font-weight: bold !important;
+}
+.nwos label.oe_open_balance{
+    margin-right: -18px;
+}
+.nwos label.oe_subtotal_footer_separator{
+    float:right;
+    width: 184px !important;
+}
+.nwos label.oe_mini_subtotal_footer_separator{
+    margin-right: -14px;
+}
+.nwos .oe_account_total, .nwos .oe_pos_total {
+    margin-left: -2px;
+}
+.nwos label.oe_real_closing_balance{
+    min-width: 184px !important;
+}
+.nwos label.oe_difference, .nwos label.oe_pos_difference {
+    margin-right: -10px;
+    padding-left: 10px !important;
+    min-width: 195px !important;
+}
+.nwos .oe_opening_total{
+  margin-right: 4px;
+}
+
+.o_payment_label{
+  padding-right: 20px;
+}
