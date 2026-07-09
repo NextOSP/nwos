@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nwos>
+    <record id="base.main_company" model="res.company">
+        <field name="social_twitter">https://twitter.com/NWOS</field>
+        <field name="social_facebook">https://www.facebook.com/NWOS</field>
+        <field name="social_linkedin">https://www.linkedin.com/company/nwos</field>
+        <field name="social_youtube">https://www.youtube.com/user/NWOSonline</field>
+        <field name="social_github">https://github.com/nwos</field>
+        <field name="social_instagram">https://www.instagram.com/explore/tags/nwos/</field>
+        <field name="social_tiktok">https://www.tiktok.com/@nwos</field>
+        <field name="social_discord">https://discord.com/servers/discord-town-hall-169256939211980800</field>
+    </record>
+</nwos>
