@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates xml:space="preserve">
+    <t t-name="nwos_carbon_dashboard.CarbonDashboardAction">
+        <div class="o_action o_carbon_dashboard o_carbon_dashboard_action">
+            <ControlPanel display="controlPanelDisplay">
+                <t t-set-slot="layout-actions">
+                    <t t-set="dashboard" t-value="loader.getActiveDashboard()"/>
+                    <div class="d-flex flex-wrap w-100" t-if="dashboard and dashboard.status === Status.Loaded and dashboard.model.getters.getGlobalFilters().length">
+                        <DashboardSearchBar t-key="activeDashboardId" model="dashboard.model" toggler="searchBarToggler"/>
+                    </div>
+                </t>
+                <t t-set-slot="control-panel-navigation-additional">
+                    <t t-if="env.isSmall">
+                        <DashboardMobileSearchPanel
+                            onDashboardSelected="(dashboardId) => this.openDashboard(dashboardId)"
+                            activeDashboard="loader.getActiveDashboard()"
+                            groups="getDashboardGroups()"/>
+                    </t>
+                    <a t-if="loader.getActiveDashboard()"
+                        title="Toggle favorite"
+                        t-on-click="toggleFavorite"
+                        t-attf-class="o_dashboard_star align-middle lh-base fa fa-lg fa-star{{!loader.getActiveDashboard().data.is_favorite ? '-o' : ''}}"/>
+                    <div class="ms-1 o_search_toggler" t-if="env.isSmall">
+                        <t t-component="searchBarToggler.component" t-props="searchBarToggler.props"/>
+                    </div>
+                </t>
+            </ControlPanel>
+
+            <t t-set="dashboard" t-value="loader.getActiveDashboard()"/>
+            <div class="o_content o_carbon_content d-flex">
+                <!-- Sidebar (desktop): dashboard groups -->
+                <t t-if="!env.isSmall">
+                    <t t-if="state.sidebarExpanded">
+                        <div class="o_carbon_sidebar">
+                            <button t-if="dashboard" class="o_carbon_sidebar_toggle btn btn-sm" t-on-click="toggleSidebar" title="Collapse">
+                                <i class="fa fa-angle-double-left"/>
+                            </button>
+                            <section t-foreach="getDashboardGroups()" t-as="group" t-key="group.id" class="o_carbon_sidebar_group">
+                                <header class="o_carbon_sidebar_group_head" t-esc="group.name"/>
+                                <ul class="o_carbon_sidebar_list">
+                                    <li t-foreach="group.dashboards" t-as="db" t-key="db.data.id"
+                                        t-on-click="() => this.openDashboard(db.data.id)"
+                                        t-att-title="db.data.name"
+                                        t-attf-class="o_carbon_sidebar_item {{db.data.id === activeDashboardId ? 'active' : ''}}">
+                                        <span t-esc="db.data.name"/>
+                                    </li>
+                                </ul>
+                            </section>
+                        </div>
+                    </t>
+                    <t t-else="">
+                        <div class="o_carbon_sidebar o_carbon_sidebar_collapsed" t-on-click="toggleSidebar">
+                            <button class="o_carbon_sidebar_toggle btn btn-sm"><i class="fa fa-angle-double-right"/></button>
+                        </div>
+                    </t>
+                </t>
+
+                <!-- Main content -->
+                <div class="o_carbon_main">
+                    <h3 t-if="!dashboard" class="o_carbon_status">No available dashboard</h3>
+                    <t t-else="">
+                        <h3 t-if="dashboard.status === Status.Loading" class="o_carbon_status">Loading…</h3>
+                        <div t-elif="dashboard.status === Status.Error" class="o_carbon_status text-danger">
+                            An error occurred while loading the dashboard
+                        </div>
+                        <t t-else="">
+                            <div class="o_carbon_dashboard_header">
+                                <span class="o_carbon_dashboard_group" t-esc="activeDashboardGroupName"/>
+                                <h2 class="o_carbon_dashboard_title" t-esc="dashboard.data.name"/>
+                            </div>
+                            <CarbonDashboardCanvas t-key="dashboard.data.id" model="dashboard.model"/>
+                        </t>
+                    </t>
+                </div>
+            </div>
+        </div>
+    </t>
+</templates>

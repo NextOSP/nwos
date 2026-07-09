@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates xml:space="preserve">
+    <t t-name="nwos_carbon_dashboard.CarbonKpiCard">
+        <div class="o_carbon_kpi">
+            <div t-if="title" class="o_carbon_kpi_label" t-esc="title"/>
+            <div class="o_carbon_kpi_value" t-esc="keyValue"/>
+            <div t-if="keyDescr" class="o_carbon_kpi_sub" t-esc="keyDescr"/>
+            <div t-if="baselineDisplay" t-attf-class="o_carbon_kpi_delta o_carbon_kpi_delta_{{arrow}}">
+                <span t-if="arrowGlyph" class="o_carbon_kpi_arrow" t-esc="arrowGlyph"/>
+                <span t-esc="baselineDisplay"/>
+                <span t-if="baselineDescr" class="o_carbon_kpi_delta_descr" t-esc="baselineDescr"/>
+            </div>
+            <div t-if="progressBar" class="o_carbon_kpi_progress">
+                <div class="o_carbon_kpi_progress_bar" t-attf-style="width: {{progressPercent}}%;"/>
+            </div>
+        </div>
+    </t>
+</templates>

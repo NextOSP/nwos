@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates xml:space="preserve">
+    <!-- Shared KPI band: any component exposing a `cards` getter of
+         [{label, value, sub, accent}] renders as a row of Carbon mini tiles. -->
+    <t t-name="nwos_carbon_dashboard.CarbonKpiBand">
+        <div class="o_carbon_kpi_band">
+            <t t-if="state.loading">
+                <div class="o_carbon_gantt_empty">Loading…</div>
+            </t>
+            <t t-else="">
+                <div t-foreach="cards" t-as="c" t-key="c_index"
+                     t-attf-class="o_carbon_kpi_mini o_carbon_kpi_mini_{{c.accent}}">
+                    <div class="o_carbon_kpi_mini_value" t-esc="c.value"/>
+                    <div class="o_carbon_kpi_mini_label" t-esc="c.label"/>
+                    <div t-if="c.sub" class="o_carbon_kpi_mini_sub" t-esc="c.sub"/>
+                </div>
+            </t>
+        </div>
+    </t>
+</templates>

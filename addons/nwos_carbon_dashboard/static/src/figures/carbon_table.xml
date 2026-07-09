@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates xml:space="preserve">
+    <t t-name="nwos_carbon_dashboard.CarbonTable">
+        <table class="o_carbon_table">
+            <thead>
+                <tr>
+                    <th t-foreach="props.columns" t-as="col" t-key="col_index"
+                        t-attf-class="{{col.numeric ? 'o_carbon_num' : ''}}"
+                        t-esc="col.label"/>
+                </tr>
+            </thead>
+            <tbody>
+                <tr t-foreach="props.rows" t-as="row" t-key="row_index">
+                    <td t-foreach="row" t-as="cell" t-key="cell_index"
+                        t-attf-class="{{props.columns[cell_index] and props.columns[cell_index].numeric ? 'o_carbon_num' : ''}}"
+                        t-esc="cell"/>
+                </tr>
+                <tr t-if="!props.rows.length">
+                    <td t-att-colspan="props.columns.length" class="o_carbon_table_empty">No data</td>
+                </tr>
+            </tbody>
+        </table>
+    </t>
+</templates>

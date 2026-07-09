@@ -1,0 +1,15 @@
+# Part of NextOSP. See LICENSE file for full copyright and licensing details.
+
+from nwos import api, models
+from nwos.tools import SQL
+
+
+class AlarmManager(models.AbstractModel):
+    _inherit = 'calendar.alarm_manager'
+
+    @api.model
+    def _get_notify_alert_extra_conditions(self):
+        base = super()._get_notify_alert_extra_conditions()
+        if self.env.context.get('alarm_type') == 'email':
+            return SQL("%s AND event.microsoft_id IS NULL", base)
+        return base

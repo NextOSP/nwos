@@ -1,0 +1,401 @@
+# Translation of NextOSP Server.
+# This file contains the translation of the following modules:
+# 	* nwos_bod_dashboard
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: NextOSP Server\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+
+#. module: nwos_bod_dashboard
+#. nwos-javascript
+#: code:addons/nwos_bod_dashboard/static/src/bod_dashboard.js:0
+msgid "This month"
+msgstr "Tháng này"
+
+#. module: nwos_bod_dashboard
+#. nwos-javascript
+#: code:addons/nwos_bod_dashboard/static/src/bod_dashboard.js:0
+msgid "This quarter"
+msgstr "Quý này"
+
+#. module: nwos_bod_dashboard
+#. nwos-javascript
+#: code:addons/nwos_bod_dashboard/static/src/bod_dashboard.js:0
+msgid "Last 90 days"
+msgstr "90 ngày qua"
+
+#. module: nwos_bod_dashboard
+#. nwos-javascript
+#: code:addons/nwos_bod_dashboard/static/src/bod_dashboard.js:0
+msgid "This year"
+msgstr "Năm nay"
+
+#. module: nwos_bod_dashboard
+#. nwos-javascript
+#: code:addons/nwos_bod_dashboard/static/src/bod_dashboard.js:0
+msgid "Revenue"
+msgstr "Doanh thu"
+
+#. module: nwos_bod_dashboard
+#. nwos-javascript
+#. nwos-python
+#: code:addons/nwos_bod_dashboard/static/src/bod_dashboard.js:0
+#: code:addons/nwos_bod_dashboard/models/bod_dashboard.py:0
+msgid "Sales Orders"
+msgstr "Đơn bán hàng"
+
+#. module: nwos_bod_dashboard
+#. nwos-javascript
+#: code:addons/nwos_bod_dashboard/static/src/bod_dashboard.js:0
+msgid "Invoices"
+msgstr "Hóa đơn"
+
+#. module: nwos_bod_dashboard
+#. nwos-javascript
+#: code:addons/nwos_bod_dashboard/static/src/bod_dashboard.js:0
+msgid "Overdue Invoices"
+msgstr "Hóa đơn quá hạn"
+
+#. module: nwos_bod_dashboard
+#. nwos-javascript
+#: code:addons/nwos_bod_dashboard/static/src/bod_dashboard.js:0
+msgid "Unpaid Invoices"
+msgstr "Hóa đơn chưa thanh toán"
+
+#. module: nwos_bod_dashboard
+#. nwos-javascript
+#: code:addons/nwos_bod_dashboard/static/src/bod_dashboard.js:0
+msgid "Opportunities"
+msgstr "Cơ hội"
+
+#. module: nwos_bod_dashboard
+#. nwos-javascript
+#: code:addons/nwos_bod_dashboard/static/src/bod_dashboard.js:0
+msgid "Purchase Orders"
+msgstr "Đơn mua hàng"
+
+#. module: nwos_bod_dashboard
+#. nwos-javascript
+#: code:addons/nwos_bod_dashboard/static/src/bod_dashboard.js:0
+msgid "Products Out of Stock"
+msgstr "Sản phẩm hết hàng"
+
+#. module: nwos_bod_dashboard
+#. nwos-javascript
+#: code:addons/nwos_bod_dashboard/static/src/bod_dashboard.js:0
+msgid "POS Orders"
+msgstr "Đơn POS"
+
+#. module: nwos_bod_dashboard
+#. nwos-javascript
+#: code:addons/nwos_bod_dashboard/static/src/bod_dashboard.js:0
+msgid "Executive Overview"
+msgstr "Tổng quan điều hành"
+
+#. module: nwos_bod_dashboard
+#: model:ir.ui.menu,name:nwos_bod_dashboard.menu_bod_root
+msgid "Business Reports"
+msgstr "Báo cáo Kinh doanh"
+
+#. module: nwos_bod_dashboard
+#. nwos-javascript
+#: code:addons/nwos_bod_dashboard/static/src/bod_dashboard.js:0
+msgid "Revenue/Sales by Salesman"
+msgstr "Doanh thu/Bán hàng theo nhân viên"
+
+#. module: nwos_bod_dashboard
+#. nwos-javascript
+#: code:addons/nwos_bod_dashboard/static/src/bod_dashboard.js:0
+msgid "Ask AI"
+msgstr "Hỏi AI"
+
+#. module: nwos_bod_dashboard
+#. nwos-javascript
+#: code:addons/nwos_bod_dashboard/static/src/bod_dashboard.js:0
+msgid "Sales"
+msgstr "Bán hàng"
+
+#. module: nwos_bod_dashboard
+#. nwos-javascript
+#: code:addons/nwos_bod_dashboard/static/src/bod_dashboard.js:0
+msgid "Revenue (confirmed orders)"
+msgstr "Doanh thu (đơn đã xác nhận)"
+
+#. module: nwos_bod_dashboard
+#. nwos-javascript
+#: code:addons/nwos_bod_dashboard/static/src/bod_dashboard.js:0
+msgid "vs previous period"
+msgstr "so với kỳ trước"
+
+#. module: nwos_bod_dashboard
+#. nwos-javascript
+#: code:addons/nwos_bod_dashboard/static/src/bod_dashboard.js:0
+msgid "Orders"
+msgstr "Đơn hàng"
+
+#. module: nwos_bod_dashboard
+#. nwos-javascript
+#: code:addons/nwos_bod_dashboard/static/src/bod_dashboard.js:0
+msgid "Average order"
+msgstr "Giá trị đơn trung bình"
+
+#. module: nwos_bod_dashboard
+#. nwos-javascript
+#: code:addons/nwos_bod_dashboard/static/src/bod_dashboard.js:0
+msgid "Salesman"
+msgstr "Nhân viên bán hàng"
+
+#. module: nwos_bod_dashboard
+#. nwos-javascript
+#: code:addons/nwos_bod_dashboard/static/src/bod_dashboard.js:0
+msgid "Share"
+msgstr "Tỷ trọng"
+
+#. module: nwos_bod_dashboard
+#. nwos-javascript
+#: code:addons/nwos_bod_dashboard/static/src/bod_dashboard.js:0
+msgid "Revenue by month"
+msgstr "Doanh thu theo tháng"
+
+#. module: nwos_bod_dashboard
+#. nwos-javascript
+#: code:addons/nwos_bod_dashboard/static/src/bod_dashboard.js:0
+msgid "Top customers"
+msgstr "Khách hàng hàng đầu"
+
+#. module: nwos_bod_dashboard
+#. nwos-javascript
+#: code:addons/nwos_bod_dashboard/static/src/bod_dashboard.js:0
+msgid "Top products"
+msgstr "Sản phẩm bán chạy"
+
+#. module: nwos_bod_dashboard
+#. nwos-javascript
+#: code:addons/nwos_bod_dashboard/static/src/bod_dashboard.js:0
+msgid "No data for this period."
+msgstr "Không có dữ liệu cho kỳ này."
+
+#. module: nwos_bod_dashboard
+#. nwos-javascript
+#: code:addons/nwos_bod_dashboard/static/src/bod_dashboard.js:0
+msgid "Sales app is not installed yet."
+msgstr "Ứng dụng Bán hàng chưa được cài đặt."
+
+#. module: nwos_bod_dashboard
+#. nwos-javascript
+#: code:addons/nwos_bod_dashboard/static/src/bod_dashboard.js:0
+msgid "Invoicing"
+msgstr "Hóa đơn"
+
+#. module: nwos_bod_dashboard
+#. nwos-javascript
+#: code:addons/nwos_bod_dashboard/static/src/bod_dashboard.js:0
+msgid "Invoiced"
+msgstr "Đã xuất hóa đơn"
+
+#. module: nwos_bod_dashboard
+#. nwos-javascript
+#: code:addons/nwos_bod_dashboard/static/src/bod_dashboard.js:0
+msgid "Overdue receivables"
+msgstr "Công nợ quá hạn"
+
+#. module: nwos_bod_dashboard
+#. nwos-javascript
+#: code:addons/nwos_bod_dashboard/static/src/bod_dashboard.js:0
+msgid "Unpaid total"
+msgstr "Tổng chưa thanh toán"
+
+#. module: nwos_bod_dashboard
+#. nwos-javascript
+#: code:addons/nwos_bod_dashboard/static/src/bod_dashboard.js:0
+msgid "Pipeline"
+msgstr "Cơ hội"
+
+#. module: nwos_bod_dashboard
+#. nwos-javascript
+#: code:addons/nwos_bod_dashboard/static/src/bod_dashboard.js:0
+msgid "Open opportunities"
+msgstr "Cơ hội đang mở"
+
+#. module: nwos_bod_dashboard
+#. nwos-javascript
+#: code:addons/nwos_bod_dashboard/static/src/bod_dashboard.js:0
+msgid "Expected revenue"
+msgstr "Doanh thu kỳ vọng"
+
+#. module: nwos_bod_dashboard
+#. nwos-javascript
+#: code:addons/nwos_bod_dashboard/static/src/bod_dashboard.js:0
+msgid "Weighted pipeline"
+msgstr "Giá trị cơ hội theo trọng số"
+
+#. module: nwos_bod_dashboard
+#. nwos-javascript
+#: code:addons/nwos_bod_dashboard/static/src/bod_dashboard.js:0
+msgid "Expected to close"
+msgstr "Dự kiến chốt"
+
+#. module: nwos_bod_dashboard
+#. nwos-javascript
+#: code:addons/nwos_bod_dashboard/static/src/bod_dashboard.js:0
+msgid "Operations"
+msgstr "Vận hành"
+
+#. module: nwos_bod_dashboard
+#. nwos-javascript
+#: code:addons/nwos_bod_dashboard/static/src/bod_dashboard.js:0
+msgid "Committed purchases"
+msgstr "Mua hàng đã cam kết"
+
+#. module: nwos_bod_dashboard
+#. nwos-javascript
+#: code:addons/nwos_bod_dashboard/static/src/bod_dashboard.js:0
+msgid "Inventory valuation"
+msgstr "Giá trị tồn kho"
+
+#. module: nwos_bod_dashboard
+#. nwos-javascript
+#: code:addons/nwos_bod_dashboard/static/src/bod_dashboard.js:0
+msgid "Products out of stock"
+msgstr "Sản phẩm hết hàng"
+
+#. module: nwos_bod_dashboard
+#. nwos-javascript
+#: code:addons/nwos_bod_dashboard/static/src/bod_dashboard.js:0
+msgid "Point of Sale"
+msgstr "Điểm bán hàng"
+
+#. module: nwos_bod_dashboard
+#. nwos-javascript
+#: code:addons/nwos_bod_dashboard/static/src/bod_dashboard.js:0
+msgid "Sales Pipeline — at a glance"
+msgstr "Kênh bán hàng — tổng quan nhanh"
+
+#. module: nwos_bod_dashboard
+#. nwos-javascript
+#: code:addons/nwos_bod_dashboard/static/src/bod_dashboard.js:0
+msgid "invoice(s)"
+msgstr "hóa đơn"
+
+#. module: nwos_bod_dashboard
+#. nwos-javascript
+#: code:addons/nwos_bod_dashboard/static/src/bod_dashboard.js:0
+msgid "deal(s)"
+msgstr "giao dịch"
+
+#. module: nwos_bod_dashboard
+#. nwos-javascript
+#: code:addons/nwos_bod_dashboard/static/src/bod_dashboard.js:0
+msgid "order(s)"
+msgstr "đơn"
+
+#. module: nwos_bod_dashboard
+#. nwos-javascript
+#: code:addons/nwos_bod_dashboard/static/src/bod_dashboard.js:0
+msgid "Ask about your live business data:"
+msgstr "Hỏi về dữ liệu kinh doanh trực tiếp của bạn:"
+
+#. module: nwos_bod_dashboard
+#. nwos-javascript
+#: code:addons/nwos_bod_dashboard/static/src/bod_dashboard.js:0
+msgid "Type a question…"
+msgstr "Nhập câu hỏi…"
+
+#. module: nwos_bod_dashboard
+#. nwos-javascript
+#: code:addons/nwos_bod_dashboard/static/src/bod_dashboard.js:0
+msgid "Thinking…"
+msgstr "Đang xử lý…"
+
+#. module: nwos_bod_dashboard
+#. nwos-javascript
+#: code:addons/nwos_bod_dashboard/static/src/bod_dashboard.js:0
+msgid "How is revenue trending vs the previous period?"
+msgstr "Doanh thu thay đổi thế nào so với kỳ trước?"
+
+#. module: nwos_bod_dashboard
+#. nwos-javascript
+#: code:addons/nwos_bod_dashboard/static/src/bod_dashboard.js:0
+msgid "Who are our top 5 customers this period?"
+msgstr "5 khách hàng hàng đầu kỳ này là ai?"
+
+#. module: nwos_bod_dashboard
+#. nwos-javascript
+#: code:addons/nwos_bod_dashboard/static/src/bod_dashboard.js:0
+msgid "How much is overdue in receivables?"
+msgstr "Công nợ quá hạn là bao nhiêu?"
+
+#. module: nwos_bod_dashboard
+#. nwos-javascript
+#: code:addons/nwos_bod_dashboard/static/src/bod_dashboard.js:0
+msgid "No answer."
+msgstr "Không có câu trả lời."
+
+#. module: nwos_bod_dashboard
+#. nwos-javascript
+#: code:addons/nwos_bod_dashboard/static/src/bod_dashboard.js:0
+msgid "The AI request failed. Please try again."
+msgstr "Yêu cầu AI thất bại. Vui lòng thử lại."
+
+#. module: nwos_bod_dashboard
+#. nwos-python
+#: code:addons/nwos_bod_dashboard/models/bod_dashboard.py:0
+msgid "Leads"
+msgstr "Tiềm năng"
+
+#. module: nwos_bod_dashboard
+#. nwos-python
+#: code:addons/nwos_bod_dashboard/models/bod_dashboard.py:0
+msgid "Deals"
+msgstr "Giao dịch"
+
+#. module: nwos_bod_dashboard
+#. nwos-python
+#: code:addons/nwos_bod_dashboard/models/bod_dashboard.py:0
+msgid "Quotations"
+msgstr "Báo giá"
+
+#. module: nwos_bod_dashboard
+#. nwos-python
+#: code:addons/nwos_bod_dashboard/models/bod_dashboard.py:0
+msgid "Undefined"
+msgstr "Không xác định"
+
+#. module: nwos_bod_dashboard
+#. nwos-python
+#: code:addons/nwos_bod_dashboard/models/bod_dashboard.py:0
+msgid "Please type a question."
+msgstr "Vui lòng nhập câu hỏi."
+
+#. module: nwos_bod_dashboard
+#. nwos-python
+#: code:addons/nwos_bod_dashboard/models/bod_dashboard.py:0
+msgid "I could not produce an answer."
+msgstr "Tôi không thể đưa ra câu trả lời."
+
+#. module: nwos_bod_dashboard
+#. nwos-python
+#: code:addons/nwos_bod_dashboard/models/bod_dashboard.py:0
+msgid "This section could not be loaded."
+msgstr "Không thể tải phần này."
+
+#. module: nwos_bod_dashboard
+#. nwos-python
+#: code:addons/nwos_bod_dashboard/models/bod_dashboard.py:0
+msgid "The AI provider request failed: %s"
+msgstr "Yêu cầu đến nhà cung cấp AI thất bại: %s"
+
+#. module: nwos_bod_dashboard
+#. nwos-python
+#: code:addons/nwos_bod_dashboard/models/bod_dashboard.py:0
+msgid "I could not complete that AI request: %s"
+msgstr "Tôi không thể hoàn tất yêu cầu AI đó: %s"

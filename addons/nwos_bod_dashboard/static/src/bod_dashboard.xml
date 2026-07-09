@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+
+    <t t-name="nwos_bod_dashboard.BodDashboard">
+        <div class="o_bod_dashboard">
+            <!-- Header -->
+            <div class="o_bod_header">
+                <div class="o_bod_title">
+                    <h1 t-if="state.tab === 'overview'">Executive Overview</h1>
+                    <h1 t-else="">Revenue/Sales by Salesman</h1>
+                    <span class="o_bod_company" t-if="state.data" t-esc="state.data.company"/>
+                </div>
+                <div class="o_bod_controls">
+                    <div class="o_bod_periods" role="group">
+                        <t t-foreach="periods" t-as="p" t-key="p.id">
+                            <button
+                                type="button"
+                                class="o_bod_period_btn"
+                                t-att-class="{ 'o_bod_period_btn--active': p.id === state.period }"
+                                t-on-click="() => this.setPeriod(p.id)"
+                                t-esc="p.label"/>
+                        </t>
+                    </div>
+                    <button
+                        type="button"
+                        class="o_bod_ai_toggle"
+                        t-att-class="{ 'o_bod_ai_toggle--active': state.aiOpen }"
+                        t-on-click="() => state.aiOpen = !state.aiOpen">
+                        <i class="fa fa-magic me-1"/>Ask AI
+                    </button>
+                </div>
+            </div>
+
+            <!-- Loading -->
+            <div t-if="state.loading" class="o_bod_loading">
+                <i class="fa fa-circle-o-notch fa-spin fa-2x"/>
+            </div>
+
+            <div t-else="" class="o_bod_body">
+                <div class="o_bod_main">
+                    <div class="o_bod_tabs" role="tablist">
+                        <button type="button" role="tab"
+                            class="o_bod_tab"
+                            t-att-class="{ 'o_bod_tab--active': state.tab === 'overview' }"
+                            t-on-click="() => state.tab = 'overview'">
+                            Executive Overview
+                        </button>
+                        <button type="button" role="tab"
+                            class="o_bod_tab"
+                            t-att-class="{ 'o_bod_tab--active': state.tab === 'salesman' }"
+                            t-on-click="() => state.tab = 'salesman'">
+                            Revenue/Sales by Salesman
+                        </button>
+                    </div>
+
+                    <!-- Empty state: no supported app installed -->
+                    <div t-if="!state.data.sections.length" class="o_bod_empty">
+                        <i class="fa fa-info-circle me-1"/>
+                        No Sales, Invoicing, CRM, Purchase, Inventory or POS app is installed yet.
+                    </div>
+
+                    <t t-if="state.tab === 'overview'">
+                        <!-- SALES PIPELINE — AT A GLANCE -->
+                        <section t-if="state.data.pipeline_funnel and state.data.pipeline_funnel.length" class="o_bod_section">
+                            <h2>Sales Pipeline — at a glance</h2>
+                            <div class="o_bod_tile o_bod_funnel">
+                                <t t-foreach="state.data.pipeline_funnel" t-as="bar" t-key="bar.key">
+                                    <div class="o_bod_funnel_row">
+                                        <div class="o_bod_funnel_head">
+                                            <span class="o_bod_funnel_total" t-esc="bar.total"/>
+                                            <span class="o_bod_funnel_name" t-esc="bar.label"/>
+                                        </div>
+                                        <div class="o_bod_funnel_track">
+                                            <div t-if="!bar.segments.length" class="o_bod_funnel_empty"/>
+                                            <t t-foreach="bar.segments" t-as="seg" t-key="seg_index">
+                                                <div class="o_bod_funnel_seg" role="button"
+                                                    t-att-style="'flex-grow:' + seg.count + ';background:' + seg.color"
+                                                    t-att-title="seg.label + ': ' + seg.count"
+                                                    t-on-click="() => this.openFunnel(bar, seg)"/>
+                                            </t>
+                                        </div>
+                                        <div class="o_bod_funnel_legend">
+                                            <span class="o_bod_funnel_key" role="button"
+                                                t-foreach="bar.segments" t-as="seg" t-key="seg_index"
+                                                t-on-click="() => this.openFunnel(bar, seg)">
+                                                <span class="o_bod_funnel_dot" t-att-style="'background:' + seg.color"/>
+                                                <b t-esc="seg.count"/>
+                                                <span t-esc="seg.label"/>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </t>
+                            </div>
+                        </section>
+
+                        <!-- SALES -->
+                        <section t-if="hasSection('sales')" class="o_bod_section">
+                            <h2>Sales</h2>
+                            <div class="o_bod_tiles">
+                                <div class="o_bod_tile o_bod_tile--clickable o_bod_tile--hero" role="button" tabindex="0"
+                                    t-on-click="() => this.openSales()">
+                                    <span class="o_bod_tile_label">Revenue (confirmed orders)</span>
+                                    <span class="o_bod_tile_value" t-esc="state.data.sales.revenue.formatted"/>
+                                    <span class="o_bod_tile_delta"
+                                        t-att-class="deltaClass(state.data.sales.revenue_delta)"
+                                        t-esc="deltaLabel(state.data.sales.revenue_delta)"/>
+                                    <span class="o_bod_tile_sub">vs previous period</span>
+                                    <i class="fa fa-arrow-right o_bod_tile_arrow"/>
+                                </div>
+                                <div class="o_bod_tile o_bod_tile--clickable" role="button" tabindex="0"
+                                    t-on-click="() => this.openSales()">
+                                    <span class="o_bod_tile_label">Orders</span>
+                                    <span class="o_bod_tile_value" t-esc="state.data.sales.order_count"/>
+                                    <i class="fa fa-arrow-right o_bod_tile_arrow"/>
+                                </div>
+                                <div class="o_bod_tile o_bod_tile--clickable" role="button" tabindex="0"
+                                    t-on-click="() => this.openSales()">
+                                    <span class="o_bod_tile_label">Average order</span>
+                                    <span class="o_bod_tile_value" t-esc="state.data.sales.avg_order.formatted"/>
+                                    <i class="fa fa-arrow-right o_bod_tile_arrow"/>
+                                </div>
+                            </div>
+
+                            <div class="o_bod_row">
+                                <div class="o_bod_tile o_bod_chart_tile">
+                                    <h3>Revenue by month</h3>
+                                    <div class="o_bod_chart">
+                                        <canvas t-ref="trendCanvas"/>
+                                    </div>
+                                </div>
+                                <div class="o_bod_tile">
+                                    <h3>Top customers</h3>
+                                    <ol class="o_bod_rank" t-if="state.data.sales.top_customers.length">
+                                        <li t-foreach="state.data.sales.top_customers" t-as="c" t-key="c_index"
+                                            class="o_bod_rank_item" role="button" tabindex="0"
+                                            t-on-click="() => this.openCustomer(c)">
+                                            <span class="o_bod_rank_name" t-esc="c.name"/>
+                                            <span class="o_bod_rank_val" t-esc="c.formatted"/>
+                                        </li>
+                                    </ol>
+                                    <p t-else="" class="o_bod_muted">No data for this period.</p>
+                                </div>
+                                <div class="o_bod_tile">
+                                    <h3>Top products</h3>
+                                    <ol class="o_bod_rank" t-if="state.data.sales.top_products.length">
+                                        <li t-foreach="state.data.sales.top_products" t-as="p" t-key="p_index"
+                                            class="o_bod_rank_item" role="button" tabindex="0"
+                                            t-on-click="() => this.openProduct(p)">
+                                            <span class="o_bod_rank_name" t-esc="p.name"/>
+                                            <span class="o_bod_rank_val" t-esc="p.formatted"/>
+                                        </li>
+                                    </ol>
+                                    <p t-else="" class="o_bod_muted">No data for this period.</p>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- INVOICING -->
+                        <section t-if="hasSection('invoicing')" class="o_bod_section">
+                            <h2>Invoicing</h2>
+                            <div class="o_bod_tiles">
+                                <div class="o_bod_tile o_bod_tile--clickable" role="button" tabindex="0"
+                                    t-on-click="() => this.openInvoicing('invoiced')">
+                                    <span class="o_bod_tile_label">Invoiced</span>
+                                    <span class="o_bod_tile_value" t-esc="state.data.invoicing.invoiced.formatted"/>
+                                    <i class="fa fa-arrow-right o_bod_tile_arrow"/>
+                                </div>
+                                <div class="o_bod_tile o_bod_tile--clickable o_bod_tile--warn" role="button" tabindex="0"
+                                    t-on-click="() => this.openInvoicing('overdue')">
+                                    <span class="o_bod_tile_label">Overdue receivables</span>
+                                    <span class="o_bod_tile_value" t-esc="state.data.invoicing.overdue.formatted"/>
+                                    <span class="o_bod_tile_sub">
+                                        <t t-esc="state.data.invoicing.overdue_count"/> invoice(s)
+                                    </span>
+                                    <i class="fa fa-arrow-right o_bod_tile_arrow"/>
+                                </div>
+                                <div class="o_bod_tile o_bod_tile--clickable" role="button" tabindex="0"
+                                    t-on-click="() => this.openInvoicing('unpaid')">
+                                    <span class="o_bod_tile_label">Unpaid total</span>
+                                    <span class="o_bod_tile_value" t-esc="state.data.invoicing.unpaid.formatted"/>
+                                    <i class="fa fa-arrow-right o_bod_tile_arrow"/>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- CRM PIPELINE -->
+                        <section t-if="hasSection('pipeline')" class="o_bod_section">
+                            <h2>Pipeline</h2>
+                            <div class="o_bod_tiles">
+                                <div class="o_bod_tile o_bod_tile--clickable" role="button" tabindex="0"
+                                    t-on-click="() => this.openPipeline()">
+                                    <span class="o_bod_tile_label">Open opportunities</span>
+                                    <span class="o_bod_tile_value" t-esc="state.data.pipeline.open_count"/>
+                                    <i class="fa fa-arrow-right o_bod_tile_arrow"/>
+                                </div>
+                                <div class="o_bod_tile o_bod_tile--clickable" role="button" tabindex="0"
+                                    t-on-click="() => this.openPipeline()">
+                                    <span class="o_bod_tile_label">Expected revenue</span>
+                                    <span class="o_bod_tile_value" t-esc="state.data.pipeline.expected.formatted"/>
+                                    <i class="fa fa-arrow-right o_bod_tile_arrow"/>
+                                </div>
+                                <div class="o_bod_tile o_bod_tile--clickable" role="button" tabindex="0"
+                                    t-on-click="() => this.openPipeline()">
+                                    <span class="o_bod_tile_label">Weighted pipeline</span>
+                                    <span class="o_bod_tile_value" t-esc="state.data.pipeline.weighted.formatted"/>
+                                    <i class="fa fa-arrow-right o_bod_tile_arrow"/>
+                                </div>
+                                <div class="o_bod_tile o_bod_tile--clickable" role="button" tabindex="0"
+                                    t-on-click="() => this.openPipeline()">
+                                    <span class="o_bod_tile_label">Expected to close</span>
+                                    <span class="o_bod_tile_value" t-esc="state.data.pipeline.closing_value.formatted"/>
+                                    <span class="o_bod_tile_sub">
+                                        <t t-esc="state.data.pipeline.closing_count"/> deal(s)
+                                    </span>
+                                    <i class="fa fa-arrow-right o_bod_tile_arrow"/>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- SECONDARY: purchase / inventory / pos -->
+                        <section t-if="hasSection('purchase') or hasSection('inventory') or hasSection('pos')" class="o_bod_section">
+                            <h2>Operations</h2>
+                            <div class="o_bod_tiles">
+                                <div t-if="hasSection('purchase')" class="o_bod_tile o_bod_tile--clickable" role="button" tabindex="0"
+                                    t-on-click="() => this.openPurchase()">
+                                    <span class="o_bod_tile_label">Committed purchases</span>
+                                    <span class="o_bod_tile_value" t-esc="state.data.purchase.committed.formatted"/>
+                                    <span class="o_bod_tile_sub">
+                                        <t t-esc="state.data.purchase.order_count"/> order(s)
+                                    </span>
+                                    <i class="fa fa-arrow-right o_bod_tile_arrow"/>
+                                </div>
+                                <div t-if="hasSection('inventory') and state.data.inventory.valuation" class="o_bod_tile">
+                                    <span class="o_bod_tile_label">Inventory valuation</span>
+                                    <span class="o_bod_tile_value" t-esc="state.data.inventory.valuation.formatted"/>
+                                </div>
+                                <div t-if="hasSection('inventory')" class="o_bod_tile o_bod_tile--clickable" role="button" tabindex="0"
+                                    t-on-click="() => this.openOutOfStock()">
+                                    <span class="o_bod_tile_label">Products out of stock</span>
+                                    <span class="o_bod_tile_value" t-esc="state.data.inventory.out_of_stock"/>
+                                    <i class="fa fa-arrow-right o_bod_tile_arrow"/>
+                                </div>
+                                <div t-if="hasSection('pos')" class="o_bod_tile o_bod_tile--clickable" role="button" tabindex="0"
+                                    t-on-click="() => this.openPos()">
+                                    <span class="o_bod_tile_label">Point of Sale</span>
+                                    <span class="o_bod_tile_value" t-esc="state.data.pos.total.formatted"/>
+                                    <span class="o_bod_tile_sub">
+                                        <t t-esc="state.data.pos.order_count"/> order(s)
+                                    </span>
+                                    <i class="fa fa-arrow-right o_bod_tile_arrow"/>
+                                </div>
+                            </div>
+                        </section>
+                    </t>
+
+                    <t t-elif="state.tab === 'salesman'">
+                        <section t-if="hasSection('sales')" class="o_bod_section">
+                            <h2>Revenue/Sales by Salesman</h2>
+                            <div class="o_bod_tiles">
+                                <div class="o_bod_tile o_bod_tile--hero">
+                                    <span class="o_bod_tile_label">Revenue (confirmed orders)</span>
+                                    <span class="o_bod_tile_value" t-esc="state.data.sales.revenue.formatted"/>
+                                </div>
+                                <div class="o_bod_tile">
+                                    <span class="o_bod_tile_label">Orders</span>
+                                    <span class="o_bod_tile_value" t-esc="state.data.sales.order_count"/>
+                                </div>
+                                <div class="o_bod_tile">
+                                    <span class="o_bod_tile_label">Average order</span>
+                                    <span class="o_bod_tile_value" t-esc="state.data.sales.avg_order.formatted"/>
+                                </div>
+                            </div>
+
+                            <div class="o_bod_tile o_bod_salesman_tile">
+                                <div class="o_bod_salesman_head">
+                                    <span>Salesman</span>
+                                    <span>Revenue</span>
+                                    <span>Orders</span>
+                                    <span>Average order</span>
+                                    <span>Share</span>
+                                </div>
+                                <div t-if="state.data.sales.salespeople.length" class="o_bod_salesman_rows">
+                                    <button type="button"
+                                        t-foreach="state.data.sales.salespeople"
+                                        t-as="person"
+                                        t-key="person.id || person_index"
+                                        class="o_bod_salesman_row"
+                                        t-att-style="'--bod-share:' + person.share + '%'"
+                                        t-on-click="() => this.openSalesman(person)">
+                                        <span class="o_bod_salesman_name" t-esc="person.name"/>
+                                        <span class="o_bod_salesman_revenue" t-esc="person.formatted"/>
+                                        <span t-esc="person.order_count"/>
+                                        <span t-esc="person.avg_order.formatted"/>
+                                        <span class="o_bod_salesman_share">
+                                            <span class="o_bod_salesman_bar"/>
+                                            <span><t t-esc="person.share"/>%</span>
+                                        </span>
+                                    </button>
+                                </div>
+                                <p t-else="" class="o_bod_muted">No data for this period.</p>
+                            </div>
+                        </section>
+                        <div t-else="" class="o_bod_empty">
+                            Sales app is not installed yet.
+                        </div>
+                    </t>
+                </div>
+
+                <!-- AI side panel -->
+                <BodAiPanel
+                    t-if="state.aiOpen"
+                    available="state.data.ai_available"
+                    getContext="() => this.aiContext()"
+                    onClose="() => state.aiOpen = false"/>
+            </div>
+        </div>
+    </t>
+
+</templates>

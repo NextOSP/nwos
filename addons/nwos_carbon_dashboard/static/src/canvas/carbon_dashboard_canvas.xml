@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates xml:space="preserve">
+    <t t-name="nwos_carbon_dashboard.CarbonDashboardCanvas">
+        <div class="o_carbon_grid">
+            <t t-foreach="cards" t-as="card" t-key="card.id">
+                <div t-attf-class="o_carbon_card o_carbon_span_{{card.span}} o_carbon_card_{{card.kind}}">
+                    <!-- KPI scorecard: the card IS the tile (no extra chrome) -->
+                    <t t-if="card.kind === 'kpi'">
+                        <CarbonKpiCard runtime="card.runtime"/>
+                    </t>
+                    <!-- Chart card: Carbon chart with a header title -->
+                    <t t-elif="card.kind === 'chart'">
+                        <div t-if="card.title" class="o_carbon_card_head" t-esc="card.title"/>
+                        <div class="o_carbon_card_body">
+                            <CarbonChart spec="card.spec" t-key="card.id"/>
+                        </div>
+                    </t>
+                    <!-- Ranked Carbon table (Top Countries / Top Categories, lists) -->
+                    <t t-elif="card.kind === 'table'">
+                        <div t-if="card.title" class="o_carbon_card_head" t-esc="card.title"/>
+                        <div class="o_carbon_card_body">
+                            <CarbonTable columns="card.table.columns" rows="card.table.rows"/>
+                        </div>
+                    </t>
+                    <!-- Manufacturing Gantt/timeline -->
+                    <t t-elif="card.kind === 'gantt'">
+                        <div t-if="card.title" class="o_carbon_card_head" t-esc="card.title"/>
+                        <div class="o_carbon_card_body">
+                            <CarbonGantt/>
+                        </div>
+                    </t>
+                    <!-- Purchase KPI band -->
+                    <t t-elif="card.kind === 'purchase_kpis'">
+                        <div t-if="card.title" class="o_carbon_card_head" t-esc="card.title"/>
+                        <div class="o_carbon_card_body">
+                            <CarbonPurchaseKpis/>
+                        </div>
+                    </t>
+                    <!-- Sales KPI band -->
+                    <t t-elif="card.kind === 'sales_kpis'">
+                        <div t-if="card.title" class="o_carbon_card_head" t-esc="card.title"/>
+                        <div class="o_carbon_card_body">
+                            <CarbonSalesKpis/>
+                        </div>
+                    </t>
+                    <!-- No data / unmapped: clean empty state -->
+                    <t t-else="">
+                        <div t-if="card.title" class="o_carbon_card_head" t-esc="card.title"/>
+                        <div class="o_carbon_card_body o_carbon_unsupported">
+                            <span>No data available</span>
+                        </div>
+                    </t>
+                </div>
+            </t>
+        </div>
+    </t>
+</templates>

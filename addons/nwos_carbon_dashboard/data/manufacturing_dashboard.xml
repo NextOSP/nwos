@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nwos>
+
+    <record id="dashboard_group_manufacturing" model="spreadsheet.dashboard.group">
+        <field name="name">Manufacturing</field>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="dashboard_manufacturing_production" model="spreadsheet.dashboard">
+        <field name="name">Production</field>
+        <field name="spreadsheet_binary_data" type="base64" file="nwos_carbon_dashboard/data/files/mrp_dashboard.json"/>
+        <field name="dashboard_group_id" ref="dashboard_group_manufacturing"/>
+        <field name="sequence">10</field>
+        <field name="is_published">True</field>
+    </record>
+
+</nwos>

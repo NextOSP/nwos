@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates xml:space="preserve">
+    <t t-name="nwos_carbon_dashboard.CarbonGantt">
+        <div class="o_carbon_gantt_wrap">
+            <t t-if="state.loading">
+                <div class="o_carbon_gantt_empty">Loading…</div>
+            </t>
+            <t t-elif="!gantt.rows.length">
+                <div class="o_carbon_gantt_empty">No manufacturing orders to schedule</div>
+            </t>
+            <t t-else="">
+                <div class="o_carbon_gantt">
+                    <div class="o_carbon_gantt_inner" t-attf-style="width: {{gantt.width + 180}}px;">
+                        <div class="o_carbon_gantt_axis">
+                            <div class="o_carbon_gantt_corner"/>
+                            <div class="o_carbon_gantt_ticks" t-attf-style="width: {{gantt.width}}px;">
+                                <span t-foreach="gantt.ticks" t-as="tick" t-key="tick_index"
+                                      class="o_carbon_gantt_tick" t-attf-style="left: {{tick.leftPx}}px;"
+                                      t-esc="tick.label"/>
+                            </div>
+                        </div>
+                        <div t-foreach="gantt.rows" t-as="row" t-key="row_index" class="o_carbon_gantt_row">
+                            <div class="o_carbon_gantt_label" t-esc="row.name"
+                                 t-on-click="() => this.openMO(row.id)"
+                                 t-att-title="'Open ' + row.name"/>
+                            <div class="o_carbon_gantt_track" t-attf-style="width: {{gantt.width}}px;">
+                                <div class="o_carbon_gantt_bar"
+                                     t-attf-style="left: {{row.leftPx}}px; width: {{row.widthPx}}px; background-color: {{row.color}};"
+                                     t-att-title="row.tip"
+                                     t-on-click="() => this.openMO(row.id)">
+                                    <span class="o_carbon_gantt_bar_label" t-esc="row.stateLabel"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="o_carbon_gantt_legend">
+                    <span class="o_carbon_gantt_key"><i style="background:#0f62fe"/>Confirmed</span>
+                    <span class="o_carbon_gantt_key"><i style="background:#1192e8"/>In Progress</span>
+                    <span class="o_carbon_gantt_key"><i style="background:#24a148"/>Done</span>
+                    <span class="o_carbon_gantt_key"><i style="background:#8d8d8d"/>Draft</span>
+                    <span class="o_carbon_gantt_key"><i style="background:#da1e28"/>Cancelled</span>
+                </div>
+            </t>
+        </div>
+    </t>
+</templates>

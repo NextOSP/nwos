@@ -1,0 +1,30 @@
+.o_nwosbot_command {
+    background-color: $gray-200;
+    border-radius: 4px;
+    padding: 2px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-weight: bold;
+}
+
+.o_nextbot_action_card,
+.o_nextbot_quotation_card,
+.o_nextbot_quotation_summary_card,
+.o_nextbot_sales_report_card,
+.o_nextbot_clarify_card {
+    max-width: 560px;
+    border-left: 4px solid $primary !important;
+
+    .o_nextbot_action_value {
+        overflow-wrap: anywhere;
+    }
+
+    .o_nextbot_quotation_total {
+        white-space: nowrap;
+    }
+}
+
+.o_nextbot_clarify_card .o_nextbot_suggestion {
+    white-space: normal;
+    text-align: left;
+}
