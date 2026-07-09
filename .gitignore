@@ -1,0 +1,89 @@
+# OS and editor noise
+.DS_Store
+Thumbs.db
+*~
+*.swp
+*.swo
+.idea/
+.vscode/
+/.claude/
+/.conductor/
+
+# Local environment and secrets
+.env
+.env.*
+*.secret
+/nwos.conf
+/start.sh
+
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*$py.class
+.python-version
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.pyre/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+
+# Python packaging and virtual environments
+*.egg-info/
+.eggs/
+/build/
+/dist/
+pip-wheel-metadata/
+wheelhouse/
+.tox/
+.nox/
+/.venv/
+/venv/
+/env/
+/ENV/
+
+# JavaScript and web asset tooling
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.npm/
+.yarn/
+.parcel-cache/
+.vite/
+
+# Flectra/Odoo runtime state
+/data/
+/logs/
+/False
+*.log
+*.pid
+*.sqlite
+*.sqlite3
+nwos/filestore/
+nwos/sessions/
+
+# Generated documentation
+_build/
+doc/_build/
+
+# Local migration and maintenance working directories
+nwos/addons/base/maintenance/
+nwos/addons/base/maintenance-*/
+migration/staging/
+
+# Merge and patch leftovers
+*.orig
+*.rej
+*.bak
+status
+
+# Generated Windows installer dependencies
+install/win32/*.bat
+install/win32/meta.py
+setup/win32/static/less/
+setup/win32/static/wkhtmltopdf/
+setup/win32/static/postgresql*.exe
