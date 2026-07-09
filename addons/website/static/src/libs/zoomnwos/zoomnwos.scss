@@ -1,0 +1,34 @@
+
+.zoomnwos {
+    position: relative;
+
+    /* 'Shrink-wrap' the element */
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+
+    img {
+        vertical-align: bottom;
+    }
+}
+
+.zoomnwos-flyout {
+    position:absolute;
+    z-index: 100;
+    overflow: hidden;
+    background: #FFF;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    img {
+        max-width: 500%;
+    }
+}
+
+.zoomnwos-hover .zoomnwos-flyout {
+    left: 0;
+}
+
+.zoomnwos-next .zoomnwos-flyout {
+    left: 100%;
+}

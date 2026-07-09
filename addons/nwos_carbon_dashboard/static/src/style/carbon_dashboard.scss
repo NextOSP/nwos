@@ -1,0 +1,454 @@
+///
+/// Carbon Dashboards — IBM Carbon layout for the (overridden) spreadsheet
+/// dashboard action. Token-driven: every color/space/type references a
+/// web_carbon $carbon-* token, never a literal.
+///
+
+.o_carbon_dashboard {
+    height: 100%;
+    background-color: $carbon-layer-01;
+    font-family: $carbon-font-sans, sans-serif;
+    color: $carbon-text-primary;
+
+    .o_carbon_content {
+        height: 100%;
+        overflow: hidden;
+    }
+
+    // -- Sidebar -----------------------------------------------------------
+    .o_carbon_sidebar {
+        flex: 0 0 auto;
+        width: 220px;
+        background-color: $carbon-layer-02;
+        border-right: 1px solid $carbon-border-subtle;
+        padding: $carbon-spacing-05 0;
+        overflow-y: auto;
+        position: relative;
+
+        &.o_carbon_sidebar_collapsed {
+            width: 40px;
+            cursor: pointer;
+        }
+    }
+
+    .o_carbon_sidebar_toggle {
+        position: absolute;
+        top: $carbon-spacing-03;
+        right: $carbon-spacing-03;
+        border-radius: 0;
+        color: $carbon-icon-secondary;
+    }
+
+    .o_carbon_sidebar_group {
+        margin-bottom: $carbon-spacing-05;
+    }
+
+    .o_carbon_sidebar_group_head {
+        padding: $carbon-spacing-03 $carbon-spacing-05 $carbon-spacing-02;
+        font-size: $carbon-font-size-label;
+        font-weight: $carbon-font-weight-semibold;
+        text-transform: uppercase;
+        letter-spacing: 0.32px;
+        color: $carbon-text-secondary;
+    }
+
+    .o_carbon_sidebar_list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .o_carbon_sidebar_item {
+        padding: $carbon-spacing-03 $carbon-spacing-05;
+        font-size: $carbon-font-size-body;
+        color: $carbon-text-primary;
+        cursor: pointer;
+        border-left: 3px solid transparent;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        &:hover {
+            background-color: $carbon-layer-01;
+        }
+
+        &.active {
+            background-color: $carbon-highlight;
+            border-left-color: $carbon-interactive;
+            font-weight: $carbon-font-weight-semibold;
+        }
+    }
+
+    // -- Main --------------------------------------------------------------
+    .o_carbon_main {
+        flex: 1 1 auto;
+        overflow-y: auto;
+        padding: $carbon-spacing-06;
+    }
+
+    .o_carbon_status {
+        margin: $carbon-spacing-09 auto;
+        text-align: center;
+        color: $carbon-text-secondary;
+    }
+
+    .o_carbon_dashboard_header {
+        margin-bottom: $carbon-spacing-06;
+    }
+
+    .o_carbon_dashboard_group {
+        font-size: $carbon-font-size-label;
+        text-transform: uppercase;
+        letter-spacing: 0.32px;
+        color: $carbon-text-secondary;
+    }
+
+    .o_carbon_dashboard_title {
+        margin: 0;
+        font-size: $carbon-font-size-h04;
+        font-weight: $carbon-font-weight-regular;
+        color: $carbon-text-primary;
+    }
+
+    // -- Card grid ---------------------------------------------------------
+    .o_carbon_grid {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: $carbon-spacing-05;
+        align-items: stretch;
+    }
+
+    @for $i from 1 through 12 {
+        .o_carbon_span_#{$i} {
+            grid-column: span $i;
+        }
+    }
+
+    .o_carbon_card {
+        background-color: $carbon-layer-02;
+        border: 1px solid $carbon-border-subtle;
+        padding: $carbon-spacing-05;
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+    }
+
+    .o_carbon_card_head {
+        font-size: $carbon-font-size-body-02;
+        font-weight: $carbon-font-weight-semibold;
+        color: $carbon-text-primary;
+        margin-bottom: $carbon-spacing-04;
+    }
+
+    .o_carbon_card_body {
+        flex: 1 1 auto;
+        min-height: 340px;
+        position: relative;
+    }
+
+    // Height is driven by @carbon/charts `options.height` (fixed px). Do NOT set
+    // height:100% here — a percentage height inside a flex card makes carbon's
+    // ResizeObserver re-measure endlessly (a busy-loop that pegs the CPU).
+    .o_carbon_chart {
+        width: 100%;
+    }
+
+    // -- Carbon data table -------------------------------------------------
+    .o_carbon_table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: $carbon-font-size-body;
+        color: $carbon-text-primary;
+
+        thead th {
+            text-align: left;
+            background-color: $carbon-layer-01;
+            color: $carbon-text-primary;
+            font-weight: $carbon-font-weight-semibold;
+            letter-spacing: 0.16px;
+            border-bottom: 1px solid $carbon-border-subtle;
+            padding: $carbon-spacing-03 $carbon-spacing-05;
+        }
+
+        tbody td {
+            border-bottom: 1px solid $carbon-border-subtle;
+            padding: $carbon-spacing-03 $carbon-spacing-05;
+        }
+
+        tbody tr:hover {
+            background-color: $carbon-layer-01;
+        }
+
+        .o_carbon_num {
+            text-align: right;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .o_carbon_table_empty {
+            text-align: center;
+            color: $carbon-text-helper;
+            padding: $carbon-spacing-06;
+        }
+    }
+
+    .o_carbon_unsupported {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: $carbon-text-helper;
+        font-size: $carbon-font-size-body;
+    }
+
+    // -- KPI band (Purchase / Sales overviews) -----------------------------
+    .o_carbon_kpi_band {
+        display: flex;
+        flex-wrap: wrap;
+        gap: $carbon-spacing-05;
+    }
+    .o_carbon_kpi_mini {
+        flex: 1 1 140px;
+        min-width: 130px;
+        background-color: $carbon-layer-01;
+        border-left: 3px solid $carbon-border-strong;
+        padding: $carbon-spacing-04 $carbon-spacing-05;
+
+        &.o_carbon_kpi_mini_caution {
+            border-left-color: $carbon-support-caution;
+        }
+        &.o_carbon_kpi_mini_error {
+            border-left-color: $carbon-support-error;
+        }
+    }
+    .o_carbon_kpi_mini_value {
+        font-size: $carbon-font-size-h04;
+        font-weight: $carbon-font-weight-regular;
+        color: $carbon-text-primary;
+        line-height: 1.1;
+    }
+    .o_carbon_kpi_mini_label {
+        font-size: $carbon-font-size-label;
+        text-transform: uppercase;
+        letter-spacing: 0.32px;
+        color: $carbon-text-secondary;
+        margin-top: $carbon-spacing-02;
+    }
+    .o_carbon_kpi_mini_sub {
+        font-size: $carbon-font-size-label;
+        color: $carbon-text-helper;
+    }
+
+    // -- Gantt / timeline (scrollable, week scale, sticky labels + axis) ---
+    $gantt-label-w: 180px;
+
+    .o_carbon_gantt_wrap {
+        width: 100%;
+    }
+    .o_carbon_gantt {
+        overflow: auto;
+        max-height: 460px;
+        position: relative;
+        border: 1px solid $carbon-border-subtle;
+    }
+    .o_carbon_gantt_inner {
+        // width is set inline (label column + timeline width)
+    }
+    .o_carbon_gantt_empty {
+        color: $carbon-text-helper;
+        padding: $carbon-spacing-06;
+        text-align: center;
+    }
+    .o_carbon_gantt_axis {
+        display: flex;
+        height: 26px;
+        position: sticky;
+        top: 0;
+        z-index: 3;
+        background-color: $carbon-layer-02;
+        border-bottom: 1px solid $carbon-border-subtle;
+    }
+    .o_carbon_gantt_corner {
+        flex: 0 0 $gantt-label-w;
+        width: $gantt-label-w;
+        position: sticky;
+        left: 0;
+        z-index: 4;
+        background-color: $carbon-layer-02;
+        border-right: 1px solid $carbon-border-subtle;
+    }
+    .o_carbon_gantt_ticks {
+        position: relative;
+        flex: 0 0 auto;
+    }
+    .o_carbon_gantt_tick {
+        position: absolute;
+        top: 5px;
+        transform: translateX(-50%);
+        font-size: $carbon-font-size-label;
+        color: $carbon-text-secondary;
+        white-space: nowrap;
+        padding-left: $carbon-spacing-02;
+        border-left: 1px solid $carbon-border-subtle;
+        height: 21px;
+    }
+    .o_carbon_gantt_row {
+        display: flex;
+        align-items: stretch;
+        height: 28px;
+    }
+    .o_carbon_gantt_label {
+        flex: 0 0 $gantt-label-w;
+        width: $gantt-label-w;
+        position: sticky;
+        left: 0;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        background-color: $carbon-layer-02;
+        border-right: 1px solid $carbon-border-subtle;
+        border-bottom: 1px solid $carbon-border-subtle;
+        padding: 0 $carbon-spacing-03;
+        font-size: $carbon-font-size-label;
+        color: $carbon-link-primary;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        cursor: pointer;
+
+        &:hover {
+            background-color: $carbon-layer-01;
+            text-decoration: underline;
+        }
+    }
+    .o_carbon_gantt_track {
+        position: relative;
+        flex: 0 0 auto;
+        border-bottom: 1px solid $carbon-border-subtle;
+    }
+    .o_carbon_gantt_bar {
+        position: absolute;
+        top: 4px;
+        height: 20px;
+        border-radius: 0;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+        min-width: 6px;
+        cursor: pointer;
+        transition: filter 70ms, box-shadow 70ms;
+
+        &:hover {
+            filter: brightness(1.08);
+            box-shadow: inset 0 0 0 2px rgba($carbon-gray-100, 0.35);
+        }
+    }
+    .o_carbon_gantt_bar_label {
+        font-size: 0.6875rem;
+        color: $carbon-text-on-color;
+        padding: 0 $carbon-spacing-02;
+        white-space: nowrap;
+    }
+    .o_carbon_gantt_legend {
+        display: flex;
+        flex-wrap: wrap;
+        gap: $carbon-spacing-05;
+        margin-top: $carbon-spacing-04;
+    }
+    .o_carbon_gantt_key {
+        display: flex;
+        align-items: center;
+        gap: $carbon-spacing-02;
+        font-size: $carbon-font-size-label;
+        color: $carbon-text-secondary;
+
+        i {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+        }
+    }
+
+    // -- KPI card ----------------------------------------------------------
+    .o_carbon_card_kpi {
+        justify-content: center;
+        border-left: 3px solid $carbon-interactive;
+    }
+
+    .o_carbon_kpi {
+        display: flex;
+        flex-direction: column;
+        gap: $carbon-spacing-02;
+    }
+
+    .o_carbon_kpi_label {
+        font-size: $carbon-font-size-label;
+        text-transform: uppercase;
+        letter-spacing: 0.32px;
+        color: $carbon-text-secondary;
+    }
+
+    .o_carbon_kpi_value {
+        font-size: $carbon-font-size-h05;
+        font-weight: $carbon-font-weight-regular;
+        line-height: 1.1;
+        color: $carbon-text-primary;
+    }
+
+    .o_carbon_kpi_sub {
+        font-size: $carbon-font-size-label;
+        color: $carbon-text-helper;
+    }
+
+    .o_carbon_kpi_delta {
+        font-size: $carbon-font-size-body;
+        font-weight: $carbon-font-weight-semibold;
+        display: flex;
+        align-items: center;
+        gap: $carbon-spacing-02;
+
+        &.o_carbon_kpi_delta_up {
+            color: $carbon-support-success;
+        }
+        &.o_carbon_kpi_delta_down {
+            color: $carbon-support-error;
+        }
+        &.o_carbon_kpi_delta_neutral {
+            color: $carbon-text-secondary;
+        }
+    }
+
+    .o_carbon_kpi_delta_descr {
+        color: $carbon-text-helper;
+        font-weight: $carbon-font-weight-regular;
+    }
+
+    .o_carbon_kpi_progress {
+        height: 4px;
+        background-color: $carbon-border-subtle;
+        margin-top: $carbon-spacing-02;
+    }
+    .o_carbon_kpi_progress_bar {
+        height: 100%;
+        background-color: $carbon-interactive;
+    }
+
+    // -- Responsive --------------------------------------------------------
+    @media (max-width: 900px) {
+        .o_carbon_grid {
+            grid-template-columns: repeat(6, 1fr);
+        }
+        .o_carbon_card[class*="o_carbon_span_"] {
+            grid-column: span 6;
+        }
+        .o_carbon_card_kpi {
+            grid-column: span 3;
+        }
+    }
+    @media (max-width: 560px) {
+        .o_carbon_grid {
+            grid-template-columns: 1fr;
+        }
+        .o_carbon_card[class*="o_carbon_span_"] {
+            grid-column: span 1;
+        }
+    }
+}

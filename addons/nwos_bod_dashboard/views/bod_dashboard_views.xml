@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nwos>
+    <record id="action_bod_dashboard" model="ir.actions.client">
+        <field name="name">Executive Overview</field>
+        <field name="path">bod-dashboard</field>
+        <field name="tag">nwos_bod_dashboard</field>
+    </record>
+
+    <record id="action_bod_dashboard_salesman" model="ir.actions.client">
+        <field name="name">Revenue/Sales by Salesman</field>
+        <field name="path">bod-dashboard-salesman</field>
+        <field name="tag">nwos_bod_dashboard</field>
+        <field name="context">{'default_bod_tab': 'salesman'}</field>
+    </record>
+
+    <menuitem
+        id="menu_bod_root"
+        name="Business Reports"
+        web_icon="nwos_bod_dashboard,static/description/icon.png"
+        sequence="1"/>
+
+    <menuitem
+        id="menu_bod_dashboard"
+        name="Executive Overview"
+        parent="menu_bod_root"
+        action="action_bod_dashboard"
+        sequence="1"/>
+
+    <menuitem
+        id="menu_bod_dashboard_salesman"
+        name="Revenue/Sales by Salesman"
+        parent="menu_bod_root"
+        action="action_bod_dashboard_salesman"
+        sequence="2"/>
+</nwos>

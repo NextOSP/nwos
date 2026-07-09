@@ -1,0 +1,53 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: nwos
+      POSTGRES_USER: nwos
+      POSTGRES_PASSWORD: nwos
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U nwos -d nwos"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  web:
+    build:
+      context: .
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      NWOS_DB_HOST: db
+      NWOS_DB_PORT: "5432"
+      NWOS_DB_USER: nwos
+    ports:
+      - "7073:7073"
+    command: ["server", "-c", "/etc/nwos/nwos.conf", "--max-cron-threads=0"]
+    volumes:
+      - nwos-data:/var/lib/nwos
+      - ./docker/nwos.conf:/etc/nwos/nwos.conf:ro
+    restart: unless-stopped
+
+  cron:
+    build:
+      context: .
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      NWOS_DB_HOST: db
+      NWOS_DB_PORT: "5432"
+      NWOS_DB_USER: nwos
+    command: ["server", "-c", "/etc/nwos/nwos.conf", "--workers=0", "--max-cron-threads=2"]
+    volumes:
+      - nwos-data:/var/lib/nwos
+      - ./docker/nwos.conf:/etc/nwos/nwos.conf:ro
+    restart: unless-stopped
+
+volumes:
+  postgres-data:
+  nwos-data:

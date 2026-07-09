@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+
+    <t t-name="nwos_bod_dashboard.BodAiPanel">
+        <div class="o_bod_ai">
+            <div class="o_bod_ai_head">
+                <span><i class="fa fa-magic me-1"/>Ask AI</span>
+                <button type="button" class="o_bod_ai_close" t-on-click="() => props.onClose()">
+                    <i class="fa fa-times"/>
+                </button>
+            </div>
+
+            <div t-if="!props.available" class="o_bod_ai_disabled">
+                <i class="fa fa-info-circle me-1"/>
+                AI is not configured. An administrator can enable it in
+                Settings &#8250; Integrations &#8250; AI.
+            </div>
+
+            <div class="o_bod_ai_thread">
+                <div t-if="!state.messages.length" class="o_bod_ai_intro">
+                    <p class="o_bod_muted">Ask about your live business data:</p>
+                    <div class="o_bod_ai_suggestions">
+                        <button t-foreach="suggestions" t-as="s" t-key="s_index"
+                            type="button"
+                            t-att-disabled="!props.available"
+                            t-on-click="() => this.ask(s)" t-esc="s"/>
+                    </div>
+                </div>
+
+                <t t-foreach="state.messages" t-as="m" t-key="m_index">
+                    <div class="o_bod_ai_msg" t-att-class="'o_bod_ai_' + m.role">
+                        <t t-esc="m.text"/>
+                    </div>
+                </t>
+
+                <div t-if="state.pending" class="o_bod_ai_msg o_bod_ai_assistant o_bod_ai_typing">
+                    <i class="fa fa-circle-o-notch fa-spin me-1"/>Thinking…
+                </div>
+            </div>
+
+            <div class="o_bod_ai_input">
+                <textarea
+                    t-ref="input"
+                    rows="2"
+                    placeholder="Type a question…"
+                    t-att-disabled="!props.available or state.pending"
+                    t-model="state.question"
+                    t-on-keydown="onKeydown"/>
+                <button type="button"
+                    t-att-disabled="!props.available or state.pending or !state.question.trim()"
+                    t-on-click="() => this.ask()">
+                    <i class="fa fa-paper-plane"/>
+                </button>
+            </div>
+        </div>
+    </t>
+
+</templates>

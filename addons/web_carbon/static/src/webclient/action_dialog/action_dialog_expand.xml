@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <!--
+      Add an expand ("view in full") button to act_window target="new" dialogs.
+      web.ActionDialog.header inherits web.Dialog.header (which has the .btn-close);
+      the header is t-call'd in the ActionDialog component context, so `canExpandRecord`
+      and `expandRecordToFull` (added via patch) resolve here.
+    -->
+    <t t-inherit="web.ActionDialog.header" t-inherit-mode="extension">
+        <xpath expr="//button[hasclass('btn-close')]" position="before">
+            <button t-if="canExpandRecord" type="button"
+                    class="fa fa-expand btn o_expand_button opacity-75 opacity-100-hover"
+                    aria-label="Open in full view" title="Open in full view" tabindex="-1"
+                    t-on-click="() => this.expandRecordToFull()"/>
+        </xpath>
+    </t>
+
+</templates>

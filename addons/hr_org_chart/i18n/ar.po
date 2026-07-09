@@ -1,0 +1,218 @@
+# Translation of NextOSP Server.
+# This file contains the translation of the following modules:
+# * hr_org_chart
+#
+# Translators:
+# Martin Trigaux, 2022
+# Malaz Abuidris <msea@nwos.com>, 2023
+# "Tiffany Chang (tic)" <tic@nwos.com>, 2025.
+# Mohammad Abdulmoneim <abdu@nwos.com>, 2025.
+# "Malaz Siddig Elsayed Abuidris (msea)" <msea@nwos.com>, 2025.
+msgid ""
+msgstr ""
+"Project-Id-Version: NextOSP Server 16.0beta\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-01-25 18:36+0000\n"
+"PO-Revision-Date: 2025-11-05 17:58+0000\n"
+"Last-Translator: \"Malaz Siddig Elsayed Abuidris (msea)\" <msea@nwos.com>\n"
+"Language-Team: Arabic <https://translate.nwos.com/projects/nwos-19/"
+"hr_org_chart/ar/>\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+"X-Generator: Weblate 5.12.2\n"
+
+#. module: hr_org_chart
+#: model_terms:ir.ui.view,arch_db:hr_org_chart.hr_employee_view_form_inherit_org_chart
+msgid ""
+"<i class=\"fa fa-share-alt fa-rotate-90 ms-1 mt-1\" role=\"img\" aria-"
+"label=\"Full Chart\"/>\n"
+"                        Full Chart"
+msgstr ""
+"<i class=\"fa fa-share-alt fa-rotate-90 ms-1 mt-1\" role=\"img\" aria-"
+"label=\"Full Chart\"/>\n"
+"                        المخطط الكامل"
+
+#. module: hr_org_chart
+#: model_terms:ir.ui.view,arch_db:hr_org_chart.hr_employee_public_view_form_inherit_org_chart
+msgid ""
+"<i class=\"fa fa-sitemap me-1 mt-1\"/>\n"
+"                                <span class=\"fw-bolder\">Zoom</span>"
+msgstr ""
+"<i class=\"fa fa-sitemap me-1 mt-1\"/>\n"
+"                                <span class=\"fw-bolder\">تكبير</span>"
+
+#. module: hr_org_chart
+#: model_terms:ir.ui.view,arch_db:hr_org_chart.hr_employee_public_view_form_inherit_org_chart
+msgid ""
+"<span class=\"text-uppercase fw-bolder\" style=\"font-size: "
+"13px\">Organization Chart</span>"
+msgstr ""
+"<span class=\"text-uppercase fw-bolder\" style=\"font-size: 13px\">المخطط "
+"التنظيمي</span>"
+
+#. module: hr_org_chart
+#: model:ir.model.fields,field_description:hr_org_chart.field_hr_employee_public__child_all_count
+msgid "Child All Count"
+msgstr "عدد الأطفال"
+
+#. module: hr_org_chart
+#: model:ir.model.fields,field_description:hr_org_chart.field_hr_employee_public__child_count
+msgid "Child Count"
+msgstr "عدد الأطفال"
+
+#. module: hr_org_chart
+#: model_terms:ir.actions.act_window,help:hr_org_chart.action_hr_employee_org_chart
+#: model_terms:ir.actions.act_window,help:hr_org_chart.action_hr_employee_public_org_chart
+msgid "Create an employee."
+msgstr "إنشاء موظف."
+
+#. module: hr_org_chart
+#: model:ir.model.fields,field_description:hr_org_chart.field_hr_employee__department_color
+#: model:ir.model.fields,field_description:hr_org_chart.field_hr_employee_public__department_color
+msgid "Department Color"
+msgstr "لون القسم"
+
+#. module: hr_org_chart
+#: model:ir.model.fields,field_description:hr_org_chart.field_hr_employee__child_count
+msgid "Direct Subordinates Count"
+msgstr "عدد المرؤوسين المباشرين"
+
+#. module: hr_org_chart
+#: model:ir.model.fields,help:hr_org_chart.field_hr_employee__subordinate_ids
+#: model:ir.model.fields,help:hr_org_chart.field_hr_employee_public__subordinate_ids
+msgid "Direct and indirect subordinates"
+msgstr "المرؤوسين المباشرين وغير المباشرين"
+
+#. module: hr_org_chart
+#. nwos-javascript
+#: code:addons/hr_org_chart/static/src/fields/hr_org_chart.xml:0
+msgid "Direct subordinates"
+msgstr "المرؤوسين المباشرين"
+
+#. module: hr_org_chart
+#: model:ir.model.fields,field_description:hr_org_chart.field_hr_employee__display_name
+#: model:ir.model.fields,field_description:hr_org_chart.field_hr_employee_public__display_name
+msgid "Display Name"
+msgstr "اسم العرض"
+
+#. module: hr_org_chart
+#: model:ir.model,name:hr_org_chart.model_hr_employee
+msgid "Employee"
+msgstr "الموظف"
+
+#. module: hr_org_chart
+#: model_terms:ir.ui.view,arch_db:hr_org_chart.hr_department_hierarchy_view
+msgid "Employees"
+msgstr "الموظفون"
+
+#. module: hr_org_chart
+#: model_terms:ir.actions.act_window,help:hr_org_chart.action_hr_employee_org_chart
+#: model_terms:ir.actions.act_window,help:hr_org_chart.action_hr_employee_public_org_chart
+msgid "Find all the information on employees."
+msgstr "ستجد كافة معلومات الموظفين."
+
+#. module: hr_org_chart
+#: model:ir.model.fields,field_description:hr_org_chart.field_hr_employee__id
+#: model:ir.model.fields,field_description:hr_org_chart.field_hr_employee_public__id
+msgid "ID"
+msgstr "المُعرف"
+
+#. module: hr_org_chart
+#: model:ir.model.fields,field_description:hr_org_chart.field_hr_employee__child_all_count
+msgid "Indirect Subordinates Count"
+msgstr "عدد المرؤوسين غير المباشرين"
+
+#. module: hr_org_chart
+#. nwos-javascript
+#: code:addons/hr_org_chart/static/src/fields/hr_org_chart.xml:0
+msgid "Indirect subordinates"
+msgstr "المرؤوسين غير المباشرين"
+
+#. module: hr_org_chart
+#: model:ir.model.fields,field_description:hr_org_chart.field_hr_employee__is_subordinate
+#: model:ir.model.fields,field_description:hr_org_chart.field_hr_employee_public__is_subordinate
+msgid "Is Subordinate"
+msgstr "تابع"
+
+#. module: hr_org_chart
+#. nwos-javascript
+#: code:addons/hr_org_chart/static/src/fields/hr_org_chart.xml:0
+msgid "More managers"
+msgstr "المزيد من المدراء"
+
+#. module: hr_org_chart
+#: model:ir.actions.act_window,name:hr_org_chart.action_hr_employee_org_chart
+#: model:ir.actions.act_window,name:hr_org_chart.action_hr_employee_public_org_chart
+msgid "Org Chart"
+msgstr "المخطط التنظيمي"
+
+#. module: hr_org_chart
+#: model_terms:ir.ui.view,arch_db:hr_org_chart.hr_employee_view_form_inherit_org_chart
+msgid "Organization Chart"
+msgstr "المخطط التنظيمي "
+
+#. module: hr_org_chart
+#: model:ir.model,name:hr_org_chart.model_hr_employee_public
+msgid "Public Employee"
+msgstr "موظف في القطاع العام"
+
+#. module: hr_org_chart
+#. nwos-javascript
+#: code:addons/hr_org_chart/static/src/fields/hr_org_chart.xml:0
+msgid "See All"
+msgstr "إظهار الكل"
+
+#. module: hr_org_chart
+#. nwos-javascript
+#: code:addons/hr_org_chart/static/src/fields/hr_org_chart.xml:0
+msgid "Set a manager or reports to show in org chart."
+msgstr ""
+
+#. module: hr_org_chart
+#: model:ir.model.fields,field_description:hr_org_chart.field_hr_employee__subordinate_ids
+#: model:ir.model.fields,field_description:hr_org_chart.field_hr_employee_public__subordinate_ids
+msgid "Subordinates"
+msgstr "المرؤوسين"
+
+#. module: hr_org_chart
+#. nwos-javascript
+#: code:addons/hr_org_chart/static/src/fields/hooks.js:0
+msgid "Team"
+msgstr "الفريق"
+
+#. module: hr_org_chart
+#. nwos-javascript
+#: code:addons/hr_org_chart/static/src/fields/hr_org_chart.xml:0
+msgid "Total"
+msgstr "الإجمالي"
+
+#. module: hr_org_chart
+#. nwos-javascript
+#: code:addons/hr_org_chart/static/src/fields/hr_org_chart.xml:0
+msgid "View employee"
+msgstr ""
+
+#. module: hr_org_chart
+#. nwos-javascript
+#: code:addons/hr_org_chart/static/src/views/hr_employee_hierarchy/hr_employee_hierarchy_card.xml:0
+msgid "people"
+msgstr "أفراد"
+
+#~ msgid "Basic Employee"
+#~ msgstr "الموظف العادي "
+
+#~ msgid "In order to get an organigram, set a manager and save the record."
+#~ msgstr "لعرض الهيكل التنظيمي، حدد المدير لهذا الموظف ثم احفظه."
+
+#~ msgid "No hierarchy position."
+#~ msgstr "لا يوجد تسلسل هرمي."
+
+#~ msgid "Redirect"
+#~ msgstr "إعادة توجيه"
+
+#~ msgid "This employee has no manager or subordinate."
+#~ msgstr "لا يوجد مدير أو مرؤوس لهذا الموظف. "

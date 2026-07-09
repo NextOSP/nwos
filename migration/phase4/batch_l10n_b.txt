@@ -1,0 +1,13 @@
+l10n_in_purchase
+l10n_in_withholding
+l10n_it_edi_ndd
+l10n_it_edi_ndd_account_dn
+l10n_it_edi_website_sale
+l10n_it_edi_withholding
+l10n_jo_edi_extended
+l10n_mx_hr
+l10n_my_edi_extended
+l10n_pe_website_sale
+l10n_ro_efactura
+l10n_ro_efactura_synchronize
+l10n_uy_website_sale

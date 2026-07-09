@@ -1,0 +1,77 @@
+///
+/// Carbon global base layer (backend).
+/// Typography smoothing, the Blue-60 focus ring, links and code.
+///
+
+// web_nwos sets `body.o_web_client { font-family: Rubik !important }`. Force
+// IBM Plex back with matching specificity + !important (we load after it).
+body.o_web_client,
+html[lang] body.o_web_client,
+.o_web_client {
+    font-family: $o-font-family-sans-serif !important;
+}
+
+.o_web_client,
+.o_action_manager {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    letter-spacing: 0.16px;   // Carbon body-compact-01 tracking
+}
+
+// Principle 6 — a single, distinctive 2px Blue-60 focus ring everywhere.
+.o_web_client {
+    :focus-visible {
+        outline: $carbon-focus-width solid $carbon-focus;
+        outline-offset: -#{$carbon-focus-width};
+    }
+
+    // Carbon field/button focus uses an inset ring with a white companion
+    // border so it reads on both light and dark surfaces.
+    .btn:focus-visible,
+    .form-control:focus-visible,
+    input:focus-visible,
+    select:focus-visible,
+    textarea:focus-visible {
+        outline: $carbon-focus-width solid $carbon-focus;
+        outline-offset: -#{$carbon-focus-width};
+        box-shadow: inset 0 0 0 1px $carbon-focus-inset;
+    }
+}
+
+// Links — Carbon Blue 60 / Blue 70 hover, no rounded focus.
+.o_web_client a:not(.btn):not(.nav-link):not(.dropdown-item) {
+    color: $carbon-link-primary;
+    &:hover { color: $carbon-link-primary-hover; }
+}
+
+// Monospace surfaces → IBM Plex Mono.
+.o_web_client code,
+.o_web_client kbd,
+.o_web_client pre,
+.o_web_client .o_field_ace,
+.o_web_client .ace_editor {
+    font-family: $o-font-family-monospace;
+}
+
+// Headings use the semibold IBM Plex weight, sharp and tight.
+.o_web_client h1, .o_web_client h2, .o_web_client h3,
+.o_web_client h4, .o_web_client h5, .o_web_client h6 {
+    font-family: $o-headings-font-family;
+    color: $carbon-text-primary;
+    letter-spacing: 0;
+}
+
+// --- Missing `oi-*` glyph backfill --------------------------------------
+// This build's `web/static/lib/nwos_ui_icons/style.css` ships only a subset of
+// the Odoo icon set (38 of ~69), so templates that still reference the dropped
+// `oi-*` classes render a BLANK icon — e.g. the mail composer's "more/template"
+// button (`oi-ellipsis-v`). Backfill the ones actually used with their
+// FontAwesome equivalents (FontAwesome is always loaded). Global — NOT
+// `.o_web_client`-scoped — because dialogs render in a body-level portal.
+.oi-ellipsis-v::before { font-family: "FontAwesome" !important; content: "\f142" !important; }  // fa-ellipsis-v
+.oi-ellipsis-h::before { font-family: "FontAwesome" !important; content: "\f141" !important; }  // fa-ellipsis-h
+.oi-plus::before       { font-family: "FontAwesome" !important; content: "\f067" !important; }  // fa-plus
+.oi-minus::before      { font-family: "FontAwesome" !important; content: "\f068" !important; }  // fa-minus
+.oi-user::before       { font-family: "FontAwesome" !important; content: "\f007" !important; }  // fa-user
+.oi-users::before      { font-family: "FontAwesome" !important; content: "\f0c0" !important; }  // fa-users
+.oi-user-plus::before  { font-family: "FontAwesome" !important; content: "\f234" !important; }  // fa-user-plus

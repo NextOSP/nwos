@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nwos>
+    <data>
+        <record id="res_config_settings_view_form_stock_request" model="ir.ui.view">
+            <field name="name">res.config.settings.view.form.inherit.stock.request</field>
+            <field name="model">res.config.settings</field>
+            <field name="inherit_id" ref="stock.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//block[@name='operations_setting_container']" position="inside">
+                    <setting id="stock_request_approval_setting"
+                             string="Stock Request Approval"
+                             help="Threshold below which a requester can self-approve a stock request.">
+                        <div class="content-group">
+                            <div class="mt16">
+                                <label for="stock_request_approval_amount"
+                                       string="Self-approval below"/>
+                                <field name="stock_request_approval_amount" class="oe_inline"/>
+                            </div>
+                        </div>
+                    </setting>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</nwos>

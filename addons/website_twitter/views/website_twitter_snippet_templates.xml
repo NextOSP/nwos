@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nwos>
+    <template id="s_twitter" name="Twitter Scroller">
+        <section class="twitter" data-screen-name="NWOS" data-limit="15">
+            <div class="twitter_timeline o_not_editable"/>
+        </section>
+    </template>
+
+    <!-- NWOS19: the new website builder registers module snippets by inheriting
+         `website.snippets` and adding a `t-snippet` entry to the snippet structure.
+         The old `twitter_favorite_tweets_hook`, `website.external_snippets`
+         `t-install` placeholder and `website.snippet_options` anchors were removed. -->
+    <template id="website_twitter_snippet" inherit_id="website.snippets" name="Snippet Twitter">
+        <xpath expr="//snippets[@id='snippet_structure']" position="inside">
+            <t t-snippet="website_twitter.s_twitter" string="Twitter Scroller" group="social"
+               t-thumbnail="/website/static/src/img/snippets_thumbs/s_twitter_scroll.svg"/>
+        </xpath>
+    </template>
+</nwos>

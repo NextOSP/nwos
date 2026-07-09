@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nwos>
+    <data>
+        <!-- Standalone application (appears as a tile in the Apps menu) -->
+        <menuitem id="menu_stock_request_root"
+                  name="Stock Requests"
+                  web_icon="nwos_stock_request,static/description/icon.png"
+                  sequence="55"
+                  groups="nwos_stock_request.group_stock_request_user"/>
+
+        <menuitem id="menu_stock_request_app"
+                  name="Requests"
+                  parent="menu_stock_request_root"
+                  action="action_stock_request"
+                  sequence="1"/>
+
+        <menuitem id="menu_stock_request_config"
+                  name="Configuration"
+                  parent="menu_stock_request_root"
+                  sequence="90"
+                  groups="nwos_stock_request.group_stock_request_manager"/>
+
+        <menuitem id="menu_stock_request_approval_rule"
+                  name="Approval Rules"
+                  parent="menu_stock_request_config"
+                  action="action_stock_request_approval_rule"
+                  sequence="1"/>
+
+        <menuitem id="menu_stock_request_approval_auto"
+                  name="Auto-Approval"
+                  parent="menu_stock_request_config"
+                  action="action_stock_request_approval_auto"
+                  sequence="2"/>
+
+        <menuitem id="menu_stock_request_settings"
+                  name="Settings"
+                  parent="menu_stock_request_config"
+                  action="stock.action_stock_config_settings"
+                  sequence="10"/>
+
+        <!-- Also reachable from Inventory and Purchase -->
+        <menuitem id="menu_stock_request"
+                  name="Stock Requests"
+                  parent="stock.menu_stock_warehouse_mgmt"
+                  action="action_stock_request"
+                  sequence="15"
+                  groups="nwos_stock_request.group_stock_request_user"/>
+
+        <menuitem id="menu_stock_request_purchase"
+                  name="Stock Requests"
+                  parent="purchase.menu_purchase_root"
+                  action="action_stock_request"
+                  sequence="15"
+                  groups="nwos_stock_request.group_stock_request_user"/>
+    </data>
+</nwos>

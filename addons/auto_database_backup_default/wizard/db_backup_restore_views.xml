@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<nwos>
+    <record id="view_db_backup_restore_form" model="ir.ui.view">
+        <field name="name">db.backup.restore.form</field>
+        <field name="model">db.backup.restore</field>
+        <field name="arch" type="xml">
+            <form string="Restore Backup">
+                <div class="alert alert-info" role="alert">
+                    The backup is restored into a <strong>new</strong> database - your
+                    running database is never touched. After it finishes, open the new
+                    database from the database selector.
+                </div>
+                <group>
+                    <group>
+                        <field name="config_id"
+                               options="{'no_create': True, 'no_open': True}"/>
+                        <field name="backup_destination" invisible="1"/>
+                        <field name="backup_file"
+                               placeholder="e.g. mydb_2026-07-09_02-00-00.zip"/>
+                        <field name="new_dbname" placeholder="e.g. mydb_restored"/>
+                        <field name="master_pwd" password="True"/>
+                        <field name="neutralize"/>
+                    </group>
+                    <group>
+                        <field name="available_backups" nolabel="1"
+                               readonly="1" widget="text"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="action_restore" type="object" string="Restore"
+                            class="btn-primary"
+                            confirm="Restore this backup into a new database?"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_db_backup_restore" model="ir.actions.act_window">
+        <field name="name">Restore Backup</field>
+        <field name="res_model">db.backup.restore</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_db_backup_restore"
+              parent="auto_database_backup.menu_db_backup"
+              action="action_db_backup_restore"
+              name="Restore Backup"
+              sequence="20"/>
+</nwos>

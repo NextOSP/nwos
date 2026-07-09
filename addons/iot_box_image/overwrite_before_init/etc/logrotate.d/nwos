@@ -1,0 +1,6 @@
+/var/log/nwos/*.log {
+    size 100M
+    copytruncate
+    missingok
+    notifempty
+}

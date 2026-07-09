@@ -1,0 +1,8590 @@
+{
+ "counts": {
+  "A": 975,
+  "B": 96,
+  "C": 53,
+  "D": 174,
+  "E": 42,
+  "F": 0,
+  "G": 10
+ },
+ "A_clean": 725,
+ "A_conflicted": 250,
+ "records": {
+  "A": [
+   {
+    "rel": "__main__.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/__init__.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/__manifest__.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 1,
+    "returncode": 1
+   },
+   {
+    "rel": "addons/base/data/base_data.sql",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/data/ir_cron_data.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/data/ir_demo_data.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/data/ir_demo_failure_data.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/data/ir_module_category_data.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/data/ir_module_module.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/data/neutralize.sql",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/data/report_paperformat_data.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/data/res.country.state.csv",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 1,
+    "returncode": 1
+   },
+   {
+    "rel": "addons/base/data/res.lang.csv",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 1,
+    "returncode": 1
+   },
+   {
+    "rel": "addons/base/data/res_bank.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/data/res_bank_demo.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/data/res_company_data.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/data/res_country_data.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/data/res_currency_data.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/data/res_currency_demo.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/data/res_currency_rate_demo.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/data/res_lang_data.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/data/res_partner_bank_demo.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/data/res_partner_data.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/data/res_partner_demo.xml",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 1,
+    "returncode": 1
+   },
+   {
+    "rel": "addons/base/data/res_partner_image_demo.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/data/res_users_data.xml",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 2,
+    "returncode": 2
+   },
+   {
+    "rel": "addons/base/data/res_users_demo.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/data/rtlcss.json",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/i18n/af.po",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/i18n/am.po",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/i18n/ar.po",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 628,
+    "returncode": 127
+   },
+   {
+    "rel": "addons/base/i18n/az.po",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 412,
+    "returncode": 127
+   },
+   {
+    "rel": "addons/base/i18n/base.pot",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 362,
+    "returncode": 127
+   },
+   {
+    "rel": "addons/base/i18n/bg.po",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 376,
+    "returncode": 127
+   },
+   {
+    "rel": "addons/base/i18n/bs.po",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 393,
+    "returncode": 127
+   },
+   {
+    "rel": "addons/base/i18n/ca.po",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 385,
+    "returncode": 127
+   },
+   {
+    "rel": "addons/base/i18n/cs.po",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 397,
+    "returncode": 127
+   },
+   {
+    "rel": "addons/base/i18n/da.po",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 396,
+    "returncode": 127
+   },
+   {
+    "rel": "addons/base/i18n/de.po",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 414,
+    "returncode": 127
+   },
+   {
+    "rel": "addons/base/i18n/el.po",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 366,
+    "returncode": 127
+   },
+   {
+    "rel": "addons/base/i18n/es.po",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 420,
+    "returncode": 127
+   },
+   {
+    "rel": "addons/base/i18n/es_419.po",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 415,
+    "returncode": 127
+   },
+   {
+    "rel": "addons/base/i18n/es_CL.po",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/i18n/et.po",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 394,
+    "returncode": 127
+   },
+   {
+    "rel": "addons/base/i18n/eu.po",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/i18n/fa.po",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 375,
+    "returncode": 127
+   },
+   {
+    "rel": "addons/base/i18n/fi.po",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 666,
+    "returncode": 127
+   },
+   {
+    "rel": "addons/base/i18n/fo.po",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/i18n/fr.po",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 449,
+    "returncode": 127
+   },
+   {
+    "rel": "addons/base/i18n/fr_BE.po",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/i18n/fr_CA.po",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/i18n/gl.po",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/i18n/gu.po",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/i18n/he.po",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 384,
+    "returncode": 127
+   },
+   {
+    "rel": "addons/base/i18n/hi.po",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 419,
+    "returncode": 127
+   },
+   {
+    "rel": "addons/base/i18n/hr.po",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 389,
+    "returncode": 127
+   },
+   {
+    "rel": "addons/base/i18n/hu.po",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 378,
+    "returncode": 127
+   },
+   {
+    "rel": "addons/base/i18n/id.po",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 458,
+    "returncode": 127
+   },
+   {
+    "rel": "addons/base/i18n/is.po",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/i18n/it.po",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 450,
+    "returncode": 127
+   },
+   {
+    "rel": "addons/base/i18n/ja.po",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 493,
+    "returncode": 127
+   },
+   {
+    "rel": "addons/base/i18n/ka.po",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/i18n/kab.po",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 363,
+    "returncode": 127
+   },
+   {
+    "rel": "addons/base/i18n/km.po",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/i18n/ko.po",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 441,
+    "returncode": 127
+   },
+   {
+    "rel": "addons/base/i18n/ku.po",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 363,
+    "returncode": 127
+   },
+   {
+    "rel": "addons/base/i18n/lb.po",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/i18n/lo.po",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 383,
+    "returncode": 127
+   },
+   {
+    "rel": "addons/base/i18n/lt.po",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 368,
+    "returncode": 127
+   },
+   {
+    "rel": "addons/base/i18n/lv.po",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 610,
+    "returncode": 127
+   },
+   {
+    "rel": "addons/base/i18n/mk.po",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/i18n/mn.po",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 380,
+    "returncode": 127
+   },
+   {
+    "rel": "addons/base/i18n/my.po",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 371,
+    "returncode": 127
+   },
+   {
+    "rel": "addons/base/i18n/nb.po",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 367,
+    "returncode": 127
+   },
+   {
+    "rel": "addons/base/i18n/nl.po",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 472,
+    "returncode": 127
+   },
+   {
+    "rel": "addons/base/i18n/pl.po",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 420,
+    "returncode": 127
+   },
+   {
+    "rel": "addons/base/i18n/pt.po",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 625,
+    "returncode": 127
+   },
+   {
+    "rel": "addons/base/i18n/pt_BR.po",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 447,
+    "returncode": 127
+   },
+   {
+    "rel": "addons/base/i18n/ro.po",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 773,
+    "returncode": 127
+   },
+   {
+    "rel": "addons/base/i18n/ru.po",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 665,
+    "returncode": 127
+   },
+   {
+    "rel": "addons/base/i18n/sk.po",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 413,
+    "returncode": 127
+   },
+   {
+    "rel": "addons/base/i18n/sl.po",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 384,
+    "returncode": 127
+   },
+   {
+    "rel": "addons/base/i18n/sq.po",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 468,
+    "returncode": 127
+   },
+   {
+    "rel": "addons/base/i18n/sr@latin.po",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 367,
+    "returncode": 127
+   },
+   {
+    "rel": "addons/base/i18n/sv.po",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 444,
+    "returncode": 127
+   },
+   {
+    "rel": "addons/base/i18n/th.po",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 431,
+    "returncode": 127
+   },
+   {
+    "rel": "addons/base/i18n/tr.po",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 435,
+    "returncode": 127
+   },
+   {
+    "rel": "addons/base/i18n/uk.po",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 441,
+    "returncode": 127
+   },
+   {
+    "rel": "addons/base/i18n/vi.po",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 426,
+    "returncode": 127
+   },
+   {
+    "rel": "addons/base/i18n/zh_CN.po",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 476,
+    "returncode": 127
+   },
+   {
+    "rel": "addons/base/i18n/zh_TW.po",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 411,
+    "returncode": 127
+   },
+   {
+    "rel": "addons/base/models/__init__.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/models/assetsbundle.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 7,
+    "returncode": 7
+   },
+   {
+    "rel": "addons/base/models/avatar_mixin.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/models/decimal_precision.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 1,
+    "returncode": 1
+   },
+   {
+    "rel": "addons/base/models/image_mixin.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/models/ir_actions.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 13,
+    "returncode": 13
+   },
+   {
+    "rel": "addons/base/models/ir_actions_report.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 12,
+    "returncode": 12
+   },
+   {
+    "rel": "addons/base/models/ir_asset.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/models/ir_attachment.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 9,
+    "returncode": 9
+   },
+   {
+    "rel": "addons/base/models/ir_autovacuum.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 1,
+    "returncode": 1
+   },
+   {
+    "rel": "addons/base/models/ir_binary.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 2,
+    "returncode": 2
+   },
+   {
+    "rel": "addons/base/models/ir_config_parameter.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 1,
+    "returncode": 1
+   },
+   {
+    "rel": "addons/base/models/ir_cron.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 35,
+    "returncode": 35
+   },
+   {
+    "rel": "addons/base/models/ir_default.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 8,
+    "returncode": 8
+   },
+   {
+    "rel": "addons/base/models/ir_demo.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 1,
+    "returncode": 1
+   },
+   {
+    "rel": "addons/base/models/ir_demo_failure.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/models/ir_exports.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/models/ir_fields.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 3,
+    "returncode": 3
+   },
+   {
+    "rel": "addons/base/models/ir_filters.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 7,
+    "returncode": 7
+   },
+   {
+    "rel": "addons/base/models/ir_http.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 7,
+    "returncode": 7
+   },
+   {
+    "rel": "addons/base/models/ir_logging.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/models/ir_mail_server.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 8,
+    "returncode": 8
+   },
+   {
+    "rel": "addons/base/models/ir_model.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 32,
+    "returncode": 32
+   },
+   {
+    "rel": "addons/base/models/ir_module.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 12,
+    "returncode": 12
+   },
+   {
+    "rel": "addons/base/models/ir_profile.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 1,
+    "returncode": 1
+   },
+   {
+    "rel": "addons/base/models/ir_qweb.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 2,
+    "returncode": 2
+   },
+   {
+    "rel": "addons/base/models/ir_qweb_fields.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 2,
+    "returncode": 2
+   },
+   {
+    "rel": "addons/base/models/ir_rule.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 2,
+    "returncode": 2
+   },
+   {
+    "rel": "addons/base/models/ir_sequence.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 1,
+    "returncode": 1
+   },
+   {
+    "rel": "addons/base/models/ir_ui_menu.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 6,
+    "returncode": 6
+   },
+   {
+    "rel": "addons/base/models/ir_ui_view.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 29,
+    "returncode": 29
+   },
+   {
+    "rel": "addons/base/models/report_layout.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/models/report_paperformat.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 1,
+    "returncode": 1
+   },
+   {
+    "rel": "addons/base/models/res_bank.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 4,
+    "returncode": 4
+   },
+   {
+    "rel": "addons/base/models/res_company.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 9,
+    "returncode": 9
+   },
+   {
+    "rel": "addons/base/models/res_config.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 2,
+    "returncode": 2
+   },
+   {
+    "rel": "addons/base/models/res_country.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 7,
+    "returncode": 7
+   },
+   {
+    "rel": "addons/base/models/res_currency.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 8,
+    "returncode": 8
+   },
+   {
+    "rel": "addons/base/models/res_lang.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 7,
+    "returncode": 7
+   },
+   {
+    "rel": "addons/base/models/res_partner.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 33,
+    "returncode": 33
+   },
+   {
+    "rel": "addons/base/models/res_users.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 40,
+    "returncode": 40
+   },
+   {
+    "rel": "addons/base/models/res_users_deletion.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 4,
+    "returncode": 4
+   },
+   {
+    "rel": "addons/base/models/res_users_settings.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 2,
+    "returncode": 2
+   },
+   {
+    "rel": "addons/base/report/__init__.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/report/corporate_defaults.xsl",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/report/custom_default_printscreen.xsl",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/report/custom_new.xsl",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/report/custom_rml_printscreen.xsl",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/report/ir_model_report.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/report/ir_model_templates.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/report/ir_module_report_templates.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/report/ir_module_reports.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/report/mako_footer.html",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/report/mako_header.html",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/report/mako_template.css",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/report/report_base_report_irmodulereference.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/rng/activity_view.rng",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/rng/calendar_view.rng",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 1,
+    "returncode": 1
+   },
+   {
+    "rel": "addons/base/rng/common.rng",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/rng/graph_view.rng",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/rng/pivot_view.rng",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/rng/search_view.rng",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/security/base_groups.xml",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 2,
+    "returncode": 2
+   },
+   {
+    "rel": "addons/base/security/base_security.xml",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 1,
+    "returncode": 1
+   },
+   {
+    "rel": "addons/base/security/ir.model.access.csv",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 2,
+    "returncode": 2
+   },
+   {
+    "rel": "addons/base/static/description/board.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": true,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/description/board.svg",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/static/description/icon.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/description/icon.svg",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/static/description/modules.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": true,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/description/modules.svg",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/static/description/settings.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": true,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/description/settings.svg",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/static/img/avatar.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/avatar_grey.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": true,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/company_image.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": true,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/419.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/ad.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/ae.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/af.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/ag.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/ai.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/al.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/am.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/an.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/ao.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/ar.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/as.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/at.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/au.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/aw.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/ax.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/az.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/ba.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/bb.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/bd.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/be.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/bf.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/bg.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/bh.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/bi.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/bj.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/bl.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/bm.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/bn.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/bo.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/br.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/bs.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/bt.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/bw.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/by.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/bz.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/ca.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/cc.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/cd.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/cf.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/cg.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/ch.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/ci.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/ck.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/cl.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/cm.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/cn.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/co.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/cr.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/cu.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/cv.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/cw.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/cx.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/cy.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/cz.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/de.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/dj.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/dk.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/dm.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/do.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/dz.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/ec.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/ee.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/eg.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/eh.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/er.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/es.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/et.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/fi.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/fj.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/fk.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/fm.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/fo.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/fr.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/ga.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/gb.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/gd.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/ge.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/gg.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/gh.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/gi.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/gl.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/gm.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/gn.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/gq.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/gr.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/gs.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/gt.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/gu.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/gw.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/gy.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/hk.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/hn.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/hr.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/ht.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/hu.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/id.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/ie.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/il.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/im.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/in.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/io.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/iq.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/ir.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/iran.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/is.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/it.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/je.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/jm.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/jo.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/jp.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/ke.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/kg.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/kh.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/ki.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/km.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/kn.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/kp.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/kr.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/kw.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/ky.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/kz.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/la.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/lb.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/lc.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/li.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/lk.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/lr.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/ls.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/lt.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/lu.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/lv.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/ly.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/ma.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/mc.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/md.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/me.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/mg.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/mh.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/mk.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/ml.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/mm.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/mn.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/mo.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/mp.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/mq.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/mr.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": true,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/ms.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/mt.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/mu.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/mv.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/mw.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/mx.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/my.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/mz.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/na.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/nc.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/ne.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/nf.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/ng.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/ni.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/nl.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/no.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/np.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/nr.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/nu.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/nz.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/om.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/pa.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/pe.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/pf.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/pg.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/ph.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/pk.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/pl.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/pm.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/pn.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/pr.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/ps.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/pt.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/pw.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/py.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/qa.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/ro.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/rs.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/ru.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/rw.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/sa.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/sb.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/sc.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/sd.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/se.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/sg.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/sh.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/si.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/sk.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/sl.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/sm.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/sn.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/so.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/sr.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/ss.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/st.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/sv.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/sx.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/sy.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/sz.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/tc.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/td.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/tf.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/tg.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/th.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/tj.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/tk.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/tl.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/tm.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/tn.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/to.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/tr.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/tt.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/tv.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/tw.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/tz.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/ua.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/ug.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/us.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/uy.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/uz.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/va.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/vc.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/ve.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/vg.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/vi.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/vn.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/vu.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/wf.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/ws.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/xk.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/ye.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/za.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/zm.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/country_flags/zw.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/icons/account_accountant.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/icons/appointment.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/icons/helpdesk.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/icons/hr_appraisal.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/icons/industry_fsm.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/icons/knowledge.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/icons/marketing_automation.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/icons/mrp_plm.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/icons/mrp_workorder.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/icons/payment_sepa_direct_debit.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/icons/planning.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/icons/quality_control.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/icons/sale_amazon.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/icons/sale_ebay.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/icons/sale_subscription.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/icons/sign.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/icons/social.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/icons/stock_barcode.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/icons/timesheet_grid.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/icons/voip.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": true,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/icons/web_mobile.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/icons/web_studio.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/icons/website_form_editor.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/icons/website_version.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/lang_flags/lang_ar.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/lang_flags/lang_ca.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/logo_sample.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/logo_white.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/main_partner-image.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/money.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": true,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/onboarding_accounting-periods.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/onboarding_calendar.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/onboarding_chart-of-accounts.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/onboarding_cog.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/onboarding_company-data.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/onboarding_confetti.svg",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/static/img/onboarding_default.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/onboarding_looking_glass.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/onboarding_puzzle.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/onboarding_quotation-layout.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/onboarding_sample-quotation.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/onboarding_taxes.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/partner_demo_portal.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/partner_root-image.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/public_user-image.png",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/static/img/res_company_logo.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": true,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/res_partner_1-image.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/res_partner_10-image.jpg",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/res_partner_12-image.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/res_partner_18-image.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/res_partner_2-image.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/res_partner_3-image.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/res_partner_4-image.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/res_partner_address_1.jpg",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/res_partner_address_10.jpg",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/res_partner_address_11.jpg",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/res_partner_address_13.jpg",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/res_partner_address_14.jpg",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/res_partner_address_15.jpg",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/res_partner_address_16.jpg",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/res_partner_address_17.jpg",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/res_partner_address_18.jpg",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/res_partner_address_2.jpg",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/res_partner_address_24.jpg",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/res_partner_address_25.jpg",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/res_partner_address_27.jpg",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/res_partner_address_28.jpg",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/res_partner_address_3.jpg",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/res_partner_address_30.jpg",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/res_partner_address_31.jpg",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/res_partner_address_32.jpg",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/res_partner_address_33.jpg",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/res_partner_address_34.jpg",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/res_partner_address_4.jpg",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/res_partner_address_5.jpg",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/res_partner_address_7.jpg",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/res_partner_main1.jpg",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/res_partner_main2.jpg",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/truck.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": true,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/user-slash.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/img/user_demo-image.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/static/src/css/description.css",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/static/src/css/description.sass",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/static/src/css/modules.css",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/static/src/scss/res_partner.scss",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/static/tests/test_ir_model_fields_translation.js",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 1,
+    "returncode": 1
+   },
+   {
+    "rel": "addons/base/tests/__init__.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/tests/asset_tag.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/tests/common.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 9,
+    "returncode": 9
+   },
+   {
+    "rel": "addons/base/tests/fire_small.jpeg",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/tests/minimal.pdf",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/tests/multi_kids_embedded.pdf",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/tests/split_table/copy_attributes.split1.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/tests/split_table/copy_attributes.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/tests/split_table/first_nested.split2.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/tests/split_table/first_nested.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/tests/split_table/nested.split2.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/tests/split_table/nested.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/tests/split_table/simple.split1.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/tests/split_table/simple.split2.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/tests/split_table/simple.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/tests/ssl/ca.cert.pem",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/tests/ssl/client.cert.pem",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/tests/ssl/client.key.pem",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/tests/ssl/self_signed.cert.pem",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/tests/ssl/self_signed.key.pem",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/tests/ssl/server.cert.pem",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/tests/ssl/server.key.pem",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/tests/test_acl.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 3,
+    "returncode": 3
+   },
+   {
+    "rel": "addons/base/tests/test_api.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 1,
+    "returncode": 1
+   },
+   {
+    "rel": "addons/base/tests/test_avatar_mixin.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/tests/test_barcode.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/tests/test_base.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/tests/test_basecase.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/tests/test_cache.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/tests/test_cloc.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/tests/test_config_parameter.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/tests/test_date_utils.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 1,
+    "returncode": 1
+   },
+   {
+    "rel": "addons/base/tests/test_db_cursor.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 3,
+    "returncode": 3
+   },
+   {
+    "rel": "addons/base/tests/test_deprecation.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/tests/test_display_name.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/tests/test_expression.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 65,
+    "returncode": 65
+   },
+   {
+    "rel": "addons/base/tests/test_float.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/tests/test_form_create.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 1,
+    "returncode": 1
+   },
+   {
+    "rel": "addons/base/tests/test_format_address_mixin.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/tests/test_func.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/tests/test_http_case.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 2,
+    "returncode": 2
+   },
+   {
+    "rel": "addons/base/tests/test_image.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/tests/test_ir_actions.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 1,
+    "returncode": 1
+   },
+   {
+    "rel": "addons/base/tests/test_ir_asset.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/tests/test_ir_attachment.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 6,
+    "returncode": 6
+   },
+   {
+    "rel": "addons/base/tests/test_ir_cron.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 15,
+    "returncode": 15
+   },
+   {
+    "rel": "addons/base/tests/test_ir_default.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/tests/test_ir_filters.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 2,
+    "returncode": 2
+   },
+   {
+    "rel": "addons/base/tests/test_ir_http.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/tests/test_ir_mail_server.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/tests/test_ir_mail_server_smtpd.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 1,
+    "returncode": 1
+   },
+   {
+    "rel": "addons/base/tests/test_ir_model.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 2,
+    "returncode": 2
+   },
+   {
+    "rel": "addons/base/tests/test_ir_module.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/tests/test_ir_module_category.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/tests/test_ir_sequence.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 1,
+    "returncode": 1
+   },
+   {
+    "rel": "addons/base/tests/test_ir_sequence_date_range.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/tests/test_mail.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 1,
+    "returncode": 1
+   },
+   {
+    "rel": "addons/base/tests/test_menu.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/tests/test_mimetypes.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/tests/test_misc.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 2,
+    "returncode": 2
+   },
+   {
+    "rel": "addons/base/tests/test_module.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 3,
+    "returncode": 3
+   },
+   {
+    "rel": "addons/base/tests/test_neutralize.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/tests/test_num2words_ar.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/tests/test_orm.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 3,
+    "returncode": 3
+   },
+   {
+    "rel": "addons/base/tests/test_ormcache.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 1,
+    "returncode": 1
+   },
+   {
+    "rel": "addons/base/tests/test_overrides.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/tests/test_pdf.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/tests/test_profiler.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/tests/test_qweb.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 1,
+    "returncode": 1
+   },
+   {
+    "rel": "addons/base/tests/test_qweb_field.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/tests/test_reports.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/tests/test_res_company.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 1,
+    "returncode": 1
+   },
+   {
+    "rel": "addons/base/tests/test_res_config.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/tests/test_res_country.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/tests/test_res_currency.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/tests/test_res_lang.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/tests/test_res_partner.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 8,
+    "returncode": 8
+   },
+   {
+    "rel": "addons/base/tests/test_res_partner_bank.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/tests/test_res_users.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 7,
+    "returncode": 7
+   },
+   {
+    "rel": "addons/base/tests/test_search.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 1,
+    "returncode": 1
+   },
+   {
+    "rel": "addons/base/tests/test_split_table.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/tests/test_sql.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 1,
+    "returncode": 1
+   },
+   {
+    "rel": "addons/base/tests/test_test_retry.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 4,
+    "returncode": 4
+   },
+   {
+    "rel": "addons/base/tests/test_test_suite.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 3,
+    "returncode": 3
+   },
+   {
+    "rel": "addons/base/tests/test_tests_tags.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 1,
+    "returncode": 1
+   },
+   {
+    "rel": "addons/base/tests/test_transactions.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/tests/test_translate.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 1,
+    "returncode": 1
+   },
+   {
+    "rel": "addons/base/tests/test_tz.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/tests/test_uninstall.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 1,
+    "returncode": 1
+   },
+   {
+    "rel": "addons/base/tests/test_user_has_group.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 1,
+    "returncode": 1
+   },
+   {
+    "rel": "addons/base/tests/test_views.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 52,
+    "returncode": 52
+   },
+   {
+    "rel": "addons/base/tests/tommy_small.jpeg",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/base/views/base_menus.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/views/decimal_precision_views.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/views/ir_actions_views.xml",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 5,
+    "returncode": 5
+   },
+   {
+    "rel": "addons/base/views/ir_asset_views.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/views/ir_attachment_views.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/views/ir_config_parameter_views.xml",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 1,
+    "returncode": 1
+   },
+   {
+    "rel": "addons/base/views/ir_cron_trigger_views.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/views/ir_cron_views.xml",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 1,
+    "returncode": 1
+   },
+   {
+    "rel": "addons/base/views/ir_default_views.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/views/ir_filters_views.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/views/ir_logging_views.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/views/ir_mail_server_views.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/views/ir_model_views.xml",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 2,
+    "returncode": 2
+   },
+   {
+    "rel": "addons/base/views/ir_module_views.xml",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 3,
+    "returncode": 3
+   },
+   {
+    "rel": "addons/base/views/ir_profile_views.xml",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 2,
+    "returncode": 2
+   },
+   {
+    "rel": "addons/base/views/ir_qweb_widget_templates.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/views/ir_rule_views.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/views/ir_sequence_views.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/views/ir_ui_menu_views.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/views/ir_ui_view_views.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/views/report_paperformat_views.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/views/res_bank_views.xml",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 4,
+    "returncode": 4
+   },
+   {
+    "rel": "addons/base/views/res_company_views.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/views/res_config_settings_views.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/views/res_config_views.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/views/res_country_views.xml",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 1,
+    "returncode": 1
+   },
+   {
+    "rel": "addons/base/views/res_currency_views.xml",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 2,
+    "returncode": 2
+   },
+   {
+    "rel": "addons/base/views/res_lang_views.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/views/res_partner_views.xml",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 27,
+    "returncode": 27
+   },
+   {
+    "rel": "addons/base/views/res_users_identitycheck_views.xml",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 2,
+    "returncode": 2
+   },
+   {
+    "rel": "addons/base/views/res_users_views.xml",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 16,
+    "returncode": 16
+   },
+   {
+    "rel": "addons/base/wizard/__init__.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/wizard/base_export_language.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 4,
+    "returncode": 4
+   },
+   {
+    "rel": "addons/base/wizard/base_export_language_views.xml",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 1,
+    "returncode": 1
+   },
+   {
+    "rel": "addons/base/wizard/base_import_language.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 2,
+    "returncode": 2
+   },
+   {
+    "rel": "addons/base/wizard/base_import_language_views.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/wizard/base_language_install.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 1,
+    "returncode": 1
+   },
+   {
+    "rel": "addons/base/wizard/base_language_install_views.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/wizard/base_module_uninstall.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/wizard/base_module_uninstall_views.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/wizard/base_module_update.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/wizard/base_module_update_views.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/wizard/base_module_upgrade.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 1,
+    "returncode": 1
+   },
+   {
+    "rel": "addons/base/wizard/base_module_upgrade_views.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/base/wizard/base_partner_merge.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 10,
+    "returncode": 10
+   },
+   {
+    "rel": "addons/base/wizard/base_partner_merge_views.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_access_rights/__init__.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_access_rights/__manifest__.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_access_rights/data.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_access_rights/ir.model.access.csv",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_access_rights/models.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_access_rights/security.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_access_rights/tests/__init__.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_access_rights/tests/test_access_monetary_related.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_access_rights/tests/test_check_access.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_access_rights/tests/test_feedback.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 8,
+    "returncode": 8
+   },
+   {
+    "rel": "addons/test_access_rights/tests/test_ir_rules.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 1,
+    "returncode": 1
+   },
+   {
+    "rel": "addons/test_action_bindings/__init__.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_action_bindings/__manifest__.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_action_bindings/ir.model.access.csv",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_action_bindings/models.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_action_bindings/test_data.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_action_bindings/tests/__init__.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_action_bindings/tests/test_bindings.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_assetsbundle/__init__.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_assetsbundle/__manifest__.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 1,
+    "returncode": 1
+   },
+   {
+    "rel": "addons/test_assetsbundle/controllers/__init__.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_assetsbundle/controllers/main.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_assetsbundle/data/ir_asset.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_assetsbundle/models/__init__.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_assetsbundle/models/ir_qweb.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_assetsbundle/static/accessible.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_assetsbundle/static/invalid_src/css/invalid_css.css",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_assetsbundle/static/invalid_src/xml/invalid_xml.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_assetsbundle/static/invalid_src/xml/second_invalid_xml.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_assetsbundle/static/src/css/test_cssfile1.css",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_assetsbundle/static/src/css/test_cssfile2.css",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_assetsbundle/static/src/css/test_cssfile3.css",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_assetsbundle/static/src/js/test_jsfile1.js",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_assetsbundle/static/src/js/test_jsfile2.js",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_assetsbundle/static/src/js/test_jsfile3.js",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_assetsbundle/static/src/js/test_jsfile4.js",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_assetsbundle/static/src/scss/test_file1.scss",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_assetsbundle/static/tests/lazy_test_component/lazy_test_component.js",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 1,
+    "returncode": 1
+   },
+   {
+    "rel": "addons/test_assetsbundle/static/tests/lazy_test_component/lazy_test_component.scss",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_assetsbundle/static/tests/lazy_test_component/lazy_test_component.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_assetsbundle/static/tests/test_css_error.js",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 2,
+    "returncode": 2
+   },
+   {
+    "rel": "addons/test_assetsbundle/tests/__init__.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_assetsbundle/tests/test_assetsbundle.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 2,
+    "returncode": 2
+   },
+   {
+    "rel": "addons/test_assetsbundle/tests/test_js_transpiler.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 1,
+    "returncode": 1
+   },
+   {
+    "rel": "addons/test_assetsbundle/tests/test_js_transpiler_regex.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 2,
+    "returncode": 2
+   },
+   {
+    "rel": "addons/test_assetsbundle/views/views.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_auth_custom/__init__.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_auth_custom/__manifest__.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_auth_custom/tests/__init__.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_auth_custom/tests/test_endpoints.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_convert/__init__.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_convert/__manifest__.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_convert/data/test_translated_field/test_convert.test_model.csv",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_convert/data/test_translated_field/test_model_data.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_convert/ir.model.access.csv",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_convert/models.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_convert/test_file.txt",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_convert/tests/__init__.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_convert/tests/test_convert.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_convert/tests/test_env.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_converter/__init__.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_converter/__manifest__.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_converter/ir.model.access.csv",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_converter/models.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 2,
+    "returncode": 2
+   },
+   {
+    "rel": "addons/test_converter/tests/__init__.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_converter/tests/test_html.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_converter/tests/test_vectors/image",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/test_converter/tests/test_vectors/pdf",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/test_converter/tests/test_vectors/pptx",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/test_data_module/__manifest__.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_data_module_install/__init__.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_data_module_install/__manifest__.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_data_module_install/tests/__init__.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_data_module_install/tests/test_data_module_installed.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_http/__init__.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_http/__manifest__.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 1,
+    "returncode": 1
+   },
+   {
+    "rel": "addons/test_http/controllers.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 6,
+    "returncode": 6
+   },
+   {
+    "rel": "addons/test_http/data.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_http/ir.model.access.csv",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_http/models.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_http/static/src/img/gizeh.png",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/test_http/static/src/img/milky_way.jpg",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/test_http/static/src/img/pegasus.jpg",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/test_http/static/src/img/xss.svg",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_http/tests/__init__.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 1,
+    "returncode": 1
+   },
+   {
+    "rel": "addons/test_http/tests/test_common.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_http/tests/test_echo_reply.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_http/tests/test_error.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_http/tests/test_greeting.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 1,
+    "returncode": 1
+   },
+   {
+    "rel": "addons/test_http/tests/test_misc.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_http/tests/test_models.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 2,
+    "returncode": 2
+   },
+   {
+    "rel": "addons/test_http/tests/test_security.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_http/tests/test_session.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 7,
+    "returncode": 7
+   },
+   {
+    "rel": "addons/test_http/tests/test_static.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 2,
+    "returncode": 2
+   },
+   {
+    "rel": "addons/test_http/tests/test_web_server.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_http/tests/test_xss.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_http/utils.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 1,
+    "returncode": 1
+   },
+   {
+    "rel": "addons/test_http/views.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_inherit/__init__.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_inherit/__manifest__.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_inherit/demo_data.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_inherit/ir.model.access.csv",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_inherit/tests/__init__.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_inherit/tests/test_inherit.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_inherit_depends/__init__.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_inherit_depends/__manifest__.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_inherit_depends/models.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_inherit_depends/tests/__init__.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_inherit_depends/tests/test_inherit_depends.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_inherits/__init__.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_inherits/__manifest__.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_inherits/demo_data.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_inherits/ir.model.access.csv",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_inherits/models.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_inherits/tests/__init__.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_inherits/tests/test_inherits.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_inherits_depends/__init__.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_inherits_depends/__manifest__.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_inherits_depends/models.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_inherits_depends/tests/__init__.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_inherits_depends/tests/test_inherits.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_lint/__init__.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 1,
+    "returncode": 1
+   },
+   {
+    "rel": "addons/test_lint/__manifest__.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_lint/tests/__init__.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 1,
+    "returncode": 1
+   },
+   {
+    "rel": "addons/test_lint/tests/_pylint_path_setup.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_lint/tests/eslintrc",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 1,
+    "returncode": 1
+   },
+   {
+    "rel": "addons/test_lint/tests/lint_case.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 1,
+    "returncode": 1
+   },
+   {
+    "rel": "addons/test_lint/tests/test_checkers.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 1,
+    "returncode": 1
+   },
+   {
+    "rel": "addons/test_lint/tests/test_dunderinit.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 1,
+    "returncode": 1
+   },
+   {
+    "rel": "addons/test_lint/tests/test_eslint.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_lint/tests/test_jstranslate.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_lint/tests/test_l10n.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_lint/tests/test_manifests.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 2,
+    "returncode": 2
+   },
+   {
+    "rel": "addons/test_lint/tests/test_markers.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 3,
+    "returncode": 3
+   },
+   {
+    "rel": "addons/test_lint/tests/test_onchange_domains.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_lint/tests/test_override_signatures.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 2,
+    "returncode": 2
+   },
+   {
+    "rel": "addons/test_lint/tests/test_pofile.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_lint/tests/test_pylint.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 2,
+    "returncode": 2
+   },
+   {
+    "rel": "addons/test_lint/tests/test_routes.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_main_flows/__init__.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_main_flows/__manifest__.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_main_flows/models/ir.model.access.csv",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_main_flows/models/model_multicompany.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_main_flows/static/tests/tours/main_flow.js",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 24,
+    "returncode": 24
+   },
+   {
+    "rel": "addons/test_main_flows/static/tests/tours/switch_company_access_error_tour.js",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 4,
+    "returncode": 4
+   },
+   {
+    "rel": "addons/test_main_flows/tests/__init__.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_main_flows/tests/test_flow.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 3,
+    "returncode": 3
+   },
+   {
+    "rel": "addons/test_mimetypes/__init__.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_mimetypes/__manifest__.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_mimetypes/tests/__init__.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_mimetypes/tests/test_guess_mimetypes.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 3,
+    "returncode": 3
+   },
+   {
+    "rel": "addons/test_mimetypes/tests/testfiles/case.csv",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_mimetypes/tests/testfiles/case.doc",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/test_mimetypes/tests/testfiles/case.docx",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/test_mimetypes/tests/testfiles/case.gif",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/test_mimetypes/tests/testfiles/case.jpg",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/test_mimetypes/tests/testfiles/case.ods",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/test_mimetypes/tests/testfiles/case.odt",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/test_mimetypes/tests/testfiles/case.xls",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/test_mimetypes/tests/testfiles/case.xlsx",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/test_mimetypes/tests/testfiles/case.zip",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "addons/test_read_group/__init__.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_read_group/__manifest__.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_read_group/ir.model.access.csv",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 1,
+    "returncode": 1
+   },
+   {
+    "rel": "addons/test_read_group/models.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 2,
+    "returncode": 2
+   },
+   {
+    "rel": "addons/test_read_group/tests/__init__.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 2,
+    "returncode": 2
+   },
+   {
+    "rel": "addons/test_read_group/tests/test_private_read_group.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 2,
+    "returncode": 2
+   },
+   {
+    "rel": "addons/test_rpc/__init__.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_rpc/__manifest__.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_rpc/ir.model.access.csv",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_rpc/models.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 1,
+    "returncode": 1
+   },
+   {
+    "rel": "addons/test_rpc/tests/__init__.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_rpc/tests/test_error.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 1,
+    "returncode": 1
+   },
+   {
+    "rel": "addons/test_search_panel/__init__.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_search_panel/__manifest__.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_search_panel/ir.model.access.csv",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_search_panel/models/__init__.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_search_panel/models/models.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_search_panel/tests/__init__.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_search_panel/tests/test_search_panel_select_multi_range.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_search_panel/tests/test_search_panel_select_range.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_testing_utilities/__init__.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_testing_utilities/__manifest__.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_testing_utilities/tests/__init__.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_testing_utilities/tests/test_env.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_testing_utilities/tests/test_form_impl.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_testing_utilities/tests/test_lxml.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_testing_utilities/tests/test_methods.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_testing_utilities/tests/test_res_config.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_testing_utilities/tests/test_xml_tools.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_translation_import/__init__.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_translation_import/__manifest__.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_translation_import/data/files/test_spreadsheet_dashboard.json",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_translation_import/data/test_translation_import_data.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_translation_import/i18n/dot.csv",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_translation_import/i18n/fr.po",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 5,
+    "returncode": 5
+   },
+   {
+    "rel": "addons/test_translation_import/i18n/fr_BE.po",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 5,
+    "returncode": 5
+   },
+   {
+    "rel": "addons/test_translation_import/i18n/fr_CA.po",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 5,
+    "returncode": 5
+   },
+   {
+    "rel": "addons/test_translation_import/i18n/test_translation_import.pot",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 1,
+    "returncode": 1
+   },
+   {
+    "rel": "addons/test_translation_import/i18n/tlh.po",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 5,
+    "returncode": 5
+   },
+   {
+    "rel": "addons/test_translation_import/models/__init__.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_translation_import/models/models.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_translation_import/security/ir.model.access.csv",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_translation_import/static/src/xml/js_templates.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_translation_import/tests/__init__.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_translation_import/tests/test_export_wizard.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_translation_import/tests/test_term_count.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 1,
+    "returncode": 1
+   },
+   {
+    "rel": "addons/test_translation_import/view.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_uninstall/__init__.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_uninstall/__manifest__.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_uninstall/ir.model.access.csv",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "addons/test_uninstall/models.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "cli/__init__.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 1,
+    "returncode": 1
+   },
+   {
+    "rel": "cli/cloc.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 2,
+    "returncode": 2
+   },
+   {
+    "rel": "cli/command.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 4,
+    "returncode": 4
+   },
+   {
+    "rel": "cli/db.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 1,
+    "returncode": 1
+   },
+   {
+    "rel": "cli/deploy.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 2,
+    "returncode": 2
+   },
+   {
+    "rel": "cli/neutralize.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 1,
+    "returncode": 1
+   },
+   {
+    "rel": "cli/obfuscate.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 4,
+    "returncode": 4
+   },
+   {
+    "rel": "cli/populate.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 5,
+    "returncode": 5
+   },
+   {
+    "rel": "cli/scaffold.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 1,
+    "returncode": 1
+   },
+   {
+    "rel": "cli/server.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 10,
+    "returncode": 10
+   },
+   {
+    "rel": "cli/shell.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 4,
+    "returncode": 4
+   },
+   {
+    "rel": "cli/start.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 1,
+    "returncode": 1
+   },
+   {
+    "rel": "cli/templates/default/__init__.py.template",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "cli/templates/default/__manifest__.py.template",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "cli/templates/default/controllers/__init__.py.template",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "cli/templates/default/controllers/controllers.py.template",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 1,
+    "returncode": 1
+   },
+   {
+    "rel": "cli/templates/default/demo/demo.xml.template",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "cli/templates/default/models/__init__.py.template",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "cli/templates/default/models/models.py.template",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 1,
+    "returncode": 1
+   },
+   {
+    "rel": "cli/templates/default/security/ir.model.access.csv.template",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "cli/templates/default/views/templates.xml.template",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "cli/templates/default/views/views.xml.template",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "cli/templates/l10n_payroll/__init__.py.template",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "cli/templates/l10n_payroll/__manifest__.py.template",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "cli/templates/l10n_payroll/data/hr_payroll_structure_data.xml.template",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "cli/templates/l10n_payroll/data/hr_payroll_structure_type_data.xml.template",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "cli/templates/l10n_payroll/data/hr_rule_parameters_data.xml.template",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "cli/templates/l10n_payroll/data/hr_salary_rule_category_data.xml.template",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "cli/templates/l10n_payroll/data/hr_salary_rule_data.xml.template",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "cli/templates/l10n_payroll/data/l10n_{{code}}_hr_payroll_demo.xml.template",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "cli/templates/l10n_payroll/models/__init__.py.template",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "cli/templates/l10n_payroll/models/hr_payslip.py.template",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "cli/templates/l10n_payroll/models/hr_payslip_worked_days.py.template",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "cli/templates/l10n_payroll/views/hr_payroll_report.xml.template",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "cli/templates/l10n_payroll/views/report_payslip_templates.xml.template",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "cli/templates/theme/__init__.py.template",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "cli/templates/theme/__manifest__.py.template",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "cli/templates/theme/demo/pages.xml.template",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "cli/templates/theme/static/src/scss/custom.scss.template",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "cli/templates/theme/views/options.xml.template",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "cli/templates/theme/views/snippets.xml.template",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "exceptions.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 1,
+    "returncode": 1
+   },
+   {
+    "rel": "http.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 25,
+    "returncode": 25
+   },
+   {
+    "rel": "import_xml.rng",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "loglevels.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "modules/__init__.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 1,
+    "returncode": 1
+   },
+   {
+    "rel": "modules/db.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 1,
+    "returncode": 1
+   },
+   {
+    "rel": "modules/loading.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 6,
+    "returncode": 6
+   },
+   {
+    "rel": "modules/migration.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 6,
+    "returncode": 6
+   },
+   {
+    "rel": "modules/module.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 12,
+    "returncode": 12
+   },
+   {
+    "rel": "modules/neutralize.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 1,
+    "returncode": 1
+   },
+   {
+    "rel": "netsvc.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 8,
+    "returncode": 8
+   },
+   {
+    "rel": "osv/__init__.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 1,
+    "returncode": 1
+   },
+   {
+    "rel": "osv/expression.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 12,
+    "returncode": 12
+   },
+   {
+    "rel": "release.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 3,
+    "returncode": 3
+   },
+   {
+    "rel": "service/__init__.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "service/common.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 1,
+    "returncode": 1
+   },
+   {
+    "rel": "service/db.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 6,
+    "returncode": 6
+   },
+   {
+    "rel": "service/model.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 6,
+    "returncode": 6
+   },
+   {
+    "rel": "service/security.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 5,
+    "returncode": 5
+   },
+   {
+    "rel": "service/server.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 7,
+    "returncode": 7
+   },
+   {
+    "rel": "sql_db.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 19,
+    "returncode": 19
+   },
+   {
+    "rel": "tests/__init__.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "tests/case.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "tests/common.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 46,
+    "returncode": 46
+   },
+   {
+    "rel": "tests/dummy.js",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "tests/dummy.xml",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "tests/form.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 2,
+    "returncode": 2
+   },
+   {
+    "rel": "tests/loader.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 2,
+    "returncode": 2
+   },
+   {
+    "rel": "tests/result.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "tests/shell.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "tests/suite.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "tests/tag_selector.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "tests/test_module_operations.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 7,
+    "returncode": 7
+   },
+   {
+    "rel": "tools/__init__.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 5,
+    "returncode": 5
+   },
+   {
+    "rel": "tools/_vendor/__init__.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "tools/_vendor/send_file.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "tools/_vendor/sessions.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "tools/_vendor/useragents.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "tools/appdirs.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "tools/barcode.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 2,
+    "returncode": 2
+   },
+   {
+    "rel": "tools/cache.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 7,
+    "returncode": 7
+   },
+   {
+    "rel": "tools/cloc.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 2,
+    "returncode": 2
+   },
+   {
+    "rel": "tools/config.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 13,
+    "returncode": 13
+   },
+   {
+    "rel": "tools/constants.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 1,
+    "returncode": 1
+   },
+   {
+    "rel": "tools/convert.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 13,
+    "returncode": 13
+   },
+   {
+    "rel": "tools/data/files/sRGB2014.icc",
+    "conflicted": false,
+    "binary": true,
+    "binary_conflict": false,
+    "hunks": 0,
+    "returncode": null
+   },
+   {
+    "rel": "tools/data/files/sRGB2014.icc.LICENSE",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "tools/date_utils.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 14,
+    "returncode": 14
+   },
+   {
+    "rel": "tools/facade.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "tools/float_utils.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 11,
+    "returncode": 11
+   },
+   {
+    "rel": "tools/func.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 7,
+    "returncode": 7
+   },
+   {
+    "rel": "tools/image.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "tools/js_transpiler.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 1,
+    "returncode": 1
+   },
+   {
+    "rel": "tools/json.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 1,
+    "returncode": 1
+   },
+   {
+    "rel": "tools/lru.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 10,
+    "returncode": 10
+   },
+   {
+    "rel": "tools/mail.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 4,
+    "returncode": 4
+   },
+   {
+    "rel": "tools/mimetypes.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 3,
+    "returncode": 3
+   },
+   {
+    "rel": "tools/misc.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 17,
+    "returncode": 17
+   },
+   {
+    "rel": "tools/osutil.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 1,
+    "returncode": 1
+   },
+   {
+    "rel": "tools/parse_version.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "tools/pdf/__init__.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 3,
+    "returncode": 3
+   },
+   {
+    "rel": "tools/pdf/_pypdf.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "tools/pdf/_pypdf2_1.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "tools/pdf/_pypdf2_2.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "tools/populate.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 3,
+    "returncode": 3
+   },
+   {
+    "rel": "tools/profiler.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 4,
+    "returncode": 4
+   },
+   {
+    "rel": "tools/pycompat.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 3,
+    "returncode": 3
+   },
+   {
+    "rel": "tools/query.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 3,
+    "returncode": 3
+   },
+   {
+    "rel": "tools/rendering_tools.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "tools/safe_eval.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 5,
+    "returncode": 5
+   },
+   {
+    "rel": "tools/sourcemap_generator.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "tools/speedscope.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "tools/sql.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 7,
+    "returncode": 7
+   },
+   {
+    "rel": "tools/template_inheritance.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "tools/test_reports.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "tools/translate.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 13,
+    "returncode": 13
+   },
+   {
+    "rel": "tools/view_validation.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "tools/which.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "tools/xml_utils.py",
+    "conflicted": true,
+    "binary": false,
+    "hunks": 1,
+    "returncode": 1
+   },
+   {
+    "rel": "tools/zeep/__init__.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "tools/zeep/client.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "tools/zeep/exceptions.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "tools/zeep/helpers.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "tools/zeep/ns.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "tools/zeep/wsa.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "tools/zeep/wsdl/__init__.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "tools/zeep/wsdl/utils.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "tools/zeep/wsse/__init__.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   },
+   {
+    "rel": "tools/zeep/wsse/username/__init__.py",
+    "conflicted": false,
+    "binary": false,
+    "hunks": 0,
+    "returncode": 0
+   }
+  ],
+  "B": [
+   "__init__.py",
+   "addons/__init__.py",
+   "addons/base/controllers/__init__.py",
+   "addons/base/controllers/rpc.py",
+   "addons/base/report/corporate_defaults.xml",
+   "addons/base/report/corporate_odt_header.xml",
+   "addons/base/report/corporate_sxw_header.xml",
+   "addons/base/report/custom_report.xml",
+   "addons/base/report/custom_view.xml",
+   "addons/base/static/img/onboarding_bank-account.png",
+   "addons/base/static/xls/res_partner.xlsx",
+   "addons/base/tests/test_mail_examples.py",
+   "addons/base/tests/test_osv.py",
+   "addons/base/tests/test_xmlrpc.py",
+   "addons/test_apikeys/__init__.py",
+   "addons/test_apikeys/__manifest__.py",
+   "addons/test_apikeys/static/tests/apikey_flow.js",
+   "addons/test_apikeys/tests/__init__.py",
+   "addons/test_apikeys/tests/test_flow.py",
+   "addons/test_assetsbundle/static/tests/lazyloading_test.js",
+   "addons/test_converter/tests/test_gbf.py",
+   "addons/test_exceptions/__init__.py",
+   "addons/test_exceptions/__manifest__.py",
+   "addons/test_exceptions/ir.model.access.csv",
+   "addons/test_exceptions/models.py",
+   "addons/test_exceptions/static/description/icon.png",
+   "addons/test_exceptions/static/description/icon.svg",
+   "addons/test_exceptions/view.xml",
+   "addons/test_inherit/models.py",
+   "addons/test_limits/__init__.py",
+   "addons/test_limits/__manifest__.py",
+   "addons/test_limits/ir.model.access.csv",
+   "addons/test_limits/models.py",
+   "addons/test_new_api/__init__.py",
+   "addons/test_new_api/__manifest__.py",
+   "addons/test_new_api/data/test_new_api_data.xml",
+   "addons/test_new_api/i18n/fr.po",
+   "addons/test_new_api/i18n/test_new_api.pot",
+   "addons/test_new_api/models/__init__.py",
+   "addons/test_new_api/models/test_new_api.py",
+   "addons/test_new_api/models/test_unity_read.py",
+   "addons/test_new_api/security/ir.model.access.csv",
+   "addons/test_new_api/security/test_new_api_security.xml",
+   "addons/test_new_api/static/tests/tours/constraint.js",
+   "addons/test_new_api/static/tests/tours/x2many.js",
+   "addons/test_new_api/tests/__init__.py",
+   "addons/test_new_api/tests/test_attributes.py",
+   "addons/test_new_api/tests/test_autovacuum.py",
+   "addons/test_new_api/tests/test_company_checks.py",
+   "addons/test_new_api/tests/test_domain.py",
+   "addons/test_new_api/tests/test_indexed_translation.py",
+   "addons/test_new_api/tests/test_json_field.py",
+   "addons/test_new_api/tests/test_many2many.py",
+   "addons/test_new_api/tests/test_new_fields.py",
+   "addons/test_new_api/tests/test_onchange.py",
+   "addons/test_new_api/tests/test_one2many.py",
+   "addons/test_new_api/tests/test_properties.py",
+   "addons/test_new_api/tests/test_qweb_float.py",
+   "addons/test_new_api/tests/test_related_translation.py",
+   "addons/test_new_api/tests/test_schema.py",
+   "addons/test_new_api/tests/test_ui.py",
+   "addons/test_new_api/tests/test_unity_read.py",
+   "addons/test_new_api/tests/test_views.py",
+   "addons/test_new_api/tests/test_web_read_group.py",
+   "addons/test_new_api/tests/test_web_save.py",
+   "addons/test_new_api/views/test_new_api_views.xml",
+   "addons/test_performance/__init__.py",
+   "addons/test_performance/__manifest__.py",
+   "addons/test_performance/models/__init__.py",
+   "addons/test_performance/models/models.py",
+   "addons/test_performance/security/ir.model.access.csv",
+   "addons/test_performance/tests/__init__.py",
+   "addons/test_performance/tests/test_performance.py",
+   "addons/test_read_group/tests/test_auto_join.py",
+   "addons/test_read_group/tests/test_date_range.py",
+   "addons/test_read_group/tests/test_empty.py",
+   "addons/test_read_group/tests/test_fill_temporal.py",
+   "addons/test_read_group/tests/test_group_expand.py",
+   "addons/test_read_group/tests/test_group_operator.py",
+   "addons/test_read_group/tests/test_groupby_week.py",
+   "addons/test_read_group/tests/test_m2m_grouping.py",
+   "addons/test_testing_utilities/ir.model.access.csv",
+   "addons/test_testing_utilities/menu.xml",
+   "addons/test_testing_utilities/models.py",
+   "addons/test_testing_utilities/nested_o2m.py",
+   "api.py",
+   "cli/genproxytoken.py",
+   "cli/templates/l10n_payroll/models/hr_contract.py.template",
+   "cli/tsconfig.py",
+   "conf/__init__.py",
+   "fields.py",
+   "models.py",
+   "modules/graph.py",
+   "modules/registry.py",
+   "tools/win32.py",
+   "upgrade/__init__.py"
+  ],
+  "C": [
+   "_monkeypatches/__init__.py",
+   "_monkeypatches/_cpython.py",
+   "_monkeypatches/email.py",
+   "_monkeypatches/lxml.py",
+   "_monkeypatches/markupsafe.py",
+   "_monkeypatches/mimetypes.py",
+   "_monkeypatches/num2words.py",
+   "_monkeypatches/pytz.py",
+   "_monkeypatches/requests.py",
+   "_monkeypatches/stdnum.py",
+   "_monkeypatches/urllib3.py",
+   "_monkeypatches/zeep.py",
+   "addons/base/data/ir_config_parameter_data.xml",
+   "addons/base/models/ir_embedded_actions.py",
+   "addons/base/models/res_device.py",
+   "addons/base/rng/list_view.rng",
+   "addons/base/static/img/demo_logo_report.png",
+   "addons/base/static/img/partner_open_wood.png",
+   "addons/base/tests/config/16.0.conf",
+   "addons/base/tests/config/cli",
+   "addons/base/tests/config/empty.conf",
+   "addons/base/tests/config/non_default.conf",
+   "addons/base/tests/config/save_posix.conf",
+   "addons/base/tests/odoo.jpg",
+   "addons/base/tests/test_configmanager.py",
+   "addons/base/tests/test_groups.py",
+   "addons/base/tests/test_i18n.py",
+   "addons/base/tests/test_ir_embedded_actions.py",
+   "addons/base/tests/test_res_partner_merge.py",
+   "addons/base/views/res_device_views.xml",
+   "addons/test_assetsbundle/static/invalid_src/xml/multiple_same_name.xml",
+   "addons/test_assetsbundle/static/invalid_src/xml/template_wo_name.xml",
+   "addons/test_assetsbundle/static/src/css/test_error.scss",
+   "addons/test_http/tests/test_device.py",
+   "addons/test_http/tests/test_registry.py",
+   "addons/test_http/tests/test_webjson.py",
+   "addons/test_lint/tests/_odoo_checker_gettext.py",
+   "addons/test_lint/tests/_odoo_checker_sql_injection.py",
+   "addons/test_lint/tests/_odoo_checker_unlink_override.py",
+   "addons/test_lint/tests/test_i18n.py",
+   "addons/test_main_flows/static/tests/tours/test_company_access_error_redirect_tour.js",
+   "addons/test_read_group/tests/test_override.py",
+   "addons/test_read_group/tests/test_read_progress_bar.py",
+   "addons/test_testing_utilities/tests/test_freeze_time.py",
+   "addons/test_translation_import/data/files/test_spreadsheet_v16_dashboard.json",
+   "cli/upgrade_code.py",
+   "logging.py",
+   "tools/arabic_reshaper/__init__.py",
+   "tools/arabic_reshaper/letters.py",
+   "tools/i18n.py",
+   "tools/set_expression.py",
+   "upgrade_code/17.5-00-example.py",
+   "upgrade_code/17.5-01-tree-to-list.py"
+  ],
+  "D": [
+   "_monkeypatches/ast.py",
+   "_monkeypatches/bs4.py",
+   "_monkeypatches/csv.py",
+   "_monkeypatches/docutils.py",
+   "_monkeypatches/locale.py",
+   "_monkeypatches/re.py",
+   "_monkeypatches/site.py",
+   "_monkeypatches/werkzeug.py",
+   "_monkeypatches/xlrd.py",
+   "_monkeypatches/xlsxwriter.py",
+   "_monkeypatches/xlwt.py",
+   "addons/.gitkeep",
+   "addons/base/i18n/uz.po",
+   "addons/base/models/properties_base_definition.py",
+   "addons/base/models/properties_base_definition_mixin.py",
+   "addons/base/models/res_groups.py",
+   "addons/base/models/res_groups_privilege.py",
+   "addons/base/static/description/exception.png",
+   "addons/base/static/description/exception.svg",
+   "addons/base/static/img/bill.png",
+   "addons/base/static/img/country_flags/uk.png",
+   "addons/base/static/img/partner_lightsup.png",
+   "addons/base/static/img/puzzle.png",
+   "addons/base/static/src/scss/res_users.scss",
+   "addons/base/static/xls/contacts_import_template.xlsx",
+   "addons/base/tests/config/environ",
+   "addons/base/tests/config/multidb.conf",
+   "addons/base/tests/config/sysloglogfile.conf",
+   "addons/base/tests/file_template/file_expected_render.xml",
+   "addons/base/tests/file_template/templates/file_template.xml",
+   "addons/base/tests/file_template/templates/subdir/file_subtemplate.xml",
+   "addons/base/tests/file_template/unreadable_file_template.xml",
+   "addons/base/tests/mail_examples.py",
+   "addons/base/tests/shell_file.txt",
+   "addons/base/tests/test_cli.py",
+   "addons/base/tests/test_import_files.py",
+   "addons/base/tests/test_init.py",
+   "addons/base/tests/test_install.py",
+   "addons/base/tests/test_install_addons/test_install_auto/__init__.py",
+   "addons/base/tests/test_install_addons/test_install_auto/__manifest__.py",
+   "addons/base/tests/test_install_addons/test_install_auto/data/ir_cron.xml",
+   "addons/base/tests/test_install_addons/test_install_auto/models/__init__.py",
+   "addons/base/tests/test_install_addons/test_install_auto/models/res_currency.py",
+   "addons/base/tests/test_install_addons/test_install_base/__init__.py",
+   "addons/base/tests/test_install_addons/test_install_base/__manifest__.py",
+   "addons/base/tests/test_install_addons/test_install_fail/__init__.py",
+   "addons/base/tests/test_install_addons/test_install_fail/__manifest__.py",
+   "addons/base/tests/test_install_addons/test_install_fail/views/res_currency_views.xml",
+   "addons/base/tests/test_install_addons/test_isolated_install.md",
+   "addons/base/tests/test_intervals.py",
+   "addons/base/tests/test_module_graph.py",
+   "addons/base/tests/test_query.py",
+   "addons/base/tests/test_signature.py",
+   "addons/base/views/res_groups_views.xml",
+   "addons/base/views/res_users_apikeys_views.xml",
+   "addons/base/wizard/wizard_ir_model_menu_create.py",
+   "addons/base/wizard/wizard_ir_model_menu_create_views.xml",
+   "addons/test_assetsbundle/static/src/scss/test_prefix.scss",
+   "addons/test_assetsbundle/static/tests/lazy_component.test.js",
+   "addons/test_http/tests/test_captcha.py",
+   "addons/test_http/tests/test_webjson2.py",
+   "addons/test_inherit/models/__init__.py",
+   "addons/test_inherit/models/mother_base.py",
+   "addons/test_inherit/models/mother_inherit_1.py",
+   "addons/test_inherit/models/mother_inherit_2.py",
+   "addons/test_inherit/models/mother_inherit_3.py",
+   "addons/test_inherit/models/mother_inherit_4.py",
+   "addons/test_inherit/models/test_models.py",
+   "addons/test_lint/tests/test_docstring.py",
+   "addons/test_lint/tests/test_index.py",
+   "addons/test_lint/tests/test_naming.py",
+   "addons/test_lint/tests/test_orm_import.py",
+   "addons/test_lint/tests/test_test_holes.py",
+   "addons/test_orm/__init__.py",
+   "addons/test_orm/__manifest__.py",
+   "addons/test_orm/data/test_orm_data.xml",
+   "addons/test_orm/i18n/fr.po",
+   "addons/test_orm/i18n/test_orm.pot",
+   "addons/test_orm/models/__init__.py",
+   "addons/test_orm/models/test_orm.py",
+   "addons/test_orm/models/test_performance.py",
+   "addons/test_orm/models/test_unity_read.py",
+   "addons/test_orm/security/ir.model.access.csv",
+   "addons/test_orm/security/test_orm_security.xml",
+   "addons/test_orm/static/tests/tours/constraint.js",
+   "addons/test_orm/static/tests/tours/x2many.js",
+   "addons/test_orm/tests/__init__.py",
+   "addons/test_orm/tests/test_attributes.py",
+   "addons/test_orm/tests/test_autovacuum.py",
+   "addons/test_orm/tests/test_company_checks.py",
+   "addons/test_orm/tests/test_domain.py",
+   "addons/test_orm/tests/test_fields.py",
+   "addons/test_orm/tests/test_index_method.py",
+   "addons/test_orm/tests/test_indexed_translation.py",
+   "addons/test_orm/tests/test_json_field.py",
+   "addons/test_orm/tests/test_many2many.py",
+   "addons/test_orm/tests/test_onchange.py",
+   "addons/test_orm/tests/test_one2many.py",
+   "addons/test_orm/tests/test_performance.py",
+   "addons/test_orm/tests/test_properties.py",
+   "addons/test_orm/tests/test_qweb_float.py",
+   "addons/test_orm/tests/test_related_translation.py",
+   "addons/test_orm/tests/test_schema.py",
+   "addons/test_orm/tests/test_search.py",
+   "addons/test_orm/tests/test_sort.py",
+   "addons/test_orm/tests/test_timeit.py",
+   "addons/test_orm/tests/test_ui.py",
+   "addons/test_orm/tests/test_unity_read.py",
+   "addons/test_orm/tests/test_views.py",
+   "addons/test_orm/tests/test_web_save.py",
+   "addons/test_orm/views/test_orm_views.xml",
+   "addons/test_read_group/tests/test_formatted_read_group.py",
+   "addons/test_read_group/tests/test_read_grouping_sets.py",
+   "addons/test_read_group/tests/test_web_fill_temporal.py",
+   "addons/test_read_group/tests/test_web_group_expand.py",
+   "addons/test_read_group/tests/test_web_read_group.py",
+   "addons/test_rpc/tests/test_rpc_path.py",
+   "addons/test_testing_utilities/models/__init__.py",
+   "addons/test_testing_utilities/models/models.py",
+   "addons/test_testing_utilities/models/nested_o2m.py",
+   "addons/test_testing_utilities/security/ir.model.access.csv",
+   "addons/test_testing_utilities/views/menu.xml",
+   "addons/test_translation_import/data/test.translation.import.model1-translated.csv",
+   "addons/test_translation_import/data/test.translation.import.model1.csv",
+   "addons/test_translation_import/static/src/js/js_codefile.js",
+   "api/__init__.py",
+   "cli/help.py",
+   "cli/i18n.py",
+   "cli/module.py",
+   "cli/templates/l10n_payroll/models/hr_version.py.template",
+   "fields/__init__.py",
+   "init.py",
+   "models/__init__.py",
+   "modules/module_graph.py",
+   "modules/registry/__init__.py",
+   "orm/__init__.py",
+   "orm/commands.py",
+   "orm/decorators.py",
+   "orm/domains.py",
+   "orm/environments.py",
+   "orm/fields.py",
+   "orm/fields_binary.py",
+   "orm/fields_misc.py",
+   "orm/fields_numeric.py",
+   "orm/fields_properties.py",
+   "orm/fields_reference.py",
+   "orm/fields_relational.py",
+   "orm/fields_selection.py",
+   "orm/fields_temporal.py",
+   "orm/fields_textual.py",
+   "orm/identifiers.py",
+   "orm/model_classes.py",
+   "orm/models.py",
+   "orm/models_transient.py",
+   "orm/registry.py",
+   "orm/table_objects.py",
+   "orm/types.py",
+   "orm/utils.py",
+   "tests/test_cursor.py",
+   "tools/babel/__init__.py",
+   "tools/babel/javascript_extractor.py",
+   "tools/babel/python_extractor.py",
+   "tools/gc.py",
+   "tools/intervals.py",
+   "tools/pdf/signature.py",
+   "tools/urls.py",
+   "upgrade/.gitkeep",
+   "upgrade_code/18.1-00-sql-constraint.py",
+   "upgrade_code/18.1-02-route-jsonrpc.py",
+   "upgrade_code/18.2-00-l10n-translate.py",
+   "upgrade_code/18.3-00-l10n-fiscal-position-taxes.py",
+   "upgrade_code/18.5-00-deprecated-properties.py",
+   "upgrade_code/18.5-00-domain-dynamic-dates.py",
+   "upgrade_code/18.5-00-no-tax-tag-invert.py"
+  ],
+  "E": [
+   "addons/base/i18n/hy.po",
+   "addons/base/i18n/sr.po",
+   "addons/base/models/ir_property.py",
+   "addons/base/populate/__init__.py",
+   "addons/base/populate/ir_filters.py",
+   "addons/base/populate/res_company.py",
+   "addons/base/populate/res_currency.py",
+   "addons/base/populate/res_partner.py",
+   "addons/base/populate/res_user.py",
+   "addons/base/rng/tree_view.rng",
+   "addons/base/static/img/bg_background_template.jpg",
+   "addons/base/static/img/icons/website_twitter_wall.png",
+   "addons/base/tests/flectra.jpg",
+   "addons/base/views/ir_property_views.xml",
+   "addons/test_impex/__init__.py",
+   "addons/test_impex/__manifest__.py",
+   "addons/test_impex/ir.model.access.csv",
+   "addons/test_impex/models.py",
+   "addons/test_impex/tests/__init__.py",
+   "addons/test_impex/tests/contacts.json",
+   "addons/test_impex/tests/contacts_big.json",
+   "addons/test_impex/tests/test_export.py",
+   "addons/test_impex/tests/test_load.py",
+   "addons/test_lint/tests/_flectra_checker_gettext.py",
+   "addons/test_lint/tests/_flectra_checker_sql_injection.py",
+   "addons/test_lint/tests/_flectra_checker_unlink_override.py",
+   "addons/test_populate/__init__.py",
+   "addons/test_populate/__manifest__.py",
+   "addons/test_populate/ir.model.access.csv",
+   "addons/test_populate/models.py",
+   "addons/test_populate/tests/__init__.py",
+   "addons/test_populate/tests/test_populate.py",
+   "addons/test_read_group/tests/test_exceptions.py",
+   "osv/osv.py",
+   "service/wsgi_server.py",
+   "tests/_flectra_checker_markup.py",
+   "tests/test_security.py",
+   "tools/_monkeypatches.py",
+   "tools/_monkeypatches_lxml.py",
+   "tools/_monkeypatches_pytz.py",
+   "tools/_monkeypatches_urls.py",
+   "tools/num2words_patch.py"
+  ],
+  "F": [],
+  "G": [
+   "_monkeypatches/codecs.py",
+   "_monkeypatches/evented.py",
+   "_monkeypatches/literal_eval.py",
+   "_monkeypatches/werkzeug_urls.py",
+   "addons/base/tests/test_upgrade_code.py",
+   "addons/test_new_api/tests/test_index_method.py",
+   "addons/test_new_api/tests/test_search.py",
+   "addons/test_performance/tests/test_timeit.py",
+   "addons/test_read_group/tests/test_inherits.py",
+   "addons/test_read_group/tests/test_related.py"
+  ]
+ },
+ "conflicts": [
+  [
+   "addons/base/i18n/ro.po",
+   773
+  ],
+  [
+   "addons/base/i18n/fi.po",
+   666
+  ],
+  [
+   "addons/base/i18n/ru.po",
+   665
+  ],
+  [
+   "addons/base/i18n/ar.po",
+   628
+  ],
+  [
+   "addons/base/i18n/pt.po",
+   625
+  ],
+  [
+   "addons/base/i18n/lv.po",
+   610
+  ],
+  [
+   "addons/base/i18n/ja.po",
+   493
+  ],
+  [
+   "addons/base/i18n/zh_CN.po",
+   476
+  ],
+  [
+   "addons/base/i18n/nl.po",
+   472
+  ],
+  [
+   "addons/base/i18n/sq.po",
+   468
+  ],
+  [
+   "addons/base/i18n/id.po",
+   458
+  ],
+  [
+   "addons/base/i18n/it.po",
+   450
+  ],
+  [
+   "addons/base/i18n/fr.po",
+   449
+  ],
+  [
+   "addons/base/i18n/pt_BR.po",
+   447
+  ],
+  [
+   "addons/base/i18n/sv.po",
+   444
+  ],
+  [
+   "addons/base/i18n/ko.po",
+   441
+  ],
+  [
+   "addons/base/i18n/uk.po",
+   441
+  ],
+  [
+   "addons/base/i18n/tr.po",
+   435
+  ],
+  [
+   "addons/base/i18n/th.po",
+   431
+  ],
+  [
+   "addons/base/i18n/vi.po",
+   426
+  ],
+  [
+   "addons/base/i18n/es.po",
+   420
+  ],
+  [
+   "addons/base/i18n/pl.po",
+   420
+  ],
+  [
+   "addons/base/i18n/hi.po",
+   419
+  ],
+  [
+   "addons/base/i18n/es_419.po",
+   415
+  ],
+  [
+   "addons/base/i18n/de.po",
+   414
+  ],
+  [
+   "addons/base/i18n/sk.po",
+   413
+  ],
+  [
+   "addons/base/i18n/az.po",
+   412
+  ],
+  [
+   "addons/base/i18n/zh_TW.po",
+   411
+  ],
+  [
+   "addons/base/i18n/cs.po",
+   397
+  ],
+  [
+   "addons/base/i18n/da.po",
+   396
+  ],
+  [
+   "addons/base/i18n/et.po",
+   394
+  ],
+  [
+   "addons/base/i18n/bs.po",
+   393
+  ],
+  [
+   "addons/base/i18n/hr.po",
+   389
+  ],
+  [
+   "addons/base/i18n/ca.po",
+   385
+  ],
+  [
+   "addons/base/i18n/he.po",
+   384
+  ],
+  [
+   "addons/base/i18n/sl.po",
+   384
+  ],
+  [
+   "addons/base/i18n/lo.po",
+   383
+  ],
+  [
+   "addons/base/i18n/mn.po",
+   380
+  ],
+  [
+   "addons/base/i18n/hu.po",
+   378
+  ],
+  [
+   "addons/base/i18n/bg.po",
+   376
+  ],
+  [
+   "addons/base/i18n/fa.po",
+   375
+  ],
+  [
+   "addons/base/i18n/my.po",
+   371
+  ],
+  [
+   "addons/base/i18n/lt.po",
+   368
+  ],
+  [
+   "addons/base/i18n/nb.po",
+   367
+  ],
+  [
+   "addons/base/i18n/sr@latin.po",
+   367
+  ],
+  [
+   "addons/base/i18n/el.po",
+   366
+  ],
+  [
+   "addons/base/i18n/kab.po",
+   363
+  ],
+  [
+   "addons/base/i18n/ku.po",
+   363
+  ],
+  [
+   "addons/base/i18n/base.pot",
+   362
+  ],
+  [
+   "addons/base/tests/test_expression.py",
+   65
+  ],
+  [
+   "addons/base/tests/test_views.py",
+   52
+  ],
+  [
+   "tests/common.py",
+   46
+  ],
+  [
+   "addons/base/models/res_users.py",
+   40
+  ],
+  [
+   "addons/base/models/ir_cron.py",
+   35
+  ],
+  [
+   "addons/base/models/res_partner.py",
+   33
+  ],
+  [
+   "addons/base/models/ir_model.py",
+   32
+  ],
+  [
+   "addons/base/models/ir_ui_view.py",
+   29
+  ],
+  [
+   "addons/base/views/res_partner_views.xml",
+   27
+  ],
+  [
+   "http.py",
+   25
+  ],
+  [
+   "addons/test_main_flows/static/tests/tours/main_flow.js",
+   24
+  ],
+  [
+   "sql_db.py",
+   19
+  ],
+  [
+   "tools/misc.py",
+   17
+  ],
+  [
+   "addons/base/views/res_users_views.xml",
+   16
+  ],
+  [
+   "addons/base/tests/test_ir_cron.py",
+   15
+  ],
+  [
+   "tools/date_utils.py",
+   14
+  ],
+  [
+   "addons/base/models/ir_actions.py",
+   13
+  ],
+  [
+   "tools/config.py",
+   13
+  ],
+  [
+   "tools/convert.py",
+   13
+  ],
+  [
+   "tools/translate.py",
+   13
+  ],
+  [
+   "addons/base/models/ir_actions_report.py",
+   12
+  ],
+  [
+   "addons/base/models/ir_module.py",
+   12
+  ],
+  [
+   "modules/module.py",
+   12
+  ],
+  [
+   "osv/expression.py",
+   12
+  ],
+  [
+   "tools/float_utils.py",
+   11
+  ],
+  [
+   "addons/base/wizard/base_partner_merge.py",
+   10
+  ],
+  [
+   "cli/server.py",
+   10
+  ],
+  [
+   "tools/lru.py",
+   10
+  ],
+  [
+   "addons/base/models/ir_attachment.py",
+   9
+  ],
+  [
+   "addons/base/models/res_company.py",
+   9
+  ],
+  [
+   "addons/base/tests/common.py",
+   9
+  ],
+  [
+   "addons/base/models/ir_default.py",
+   8
+  ],
+  [
+   "addons/base/models/ir_mail_server.py",
+   8
+  ],
+  [
+   "addons/base/models/res_currency.py",
+   8
+  ],
+  [
+   "addons/base/tests/test_res_partner.py",
+   8
+  ],
+  [
+   "addons/test_access_rights/tests/test_feedback.py",
+   8
+  ],
+  [
+   "netsvc.py",
+   8
+  ],
+  [
+   "addons/base/models/assetsbundle.py",
+   7
+  ],
+  [
+   "addons/base/models/ir_filters.py",
+   7
+  ],
+  [
+   "addons/base/models/ir_http.py",
+   7
+  ],
+  [
+   "addons/base/models/res_country.py",
+   7
+  ],
+  [
+   "addons/base/models/res_lang.py",
+   7
+  ],
+  [
+   "addons/base/tests/test_res_users.py",
+   7
+  ],
+  [
+   "addons/test_http/tests/test_session.py",
+   7
+  ],
+  [
+   "service/server.py",
+   7
+  ],
+  [
+   "tests/test_module_operations.py",
+   7
+  ],
+  [
+   "tools/cache.py",
+   7
+  ],
+  [
+   "tools/func.py",
+   7
+  ],
+  [
+   "tools/sql.py",
+   7
+  ],
+  [
+   "addons/base/models/ir_ui_menu.py",
+   6
+  ],
+  [
+   "addons/base/tests/test_ir_attachment.py",
+   6
+  ],
+  [
+   "addons/test_http/controllers.py",
+   6
+  ],
+  [
+   "modules/loading.py",
+   6
+  ],
+  [
+   "modules/migration.py",
+   6
+  ],
+  [
+   "service/db.py",
+   6
+  ],
+  [
+   "service/model.py",
+   6
+  ],
+  [
+   "addons/base/views/ir_actions_views.xml",
+   5
+  ],
+  [
+   "addons/test_translation_import/i18n/fr.po",
+   5
+  ],
+  [
+   "addons/test_translation_import/i18n/fr_BE.po",
+   5
+  ],
+  [
+   "addons/test_translation_import/i18n/fr_CA.po",
+   5
+  ],
+  [
+   "addons/test_translation_import/i18n/tlh.po",
+   5
+  ],
+  [
+   "cli/populate.py",
+   5
+  ],
+  [
+   "service/security.py",
+   5
+  ],
+  [
+   "tools/__init__.py",
+   5
+  ],
+  [
+   "tools/safe_eval.py",
+   5
+  ],
+  [
+   "addons/base/models/res_bank.py",
+   4
+  ],
+  [
+   "addons/base/models/res_users_deletion.py",
+   4
+  ],
+  [
+   "addons/base/tests/test_test_retry.py",
+   4
+  ],
+  [
+   "addons/base/views/res_bank_views.xml",
+   4
+  ],
+  [
+   "addons/base/wizard/base_export_language.py",
+   4
+  ],
+  [
+   "addons/test_main_flows/static/tests/tours/switch_company_access_error_tour.js",
+   4
+  ],
+  [
+   "cli/command.py",
+   4
+  ],
+  [
+   "cli/obfuscate.py",
+   4
+  ],
+  [
+   "cli/shell.py",
+   4
+  ],
+  [
+   "tools/mail.py",
+   4
+  ],
+  [
+   "tools/profiler.py",
+   4
+  ],
+  [
+   "addons/base/models/ir_fields.py",
+   3
+  ],
+  [
+   "addons/base/tests/test_acl.py",
+   3
+  ],
+  [
+   "addons/base/tests/test_db_cursor.py",
+   3
+  ],
+  [
+   "addons/base/tests/test_module.py",
+   3
+  ],
+  [
+   "addons/base/tests/test_orm.py",
+   3
+  ],
+  [
+   "addons/base/tests/test_test_suite.py",
+   3
+  ],
+  [
+   "addons/base/views/ir_module_views.xml",
+   3
+  ],
+  [
+   "addons/test_lint/tests/test_markers.py",
+   3
+  ],
+  [
+   "addons/test_main_flows/tests/test_flow.py",
+   3
+  ],
+  [
+   "addons/test_mimetypes/tests/test_guess_mimetypes.py",
+   3
+  ],
+  [
+   "release.py",
+   3
+  ],
+  [
+   "tools/mimetypes.py",
+   3
+  ],
+  [
+   "tools/pdf/__init__.py",
+   3
+  ],
+  [
+   "tools/populate.py",
+   3
+  ],
+  [
+   "tools/pycompat.py",
+   3
+  ],
+  [
+   "tools/query.py",
+   3
+  ],
+  [
+   "addons/base/data/res_users_data.xml",
+   2
+  ],
+  [
+   "addons/base/models/ir_binary.py",
+   2
+  ],
+  [
+   "addons/base/models/ir_qweb.py",
+   2
+  ],
+  [
+   "addons/base/models/ir_qweb_fields.py",
+   2
+  ],
+  [
+   "addons/base/models/ir_rule.py",
+   2
+  ],
+  [
+   "addons/base/models/res_config.py",
+   2
+  ],
+  [
+   "addons/base/models/res_users_settings.py",
+   2
+  ],
+  [
+   "addons/base/security/base_groups.xml",
+   2
+  ],
+  [
+   "addons/base/security/ir.model.access.csv",
+   2
+  ],
+  [
+   "addons/base/tests/test_http_case.py",
+   2
+  ],
+  [
+   "addons/base/tests/test_ir_filters.py",
+   2
+  ],
+  [
+   "addons/base/tests/test_ir_model.py",
+   2
+  ],
+  [
+   "addons/base/tests/test_misc.py",
+   2
+  ],
+  [
+   "addons/base/views/ir_model_views.xml",
+   2
+  ],
+  [
+   "addons/base/views/ir_profile_views.xml",
+   2
+  ],
+  [
+   "addons/base/views/res_currency_views.xml",
+   2
+  ],
+  [
+   "addons/base/views/res_users_identitycheck_views.xml",
+   2
+  ],
+  [
+   "addons/base/wizard/base_import_language.py",
+   2
+  ],
+  [
+   "addons/test_assetsbundle/static/tests/test_css_error.js",
+   2
+  ],
+  [
+   "addons/test_assetsbundle/tests/test_assetsbundle.py",
+   2
+  ],
+  [
+   "addons/test_assetsbundle/tests/test_js_transpiler_regex.py",
+   2
+  ],
+  [
+   "addons/test_converter/models.py",
+   2
+  ],
+  [
+   "addons/test_http/tests/test_models.py",
+   2
+  ],
+  [
+   "addons/test_http/tests/test_static.py",
+   2
+  ],
+  [
+   "addons/test_lint/tests/test_manifests.py",
+   2
+  ],
+  [
+   "addons/test_lint/tests/test_override_signatures.py",
+   2
+  ],
+  [
+   "addons/test_lint/tests/test_pylint.py",
+   2
+  ],
+  [
+   "addons/test_read_group/models.py",
+   2
+  ],
+  [
+   "addons/test_read_group/tests/__init__.py",
+   2
+  ],
+  [
+   "addons/test_read_group/tests/test_private_read_group.py",
+   2
+  ],
+  [
+   "cli/cloc.py",
+   2
+  ],
+  [
+   "cli/deploy.py",
+   2
+  ],
+  [
+   "tests/form.py",
+   2
+  ],
+  [
+   "tests/loader.py",
+   2
+  ],
+  [
+   "tools/barcode.py",
+   2
+  ],
+  [
+   "tools/cloc.py",
+   2
+  ],
+  [
+   "addons/base/__manifest__.py",
+   1
+  ],
+  [
+   "addons/base/data/res.country.state.csv",
+   1
+  ],
+  [
+   "addons/base/data/res.lang.csv",
+   1
+  ],
+  [
+   "addons/base/data/res_partner_demo.xml",
+   1
+  ],
+  [
+   "addons/base/models/decimal_precision.py",
+   1
+  ],
+  [
+   "addons/base/models/ir_autovacuum.py",
+   1
+  ],
+  [
+   "addons/base/models/ir_config_parameter.py",
+   1
+  ],
+  [
+   "addons/base/models/ir_demo.py",
+   1
+  ],
+  [
+   "addons/base/models/ir_profile.py",
+   1
+  ],
+  [
+   "addons/base/models/ir_sequence.py",
+   1
+  ],
+  [
+   "addons/base/models/report_paperformat.py",
+   1
+  ],
+  [
+   "addons/base/rng/calendar_view.rng",
+   1
+  ],
+  [
+   "addons/base/security/base_security.xml",
+   1
+  ],
+  [
+   "addons/base/static/tests/test_ir_model_fields_translation.js",
+   1
+  ],
+  [
+   "addons/base/tests/test_api.py",
+   1
+  ],
+  [
+   "addons/base/tests/test_date_utils.py",
+   1
+  ],
+  [
+   "addons/base/tests/test_form_create.py",
+   1
+  ],
+  [
+   "addons/base/tests/test_ir_actions.py",
+   1
+  ],
+  [
+   "addons/base/tests/test_ir_mail_server_smtpd.py",
+   1
+  ],
+  [
+   "addons/base/tests/test_ir_sequence.py",
+   1
+  ],
+  [
+   "addons/base/tests/test_mail.py",
+   1
+  ],
+  [
+   "addons/base/tests/test_ormcache.py",
+   1
+  ],
+  [
+   "addons/base/tests/test_qweb.py",
+   1
+  ],
+  [
+   "addons/base/tests/test_res_company.py",
+   1
+  ],
+  [
+   "addons/base/tests/test_search.py",
+   1
+  ],
+  [
+   "addons/base/tests/test_sql.py",
+   1
+  ],
+  [
+   "addons/base/tests/test_tests_tags.py",
+   1
+  ],
+  [
+   "addons/base/tests/test_translate.py",
+   1
+  ],
+  [
+   "addons/base/tests/test_uninstall.py",
+   1
+  ],
+  [
+   "addons/base/tests/test_user_has_group.py",
+   1
+  ],
+  [
+   "addons/base/views/ir_config_parameter_views.xml",
+   1
+  ],
+  [
+   "addons/base/views/ir_cron_views.xml",
+   1
+  ],
+  [
+   "addons/base/views/res_country_views.xml",
+   1
+  ],
+  [
+   "addons/base/wizard/base_export_language_views.xml",
+   1
+  ],
+  [
+   "addons/base/wizard/base_language_install.py",
+   1
+  ],
+  [
+   "addons/base/wizard/base_module_upgrade.py",
+   1
+  ],
+  [
+   "addons/test_access_rights/tests/test_ir_rules.py",
+   1
+  ],
+  [
+   "addons/test_assetsbundle/__manifest__.py",
+   1
+  ],
+  [
+   "addons/test_assetsbundle/static/tests/lazy_test_component/lazy_test_component.js",
+   1
+  ],
+  [
+   "addons/test_assetsbundle/tests/test_js_transpiler.py",
+   1
+  ],
+  [
+   "addons/test_http/__manifest__.py",
+   1
+  ],
+  [
+   "addons/test_http/tests/__init__.py",
+   1
+  ],
+  [
+   "addons/test_http/tests/test_greeting.py",
+   1
+  ],
+  [
+   "addons/test_http/utils.py",
+   1
+  ],
+  [
+   "addons/test_lint/__init__.py",
+   1
+  ],
+  [
+   "addons/test_lint/tests/__init__.py",
+   1
+  ],
+  [
+   "addons/test_lint/tests/eslintrc",
+   1
+  ],
+  [
+   "addons/test_lint/tests/lint_case.py",
+   1
+  ],
+  [
+   "addons/test_lint/tests/test_checkers.py",
+   1
+  ],
+  [
+   "addons/test_lint/tests/test_dunderinit.py",
+   1
+  ],
+  [
+   "addons/test_read_group/ir.model.access.csv",
+   1
+  ],
+  [
+   "addons/test_rpc/models.py",
+   1
+  ],
+  [
+   "addons/test_rpc/tests/test_error.py",
+   1
+  ],
+  [
+   "addons/test_translation_import/i18n/test_translation_import.pot",
+   1
+  ],
+  [
+   "addons/test_translation_import/tests/test_term_count.py",
+   1
+  ],
+  [
+   "cli/__init__.py",
+   1
+  ],
+  [
+   "cli/db.py",
+   1
+  ],
+  [
+   "cli/neutralize.py",
+   1
+  ],
+  [
+   "cli/scaffold.py",
+   1
+  ],
+  [
+   "cli/start.py",
+   1
+  ],
+  [
+   "cli/templates/default/controllers/controllers.py.template",
+   1
+  ],
+  [
+   "cli/templates/default/models/models.py.template",
+   1
+  ],
+  [
+   "exceptions.py",
+   1
+  ],
+  [
+   "modules/__init__.py",
+   1
+  ],
+  [
+   "modules/db.py",
+   1
+  ],
+  [
+   "modules/neutralize.py",
+   1
+  ],
+  [
+   "osv/__init__.py",
+   1
+  ],
+  [
+   "service/common.py",
+   1
+  ],
+  [
+   "tools/constants.py",
+   1
+  ],
+  [
+   "tools/js_transpiler.py",
+   1
+  ],
+  [
+   "tools/json.py",
+   1
+  ],
+  [
+   "tools/osutil.py",
+   1
+  ],
+  [
+   "tools/xml_utils.py",
+   1
+  ]
+ ],
+ "binary_conflicts": [
+  "addons/base/static/description/board.png",
+  "addons/base/static/description/modules.png",
+  "addons/base/static/description/settings.png",
+  "addons/base/static/img/avatar_grey.png",
+  "addons/base/static/img/company_image.png",
+  "addons/base/static/img/country_flags/mr.png",
+  "addons/base/static/img/icons/voip.png",
+  "addons/base/static/img/money.png",
+  "addons/base/static/img/res_company_logo.png",
+  "addons/base/static/img/truck.png"
+ ]
+}

@@ -1,0 +1,125 @@
+///
+/// IBM Carbon "for AI" field treatment.
+///
+/// Carbon marks AI-assisted fields with a soft aura rising from a purple→blue
+/// gradient underline (plus an "AI" slug). Odoo has no consistent AI-field
+/// class, so we apply it to the AI-marked fields that exist (e.g. the CRM
+/// predicted probability, flagged by the PLS AI icon) and expose a reusable
+/// `.o_field_ai` class to opt any other field in.
+///
+
+.o_web_client {
+    // Opt-in AI field treatment (a soft purple→blue aura + gradient underline).
+    // NOTE: only applied to elements that explicitly opt in via `.o_field_ai`.
+    // The CRM probability fields are intentionally NOT included: making their
+    // input transparent/borderless dropped the value out of its box and broke
+    // alignment with neighbouring fields. They now keep the standard Carbon
+    // boxed field styling (see fields.scss) and just get a small AI icon tint.
+    .o_field_ai {
+        position: relative;
+
+        // Soft AI aura rising from the underline (Carbon AI gradient tokens).
+        background-image: linear-gradient(
+            0deg,
+            rgba($carbon-blue-40, 0.16) 0%,
+            rgba(#be95ff, 0.06) 45%,
+            transparent 72%
+        );
+
+        // The input itself is transparent so the aura shows; the gradient line
+        // below replaces the plain Carbon underline.
+        input.o_input,
+        .o_input {
+            background-color: transparent !important;
+            border-bottom-color: transparent !important;
+        }
+
+        // Carbon AI gradient underline (purple → blue).
+        &::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #8a3ffc 0%, $carbon-blue-50 100%);
+            pointer-events: none;
+        }
+
+        // Focus keeps the Carbon focus ring on top of the aura.
+        input.o_input:focus,
+        .o_input:focus {
+            outline: $carbon-focus-width solid $carbon-focus;
+            outline-offset: -#{$carbon-focus-width};
+        }
+    }
+
+    // The CRM predictive-lead-scoring "AI" icon next to the label — give it the
+    // Carbon AI gradient tint so the affordance reads as AI, not a stray image.
+    .o_form_label + sup .fa,
+    .o_pls_tooltip_button img,
+    img[src*="pls-tooltip-ai-icon"] {
+        filter: saturate(1.1);
+        vertical-align: middle;
+    }
+
+    // NextBot AI chat cards (quotation / action / sales-report / clarify).
+    // These are AI-generated, so give them Carbon's "for AI" treatment: sharp
+    // corners, a Carbon layer surface, the purple→blue AI gradient accent bar,
+    // and a soft aura. Overrides mail_bot's plain blue left border (higher
+    // specificity via .o_web_client, so load order doesn't matter).
+    .o_nextbot_action_card,
+    .o_nextbot_quotation_card,
+    .o_nextbot_sales_report_card,
+    .o_nextbot_clarify_card {
+        position: relative;
+        border-radius: 0 !important;
+        border: 1px solid $carbon-border-subtle !important;
+        border-left: 0 !important;                       // replaced by the gradient bar
+        background-color: $carbon-layer-02 !important;   // white surface
+        overflow: hidden;
+
+        // Carbon "for AI" accent — purple → Blue-60 gradient bar on the left edge.
+        &::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            width: 3px;
+            background: linear-gradient(180deg, #8a3ffc 0%, $carbon-blue-60 100%);
+        }
+
+        // Soft AI aura rising from the top-left corner.
+        &::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background: radial-gradient(
+                120% 80% at 0% 0%,
+                rgba(#8a3ffc, 0.06) 0%,
+                rgba($carbon-blue-40, 0.05) 30%,
+                transparent 60%
+            );
+        }
+
+        // Keep card content above the aura.
+        > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        // Carbon type tokens for the card text.
+        .text-muted {
+            color: $carbon-text-secondary !important;
+        }
+        .fw-bold {
+            color: $carbon-text-primary;
+        }
+        .o_nextbot_quotation_total {
+            color: $carbon-text-primary;
+            font-weight: $carbon-font-weight-semibold;
+        }
+    }
+}

@@ -1,0 +1,307 @@
+
+msgid ""
+msgstr ""
+"Project-Id-Version:NWOS Server 3.0alpha"
+"Report-Msgid-Bugs-To:"
+"POT-Creation-Date:2024-04-10 10:46+0000"
+"PO-Revision-Date:2024-04-10 10:46+0000"
+"Last-Translator:"
+"Language-Team:"
+"MIME-Version:1.0"
+"Content-Type:text/plain; charset=UTF-8"
+"Content-Transfer-Encoding:"
+"Plural-Forms:"
+
+#. module: recurring_payments
+#: model:ir.model.fields,field_description:recurring_payments.field_recurring_payment__amount
+#: model:ir.model.fields,field_description:recurring_payments.field_recurring_payment_line__amount
+msgid "Amount"
+msgstr "كمية"
+
+#. module: recurring_payments
+#. nwos-python
+#: code:addons/recurring_payments/models/recurring_payment.py:0
+#, python-format
+msgid "Amount Must Be Non-Zero Positive Number"
+msgstr "يجب أن يكون المبلغ رقمًا موجبًا غير الصفر"
+
+#. module: recurring_payments
+#. nwos-python
+#: code:addons/recurring_payments/models/recurring_payment.py:0
+#, python-format
+msgid "Cannot delete done records !"
+msgstr "لا يمكن حذف السجلات المنجزة!"
+
+#. module: recurring_payments
+#: model:ir.model.fields,field_description:recurring_payments.field_account_recurring_template__company_id
+#: model:ir.model.fields,field_description:recurring_payments.field_recurring_payment__company_id
+#: model:ir.model.fields,field_description:recurring_payments.field_recurring_payment_line__company_id
+msgid "Company"
+msgstr "شركة"
+
+#. module: recurring_payments
+#: model_terms:ir.ui.view,arch_db:recurring_payments.view_recurring_template_form
+msgid "Confirm"
+msgstr "يتأكد"
+
+#. module: recurring_payments
+#: model_terms:ir.ui.view,arch_db:recurring_payments.view_recurring_payment_form
+msgid "Create Payment"
+msgstr "إنشاء الدفع"
+
+#. module: recurring_payments
+#: model:ir.model.fields,field_description:recurring_payments.field_account_recurring_template__create_uid
+#: model:ir.model.fields,field_description:recurring_payments.field_recurring_payment__create_uid
+#: model:ir.model.fields,field_description:recurring_payments.field_recurring_payment_line__create_uid
+msgid "Created by"
+msgstr "انشأ من قبل"
+
+#. module: recurring_payments
+#: model:ir.model.fields,field_description:recurring_payments.field_account_recurring_template__create_date
+#: model:ir.model.fields,field_description:recurring_payments.field_recurring_payment__create_date
+#: model:ir.model.fields,field_description:recurring_payments.field_recurring_payment_line__create_date
+msgid "Created on"
+msgstr "تم إنشاؤها على"
+
+#. module: recurring_payments
+#: model:ir.model.fields,field_description:recurring_payments.field_recurring_payment__currency_id
+#: model:ir.model.fields,field_description:recurring_payments.field_recurring_payment_line__currency_id
+msgid "Currency"
+msgstr "عملة"
+
+#. module: recurring_payments
+#: model:ir.model.fields,field_description:recurring_payments.field_recurring_payment_line__date
+msgid "Date"
+msgstr "تاريخ"
+
+#. module: recurring_payments
+#: model:ir.model.fields.selection,name:recurring_payments.selection__account_recurring_template__recurring_period__days
+msgid "Days"
+msgstr "أيام"
+
+#. module: recurring_payments
+#: model:ir.model.fields,field_description:recurring_payments.field_account_recurring_template__description
+#: model:ir.model.fields,field_description:recurring_payments.field_recurring_payment__description
+msgid "Description"
+msgstr "وصف"
+
+#. module: recurring_payments
+#: model_terms:ir.ui.view,arch_db:recurring_payments.view_recurring_payment_form
+#: model_terms:ir.ui.view,arch_db:recurring_payments.view_recurring_template_form
+msgid "Description..."
+msgstr "وصف..."
+
+#. module: recurring_payments
+#: model:ir.model.fields,field_description:recurring_payments.field_account_recurring_template__display_name
+#: model:ir.model.fields,field_description:recurring_payments.field_recurring_payment__display_name
+#: model:ir.model.fields,field_description:recurring_payments.field_recurring_payment_line__display_name
+msgid "Display Name"
+msgstr "اسم العرض"
+
+#. module: recurring_payments
+#: model:ir.model.fields.selection,name:recurring_payments.selection__account_recurring_template__state__done
+#: model:ir.model.fields.selection,name:recurring_payments.selection__recurring_payment__state__done
+#: model:ir.model.fields.selection,name:recurring_payments.selection__recurring_payment_line__state__done
+#: model_terms:ir.ui.view,arch_db:recurring_payments.view_recurring_payment_form
+msgid "Done"
+msgstr "منتهي"
+
+#. module: recurring_payments
+#: model:ir.model.fields.selection,name:recurring_payments.selection__account_recurring_template__state__draft
+#: model:ir.model.fields.selection,name:recurring_payments.selection__recurring_payment__state__draft
+#: model:ir.model.fields.selection,name:recurring_payments.selection__recurring_payment_line__state__draft
+msgid "Draft"
+msgstr "مسودة"
+
+#. module: recurring_payments
+#: model:ir.model.fields,field_description:recurring_payments.field_recurring_payment__date_end
+msgid "End Date"
+msgstr "تاريخ الانتهاء"
+
+#. module: recurring_payments
+#: model:ir.model.fields,field_description:recurring_payments.field_account_recurring_template__journal_state
+#: model:ir.model.fields,field_description:recurring_payments.field_recurring_payment__journal_state
+msgid "Generate Journal As"
+msgstr "إنشاء دفتر يومية باسم"
+
+#. module: recurring_payments
+#: model:ir.actions.server,name:recurring_payments.action_generate_recurring_payment_ir_actions_server
+msgid "Generate Recurring Payments"
+msgstr "توليد المدفوعات المتكررة"
+
+#. module: recurring_payments
+#: model:ir.model.fields,field_description:recurring_payments.field_account_recurring_template__id
+#: model:ir.model.fields,field_description:recurring_payments.field_recurring_payment__id
+#: model:ir.model.fields,field_description:recurring_payments.field_recurring_payment_line__id
+msgid "ID"
+msgstr "بطاقة تعريف"
+
+#. module: recurring_payments
+#: model:ir.model.fields,field_description:recurring_payments.field_account_recurring_template__journal_id
+#: model:ir.model.fields,field_description:recurring_payments.field_recurring_payment__journal_id
+#: model:ir.model.fields,field_description:recurring_payments.field_recurring_payment_line__journal_id
+msgid "Journal"
+msgstr "مجلة"
+
+#. module: recurring_payments
+#: model:ir.model.fields,field_description:recurring_payments.field_account_recurring_template__write_uid
+#: model:ir.model.fields,field_description:recurring_payments.field_recurring_payment__write_uid
+#: model:ir.model.fields,field_description:recurring_payments.field_recurring_payment_line__write_uid
+msgid "Last Updated by"
+msgstr "آخر تحديث بواسطة"
+
+#. module: recurring_payments
+#: model:ir.model.fields,field_description:recurring_payments.field_account_recurring_template__write_date
+#: model:ir.model.fields,field_description:recurring_payments.field_recurring_payment__write_date
+#: model:ir.model.fields,field_description:recurring_payments.field_recurring_payment_line__write_date
+msgid "Last Updated on"
+msgstr "آخر تحديث بتاريخ"
+
+#. module: recurring_payments
+#: model:ir.model.fields.selection,name:recurring_payments.selection__account_recurring_template__recurring_period__months
+msgid "Months"
+msgstr "شهور"
+
+#. module: recurring_payments
+#: model:ir.model.fields,field_description:recurring_payments.field_account_recurring_template__name
+#: model:ir.model.fields,field_description:recurring_payments.field_recurring_payment__name
+msgid "Name"
+msgstr "اسم"
+
+#. module: recurring_payments
+#. nwos-python
+#: code:addons/recurring_payments/models/recurring_payment.py:0
+#: code:addons/recurring_payments/models/recurring_payment.py:0
+#, python-format
+msgid "New"
+msgstr "جديد"
+
+#. module: recurring_payments
+#: model:ir.model.fields,field_description:recurring_payments.field_recurring_payment__partner_id
+#: model:ir.model.fields,field_description:recurring_payments.field_recurring_payment_line__partner_id
+msgid "Partner"
+msgstr "شريك"
+
+#. module: recurring_payments
+#: model:ir.model.fields,field_description:recurring_payments.field_recurring_payment_line__payment_id
+msgid "Payment"
+msgstr "قسط"
+
+#. module: recurring_payments
+#: model:ir.model.fields,field_description:recurring_payments.field_recurring_payment__payment_type
+msgid "Payment Type"
+msgstr "نوع الدفع"
+
+#. module: recurring_payments
+#: model:ir.model.fields.selection,name:recurring_payments.selection__account_recurring_template__journal_state__posted
+msgid "Posted"
+msgstr "نشر"
+
+#. module: recurring_payments
+#: model:ir.model.fields.selection,name:recurring_payments.selection__recurring_payment__payment_type__inbound
+msgid "Receive Money"
+msgstr "إستلم نقود"
+
+#. module: recurring_payments
+#: model_terms:ir.ui.view,arch_db:recurring_payments.view_recurring_payment_form
+msgid "Recurring Entries"
+msgstr "الإدخالات المتكررة"
+
+#. module: recurring_payments
+#: model:ir.model.fields,field_description:recurring_payments.field_account_recurring_template__recurring_interval
+#: model:ir.model.fields,field_description:recurring_payments.field_recurring_payment__recurring_interval
+msgid "Recurring Interval"
+msgstr "الفاصل الزمني المتكرر"
+
+#. module: recurring_payments
+#: model:ir.model.fields,field_description:recurring_payments.field_recurring_payment__line_ids
+msgid "Recurring Lines"
+msgstr "الخطوط المتكررة"
+
+#. module: recurring_payments
+#: model:ir.actions.act_window,name:recurring_payments.action_account_recurring_payment
+#: model:ir.model.fields,field_description:recurring_payments.field_recurring_payment_line__recurring_payment_id
+#: model:ir.ui.menu,name:recurring_payments.menu_recurring_payment
+#: model:ir.ui.menu,name:recurring_payments.menu_recurring_payments
+#: model_terms:ir.ui.view,arch_db:recurring_payments.view_recurring_payment_form
+msgid "Recurring Payment"
+msgstr "دفع متكرر"
+
+#. module: recurring_payments
+#: model:ir.model,name:recurring_payments.model_recurring_payment_line
+#: model_terms:ir.ui.view,arch_db:recurring_payments.view_recurring_payment_form
+msgid "Recurring Payment Line"
+msgstr "خط الدفع المتكرر"
+
+#. module: recurring_payments
+#: model:ir.model,name:recurring_payments.model_recurring_payment
+msgid "Recurring Payment("
+msgstr "دفع متكرر("
+
+#. module: recurring_payments
+#: model_terms:ir.ui.view,arch_db:recurring_payments.view_account_recurring_payment_tree
+msgid "Recurring Payments"
+msgstr "دفعات متكررة"
+
+#. module: recurring_payments
+#: model:ir.model.fields,field_description:recurring_payments.field_account_recurring_template__recurring_period
+#: model:ir.model.fields,field_description:recurring_payments.field_recurring_payment__recurring_period
+msgid "Recurring Period"
+msgstr "الفترة المتكررة"
+
+#. module: recurring_payments
+#: model:ir.actions.act_window,name:recurring_payments.action_account_recurring_template
+#: model:ir.model,name:recurring_payments.model_account_recurring_template
+#: model:ir.model.fields,field_description:recurring_payments.field_recurring_payment__template_id
+#: model:ir.ui.menu,name:recurring_payments.menu_recurring_template
+#: model_terms:ir.ui.view,arch_db:recurring_payments.view_account_recurring_template_tree
+#: model_terms:ir.ui.view,arch_db:recurring_payments.view_recurring_template_form
+msgid "Recurring Template"
+msgstr "القالب المتكرر"
+
+#. module: recurring_payments
+#: model:ir.model.fields.selection,name:recurring_payments.selection__recurring_payment__payment_type__outbound
+msgid "Send Money"
+msgstr "إرسال الأموال"
+
+#. module: recurring_payments
+#: model_terms:ir.ui.view,arch_db:recurring_payments.view_recurring_payment_form
+#: model_terms:ir.ui.view,arch_db:recurring_payments.view_recurring_template_form
+msgid "Set To Draft"
+msgstr "تعيين للمسودة"
+
+#. module: recurring_payments
+#: model:ir.model.fields,field_description:recurring_payments.field_recurring_payment__date_begin
+msgid "Start Date"
+msgstr "تاريخ البدء"
+
+#. module: recurring_payments
+#: model:ir.model.fields,field_description:recurring_payments.field_account_recurring_template__state
+#: model:ir.model.fields,field_description:recurring_payments.field_recurring_payment__state
+#: model:ir.model.fields,field_description:recurring_payments.field_recurring_payment_line__state
+msgid "Status"
+msgstr "حالة"
+
+#. module: recurring_payments
+#: model:ir.model.fields.selection,name:recurring_payments.selection__account_recurring_template__journal_state__draft
+msgid "Un Posted"
+msgstr "غير منشور"
+
+#. module: recurring_payments
+#: model:ir.model.fields.selection,name:recurring_payments.selection__account_recurring_template__recurring_period__weeks
+msgid "Weeks"
+msgstr "أسابيع"
+
+#. module: recurring_payments
+#: model:ir.model.fields.selection,name:recurring_payments.selection__account_recurring_template__recurring_period__years
+msgid "Years"
+msgstr "سنين"
+
+#. module: recurring_payments
+#. nwos-python
+#: code:addons/recurring_payments/models/recurring_payment.py:0
+#, python-format
+msgid "You cannot Set to Draft as one of the line is already in done state"
+msgstr ""
+"لا يمكنك التعيين على مسودة نظرًا لأن أحد الأسطر في حالة الانتهاء بالفعل"
+

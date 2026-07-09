@@ -1,0 +1,24 @@
+///
+/// Carbon pagination — flat squares, Gray-70 icons, Blue-60 focus.
+///
+
+.o_web_client {
+    .o_pager,
+    .pagination {
+        font-size: $carbon-font-size-body;
+        .o_pager_counter,
+        .page-link {
+            border-radius: 0;
+            border: 0;
+            color: $carbon-text-secondary;
+            background-color: transparent;
+            &:hover { background-color: $carbon-layer-01; color: $carbon-text-primary; }
+        }
+        .o_pager_next,
+        .o_pager_previous {
+            border-radius: 0;
+            color: $carbon-icon-secondary;
+            &:hover { background-color: $carbon-layer-01; color: $carbon-text-primary; }
+        }
+    }
+}

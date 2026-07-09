@@ -1,0 +1,44 @@
+.o_control_panel {
+    .o_control_panel_breadcrumbs,
+    .o_control_panel_main_buttons,
+    .o_breadcrumb,
+    .o_last_breadcrumb_item,
+    .o_form_status_indicator,
+    .o_form_status_indicator_buttons {
+        align-items: center !important;
+    }
+
+    .o_control_panel_main_buttons {
+        min-height: 38px;
+
+        > .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 38px;
+            padding: 6px 16px;
+            line-height: 1.2;
+            white-space: nowrap;
+        }
+    }
+
+    .o_form_status_indicator {
+        align-self: center !important;
+        min-height: 38px;
+        margin-left: 2px;
+    }
+
+    .o_form_status_indicator_buttons {
+        gap: 2px;
+
+        > .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            padding: 0 !important;
+            line-height: 1;
+        }
+    }
+}

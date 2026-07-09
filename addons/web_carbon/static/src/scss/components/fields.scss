@@ -1,0 +1,220 @@
+///
+/// Carbon fields — Gray-10 fill, single bottom border, no radius, Blue-60 focus.
+/// Kept conservative: we recolor and add the underline treatment but let Odoo
+/// own the height/layout (forcing min-height broke tag & multiline fields).
+///
+
+.o_web_client {
+    .o_field_widget input.o_input:not([type="checkbox"]):not([type="radio"]),
+    .o_field_widget textarea.o_input,
+    .o_field_char input,
+    .o_field_widget .o_input,
+    .form-control,
+    .form-select {
+        background-color: $carbon-field-01;              // Gray 10
+        border: 0;
+        border-bottom: 1px solid $carbon-border-strong;  // Gray 50
+        border-radius: 0;
+        color: $carbon-text-primary;
+        transition: background-color 70ms, border-color 70ms;
+
+        &::placeholder { color: $carbon-text-placeholder; }
+        &:hover { background-color: #e8e8e8; }
+
+        &:focus,
+        &:focus-visible {
+            background-color: $carbon-field-01;
+            border-bottom-color: transparent;
+            outline: $carbon-focus-width solid $carbon-focus;
+            outline-offset: -#{$carbon-focus-width};
+            box-shadow: none;
+        }
+    }
+
+    // Consistent height for SINGLE-LINE controls so fields line up on one grid.
+    // (Excludes textarea + tag containers, which must grow.)
+    .o_field_widget input.o_input:not([type="checkbox"]):not([type="radio"]),
+    .o_field_char input,
+    .o_field_many2one input,
+    .o_field_widget select.o_input,
+    .form-select {
+        min-height: $carbon-field-height;
+        height: $carbon-field-height;
+        line-height: $o-line-height-base;
+        vertical-align: middle;
+        padding: $carbon-spacing-03 $carbon-spacing-04;   // 8px 12px
+    }
+
+    .o_field_date,
+    .o_field_datetime {
+        .o_input,
+        input.o_input {
+            min-height: $carbon-field-height;
+        }
+    }
+
+    // Monetary widget → its currency-positioning overlay is a <span> that
+    // carries `.o_input` only to align the symbol/ghost value over the real
+    // input. It must NOT get the fill+underline: the overlay is shorter than
+    // the 36px input (the height rule above only targets <input>), so its
+    // bottom border showed as a stray line partway up the field.
+    //
+    // The overlay is `position-absolute` and only as tall as its text, so the
+    // currency symbol sat at the TOP of the 40px field instead of lining up
+    // with the (vertically-centered) number. Stretch it to the full field
+    // height and center its content so the "$" aligns with the input value —
+    // in both form fields and editable list cells.
+    .o_field_monetary .o_input.position-absolute {
+        background-color: transparent;
+        border: 0;
+        top: 0;
+        bottom: 0;
+        align-items: center;
+
+        &:hover { background-color: transparent; }
+    }
+
+    // Editable list rows → use Odoo's NATIVE input layout. My form-field
+    // treatment (gray fill, underline, fixed 36px height) fought the list grid
+    // and caused width/arrow/baseline bugs. Here we neutralize it back to native;
+    // Carbon colors + sharp corners still come from the variable layer, and the
+    // editing row keeps Odoo's own blue underline.
+    .o_list_table .o_data_cell {
+        input.o_input,
+        textarea.o_input,
+        .o_input,
+        .o-autocomplete--input {
+            background-color: transparent;
+            border: 0;
+            height: auto;
+            line-height: normal;
+            padding: 0 $carbon-spacing-02;    // 0 4px, native-ish
+            vertical-align: middle;
+
+            &:hover { background-color: transparent; }
+            &:focus,
+            &:focus-visible {
+                background-color: transparent;
+                outline: none;
+                box-shadow: none;
+            }
+        }
+        .o-autocomplete { display: block; }
+
+        // Sale/invoice line description ("Nhập mô tả") → Carbon helper text:
+        // a subtle secondary sub-line under the product, not a plain crammed
+        // placeholder. (The description is the line's `name` field.)
+        .o_field_text[name="name"] textarea,
+        textarea[name="name"] {
+            font-size: 0.8125rem;                 // 13px — secondary to the product
+            color: $carbon-text-secondary !important;
+            line-height: 1.4;
+            padding-top: $carbon-spacing-01 !important;   // 2px breathing room
+            // Give the line description room by default (~5 rows) so multi-line
+            // specs are visible/editable without dragging. Autoresize still grows
+            // it further for longer text; this is just the floor.
+            min-height: 7em !important;           // 5 × 1.4em line-height ≈ 5 rows
+            &::placeholder {
+                color: $carbon-text-placeholder;
+                font-style: italic;
+            }
+        }
+    }
+
+    // Field labels → Carbon label style (Gray 70).
+    .o_form_label {
+        color: $carbon-text-secondary;
+        font-weight: $carbon-font-weight-regular;
+    }
+
+    // Invalid → Red 60 underline.
+    .o_field_invalid input.o_input,
+    .o_field_invalid .o_input {
+        border-bottom-color: $carbon-support-error !important;
+    }
+
+    // Tag containers (many2many_tags) keep native height, and draw only one
+    // Carbon underline. The widget contains an `.o_input` wrapper plus an
+    // autocomplete input; if both receive the global field treatment, the UI
+    // shows a duplicate bottom line.
+    .o_field_many2many_tags .o_input,
+    .o_field_tags {
+        min-height: 0;
+    }
+
+    .o_field_many2many_tags {
+        .o_field_many2many_selection {
+            .o_input,
+            .o-autocomplete--input {
+                background-color: transparent;
+                border: 0 !important;
+                border-bottom: 0 !important;
+                outline: 0;
+                box-shadow: none;
+
+                &:hover,
+                &:focus,
+                &:focus-visible {
+                    background-color: transparent;
+                    border: 0 !important;
+                    outline: 0;
+                    box-shadow: none;
+                }
+            }
+        }
+
+        .o_tags_input.o_input:focus-within {
+            background-color: $carbon-field-01;
+            border-bottom-color: transparent;
+            outline: $carbon-focus-width solid $carbon-focus;
+            outline-offset: -#{$carbon-focus-width};
+            box-shadow: none;
+        }
+    }
+
+    // Inline numbers inside a sentence, e.g. "☑ Ask confirmation [ 1 ] days
+    // before". Odoo caps these at max-width 7rem with width:100%, so a 1-digit
+    // value floats in a wide box and overflows its `oe_inline` wrapper, pushing
+    // the trailing text away. These wrappers are flex items, so pin the flex
+    // BASIS (width alone loses to the cascade) to a compact box and center the
+    // number; the trailing text then sits flush after it.
+    .o_field_widget.o_field_integer.oe_inline,
+    .o_field_widget.o_field_float.oe_inline,
+    .o_field_widget.o_field_percentage.oe_inline {
+        flex: 0 0 3.25rem !important;
+        width: 3.25rem !important;
+        min-width: 0 !important;
+        max-width: none !important;
+
+        input {
+            width: 100% !important;
+            max-width: 100% !important;
+            text-align: center;
+        }
+    }
+}
+
+// === Mobile / touch (phones, ≤ 767.98px) ================================
+// Bump single-line controls to a comfortable touch target and, crucially, to a
+// 16px font — iOS Safari auto-zooms the page when focusing an input whose
+// font-size < 16px. Mirrors the desktop height-block selector set above so
+// textareas / many2many-tags keep their natural auto height.
+@media (max-width: 767.98px) {
+    .o_web_client {
+        .o_field_widget input.o_input:not([type="checkbox"]):not([type="radio"]),
+        .o_field_char input,
+        .o_field_many2one input,
+        .o_field_widget select.o_input,
+        .o-autocomplete--input,
+        .form-select,
+        .form-control {
+            min-height: $carbon-field-height-lg;   // 48px comfortable touch target
+            height: $carbon-field-height-lg;
+            font-size: $carbon-font-size-body-02;  // 16px → no iOS zoom-on-focus
+            padding: 0 $carbon-spacing-05;          // 0 16px, roomier
+        }
+        .o_field_widget textarea.o_input {
+            font-size: $carbon-font-size-body-02;  // 16px (keep auto height)
+        }
+    }
+}

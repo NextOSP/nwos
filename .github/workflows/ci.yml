@@ -1,0 +1,133 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  sanity:
+    name: Sanity checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            build-essential \
+            libjpeg-dev \
+            libldap2-dev \
+            libpq-dev \
+            libsasl2-dev \
+            libxml2-dev \
+            libxslt1-dev \
+            postgresql-client \
+            zlib1g-dev
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip wheel setuptools
+          python -m pip install -r requirements.txt
+
+      - name: Verify CLI starts
+        run: |
+          python ./nwos-bin --help
+          python ./nwos-bin server --help
+
+      - name: Check README image links
+        run: |
+          python - <<'PY'
+          import pathlib
+          import re
+          import sys
+
+          readme = pathlib.Path("README.md")
+          missing = []
+          for target in re.findall(r"!\[[^\]]*\]\(([^)]+)\)", readme.read_text()):
+              if "://" in target or target.startswith("#"):
+                  continue
+              path = pathlib.Path(target)
+              if not path.exists():
+                  missing.append(target)
+          if missing:
+              print("Missing README image targets:")
+              for target in missing:
+                  print(f"- {target}")
+              sys.exit(1)
+          PY
+
+      - name: Check deployment YAML
+        run: |
+          python -m pip install PyYAML
+          python - <<'PY'
+          import pathlib
+          import yaml
+
+          files = [pathlib.Path("docker-compose.yml"), *sorted(pathlib.Path("k8s").glob("*.yaml"))]
+          for path in files:
+              with path.open() as stream:
+                  list(yaml.safe_load_all(stream))
+              print(f"valid yaml: {path}")
+          PY
+
+      - name: Check shell scripts
+        run: |
+          sh -n docker/entrypoint.sh
+          sh -n scripts/backup-compose.sh
+          sh -n scripts/restore-compose.sh
+
+      - name: Compile NextBot files
+        run: |
+          python -m py_compile \
+            addons/mail_bot/models/mail_bot.py \
+            addons/mail_bot/tests/test_mail_bot_ai.py
+
+  container:
+    name: Container image
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    needs: sanity
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GitHub Container Registry
+        if: github.event_name == 'push'
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and publish image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: ${{ github.event_name == 'push' }}
+          tags: |
+            ghcr.io/nextosp/nwos:latest
+            ghcr.io/nextosp/nwos:${{ github.sha }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max

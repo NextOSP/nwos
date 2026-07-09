@@ -1,0 +1,65 @@
+.o_partner_merge_wizard {
+    .o_form_sheet {
+        padding: 12px !important;
+    }
+    .row {
+        --gutter-x: 0;
+    }
+}
+
+.modal-content.o_partner_contact_address_form {
+    @include media-breakpoint-up(md) {
+        .modal-body {
+            background: $o-view-background-color;
+        }
+
+        &.o_form_view {
+            min-height: 0;
+        }
+
+        .o_form_sheet_bg {
+            max-width: none;
+            padding: 0;
+        }
+
+        .o_form_sheet {
+            --formView-sheet-padding-x: #{map-get($spacers, 4)};
+            --formView-sheet-padding-y: #{map-get($spacers, 3)};
+            --formView-sheet-padding-x-lg: #{map-get($spacers, 4)};
+            --formView-sheet-padding-y-lg: #{map-get($spacers, 3)};
+
+            border: 0;
+            box-shadow: none;
+        }
+
+        .o_partner_contact_type {
+            margin-bottom: map-get($spacers, 3);
+        }
+
+        .o_partner_contact_header {
+            max-width: 760px;
+        }
+
+        .o_partner_contact_name {
+            font-size: $h4-font-size;
+            line-height: $headings-line-height;
+        }
+
+        .o_field_contact_image img {
+            width: 96px;
+            height: 96px;
+        }
+
+        .o_inner_group {
+            max-width: 760px;
+            margin-top: map-get($spacers, 3);
+            margin-bottom: 0;
+        }
+    }
+
+    @include media-breakpoint-down(md) {
+        .o_partner_contact_header {
+            flex-direction: column;
+        }
+    }
+}

@@ -1,0 +1,302 @@
+
+msgid ""
+msgstr ""
+"Project-Id-Version:NWOS Server 3.0alpha"
+"Report-Msgid-Bugs-To:"
+"POT-Creation-Date:2024-04-10 10:45+0000"
+"PO-Revision-Date:2024-04-10 10:45+0000"
+"Last-Translator:"
+"Language-Team:"
+"MIME-Version:1.0"
+"Content-Type:text/plain; charset=UTF-8"
+"Content-Transfer-Encoding:"
+"Plural-Forms:"
+
+#. module: fiscal_year
+#: model_terms:ir.ui.view,arch_db:fiscal_year.view_change_lock_date
+msgid "Account Period Closing"
+msgstr "Cierre del período de cuenta"
+
+#. module: fiscal_year
+#: model:ir.model.fields,field_description:fiscal_year.field_res_config_settings__fiscalyear_lock_date
+msgid "All Users Lock Date"
+msgstr "Fecha de bloqueo de todos los usuarios"
+
+#. module: fiscal_year
+#: model:res.groups,name:fiscal_year.group_fiscal_year
+msgid "Allow to define fiscal years of more or less than a year"
+msgstr "Permite definir ejercicios fiscales de más o menos de un año."
+
+#. module: fiscal_year
+#: model_terms:ir.ui.view,arch_db:fiscal_year.view_change_lock_date
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: fiscal_year
+#: model:ir.model,name:fiscal_year.model_change_lock_date
+msgid "Change Lock Date"
+msgstr "Cambiar fecha de bloqueo"
+
+#. module: fiscal_year
+#: model_terms:ir.actions.act_window,help:fiscal_year.actions_account_fiscal_year
+msgid "Click here to create a new fiscal year."
+msgstr "Haga clic aquí para crear un nuevo año fiscal."
+
+#. module: fiscal_year
+#: model:ir.model,name:fiscal_year.model_res_company
+msgid "Companies"
+msgstr "Compañías"
+
+#. module: fiscal_year
+#: model:ir.model.fields,field_description:fiscal_year.field_account_fiscal_year__company_id
+#: model:ir.model.fields,field_description:fiscal_year.field_change_lock_date__company_id
+msgid "Company"
+msgstr "Compañía"
+
+#. module: fiscal_year
+#: model:ir.model,name:fiscal_year.model_res_config_settings
+msgid "Config Settings"
+msgstr "Ajustes de configuración"
+
+#. module: fiscal_year
+#: model:ir.model.fields,field_description:fiscal_year.field_account_fiscal_year__create_uid
+#: model:ir.model.fields,field_description:fiscal_year.field_change_lock_date__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: fiscal_year
+#: model:ir.model.fields,field_description:fiscal_year.field_account_fiscal_year__create_date
+#: model:ir.model.fields,field_description:fiscal_year.field_change_lock_date__create_date
+msgid "Created on"
+msgstr "Creado en"
+
+#. module: fiscal_year
+#: model_terms:ir.ui.view,arch_db:fiscal_year.res_config_settings_view_form
+msgid "Define fiscal years of more or less than one year"
+msgstr "Definir ejercicios fiscales de más o menos de un año."
+
+#. module: fiscal_year
+#: model:ir.model.fields,field_description:fiscal_year.field_account_fiscal_year__display_name
+#: model:ir.model.fields,field_description:fiscal_year.field_change_lock_date__display_name
+msgid "Display Name"
+msgstr "Nombre para mostrar"
+
+#. module: fiscal_year
+#: model:ir.model.fields,field_description:fiscal_year.field_account_fiscal_year__date_to
+msgid "End Date"
+msgstr "Fecha final"
+
+#. module: fiscal_year
+#: model:ir.model.fields,help:fiscal_year.field_account_fiscal_year__date_to
+msgid "Ending Date, included in the fiscal year."
+msgstr "Fecha de finalización, incluida en el ejercicio."
+
+#. module: fiscal_year
+#: model_terms:ir.ui.view,arch_db:fiscal_year.res_config_settings_view_form
+msgid "Fiscal Period Closing"
+msgstr "Cierre del Período Fiscal"
+
+#. module: fiscal_year
+#: model:ir.model,name:fiscal_year.model_account_fiscal_year
+#: model:ir.ui.menu,name:fiscal_year.menu_fiscal_year
+#: model_terms:ir.ui.view,arch_db:fiscal_year.res_config_settings_view_form
+msgid "Fiscal Year"
+msgstr "Año fiscal"
+
+#. module: fiscal_year
+#: model:ir.actions.act_window,name:fiscal_year.actions_account_fiscal_year
+#: model:ir.model.fields,field_description:fiscal_year.field_res_config_settings__group_fiscal_year
+#: model_terms:ir.ui.view,arch_db:fiscal_year.res_config_settings_view_form
+msgid "Fiscal Years"
+msgstr "Años fiscales"
+
+#. module: fiscal_year
+#: model:ir.model.fields,field_description:fiscal_year.field_res_config_settings__fiscalyear_last_day
+msgid "Fiscalyear Last Day"
+msgstr "Año fiscal último día"
+
+#. module: fiscal_year
+#: model:ir.model.fields,field_description:fiscal_year.field_res_config_settings__fiscalyear_last_month
+msgid "Fiscalyear Last Month"
+msgstr "Año fiscal último mes"
+
+#. module: fiscal_year
+#: model:ir.model.fields,field_description:fiscal_year.field_account_fiscal_year__id
+#: model:ir.model.fields,field_description:fiscal_year.field_change_lock_date__id
+msgid "ID"
+msgstr "IDENTIFICACIÓN"
+
+#. module: fiscal_year
+#: model:ir.model.fields,field_description:fiscal_year.field_change_lock_date__period_lock_date
+msgid "Journal Entries Lock Date"
+msgstr "Fecha de bloqueo de asientos de diario"
+
+#. module: fiscal_year
+#: model:ir.model.fields,field_description:fiscal_year.field_res_config_settings__period_lock_date
+msgid "Journals Entries Lock Date"
+msgstr "Fecha de bloqueo de asientos de diarios"
+
+#. module: fiscal_year
+#: model_terms:ir.ui.view,arch_db:fiscal_year.res_config_settings_view_form
+msgid "Last Day"
+msgstr "Último día"
+
+#. module: fiscal_year
+#: model:ir.model.fields,field_description:fiscal_year.field_account_fiscal_year__write_uid
+#: model:ir.model.fields,field_description:fiscal_year.field_change_lock_date__write_uid
+msgid "Last Updated by"
+msgstr "Actualizado por última vez por"
+
+#. module: fiscal_year
+#: model:ir.model.fields,field_description:fiscal_year.field_account_fiscal_year__write_date
+#: model:ir.model.fields,field_description:fiscal_year.field_change_lock_date__write_date
+msgid "Last Updated on"
+msgstr "Ultima actualización en"
+
+#. module: fiscal_year
+#: model:ir.model.fields,field_description:fiscal_year.field_change_lock_date__fiscalyear_lock_date
+msgid "Lock Date for All Users"
+msgstr "Fecha de bloqueo para todos los usuarios"
+
+#. module: fiscal_year
+#: model:ir.ui.menu,name:fiscal_year.menu_action_change_lock_date
+msgid "Lock Dates"
+msgstr "Fechas de bloqueo"
+
+#. module: fiscal_year
+#: model:ir.actions.act_window,name:fiscal_year.action_view_change_lock_date
+msgid "Lock your Fiscal Period"
+msgstr "Bloquee su período fiscal"
+
+#. module: fiscal_year
+#: model_terms:ir.ui.view,arch_db:fiscal_year.res_config_settings_view_form
+msgid "Lock your fiscal period"
+msgstr "Bloquee su período fiscal"
+
+#. module: fiscal_year
+#: model_terms:ir.ui.view,arch_db:fiscal_year.view_change_lock_date
+msgid "Management Closing"
+msgstr "Cierre de Gestión"
+
+#. module: fiscal_year
+#: model:ir.model.fields,field_description:fiscal_year.field_account_fiscal_year__name
+msgid "Name"
+msgstr "Nombre"
+
+#. module: fiscal_year
+#: model:ir.model.fields,help:fiscal_year.field_change_lock_date__tax_lock_date
+msgid ""
+"No users can edit journal entries related to a tax prior and inclusive of "
+"this date."
+msgstr ""
+"Ningún usuario puede editar asientos de diario relacionados con un impuesto "
+"anterior e inclusive a esta fecha."
+
+#. module: fiscal_year
+#: model:ir.model.fields,help:fiscal_year.field_res_config_settings__fiscalyear_lock_date
+msgid ""
+"No users, including Advisers, can edit accounts prior to and inclusive of "
+"this date. Use it for fiscal year locking for example."
+msgstr ""
+"Ningún usuario, incluidos los Asesores, puede editar cuentas antes e "
+"inclusive de esta fecha. Úselo para bloquear el año fiscal, por ejemplo."
+
+#. module: fiscal_year
+#: model:ir.model.fields,help:fiscal_year.field_change_lock_date__fiscalyear_lock_date
+msgid ""
+"No users, including Advisers, can edit accounts prior to and inclusive of "
+"this date. Use it for fiscal year locking."
+msgstr ""
+"Ningún usuario, incluidos los Asesores, puede editar cuentas antes e "
+"inclusive de esta fecha. Úselo para bloquear el año fiscal."
+
+#. module: fiscal_year
+#: model:ir.model.fields,help:fiscal_year.field_res_config_settings__period_lock_date
+msgid ""
+"Only users with the 'Adviser' role can edit accounts prior to and inclusive "
+"of this date. Use it for period locking inside an open fiscal year, for "
+"example."
+msgstr ""
+"Solo los usuarios con el rol de \"Asesor\" pueden editar cuentas antes de "
+"esta fecha e inclusive. Úselo para bloquear períodos dentro de un año fiscal"
+" abierto, por ejemplo."
+
+#. module: fiscal_year
+#: model:ir.model.fields,help:fiscal_year.field_change_lock_date__period_lock_date
+msgid "Prevent posting of journal entries in this period."
+msgstr "Evite la publicación de asientos de diario en este período."
+
+#. module: fiscal_year
+#: model_terms:ir.ui.view,arch_db:fiscal_year.view_change_lock_date
+msgid "Save"
+msgstr "Ahorrar"
+
+#. module: fiscal_year
+#. nwos-python
+#: code:addons/fiscal_year/models/res_company.py:0
+#, python-format
+msgid "Show unposted entries"
+msgstr "Mostrar entradas no publicadas"
+
+#. module: fiscal_year
+#: model:ir.model.fields,field_description:fiscal_year.field_account_fiscal_year__date_from
+msgid "Start Date"
+msgstr "Fecha de inicio"
+
+#. module: fiscal_year
+#: model:ir.model.fields,help:fiscal_year.field_account_fiscal_year__date_from
+msgid "Start Date, included in the fiscal year."
+msgstr "Fecha de Inicio, incluida en el ejercicio."
+
+#. module: fiscal_year
+#: model:ir.model.fields,field_description:fiscal_year.field_change_lock_date__tax_lock_date
+msgid "Tax Lock Date"
+msgstr "Fecha de bloqueo de impuestos"
+
+#. module: fiscal_year
+#. nwos-python
+#: code:addons/fiscal_year/models/account_fiscal_year.py:0
+#, python-format
+msgid "The ending date must not be prior to the starting date."
+msgstr "La fecha de finalización no debe ser anterior a la fecha de inicio."
+
+#. module: fiscal_year
+#. nwos-python
+#: code:addons/fiscal_year/models/res_company.py:0
+#, python-format
+msgid ""
+"There are still unposted entries in the period you want to lock. You should "
+"either post or delete them."
+msgstr ""
+"Todavía hay entradas sin publicar en el período que desea bloquear. Deberías"
+" publicarlos o eliminarlos."
+
+#. module: fiscal_year
+#. nwos-python
+#: code:addons/fiscal_year/models/res_company.py:0
+#, python-format
+msgid ""
+"There are still unreconciled bank statement lines in the period you want to "
+"lock.You should either reconcile or delete them."
+msgstr ""
+"Todavía hay líneas de extracto bancario sin conciliar en el período que "
+"desea bloquear. Debe conciliarlas o eliminarlas."
+
+#. module: fiscal_year
+#. nwos-python
+#: code:addons/fiscal_year/wizard/change_lock_date.py:0
+#, python-format
+msgid "You Are Not Allowed To Perform This Operation"
+msgstr "No tiene permiso para realizar esta operación"
+
+#. module: fiscal_year
+#. nwos-python
+#: code:addons/fiscal_year/models/account_fiscal_year.py:0
+#, python-format
+msgid ""
+"You can not have an overlap between two fiscal years, please correct the "
+"start and/or end dates of your fiscal years."
+msgstr ""
+"No puede haber superposición entre dos años fiscales, por favor corrija las "
+"fechas de inicio y/o finalización de sus años fiscales."
+

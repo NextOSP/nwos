@@ -1,0 +1,204 @@
+///
+/// Carbon multi-company switcher dropdown.
+///
+/// Core renders each company row as: a FontAwesome check-square glyph inside a
+/// btn, a `border-end` divider, then the company name (Bootstrap
+/// `bg-primary-subtle` highlight on the active one). That reads as a native
+/// checkbox + stray divider. Rebuild it as a Carbon multiselect list:
+///   - real Carbon checkbox (16px sharp square, 1px border, white check),
+///     drawn by converting the FA glyph into a box + CSS checkmark,
+///   - no divider,
+///   - Carbon list rows (40px, 16px inset, layer-hover),
+///   - active company shown with a subtle Blue-60 left accent, not a bright fill,
+///   - Carbon action buttons.
+/// Unscoped to match core's own selector (dropdown renders in the overlay
+/// portal); web_carbon loads after web so equal-specificity rules win.
+///
+
+.o_switch_company_menu_dropdown {
+    min-width: 20rem;
+    padding: 0;
+    border-radius: 0 !important;
+    border: 1px solid $carbon-border-subtle;
+    box-shadow: 0 8px 24px rgba($carbon-black, 0.18);
+    background-color: $carbon-layer-02;
+
+    // Search / filter row (shown when there are many companies).
+    .form-control {
+        border-radius: 0 !important;
+        border-color: $carbon-border-strong;
+        background-color: $carbon-field-01;
+        color: $carbon-text-primary;
+        margin: $carbon-spacing-03;
+        &:focus-within {
+            outline: $carbon-focus-width solid $carbon-blue-60;
+            outline-offset: -#{$carbon-focus-width};
+        }
+
+        .o_input {
+            color: $carbon-text-primary;
+            background: transparent;
+            &::placeholder {
+                color: $carbon-text-placeholder;
+            }
+        }
+
+        .oi {
+            color: $carbon-icon-secondary;
+        }
+    }
+
+    .o_switch_company_menu_items {
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .o_switch_company_menu_items .o_switch_company_item {
+        height: auto;
+        min-height: $carbon-field-height-lg;   // 48px, Carbon shell menu row
+        align-items: center;
+        border-radius: 0;
+        border: 0;
+        background-color: transparent !important;
+        color: $carbon-text-primary !important;
+        box-shadow: none !important;
+
+        // Carbon list-row hover / keyboard focus.
+        &:hover,
+        &:active,
+        &.active,
+        &.focus,
+        &.focus > * {
+            background-color: $carbon-layer-01 !important;
+            box-shadow: none !important;
+        }
+
+        &.alert-secondary {
+            background-color: transparent !important;
+            color: $carbon-text-primary !important;
+            box-shadow: inset 3px 0 0 0 $carbon-blue-60 !important;
+        }
+
+        // Drop the stray vertical divider after the checkbox.
+        .border-end { border-right: 0 !important; }
+        .border-primary { border-color: transparent !important; }
+
+        // Fixed Carbon checkbox column.
+        [role="menuitemcheckbox"] {
+            flex: 0 0 $carbon-field-height;
+            width: $carbon-field-height;
+            min-height: $carbon-field-height-lg;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 0 !important;
+            background-color: transparent !important;
+        }
+
+        // Reset the btn wrapper around the checkbox glyph.
+        [role="menuitemcheckbox"] > .btn {
+            width: 16px;
+            height: 16px;
+            padding: 0 !important;
+            margin: 0 !important;
+            border: 0 !important;
+            line-height: 16px;
+            box-shadow: none !important;
+            background: transparent !important;
+        }
+
+        // === Turn the FontAwesome glyph into a real Carbon checkbox ===
+        .fa {
+            width: 16px;
+            height: 16px;
+            box-sizing: border-box;
+            display: inline-block;
+            padding: 0 !important;
+            border: 1px solid $carbon-icon-primary;
+            border-radius: 0;
+            background: transparent;
+            position: relative;
+            vertical-align: middle;
+            &::before { content: "" !important; }     // kill the FA glyph
+        }
+        // Checked → Blue-60 fill + white check.
+        .fa-check-square {
+            background: $carbon-blue-60;
+            border-color: $carbon-blue-60;
+            &::after {
+                content: "";
+                position: absolute;
+                left: 5px;
+                top: 1px;
+                width: 4px;
+                height: 8px;
+                border: solid $carbon-white;
+                border-width: 0 2px 2px 0;
+                transform: rotate(45deg);
+            }
+        }
+
+        // Company name → Carbon text, not a brand-blue link.
+        .log_into {
+            min-height: $carbon-field-height-lg;
+            padding: 0 $carbon-spacing-05 0 0 !important;
+            border: 0 !important;
+            border-radius: 0 !important;
+            background-color: transparent !important;
+            box-shadow: none !important;
+            color: $carbon-text-primary !important;
+            text-align: left;
+        }
+        .company_label,
+        .btn-link.text-primary,
+        .text-primary {
+            color: $carbon-text-primary !important;
+            font-weight: $carbon-font-weight-regular !important;
+            text-decoration: none !important;
+        }
+
+        .company_label {
+            font-size: $carbon-font-size-body-02;
+            line-height: 24px;
+        }
+
+        // Current company must not reintroduce Bootstrap's inner blue bar/fill.
+        .log_into.bg-primary-subtle {
+            background-color: transparent !important;
+            box-shadow: none !important;
+            color: $carbon-text-primary !important;
+        }
+
+        // A later generic dropdown rule may target focus/active states; kill it
+        // specifically for every child in the switcher row.
+        &.focus *,
+        &.active *,
+        &:active * {
+            box-shadow: none !important;
+        }
+    }
+
+    // Confirm / Reset — Carbon buttons, sharp, evenly split.
+    .o_switch_company_menu_buttons {
+        gap: $carbon-spacing-02 !important;
+        padding: $carbon-spacing-03 $carbon-spacing-05 $carbon-spacing-05 !important;
+        border-top: 1px solid $carbon-border-subtle;
+
+        .btn {
+            border-radius: 0 !important;
+            min-height: $carbon-field-height !important;
+        }
+        .btn-primary {
+            background-color: $carbon-blue-60 !important;
+            border-color: $carbon-blue-60 !important;
+            color: $carbon-text-on-color !important;
+            &:hover { background-color: $carbon-blue-70 !important; }
+        }
+        .btn-secondary {
+            background-color: $carbon-layer-02 !important;
+            border-color: $carbon-border-strong !important;
+            color: $carbon-text-primary !important;
+            &:hover { background-color: $carbon-layer-01 !important; }
+        }
+    }
+}

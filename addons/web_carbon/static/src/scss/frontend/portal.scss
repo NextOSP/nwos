@@ -1,0 +1,273 @@
+///
+/// Carbon portal — the customer portal (my/orders, my/invoices, quotations…).
+///
+/// The base layer (IBM Plex type, Blue-60 brand, 0px radius) already reaches the
+/// frontend via the shared variables layer. This file adds the component-level
+/// Carbon treatment the portal was missing: the dark UI Shell, low-contrast
+/// notifications, the Carbon data table, sidebar, tags and chatter. Everything is
+/// scoped to `.o_portal` (plus `header#top` for the shell) and references
+/// `$carbon-*` tokens only — never a literal hex.
+///
+
+// == Top navigation — dark Gray-100 UI Shell ================================
+// The portal navbar ships as `.navbar-light.bg-light`; recolor it to the Carbon
+// UI Shell used in the backend. `header#top` wraps every frontend page.
+header#top .navbar {
+    background-color: $carbon-shell-bg !important;   // Gray 100
+    border: 0;
+    min-height: $carbon-field-height-lg;             // 48px shell height
+    font-family: $o-font-family-sans-serif;
+
+    .navbar-brand,
+    .nav-link,
+    .dropdown-toggle,
+    .navbar-text {
+        color: $carbon-shell-text;                   // Gray 10
+        border-radius: 0;
+
+        &:hover,
+        &:focus {
+            color: $carbon-shell-text-hover;         // White
+            background-color: $carbon-shell-hover;   // Gray 80
+        }
+    }
+
+    // Keep the dropdown menu itself on a light surface (it hangs below the shell).
+    .dropdown-menu {
+        border-radius: 0;
+        border-color: $carbon-border-subtle;
+        .dropdown-item {
+            color: $carbon-text-primary;
+            &:hover, &:focus { background-color: $carbon-layer-01; }
+        }
+    }
+}
+
+.o_portal {
+    // == Notifications — Carbon low-contrast inline notification =============
+    // Bootstrap alerts → sharp corners, a 3px status border-left and a tinted
+    // background driven by the Carbon support tokens.
+    .alert {
+        border-radius: 0;
+        border: 0;
+        border-left: 3px solid transparent;
+        min-height: $carbon-field-height-lg;             // 48px
+        padding: $carbon-spacing-04 $carbon-spacing-05;  // 12px / 16px
+        color: $carbon-text-primary;
+
+        .alert-link, a { color: $carbon-link-primary; }
+    }
+    .alert-success {
+        border-left-color: $carbon-support-success;
+        background-color: $carbon-notification-success-bg;
+    }
+    .alert-info {
+        border-left-color: $carbon-support-info;
+        background-color: $carbon-notification-info-bg;
+    }
+    .alert-warning {
+        border-left-color: $carbon-support-warning;
+        background-color: $carbon-notification-warning-bg;
+    }
+    .alert-danger {
+        border-left-color: $carbon-support-error;
+        background-color: $carbon-notification-error-bg;
+    }
+
+    // == Headings — Carbon productive type ==================================
+    #introduction h2 {
+        font-family: $o-headings-font-family;
+        font-size: $carbon-font-size-h04;                // 28px heading-04
+        font-weight: $carbon-font-weight-regular;
+        color: $carbon-text-primary;
+        letter-spacing: 0;
+    }
+    // Section headers ("Sale Information", "Invoicing…", "Terms…", "Documents").
+    h4, h5 {
+        font-weight: $carbon-font-weight-semibold;
+        color: $carbon-text-primary;
+        letter-spacing: 0;
+    }
+    // The `<hr>` under each section header → Carbon subtle divider.
+    hr {
+        border: 0;
+        border-top: 1px solid $carbon-border-subtle;
+        opacity: 1;
+    }
+
+    // == Data table — Carbon data table =====================================
+    .card, .o_portal_my_doc_table, .table {
+        border-radius: 0;
+        border-color: $carbon-border-subtle;
+    }
+    #sales_order_table,
+    .o_portal_my_doc_table {
+        thead th {
+            background-color: $carbon-layer-01;          // Gray 10 header
+            color: $carbon-text-primary;
+            font-weight: $carbon-font-weight-semibold;
+            border-bottom: 1px solid $carbon-border-subtle;
+            padding: $carbon-spacing-04 $carbon-spacing-05;
+        }
+        tbody td, tbody th {
+            padding: $carbon-spacing-04 $carbon-spacing-05;
+            border-color: $carbon-border-subtle;
+            vertical-align: middle;
+        }
+    }
+    // Totals block: emphasise the grand total, Carbon divider above.
+    [name="sale_order_totals_table"] {
+        border-top: 1px solid $carbon-border-subtle;
+        .o_total, .oe_subtotal_footer_separator, td strong {
+            font-weight: $carbon-font-weight-semibold;
+            color: $carbon-text-primary;
+        }
+    }
+
+    // == Status tag — Carbon tag ============================================
+    .badge {
+        border-radius: 0;
+        font-weight: $carbon-font-weight-regular;
+        &:not([class*="text-bg-"]):not([class*="bg-"]) {
+            background-color: $carbon-layer-accent-01;   // Gray 20
+            color: $carbon-text-primary;
+        }
+    }
+
+    // == Sidebar ============================================================
+    .o_portal_sidebar {
+        // Amount / total headline.
+        h1, .h1, .o_portal_sidebar_amount {
+            font-family: $o-headings-font-family;
+            font-weight: $carbon-font-weight-regular;
+            color: $carbon-text-primary;
+        }
+        // "View Details" / print — Carbon secondary button.
+        .o_print_btn.btn-light {
+            background-color: $carbon-white;
+            border: 1px solid $carbon-border-strong;
+            color: $carbon-text-primary;
+            border-radius: 0;
+            &:hover { background-color: $carbon-layer-01; border-color: $carbon-gray-70; }
+        }
+        // Contact card.
+        .o_portal_contact_details {
+            border-radius: 0;
+            border-color: $carbon-border-subtle;
+        }
+    }
+
+    // == Breadcrumb =========================================================
+    .breadcrumb {
+        background-color: transparent;
+        a { color: $carbon-link-primary; &:hover { color: $carbon-link-primary-hover; } }
+    }
+
+    // == Chatter — Communication history ====================================
+    .o_portal_chatter {
+        // Composer input → Carbon field (gray field, bottom border, focus ring).
+        .o-mail-Composer-input,
+        textarea.form-control,
+        input.form-control {
+            border-radius: 0;
+            border: 0;
+            border-bottom: 1px solid $carbon-border-strong;
+            background-color: $carbon-field-01;
+            &:focus {
+                outline: $carbon-focus-width solid $carbon-focus;
+                outline-offset: -#{$carbon-focus-width};
+                border-bottom-color: transparent;
+                box-shadow: none;
+            }
+        }
+        // Send → Carbon primary.
+        .o-mail-Composer-send,
+        .o_portal_chatter_composer_input .btn-primary {
+            border-radius: 0;
+            background-color: $carbon-blue-60;
+            border-color: $carbon-blue-60;
+            color: $carbon-text-on-color;
+            &:hover { background-color: $carbon-blue-70; border-color: $carbon-blue-70; }
+        }
+        // Message tiles → Carbon layer, sharp corners.
+        .o-mail-Message-bubble,
+        .o_portal_chatter_message {
+            border-radius: 0;
+            background-color: $carbon-layer-01;
+        }
+    }
+}
+
+// == Layout & spacing rhythm — the Carbon 2x grid ===========================
+// Colour/borders alone don't make it Carbon; the page also needs generous,
+// consistent vertical rhythm on the 8px grid and clearer hierarchy. All values
+// come from the $carbon-spacing-* scale.
+.o_portal {
+    // Give the content column room to breathe and separate it further from the
+    // sidebar divider.
+    .o_portal_sidebar_content { padding-top: $carbon-spacing-05; }
+    #wrap .o_portal_sale_sidebar { padding-top: $carbon-spacing-06; }
+
+    // -- Document title (heading-05 scale, more space beneath) ---------------
+    #introduction {
+        margin-bottom: $carbon-spacing-07;               // 32px
+        h2 { font-size: $carbon-font-size-h05; margin: 0; }   // 32px
+    }
+
+    // -- Section headers: consistent rhythm, tighter divider -----------------
+    // "Sale Information", "Invoicing…", "Terms…", "Documents".
+    #informations { margin-bottom: $carbon-spacing-06; }
+    #sale_info, #customer_info, #sale_invoices { margin-bottom: $carbon-spacing-07; }
+    h4, h5 {
+        margin-bottom: $carbon-spacing-03;
+        + hr { margin-top: 0; margin-bottom: $carbon-spacing-05; }
+    }
+    hr { margin: $carbon-spacing-03 0 $carbon-spacing-05; }
+
+    // Sale info key/value rows: comfortable line height, no cramped cells.
+    #sale_info_table th, #sale_info_table td {
+        padding-top: $carbon-spacing-02;
+        padding-bottom: $carbon-spacing-02;
+        line-height: 1.4;
+    }
+
+    // -- Details / product table block ---------------------------------------
+    section#details { margin-top: $carbon-spacing-07; }
+
+    // Taller, calmer Carbon data-table rows (48px min, 16px side padding).
+    #sales_order_table {
+        thead th { padding: $carbon-spacing-04 $carbon-spacing-05; }
+        tbody td, tbody th {
+            padding: $carbon-spacing-04 $carbon-spacing-05;
+            height: $carbon-field-height-lg;             // ~48px row
+        }
+    }
+    [name="sale_order_totals_table"] td { padding: $carbon-spacing-03 $carbon-spacing-05; }
+
+    // -- Bottom action buttons: left-aligned, full Carbon 48px, real gaps ----
+    [name="sale_order_actions"] {
+        justify-content: flex-start !important;
+        gap: $carbon-spacing-03 !important;
+        margin-top: $carbon-spacing-07;
+        flex-wrap: wrap;
+        .col-sm-auto { margin-top: 0 !important; }
+        .btn {
+            min-height: $carbon-field-height-lg;         // 48px
+            padding-inline: $carbon-spacing-05;
+        }
+    }
+
+    // -- Sidebar block spacing -----------------------------------------------
+    #sale_order_sidebar_button .btn {
+        min-height: $carbon-field-height-lg;             // 48px sidebar buttons
+        justify-content: flex-start;
+    }
+    .o_portal_sidebar {
+        h2, .o_portal_sidebar_amount { margin-bottom: $carbon-spacing-05; }
+        .o_portal_contact_details { padding: $carbon-spacing-05; margin-top: $carbon-spacing-05; }
+    }
+
+    // -- Communication history -----------------------------------------------
+    #discussion { margin-top: $carbon-spacing-08; }      // 40px above chatter
+    h3 { margin-bottom: $carbon-spacing-05; }
+}

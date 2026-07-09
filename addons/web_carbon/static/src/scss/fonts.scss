@@ -1,0 +1,71 @@
+///
+/// IBM Plex — bundled woff2 @font-face declarations.
+/// Uses literal family names only (no tokens), so it is safe in any bundle.
+///
+/// NOTE: the src url() MUST be a literal absolute path, NOT a Sass variable /
+/// interpolation. Odoo's asset pipeline rewrites url() BEFORE Sass runs and only
+/// leaves a url alone when its value literally starts with `/` (see
+/// base/models/assetsbundle.py `rx_url`). A `url('#{$var}/…')` hides the leading
+/// slash inside the interpolation, so the rewriter prepends this file's directory
+/// and the font 404s on a doubled `.../scss/web_carbon/static/src/fonts/…` path.
+/// This mirrors the sibling web_nwos addon's fonts.scss.
+///
+
+@font-face {
+    font-family: 'IBM Plex Sans';
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: url('/web_carbon/static/src/fonts/IBMPlexSans-Light.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'IBM Plex Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('/web_carbon/static/src/fonts/IBMPlexSans-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'IBM Plex Sans';
+    font-style: italic;
+    font-weight: 400;
+    font-display: swap;
+    src: url('/web_carbon/static/src/fonts/IBMPlexSans-Italic.woff2') format('woff2');
+}
+@font-face {
+    // Carbon "Text" weight (450) — used for medium emphasis.
+    font-family: 'IBM Plex Sans';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('/web_carbon/static/src/fonts/IBMPlexSans-Text.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'IBM Plex Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url('/web_carbon/static/src/fonts/IBMPlexSans-SemiBold.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'IBM Plex Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('/web_carbon/static/src/fonts/IBMPlexSans-SemiBold.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'IBM Plex Mono';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('/web_carbon/static/src/fonts/IBMPlexMono-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'IBM Plex Mono';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url('/web_carbon/static/src/fonts/IBMPlexMono-SemiBold.woff2') format('woff2');
+}

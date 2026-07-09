@@ -1,0 +1,5 @@
+/var/log/nwos/*.log {
+    copytruncate
+    missingok
+    notifempty
+}

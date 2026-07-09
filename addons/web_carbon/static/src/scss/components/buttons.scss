@@ -1,0 +1,36 @@
+///
+/// Buttons — minimal & safe.
+/// Colors come from the $o-btns-bs-override map (primary = Blue 60, secondary =
+/// neutral white) via Odoo's own button mixin, which keeps native sizing and
+/// alignment. We do NOT force min-height/border on `.btn` globally — that broke
+/// icon-only and control-panel buttons (cog menus, breadcrumb) and misaligned
+/// toolbars. Only a couple of targeted, safe touches here.
+///
+
+.o_web_client {
+    // Ghost / link buttons → Carbon blue link.
+    .btn-link {
+        color: $carbon-link-primary;
+        &:hover { color: $carbon-link-primary-hover; }
+    }
+
+    // Danger → Carbon Red 60 (map doesn't cover it).
+    .btn-danger {
+        background-color: $carbon-support-error;
+        border-color: $carbon-support-error;
+        color: $carbon-text-on-color;
+        &:hover { background-color: #ba1b23; border-color: #ba1b23; }
+    }
+}
+
+// === Mobile / touch (phones, ≤ 767.98px) ================================
+// Content action buttons (Add product, Coupon Code, …) → comfortable tap targets
+// + 16px text on phones. Scoped to the FORM BODY only; the control panel + cog
+// menus live outside `.o_form_view`, so they stay untouched (per this file's
+// header note: a global `.btn` min-height broke those). Link buttons excluded.
+@media (max-width: 767.98px) {
+    .o_web_client .o_form_view .btn:not(.btn-link) {
+        min-height: $carbon-field-height;      // 40px
+        font-size: $carbon-font-size-body-02;  // 16px
+    }
+}

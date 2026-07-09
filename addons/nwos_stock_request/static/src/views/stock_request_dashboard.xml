@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+    <t t-name="nwos_stock_request.Dashboard">
+        <div class="o_stock_request_dashboard container-fluid py-3 border-bottom bg-view">
+            <!-- ALL row -->
+            <div class="row align-items-center g-2">
+                <div class="col-1 text-end text-muted small" t-if="multiuser">All</div>
+                <t t-set="scope" t-value="'global'"/>
+                <t t-call="nwos_stock_request.DashboardCards"/>
+            </div>
+            <!-- MY row -->
+            <div class="row align-items-center g-2 mt-1" t-if="multiuser">
+                <div class="col-1 text-end text-muted small">My</div>
+                <t t-set="scope" t-value="'my'"/>
+                <t t-set="my" t-value="true"/>
+                <t t-call="nwos_stock_request.DashboardCards"/>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="nwos_stock_request.DashboardCards">
+        <t t-set="colcls" t-value="multiuser ? 'col' : 'col'"/>
+        <div t-attf-class="{{ multiuser ? 'col-11' : 'col-12' }}">
+            <div class="row g-2">
+                <div class="col" t-on-click="setSearchContext"
+                     t-att-filter_name="my ? 'draft,my' : 'draft'">
+                    <a href="#" class="btn w-100 p-2 text-start bg-secondary-subtle text-secondary-emphasis">
+                        <div t-attf-class="{{ my ? '' : 'fs-3' }}" t-out="data[scope]['draft']"/>
+                        <span t-if="!my">Draft</span>
+                    </a>
+                </div>
+                <div class="col" t-on-click="setSearchContext"
+                     t-att-filter_name="my ? 'to_approve,my' : 'to_approve'">
+                    <a href="#" class="btn w-100 p-2 text-start"
+                       t-attf-class="{{ data[scope]['to_approve'] == 0 ? 'bg-secondary-subtle text-secondary-emphasis' : 'bg-info-subtle text-info-emphasis' }}">
+                        <div t-attf-class="{{ my ? '' : 'fs-3' }}" t-out="data[scope]['to_approve']"/>
+                        <span t-if="!my">To Approve</span>
+                    </a>
+                </div>
+                <div class="col" t-on-click="setSearchContext"
+                     t-att-filter_name="'awaiting'">
+                    <a href="#" class="btn w-100 p-2 text-start"
+                       t-attf-class="{{ data[scope]['awaiting'] == 0 ? 'bg-secondary-subtle text-secondary-emphasis' : 'bg-warning-subtle text-warning-emphasis' }}">
+                        <div t-attf-class="{{ my ? '' : 'fs-3' }}" t-out="data[scope]['awaiting']"/>
+                        <span t-if="!my">Awaiting My Approval</span>
+                    </a>
+                </div>
+                <div class="col" t-on-click="setSearchContext"
+                     t-att-filter_name="my ? 'approved,my' : 'approved'">
+                    <a href="#" class="btn w-100 p-2 text-start"
+                       t-attf-class="{{ data[scope]['approved'] == 0 ? 'bg-secondary-subtle text-secondary-emphasis' : 'bg-success-subtle text-success-emphasis' }}">
+                        <div t-attf-class="{{ my ? '' : 'fs-3' }}" t-out="data[scope]['approved']"/>
+                        <span t-if="!my">Approved</span>
+                    </a>
+                </div>
+                <div class="col" t-on-click="setSearchContext"
+                     t-att-filter_name="my ? 'done,my' : 'done'">
+                    <a href="#" class="btn w-100 p-2 text-start bg-secondary-subtle text-secondary-emphasis">
+                        <div t-attf-class="{{ my ? '' : 'fs-3' }}" t-out="data[scope]['done']"/>
+                        <span t-if="!my">Purchased</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </t>
+</templates>

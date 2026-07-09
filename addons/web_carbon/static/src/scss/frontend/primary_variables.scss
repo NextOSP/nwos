@@ -1,0 +1,12 @@
+///
+/// Frontend (login / portal / website) variable tweaks.
+///
+/// Brand color, IBM Plex fonts and 0px radius already flow to the frontend via
+/// the shared `web._assets_primary_variables` layer, so only frontend-specific
+/// scalars are set here. (We deliberately do NOT touch web_editor's
+/// `$o-color-palettes` map from a prepend — it isn't defined yet at this point
+/// in the bundle, and referencing it would break compilation.)
+///
+
+// Enforce Carbon's AA contrast target for auto-generated frontend text colors.
+$o-frontend-min-contrast-ratio: 4.5;

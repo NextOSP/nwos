@@ -1,0 +1,129 @@
+///
+/// Carbon menus / dropdowns — Layer-02 surface, subtle borders, no radius,
+/// Gray-10 hover, Blue-60 selected indicator.
+///
+
+.o_web_client {
+    .dropdown-menu,
+    .o-dropdown--menu {
+        border-radius: 0;
+        border: 1px solid $carbon-border-subtle;      // Gray 20
+        box-shadow: 0 2px 6px rgba($carbon-black, 0.2);
+        background-color: $carbon-layer-02;           // White
+        padding: 0;
+        font-size: $carbon-font-size-body;
+    }
+
+    .dropdown-item,
+    .o-dropdown-item {
+        border-radius: 0;
+        color: $carbon-text-primary;
+        min-height: 36px;                              // compact, consistent rows
+        padding: $carbon-spacing-03 $carbon-spacing-05; // 8px 16px
+        display: flex;
+        align-items: center;
+
+        &:hover,
+        &:focus {
+            background-color: $carbon-layer-01;       // Gray 10
+            color: $carbon-text-primary;
+        }
+        &.selected,
+        &.active,
+        &.focus {
+            background-color: $carbon-layer-01;
+            box-shadow: inset 3px 0 0 0 $carbon-interactive; // left Blue-60 bar
+            color: $carbon-text-primary;
+        }
+    }
+}
+
+// --- Field autocomplete dropdowns (many2one, tags, combobox…) --------------
+// IBM Carbon Dropdown / ComboBox list box. The menu WIDTH and left alignment
+// (full field width, flush under the control) are set in JS — see
+// webclient/autocomplete/autocomplete_carbon.js — because Odoo's position hook
+// leaves the menu at its content width. Here we own the surface + option rows.
+.o_web_client .o-autocomplete {
+    .o-autocomplete--dropdown-menu {
+        margin-top: 0 !important;                 // flush under the control
+        border: 1px solid $carbon-border-subtle;  // Gray 20
+        border-radius: 0;
+        box-shadow: 0 2px 6px rgba($carbon-black, 0.2);
+        background-color: $carbon-layer-02;        // White
+        max-width: none !important;                // JS sizes it to the field
+        padding: 0;
+    }
+
+    // The <li> row is a flex container; the clickable <a> inside carries the
+    // 16px Carbon gutter and the hover/selected fill so states span the full
+    // width. Kill Odoo's text-indent on the create / "no result" rows.
+    .o-autocomplete--dropdown-item {
+        min-height: 40px;                          // Carbon list-box item height
+        padding: 0 !important;
+        text-indent: 0 !important;
+        display: flex;
+        align-items: stretch;
+        border: 0 !important;
+        outline: none !important;
+
+        > a,
+        > .dropdown-item {
+            flex: 1 1 auto;
+            display: flex;
+            align-items: center;
+            min-height: 40px;
+            margin: 0;
+            // Align the option text with the typed text: form inputs sit at 12px
+            // (spacing-04), so options do too instead of the 16px list-box gutter.
+            padding: 0 $carbon-spacing-04;         // 0 12px
+            border: 0;
+            border-radius: 0;
+            color: $carbon-text-primary;
+            background-color: transparent;
+            box-shadow: none;
+            text-indent: 0;
+        }
+
+        // Create / "search more" action rows use Carbon interactive Blue-60.
+        &.o_m2o_dropdown_option > a,
+        &.o_calendar_dropdown_option > a { color: $carbon-interactive; }
+
+        // Hover + keyboard-active → Gray-10 hover fill with a Blue-60 left bar.
+        &:hover > a,
+        &.ui-state-focus > a,
+        > a.ui-state-active {
+            background-color: #e8e8e8;              // Carbon layer-hover
+            box-shadow: inset 3px 0 0 0 $carbon-interactive;
+            color: $carbon-text-primary;
+        }
+        &.o_m2o_dropdown_option:hover > a,
+        &.o_m2o_dropdown_option > a.ui-state-active {
+            color: $carbon-interactive;
+        }
+    }
+}
+
+// In editable list cells the input text sits at the compact 4px cell gutter, so
+// align the option text there too (otherwise the menu options read as indented
+// relative to the typed product name).
+.o_web_client .o_list_table .o-autocomplete--dropdown-item {
+    > a,
+    > .dropdown-item {
+        padding-left: $carbon-spacing-02;          // 4px, matches the cell input
+    }
+}
+
+// === Mobile / touch (phones, ≤ 767.98px) ================================
+// Menu rows (user menu, cog actions, many2one options, …) → taller tap target
+// and 16px text on phones.
+@media (max-width: 767.98px) {
+    .o_web_client .dropdown-item,
+    .o_web_client .o-dropdown-item {
+        min-height: $carbon-field-height;        // 40px (was 36)
+        font-size: $carbon-font-size-body-02;    // 16px
+    }
+    .o_web_client .dropdown-menu,
+    .o_web_client .o-dropdown--menu {
+        font-size: $carbon-font-size-body-02;    // 16px menu text
+    }
+}

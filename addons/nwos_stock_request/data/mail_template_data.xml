@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nwos>
+    <data noupdate="1">
+        <record id="mail_template_stock_request_approved" model="mail.template">
+            <field name="name">Stock Request: Approved</field>
+            <field name="model_id" ref="model_stock_request"/>
+            <field name="subject">Stock Request {{ object.name }} approved — ready to purchase</field>
+            <field name="email_from">{{ (object.approver_id.email_formatted or user.email_formatted) }}</field>
+            <field name="description">Sent to buyers when a stock request is approved.</field>
+            <field name="body_html" type="html">
+                <div style="margin:0px;padding:0px;">
+                    <p>Stock request <strong t-out="object.name">SR/2026/0001</strong>
+                        has been approved by <t t-out="object.approver_id.name">Approver</t>.</p>
+                    <p>Requester: <t t-out="object.requester_id.name">Requester</t><br/>
+                        Estimated total:
+                        <t t-out="format_amount(object.estimated_total, object.currency_id)">0.00</t></p>
+                    <p>It is ready to be sourced — open it and click
+                        <strong>Generate Purchase</strong>.</p>
+                </div>
+            </field>
+            <field name="auto_delete" eval="True"/>
+        </record>
+    </data>
+</nwos>

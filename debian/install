@@ -1,0 +1,2 @@
+debian/nwos.conf /etc/nwos
+README.md /usr/share/doc/nwos

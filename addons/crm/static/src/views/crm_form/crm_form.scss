@@ -1,0 +1,67 @@
+.o_lead_opportunity_form {
+    &.o_form_editable {
+        .oe_title {
+            .o_field_widget,
+            .o_input {
+                width: 100%;
+            }
+
+            .o_input {
+                padding: 0 0 6px;
+                border: 0;
+                border-bottom: 1px solid $o-gray-300;
+                border-radius: 0;
+                background: transparent;
+                box-shadow: none;
+                font-size: clamp(2rem, 3vw, 3rem);
+                line-height: 1.15;
+
+                &:focus {
+                    border-color: $o-brand-primary;
+                    box-shadow: 0 2px 0 rgba($o-brand-primary, .18);
+                }
+            }
+        }
+
+        .o_group {
+            .o_input {
+                border: 1px solid $o-gray-300;
+                border-radius: 4px;
+                background: $o-view-background-color;
+                box-shadow: none;
+
+                &:focus {
+                    border-color: $o-brand-primary;
+                    box-shadow: 0 0 0 2px rgba($o-brand-primary, .12);
+                }
+            }
+        }
+    }
+
+    .o_crm_pls_ai_switch_button {
+        overflow: hidden;
+        position: relative;
+
+        &[disabled] {
+            cursor: progress;
+            opacity: 1;
+
+            &::after {
+                content: "";
+                position: absolute;
+                inset: auto 0 0;
+                height: 2px;
+                background: linear-gradient(90deg, #8a3ffc 0%, #0f62fe 70%, #78a9ff 100%);
+                animation: o_crm_pls_tooltip_ai_beam 1.2s ease-in-out infinite;
+            }
+
+            .o_lead_opportunity_form_AI_switch_img {
+                animation: o_crm_pls_tooltip_button_loading 1s ease-in-out infinite;
+            }
+        }
+    }
+
+    .o_lead_opportunity_form_AI_switch_img {
+        height: 1rem;
+    }
+}

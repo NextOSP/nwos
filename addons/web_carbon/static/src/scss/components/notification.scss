@@ -1,0 +1,33 @@
+///
+/// Carbon inline/toast notifications — left status bar, square, Layer-02.
+///
+
+.o_web_client,
+body {
+    .o_notification {
+        border-radius: 0;
+        border: 1px solid $carbon-border-subtle;
+        border-left: 3px solid $carbon-support-info;   // status accent bar
+        background-color: $carbon-layer-02;
+        color: $carbon-text-primary;
+        box-shadow: 0 2px 6px rgba($carbon-black, 0.2);
+
+        &.border-success, &.text-bg-success { border-left-color: $carbon-support-success; }
+        &.border-danger,  &.text-bg-danger  { border-left-color: $carbon-support-error; }
+        &.border-warning, &.text-bg-warning { border-left-color: $carbon-support-warning; }
+        &.border-info,    &.text-bg-info    { border-left-color: $carbon-support-info; }
+
+        .o_notification_title { font-weight: $carbon-font-weight-semibold; }
+    }
+
+    // Alerts inside forms/views.
+    .alert {
+        border-radius: 0;
+        border: 0;
+        border-left: 3px solid $carbon-support-info;
+        &.alert-success { border-left-color: $carbon-support-success; background-color: rgba($carbon-support-success, 0.12); }
+        &.alert-danger  { border-left-color: $carbon-support-error;   background-color: rgba($carbon-support-error, 0.12); }
+        &.alert-warning { border-left-color: $carbon-support-warning; background-color: rgba($carbon-support-warning, 0.16); }
+        &.alert-info    { border-left-color: $carbon-support-info;    background-color: $carbon-highlight; }
+    }
+}

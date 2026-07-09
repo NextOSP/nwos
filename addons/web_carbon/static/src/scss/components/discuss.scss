@@ -1,0 +1,191 @@
+///
+/// Discuss / chat UI → IBM Carbon. Square surfaces, Gray-10 canvas, IBM Plex Sans,
+/// Blue-60 accents. Own messages get a Blue-10 wash + Blue-60 rail, everyone else a
+/// Gray-10 card. Targets the shared `.o-mail-*` classes, so it covers the Discuss
+/// app, popup chat windows, and the record chatter from one file. Discuss-only
+/// chrome (sidebar, header) is contained by its Discuss-specific classes.
+///
+
+.o_web_client {
+
+    // --- Sidebar → white rail with a subtle divider -------------------------
+    .o-mail-DiscussSidebar {
+        background-color: $carbon-white;
+        border-right: 1px solid $carbon-border-subtle;   // Gray 20
+    }
+
+    // Category headers ("Kênh", "Tin nhắn trực tiếp") → Carbon overline label.
+    .o-mail-DiscussSidebarCategory-title {
+        color: $carbon-text-secondary;                   // Gray 70
+        font-size: $carbon-font-size-label;
+        font-weight: $carbon-font-weight-semibold;
+        letter-spacing: 0.02em;
+    }
+
+    // Channel / DM rows → square; Gray-10 hover; Carbon side-nav selected state.
+    .o-mail-DiscussSidebar-item {
+        border-radius: 0;
+
+        &:hover {
+            // beats the hardcoded `mix($gray-100,$gray-200) !important` in core
+            background-color: $carbon-layer-01 !important;   // Gray 10
+            outline-color: $carbon-border-subtle !important; // Gray 20
+        }
+
+        // Selected: Blue-20 wash + a Blue-60 left rail (Carbon side-nav pattern).
+        // Override the core custom props instead of the painted `!important` rule.
+        &.o-active {
+            --mail-DiscussSidebar-itemActiveBgColor: #{$carbon-highlight};   // Blue 20
+            --mail-DiscussSidebar-itemActiveOutlineColor: transparent;
+            box-shadow: inset 3px 0 0 0 $carbon-interactive;                 // Blue 60 rail
+        }
+
+        // core adds `filter: brightness(1.1)` to names on hover/active — drop it
+        // so labels stay flat Carbon Gray-100.
+        &.o-active, &:hover {
+            .o-mail-DiscussSidebarChannel-itemName { filter: none; }
+        }
+    }
+
+    // Unread / counter badge → Carbon Blue, square.
+    .o-discuss-badge {
+        border-radius: 2px;
+        background-color: $carbon-interactive;           // Blue 60
+        color: $carbon-text-on-color;                    // White
+        font-size: $carbon-font-size-label;
+        font-weight: $carbon-font-weight-semibold;
+    }
+
+    // Sidebar conversation search → Carbon field (Gray-10 fill, single underline).
+    .o-mail-DiscussSearch-inputContainer {
+        border-radius: 0;
+        border-bottom: 1px solid $carbon-border-strong;  // Gray 50 underline
+
+        &, & input {
+            background-color: $carbon-field-01 !important;   // Gray 10 (beats core)
+        }
+        &:has(.o-mail-DiscussSearch-inputClickable:hover) {
+            &, & input { background-color: #e8e8e8 !important; }   // Gray 10 hover
+        }
+    }
+
+    // --- Conversation header → white bar, subtle divider --------------------
+    .o-mail-DiscussContent-header {
+        background-color: $carbon-white;
+        border-bottom: 1px solid $carbon-border-subtle;  // Gray 20
+    }
+
+    .o-mail-DiscussContent-threadName {
+        color: $carbon-text-primary;                     // Gray 100
+        font-weight: $carbon-font-weight-semibold;
+    }
+
+    // Header action icons (notifications / search / attachments / pin) → Gray-70,
+    // Blue-60 on hover/active, square hover target.
+    .o-mail-DiscussContent-header {
+        .o-mail-DiscussContent-headerActions button {
+            border-radius: 0;
+            i { color: $carbon-icon-secondary; }         // Gray 70
+
+            &:not(.o-isActive):hover {
+                background-color: $carbon-layer-01 !important;   // Gray 10
+            }
+            &:hover i, &.o-isActive i { color: $carbon-icon-interactive; }  // Blue 60
+        }
+        .o-mail-DiscussContent-headerActionsGroup { border-radius: 0; }
+    }
+
+    // --- Thread canvas → Gray-10 so bubbles read as elevated (Discuss only, so
+    // the form chatter keeps its white card). -------------------------------
+    .o-mail-DiscussContent-core {
+        background-color: $carbon-layer-01;              // Gray 10
+    }
+
+    // === Modern chat — SCOPED to the Discuss app + popup chat windows ONLY ==
+    // IMPORTANT: `.o-mail-*` components render in MANY places (the chatter on
+    // every form, activity views, etc.). Everything below is confined to
+    // `.o-mail-Discuss` (Discuss app) and `.o-mail-ChatWindow` (chat windows) so
+    // the record chatter and other embeddings keep Odoo's normal layout.
+    //
+    // Look (ref: Nextwaves AI / Carbon panel): own messages → light-gray rounded
+    // bubble, right-aligned, no avatar/name; others → plain text, left, WITH
+    // avatar + name. @mention → Purple-60 rail. Author→colour is fixed in
+    // message_model.js `get bubbleColor()`: blue = others, green = self, orange
+    // = @mention; bubble fill is painted from the `--o-message-bubble-*` vars.
+    .o-mail-Discuss, .o-mail-ChatWindow {
+
+        .o-mail-Message-date { color: $carbon-text-placeholder; }   // Gray 40 timestamp
+        .o-mail-Message-author {                                    // others keep their name
+            color: $carbon-text-primary;
+            font-weight: $carbon-font-weight-semibold;
+        }
+
+        // Own messages: hide YOUR OWN avatar + name (redundant), and right-align.
+        // Right-align needs `isAlignedRight` true → message_patch.js sets it for
+        // self messages in these surfaces (chatter excluded there too).
+        .o-mail-Message.o-selfAuthored {
+            .o-mail-Message-sidebar { display: none !important; }   // own avatar (beats .d-flex)
+            .o-mail-Message-author  { display: none !important; }   // own name
+
+            flex-direction: row-reverse;
+            .o-mail-Message-core, .o-mail-Message-textContent { flex-direction: row-reverse; }
+            .o-mail-Message-header { justify-content: flex-end; }
+        }
+
+        // Rounded bubbles, no speech tails (modern look).
+        .o-mail-Message-bubble { border-radius: 12px !important; }   // beats o-rounded-*-bubble
+        .o-mail-Message-bubbleTail { display: none !important; }
+
+        // Bot / others → NO bubble, plain text on the canvas.
+        .o-mail-Message-bubble.o-blue {
+            --o-message-bubble-bg: transparent;
+            --o-message-bubble-border-color: transparent;
+        }
+        // Own → light-gray rounded bubble, default dark text.
+        .o-mail-Message-bubble.o-green {
+            --o-message-bubble-bg: #{$carbon-gray-20};       // Gray 20 (#e0e0e0)
+            --o-message-bubble-border-color: transparent;
+        }
+        .o-mail-Message.o-selfAuthored .o-mail-Message-body:not(.o-note) {
+            padding: $carbon-spacing-03 $carbon-spacing-05;   // 8px 16px, roomier
+        }
+        // @mention → Purple-60 left accent bar, plain text (no bubble).
+        .o-mail-Message-bubble.o-orange {
+            --o-message-bubble-bg: transparent;
+            --o-message-bubble-border-color: transparent;
+            box-shadow: inset 3px 0 0 0 #{$carbon-purple-60};
+        }
+
+        // Reaction pills → square Carbon chips; self-reacted uses the Blue select.
+        .o-mail-MessageReaction {
+            border-radius: 2px;
+            background-color: $carbon-field-01;              // Gray 10
+            border-color: $carbon-border-subtle;             // Gray 20
+
+            &.o-selfReacted {
+                background-color: $carbon-highlight;         // Blue 20
+                border-color: $carbon-interactive;           // Blue 60
+            }
+        }
+
+        // --- Composer → Carbon field + Blue focus ---------------------------
+        .o-mail-Composer-inputContainer {
+            border-radius: 0 !important;                     // beats o-rounded-bubble
+            background-color: $carbon-field-01;              // Gray 10
+            border-color: $carbon-border-subtle !important;  // Gray 20
+        }
+        .o-mail-Composer.o-focused .o-mail-Composer-inputContainer {
+            border-color: $carbon-interactive !important;    // Blue 60
+            box-shadow: inset 0 0 0 1px $carbon-interactive;
+        }
+        .o-mail-Composer-input {
+            background-color: transparent;
+            color: $carbon-text-primary;                     // Gray 100
+            font-size: $carbon-font-size-body;               // 14px
+        }
+        .o-mail-Composer-send {
+            border-radius: 0;
+            &:not(:disabled) i { color: $carbon-icon-interactive; }   // Blue 60
+        }
+    }
+}

@@ -1,0 +1,46 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: nextosp-postgres-restore
+  namespace: nextosp
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: pg-restore
+          image: postgres:16-alpine
+          env:
+            - name: PGHOST
+              value: nextosp-postgres
+            - name: PGDATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: nextosp-secret
+                  key: db-name
+            - name: PGUSER
+              valueFrom:
+                secretKeyRef:
+                  name: nextosp-secret
+                  key: db-user
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: nextosp-secret
+                  key: db-password
+            - name: BACKUP_FILE
+              value: /backups/nwos-YYYYMMDDTHHMMSSZ.dump
+          command:
+            - /bin/sh
+            - -ceu
+            - |
+              echo "Restoring ${BACKUP_FILE} into ${PGDATABASE}"
+              pg_restore --clean --if-exists --no-owner --no-acl -d "${PGDATABASE}" "${BACKUP_FILE}"
+          volumeMounts:
+            - name: backups
+              mountPath: /backups
+      volumes:
+        - name: backups
+          persistentVolumeClaim:
+            claimName: nextosp-backups

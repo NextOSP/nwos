@@ -1,0 +1,73 @@
+///
+/// Carbon calendar — flat grid, Gray-20 lines, Blue-60 events, Blue-20 today.
+///
+
+.o_web_client {
+    .o_calendar_view,
+    .fc {
+        font-size: $carbon-font-size-body;
+        color: $carbon-text-primary;
+    }
+
+    // Grid lines → Carbon subtle borders.
+    .fc-theme-standard td,
+    .fc-theme-standard th,
+    .fc-scrollgrid { border-color: $carbon-border-subtle; }
+
+    // Today highlight → Blue 20.
+    .fc .fc-day-today { background-color: rgba($carbon-highlight, 0.5); }
+
+    // Today's DATE marker → Carbon Blue-60 circle. Core paints it red via
+    // `$o-calendar-today-background-color: $o-danger`, which clashes with the
+    // otherwise-blue theme; override the `--o-cw-*` vars the header reads.
+    // NB: the red current-time "now" indicator line is intentionally left as-is.
+    .fc-timeGridDay-view,
+    .fc-timeGridWeek-view {
+        --o-cw-bg: #{$carbon-interactive};       // Blue 60 (was red)
+        --o-cw-color: #{$carbon-text-on-color};  // white "8"
+    }
+
+    // Events → Blue 60, square, WHITE text.
+    // Odoo paints the fill through a translucent `.fc-bg` layer
+    // (rgba($o-action, --o-bg-opacity)) and colours the title/time via
+    // `--fc-event-text-color: $body-color` (dark). On the blue fill that dark
+    // text is very low-contrast (the reported "hard to read"). Make the fill
+    // opaque Blue-60 and route the text colour var to white so the label reads
+    // clearly — in the default, hover and selected states alike.
+    .fc-event,
+    .o_event {
+        border-radius: 0;
+        background-color: $carbon-interactive;
+        border-color: $carbon-blue-70;
+        color: $carbon-text-on-color;
+    }
+
+    .fc-event:not(.o_event_dot) {
+        --fc-event-text-color: #{$carbon-text-on-color};   // white title/time
+        color: $carbon-text-on-color;
+
+        // Keep the fill fully opaque (Odoo defaults to a translucent tint, and
+        // drops it further on hover) so white text stays legible throughout.
+        .fc-bg { --o-bg-opacity: 1; }
+        &:hover {
+            color: $carbon-text-on-color;
+            .fc-bg { --o-bg-opacity: 1; }
+        }
+
+        // The title/time nodes explicitly consume the text-colour var; pin them
+        // white too so nothing inherits the dark default.
+        .fc-event-title,
+        .fc-event-time,
+        .o_event_title,
+        .fc-event-main {
+            color: $carbon-text-on-color;
+        }
+    }
+
+    // Column headers.
+    .fc-col-header-cell {
+        background-color: $carbon-layer-01;
+        color: $carbon-text-secondary;
+        font-weight: $carbon-font-weight-semibold;
+    }
+}

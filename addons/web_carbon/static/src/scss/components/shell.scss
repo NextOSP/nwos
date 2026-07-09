@@ -1,0 +1,86 @@
+///
+/// Carbon UI Shell — dark Gray-100 header.
+/// web_carbon depends on web_nwos, so this loads AFTER web_nwos/theme/navbar.scss
+/// (which hardcodes a blue #009efb navbar with !important). We override its exact
+/// selectors with !important to reclaim the dark shell.
+///
+
+.o_main_navbar {
+    background-color: $carbon-shell-bg !important;   // Gray 100 #161616
+    border-bottom: 1px solid $carbon-shell-bg !important;
+    color: $carbon-shell-text !important;
+    // web_nwos forces `--o-navbar-height: 55px !important`; the child entries
+    // use that var for their height, so the bar height and the var MUST agree
+    // or the contents look clipped/cramped. Pin both to 48px with !important.
+    height: 48px !important;
+    --o-navbar-height: 48px !important;
+    min-height: 48px;
+    font-size: $carbon-font-size-body;
+
+    // App-grid toggle + entries fill the full 48px height, larger icon.
+    .o_navbar_apps_menu > button,
+    .o_menu_toggle {
+        height: 48px !important;
+        min-width: 48px;
+        line-height: normal !important;
+        font-size: 20px;
+        justify-content: center;
+    }
+    .o_menu_sections .o_nav_entry,
+    .o_menu_sections .dropdown-toggle {
+        height: 48px !important;
+        display: flex;
+        align-items: center;
+        font-size: $carbon-font-size-body;
+    }
+    .o_menu_systray > * { height: 48px; display: flex; align-items: center; }
+
+    // web_nwos paints these blue with !important — force them dark.
+    .o_navbar_apps_menu,
+    .o_menu_brand {
+        background: $carbon-shell-bg !important;
+    }
+
+    .o_menu_brand {
+        color: $carbon-shell-text-hover !important;
+        font-weight: $carbon-font-weight-semibold;
+        font-size: $carbon-font-size-body-02;
+        letter-spacing: 0;
+    }
+
+    // Menu section entries / dropdown toggles: transparent on the dark bar,
+    // Gray-80 on hover, Blue-60 indicator when open.
+    .o_menu_sections .o_nav_entry,
+    .o_menu_sections .dropdown-toggle,
+    .o_navbar_apps_menu > button,
+    .o_menu_systray > * {
+        background: transparent !important;
+        color: $carbon-shell-text !important;
+        border-radius: 0 !important;
+
+        &:hover,
+        &:focus {
+            background-color: $carbon-shell-hover !important;  // Gray 80
+            color: $carbon-shell-text-hover !important;
+        }
+    }
+
+    .o_menu_sections .dropdown-toggle.show,
+    .o_menu_sections .o_nav_entry.active {
+        background-color: $carbon-shell-hover !important;
+        color: $carbon-shell-text-hover !important;
+        box-shadow: inset 0 -3px 0 0 $carbon-shell-accent;   // Blue 60 underline
+    }
+
+    // Systray + company switcher icons follow the shell text color.
+    .o_menu_systray i,
+    .o_navbar_apps_menu i,
+    .o_switch_company_menu .o_switch_company_menu_button,
+    .o_switch_company_menu .fa,
+    .o_switch_company_menu .oe_topbar_name {
+        color: $carbon-shell-text !important;
+    }
+    .o_menu_systray a:hover i { color: $carbon-shell-text-hover !important; }
+}
+
+.o_navbar_apps_menu .dropdown-toggle::after { display: none; }

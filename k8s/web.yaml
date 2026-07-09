@@ -1,0 +1,100 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nextosp-data
+  namespace: nextosp
+spec:
+  accessModes: ["ReadWriteOnce"]
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nextosp-web
+  namespace: nextosp
+spec:
+  type: ClusterIP
+  ports:
+    - name: http
+      port: 7073
+      targetPort: 7073
+  selector:
+    app: nextosp-web
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nextosp-web
+  namespace: nextosp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nextosp-web
+  template:
+    metadata:
+      labels:
+        app: nextosp-web
+    spec:
+      containers:
+        - name: web
+          image: ghcr.io/nextosp/nwos:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 7073
+          env:
+            - name: NWOS_DB_HOST
+              value: nextosp-postgres
+            - name: NWOS_DB_PORT
+              value: "5432"
+            - name: NWOS_DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: nextosp-secret
+                  key: db-user
+            - name: NWOS_DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: nextosp-secret
+                  key: db-password
+          args:
+            - server
+            - -c
+            - /etc/nwos/nwos.conf
+            - --db_password=$(NWOS_DB_PASSWORD)
+            - --max-cron-threads=0
+          volumeMounts:
+            - name: config
+              mountPath: /etc/nwos/nwos.conf
+              subPath: nwos.conf
+              readOnly: true
+            - name: data
+              mountPath: /var/lib/nwos
+          readinessProbe:
+            httpGet:
+              path: /web/login
+              port: 7073
+            initialDelaySeconds: 45
+            periodSeconds: 15
+          livenessProbe:
+            httpGet:
+              path: /web/login
+              port: 7073
+            initialDelaySeconds: 120
+            periodSeconds: 30
+          resources:
+            requests:
+              cpu: "1"
+              memory: 2Gi
+            limits:
+              cpu: "4"
+              memory: 6Gi
+      volumes:
+        - name: config
+          configMap:
+            name: nextosp-config
+        - name: data
+          persistentVolumeClaim:
+            claimName: nextosp-data

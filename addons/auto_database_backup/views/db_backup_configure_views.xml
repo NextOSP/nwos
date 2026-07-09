@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<nwos>
+    <record id="view_db_backup_configure_list" model="ir.ui.view">
+        <field name="name">db.backup.configure.list</field>
+        <field name="model">db.backup.configure</field>
+        <field name="arch" type="xml">
+            <list decoration-muted="(not active)" decoration-danger="last_backup_state == 'failed'">
+                <field name="name"/>
+                <field name="db_name"/>
+                <field name="backup_destination"/>
+                <field name="last_backup_state"/>
+                <field name="last_backup_date"/>
+                <field name="backup_filename" string="Last Backup"/>
+                <field name="active"/>
+                <button name="action_backup_now" type="object" string="Backup Now" class="btn-primary"/>
+                <button name="action_view_backup_files" type="object" string="Backup Files"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_db_backup_configure_form" model="ir.ui.view">
+        <field name="name">db.backup.configure.form</field>
+        <field name="model">db.backup.configure</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_backup_now" type="object" string="Backup Now" class="btn-primary"/>
+                    <button name="action_view_backup_files" type="object" string="Backup Files"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Name..."/>
+                        </h1>
+                    </div>
+                    <group name="local_section">
+                        <group>
+                            <field name="db_name"/>
+                            <field name="backup_format"/>
+                            <field name="active" widget="boolean_toggle"/>
+                            <field name="notify_user"/>
+                            <field name="user_id" invisible="notify_user == False"/>
+                        </group>
+                        <group>
+                            <field name="backup_destination" required="1"/>
+                            <field name="backup_path" invisible="backup_destination != 'local'" required="backup_destination == 'local'"/>
+                            <field name="auto_remove"/>
+                            <label for="days_to_remove" class="oe_inline" invisible="auto_remove == False"/>
+                            <div invisible="auto_remove == False">
+                                <field name="days_to_remove" class="oe_inline" required="auto_remove == True"/>
+                                Days
+                            </div>
+                            <field name="last_backup_state" readonly="1"/>
+                            <field name="last_backup_date" readonly="1"/>
+                            <field name="last_backup_message" readonly="1" invisible="not last_backup_message"/>
+                            <field name="backup_filename" readonly="1"/>
+                            <field name="generated_exception" readonly="1" invisible="not generated_exception"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_db_backup_configure_search" model="ir.ui.view">
+        <field name="name">db.backup.configure.search</field>
+        <field name="model">db.backup.configure</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="db_name"/>
+                <filter string="All" name="all" domain="['|', ('active', '=',  True), ('active', '!=',  True)]"/>
+                <filter string="Failed" name="failed" domain="[('last_backup_state', '=', 'failed')]"/>
+                <separator/>
+                <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>
+                <group>
+                    <filter string="Backup Type" name="backup_type" domain="[]"
+                            context="{'group_by': 'backup_destination'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_db_backup_configure" model="ir.actions.act_window">
+        <field name="name">Database Backup</field>
+        <field name="res_model">db.backup.configure</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No backup configured!
+            </p>
+        </field>
+        <field name="context">{'search_default_all': 1}</field>
+    </record>
+
+    <record id="view_db_backup_file_list" model="ir.ui.view">
+        <field name="name">db.backup.file.list</field>
+        <field name="model">db.backup.file</field>
+        <field name="arch" type="xml">
+            <list decoration-muted="not exists">
+                <field name="name"/>
+                <field name="config_id"/>
+                <field name="db_name"/>
+                <field name="backup_destination"/>
+                <field name="file_size_human"/>
+                <field name="modified_at"/>
+                <field name="storage_path"/>
+                <field name="exists"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_db_backup_file_form" model="ir.ui.view">
+        <field name="name">db.backup.file.form</field>
+        <field name="model">db.backup.file</field>
+        <field name="arch" type="xml">
+            <form string="Backup File">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" readonly="1"/>
+                            <field name="config_id" readonly="1"/>
+                            <field name="db_name" readonly="1"/>
+                            <field name="backup_destination" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="file_size_human" readonly="1"/>
+                            <field name="modified_at" readonly="1"/>
+                            <field name="exists" readonly="1"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="storage_path" readonly="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_db_backup_file_search" model="ir.ui.view">
+        <field name="name">db.backup.file.search</field>
+        <field name="model">db.backup.file</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="config_id"/>
+                <field name="db_name"/>
+                <filter string="Existing" name="existing" domain="[('exists', '=', True)]"/>
+                <filter string="Missing" name="missing" domain="[('exists', '=', False)]"/>
+                <group>
+                    <filter string="Configuration" name="group_config" context="{'group_by': 'config_id'}"/>
+                    <filter string="Destination" name="group_destination" context="{'group_by': 'backup_destination'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_db_backup_file" model="ir.actions.act_window">
+        <field name="name">Backup Files</field>
+        <field name="res_model">db.backup.file</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_existing': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No backup files listed yet.
+            </p>
+            <p>
+                Open a backup configuration and click Backup Files to scan its destination.
+            </p>
+        </field>
+    </record>
+
+    <record id="action_db_backup_file_sync" model="ir.actions.server">
+        <field name="name">Backup Files</field>
+        <field name="model_id" ref="model_db_backup_configure"/>
+        <field name="state">code</field>
+        <field name="code">action = model.search([]).with_context(ignore_backup_listing_errors=True).action_view_backup_files()</field>
+    </record>
+
+    <record id="action_db_backup_failed" model="ir.actions.act_window">
+        <field name="name">Failed Backups</field>
+        <field name="res_model">db.backup.configure</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('last_backup_state', '=', 'failed')]</field>
+        <field name="context">{'search_default_failed': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No failed backups.
+            </p>
+            <p>
+                Failed backup jobs are highlighted here and also create an activity for the responsible user.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_db_backup" name="Automatic Database Backup" parent="base.menu_custom" sequence="10"/>
+    <menuitem id="menu_db_backup_configuration" parent="menu_db_backup" name="Backup Configuration"
+              action="action_db_backup_configure" sequence="5"/>
+    <menuitem id="menu_db_backup_files" parent="menu_db_backup" name="Backup Files"
+              action="action_db_backup_file_sync" sequence="10"/>
+    <menuitem id="menu_db_backup_failed" parent="menu_db_backup" name="Failed Backups"
+              action="action_db_backup_failed" sequence="15"/>
+</nwos>

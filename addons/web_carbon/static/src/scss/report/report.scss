@@ -1,0 +1,531 @@
+///
+/// Carbon report design layer.
+///
+/// This file intentionally styles the shared report primitives instead of
+/// inheriting sale/account/purchase/stock templates. It keeps web_carbon
+/// dependency-light while improving quotations, orders, invoices, receipts,
+/// delivery slips, pickings and similar documents through web.report_assets_common.
+///
+
+$carbon-report-font: $carbon-font-sans, Helvetica, Arial, sans-serif;
+$carbon-report-mono-font: $carbon-font-mono, "Courier New", monospace;
+
+html,
+body {
+    font-family: $carbon-report-font;
+    color: $carbon-text-primary;
+}
+
+.o_body_html,
+.o_body_pdf {
+    font-family: $carbon-report-font;
+    color: $carbon-text-primary;
+    font-size: 12px;
+    line-height: 1.45;
+    background: $carbon-white;
+}
+
+.o_body_html #wrapwrap,
+.o_body_pdf #wrapwrap,
+.o_body_html main,
+.o_body_pdf main {
+    background: $carbon-white;
+}
+
+.article {
+    color: $carbon-text-primary;
+    font-family: $carbon-report-font;
+    font-size: 12px;
+}
+
+.article a {
+    color: $carbon-link-primary;
+    text-decoration: none;
+}
+
+.article p,
+.article address,
+.article ul,
+.article ol {
+    margin-top: 0;
+    color: $carbon-text-primary;
+}
+
+.article .text-muted,
+.article small,
+.footer .text-muted {
+    color: $carbon-text-secondary !important;
+}
+
+.header {
+    color: $carbon-text-primary;
+    font-family: $carbon-report-font;
+    font-size: 11px;
+    border-bottom: 1px solid $carbon-border-subtle;
+    padding-bottom: 10px;
+}
+
+.header [name="company_address"] {
+    color: $carbon-text-secondary;
+    line-height: 1.35;
+}
+
+.header [name="company_address"] strong,
+.header [name="company_address"] b {
+    color: $carbon-text-primary;
+    font-weight: $carbon-font-weight-semibold;
+}
+
+.o_company_logo,
+.o_company_logo_small,
+.o_company_logo_big {
+    max-width: 172px;
+    object-fit: contain;
+}
+
+.o_company_logo,
+.o_company_logo_small {
+    max-height: 46px;
+}
+
+.o_company_logo_big {
+    max-height: 58px;
+}
+
+.o_company_tagline {
+    color: $carbon-text-primary;
+    font-size: 11px;
+    font-weight: $carbon-font-weight-semibold;
+    line-height: 1.35;
+}
+
+.article h1,
+.article h2,
+.article h3 {
+    color: $carbon-text-primary;
+    font-family: $carbon-report-font;
+    font-weight: $carbon-font-weight-semibold;
+    letter-spacing: 0;
+}
+
+.article h2,
+.article h3 {
+    margin: 0 0 18px;
+    padding: 0 0 9px;
+    border-bottom: 2px solid $carbon-border-interactive;
+    font-size: 25px;
+    line-height: 1.15;
+}
+
+.article h2 span,
+.article h3 span {
+    display: inline;
+}
+
+.article .page > h2:first-child,
+.article .page > h3:first-child {
+    margin-top: 0;
+}
+
+.article [name="address"],
+.article [name="information_block"],
+.article .address,
+.article .o_portal_address {
+    color: $carbon-text-primary;
+}
+
+.article .address address,
+.article [name="address"] address,
+.article .o_portal_address address {
+    line-height: 1.35;
+}
+
+.article .address strong,
+.article [name="information_block"] strong,
+.article [name="address"] strong {
+    display: block;
+    color: $carbon-text-primary;
+    font-weight: $carbon-font-weight-semibold;
+}
+
+.article .address .fa,
+.article [name="address"] .fa,
+.article [name="information_block"] .fa {
+    color: $carbon-icon-secondary;
+}
+
+.article #informations {
+    margin: 18px 0 22px !important;
+    padding: 11px 13px;
+    border: 1px solid $carbon-border-subtle;
+    border-left: 3px solid $carbon-border-interactive;
+    background: $carbon-layer-01;
+}
+
+.article #informations > [class*="col"] {
+    min-width: 0;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+.article #informations strong {
+    display: block;
+    margin-bottom: 3px;
+    color: $carbon-text-secondary;
+    font-size: 9.5px;
+    font-weight: $carbon-font-weight-semibold;
+    letter-spacing: .32px;
+    line-height: 1.25;
+    text-transform: uppercase;
+}
+
+.article #informations div,
+.article #informations p,
+.article #informations span {
+    color: $carbon-text-primary;
+}
+
+.article #informations p {
+    margin-bottom: 0;
+}
+
+.article .o_stock_report_header_row,
+.article .page > .mb-4.mt-3 {
+    margin: 18px 0 22px !important;
+    padding: 11px 13px;
+    border: 1px solid $carbon-border-subtle;
+    border-left: 3px solid $carbon-border-interactive;
+    background: $carbon-layer-01;
+}
+
+.article .o_stock_report_header_row > div,
+.article .page > .mb-4.mt-3 > .row > [class*="col"] {
+    min-width: 150px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+.article .o_stock_report_header_row strong,
+.article .page > .mb-4.mt-3 strong {
+    color: $carbon-text-secondary;
+    font-size: 9.5px;
+    font-weight: $carbon-font-weight-semibold;
+    letter-spacing: .32px;
+    text-transform: uppercase;
+}
+
+.article .o_stock_report_header_row p,
+.article .page > .mb-4.mt-3 p {
+    margin-bottom: 0;
+}
+
+.article table.table {
+    width: 100%;
+    margin-bottom: 16px;
+    border-collapse: collapse;
+    color: $carbon-text-primary;
+    font-size: 11px;
+}
+
+.article table.o_main_table,
+.article table[name="invoice_line_table"],
+.article table.o_has_total_table {
+    margin-top: 8px;
+}
+
+.article table.table thead {
+    display: table-header-group;
+}
+
+.article table.table thead th {
+    padding: 8px 7px;
+    border-top: 2px solid $carbon-border-interactive !important;
+    border-bottom: 1px solid $carbon-border-strong !important;
+    background: $carbon-layer-01;
+    color: $carbon-text-secondary;
+    font-size: 9.5px;
+    font-weight: $carbon-font-weight-semibold;
+    letter-spacing: .32px;
+    line-height: 1.25;
+    text-transform: uppercase;
+    vertical-align: bottom;
+}
+
+.article table.table thead th strong {
+    font-weight: $carbon-font-weight-semibold;
+}
+
+.article table.table tbody td {
+    padding: 8px 7px;
+    border-bottom: 1px solid $carbon-border-subtle;
+    color: $carbon-text-primary;
+    line-height: 1.35;
+    vertical-align: top;
+}
+
+.article table.table tbody tr:last-child td {
+    border-bottom-color: $carbon-border-strong;
+}
+
+.article table.table tbody td:first-child,
+.article table.table thead th:first-child {
+    padding-left: 0;
+}
+
+.article table.table tbody td:last-child,
+.article table.table thead th:last-child {
+    padding-right: 0;
+}
+
+.article table.table tbody td.text-end,
+.article table.table thead th.text-end,
+.article .o_price_total,
+.article .o_td_quantity {
+    white-space: normal;
+}
+
+.article .o_price_total,
+.article .oe_currency_value,
+.article .text-nowrap {
+    font-variant-numeric: tabular-nums;
+}
+
+.article .oe_currency_value,
+.article .o_td_quantity,
+.article td[name*="quantity"],
+.article td[name*="price"],
+.article td[name*="subtotal"],
+.article td[name*="total"] {
+    font-family: $carbon-report-font;
+}
+
+.article .o_line_section td,
+.article tbody.o_line_section td,
+.article tr.o_line_section td {
+    border-top: 1px solid $carbon-border-strong;
+    border-bottom: 1px solid $carbon-border-strong;
+    background: $carbon-layer-01;
+    color: $carbon-text-primary;
+    font-weight: $carbon-font-weight-semibold;
+}
+
+.article .o_line_subsection td,
+.article tbody.o_line_subsection td,
+.article tr.o_line_subsection td {
+    background: $carbon-white;
+    color: $carbon-text-primary;
+    font-weight: $carbon-font-weight-semibold;
+}
+
+.article .o_line_subsection td:first-child,
+.article tbody.o_line_subsection td:first-child,
+.article tr.o_line_subsection td:first-child {
+    border-left: 3px solid $carbon-border-interactive;
+}
+
+.article .o_line_note td,
+.article tbody.o_line_note td,
+.article tr.o_line_note td {
+    background: $carbon-white;
+    color: $carbon-text-secondary;
+    font-style: italic;
+}
+
+.article tr.is-subtotal td,
+.article tbody.is-subtotal td {
+    border-top: 1px solid $carbon-border-strong;
+    border-bottom: 1px solid $carbon-border-strong;
+    background: $carbon-layer-01;
+    color: $carbon-text-primary;
+    font-weight: $carbon-font-weight-semibold;
+}
+
+.article tr.is-subtotal #subtotal,
+.article td#subtotal {
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+.article .o_total_table:not(.o_ignore_layout_styling) {
+    margin: 0;
+    border: 1px solid $carbon-border-subtle;
+    background: $carbon-layer-01;
+    font-size: 11px;
+}
+
+.article #total,
+.article .avoid-page-break-inside {
+    page-break-inside: avoid;
+}
+
+.article #total {
+    margin-top: 14px !important;
+}
+
+.article #right-elements {
+    page-break-inside: avoid;
+}
+
+.article .o_total_table:not(.o_ignore_layout_styling) td {
+    padding: 7px 10px;
+    border-bottom: 1px solid $carbon-border-subtle;
+    color: $carbon-text-primary;
+}
+
+.article .o_total_table:not(.o_ignore_layout_styling) tr:last-child td,
+.article .o_total_table:not(.o_ignore_layout_styling) tr.o_total td,
+.article .o_total_table:not(.o_ignore_layout_styling) .o_total td,
+.article .o_total_table:not(.o_ignore_layout_styling) tr.fw-bold td {
+    border-top: 2px solid $carbon-border-interactive;
+    border-bottom: 0;
+    background: $carbon-white;
+    color: $carbon-text-primary;
+    font-size: 12px;
+    font-weight: $carbon-font-weight-semibold;
+}
+
+.article .o_total_table:not(.o_ignore_layout_styling) strong {
+    font-weight: $carbon-font-weight-semibold;
+}
+
+.article #payment_term,
+.article #fiscal_position_remark,
+.article p[name="payment_term"],
+.article p[name="payment_communication"],
+.article p[name="note"],
+.article p[name="taxes_legal_notes"] {
+    color: $carbon-text-primary;
+}
+
+.article #payment_term {
+    margin-top: 18px !important;
+    padding: 10px 12px;
+    border-left: 3px solid $carbon-border-interactive;
+    background: $carbon-layer-01;
+    page-break-inside: avoid;
+}
+
+.article #payment_term p,
+.article #payment_term span,
+.article #payment_term div {
+    line-height: 1.4;
+}
+
+.article #payment_term p:last-child {
+    margin-bottom: 0;
+}
+
+.article p[name="order_note"],
+.article span[name="order_note"],
+.article #fiscal_position_remark {
+    display: block;
+    margin-top: 14px;
+    line-height: 1.45;
+}
+
+.article [name="signature"] {
+    margin-top: 24px !important;
+    padding: 12px;
+    border: 1px solid $carbon-border-subtle;
+    background: $carbon-layer-01;
+    page-break-inside: avoid;
+}
+
+.article [name="signature"] strong {
+    color: $carbon-text-secondary;
+    font-size: 9.5px;
+    font-weight: $carbon-font-weight-semibold;
+    letter-spacing: .32px;
+    text-transform: uppercase;
+}
+
+.article [name="signature"] img {
+    max-height: 3.2cm !important;
+    max-width: 7.2cm !important;
+}
+
+.article img[src*="/report/barcode"],
+.article .barcode,
+.article .o_barcode {
+    display: inline-block;
+    padding: 4px;
+    border: 1px solid $carbon-border-subtle;
+    background: $carbon-white;
+}
+
+.article .badge,
+.article .badge span {
+    border-radius: 0;
+    font-weight: $carbon-font-weight-semibold;
+}
+
+.article code,
+.article pre,
+.article .o_force_ltr {
+    font-family: $carbon-report-mono-font;
+}
+
+.footer {
+    color: $carbon-text-secondary;
+    font-family: $carbon-report-font;
+    font-size: 9.5px;
+    line-height: 1.35;
+}
+
+.footer .o_footer_content {
+    border-top: 1px solid $carbon-border-subtle !important;
+    padding-top: 8px !important;
+}
+
+.footer a {
+    color: $carbon-link-primary;
+}
+
+.o_report_layout_boxed,
+.o_report_layout_bold,
+.o_report_layout_striped,
+.o_report_layout_standard,
+.o_report_layout_folder,
+.o_report_layout_wave,
+.o_report_layout_bubble {
+    background-color: $carbon-white;
+}
+
+.o_report_layout_bold table:not(.o_ignore_layout_styling) thead th,
+.o_report_layout_striped table:not(.o_ignore_layout_styling) thead th,
+.o_report_layout_boxed table:not(.o_ignore_layout_styling) thead th,
+.o_report_layout_boxed-rounded table:not(.o_ignore_layout_styling) thead th {
+    border-top-color: $carbon-border-interactive !important;
+}
+
+.o_report_layout_boxed table:not(.o_ignore_layout_styling)::before,
+.o_report_layout_boxed-rounded table:not(.o_ignore_layout_styling)::before {
+    border-color: $carbon-border-subtle;
+    border-radius: 0;
+}
+
+.article .table-borderless > thead > tr > *,
+.article .table-borderless > tbody > tr > *,
+.article .table-borderless > tfoot > tr > * {
+    border-bottom-color: $carbon-border-subtle;
+}
+
+.article .overflow-hidden {
+    overflow: visible !important;
+}
+
+@media print {
+    .article table.table thead {
+        display: table-header-group;
+    }
+
+    .article table.table tfoot {
+        display: table-footer-group;
+    }
+
+    .article #total,
+    .article #payment_term,
+    .article [name="signature"] {
+        page-break-inside: avoid;
+    }
+}

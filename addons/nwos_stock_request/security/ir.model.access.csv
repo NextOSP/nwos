@@ -1,0 +1,16 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_stock_request_user,stock.request.user,model_stock_request,group_stock_request_user,1,1,1,0
+access_stock_request_approver,stock.request.approver,model_stock_request,group_stock_request_approver,1,1,1,0
+access_stock_request_manager,stock.request.manager,model_stock_request,group_stock_request_manager,1,1,1,1
+access_stock_request_line_user,stock.request.line.user,model_stock_request_line,group_stock_request_user,1,1,1,1
+access_stock_request_line_manager,stock.request.line.manager,model_stock_request_line,group_stock_request_manager,1,1,1,1
+access_stock_request_refuse,stock.request.refuse,model_stock_request_refuse,group_stock_request_approver,1,1,1,1
+access_stock_request_approval_user,stock.request.approval.user,model_stock_request_approval,group_stock_request_user,1,1,0,0
+access_stock_request_approval_approver,stock.request.approval.approver,model_stock_request_approval,group_stock_request_approver,1,1,1,1
+access_stock_request_approval_manager,stock.request.approval.manager,model_stock_request_approval,group_stock_request_manager,1,1,1,1
+access_stock_request_approval_rule_user,stock.request.approval.rule.user,model_stock_request_approval_rule,group_stock_request_user,1,0,0,0
+access_stock_request_approval_rule_manager,stock.request.approval.rule.manager,model_stock_request_approval_rule,group_stock_request_manager,1,1,1,1
+access_stock_request_approval_rule_step_user,stock.request.approval.rule.step.user,model_stock_request_approval_rule_step,group_stock_request_user,1,0,0,0
+access_stock_request_approval_rule_step_manager,stock.request.approval.rule.step.manager,model_stock_request_approval_rule_step,group_stock_request_manager,1,1,1,1
+access_stock_request_approval_auto_user,stock.request.approval.auto.user,model_stock_request_approval_auto,group_stock_request_user,1,0,0,0
+access_stock_request_approval_auto_manager,stock.request.approval.auto.manager,model_stock_request_approval_auto,group_stock_request_manager,1,1,1,1

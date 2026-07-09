@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nextosp-cron
+  namespace: nextosp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nextosp-cron
+  template:
+    metadata:
+      labels:
+        app: nextosp-cron
+    spec:
+      containers:
+        - name: cron
+          image: ghcr.io/nextosp/nwos:latest
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: NWOS_DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: nextosp-secret
+                  key: db-password
+          args:
+            - server
+            - -c
+            - /etc/nwos/nwos.conf
+            - --db_password=$(NWOS_DB_PASSWORD)
+            - --workers=0
+            - --max-cron-threads=2
+          volumeMounts:
+            - name: config
+              mountPath: /etc/nwos/nwos.conf
+              subPath: nwos.conf
+              readOnly: true
+            - name: data
+              mountPath: /var/lib/nwos
+          resources:
+            requests:
+              cpu: 500m
+              memory: 1Gi
+            limits:
+              cpu: "2"
+              memory: 4Gi
+      volumes:
+        - name: config
+          configMap:
+            name: nextosp-config
+        - name: data
+          persistentVolumeClaim:
+            claimName: nextosp-data

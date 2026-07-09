@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nwos>
+    <data noupdate="1">
+
+        <!-- A plain user only sees / edits their own requests -->
+        <record id="stock_request_rule_user_own" model="ir.rule">
+            <field name="name">Stock Request: own requests</field>
+            <field name="model_id" ref="model_stock_request"/>
+            <field name="domain_force">[('requester_id', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('group_stock_request_user'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+        </record>
+
+        <!-- Approvers and managers see every request of their companies -->
+        <record id="stock_request_rule_approver_all" model="ir.rule">
+            <field name="name">Stock Request: all company requests</field>
+            <field name="model_id" ref="model_stock_request"/>
+            <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+            <field name="groups" eval="[(4, ref('group_stock_request_approver'))]"/>
+        </record>
+
+        <!-- Multi-company isolation -->
+        <record id="stock_request_rule_company" model="ir.rule">
+            <field name="name">Stock Request: multi-company</field>
+            <field name="model_id" ref="model_stock_request"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+        </record>
+
+        <record id="stock_request_line_rule_company" model="ir.rule">
+            <field name="name">Stock Request Line: multi-company</field>
+            <field name="model_id" ref="model_stock_request_line"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+        </record>
+
+    </data>
+</nwos>

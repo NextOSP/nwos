@@ -1,0 +1,165 @@
+.o_crm_pls_tooltip {
+    min-width: 280px;
+
+    .o_crm_pls_tooltip_wheel {
+        height: 60px;
+        min-width: 60px;
+        font-size: 11px;
+        circle {
+            transform: rotate(-90deg);
+            transform-origin: 30px 30px;
+            stroke: $link-color;
+            &.o_crm_tooltip_wheel_bg_circle {
+                stroke: #ddd;
+            }
+        }
+        > * {
+            height: 60px;
+            width: 60px;
+        }
+    }
+    .o_crm_pls_tooltip_section_sample {
+        opacity: 0.5;
+    }
+
+    .o_crm_pls_tooltip_icon {
+        min-width: 15px;
+    }
+    .o_crm_pls_tooltip_footer {
+        font-size: 11px;
+    }
+
+    .o_crm_pls_tooltip_loading {
+        overflow: hidden;
+        position: relative;
+        width: 320px;
+        background:
+            linear-gradient(180deg, rgba(#78a9ff, 0.12), transparent 44%),
+            #ffffff;
+        border-left: 3px solid transparent;
+        border-image: linear-gradient(180deg, #8a3ffc, #0f62fe) 1;
+
+        &::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent, rgba(#0f62fe, 0.08), transparent);
+            animation: o_crm_pls_tooltip_ai_scan 1.6s linear infinite;
+            pointer-events: none;
+        }
+    }
+
+    .o_crm_pls_tooltip_loading_header,
+    .o_crm_pls_tooltip_loading_step {
+        position: relative;
+        z-index: 1;
+    }
+
+    .o_crm_pls_tooltip_loading_slug {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        height: 1.75rem;
+        min-width: 1.75rem;
+        color: #ffffff;
+        font-size: 0.75rem;
+        font-weight: 600;
+        background: linear-gradient(135deg, #8a3ffc 0%, #0f62fe 100%);
+    }
+
+    .o_crm_pls_tooltip_loading_beam {
+        position: relative;
+        z-index: 1;
+        height: 3px;
+        background: #e0e0e0;
+
+        &::after {
+            content: "";
+            display: block;
+            width: 42%;
+            height: 100%;
+            background: linear-gradient(90deg, #8a3ffc 0%, #0f62fe 70%, #78a9ff 100%);
+            animation: o_crm_pls_tooltip_ai_beam 1.2s ease-in-out infinite;
+        }
+    }
+
+    .o_crm_pls_tooltip_loading_step {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        min-height: 1.5rem;
+        color: #525252;
+        font-size: 0.8125rem;
+
+        > span:first-child {
+            width: 0.5rem;
+            height: 0.5rem;
+            background: #0f62fe;
+            opacity: 0.35;
+            animation: o_crm_pls_tooltip_ai_pulse 1.4s ease-in-out infinite;
+        }
+
+        &:nth-child(4) > span:first-child {
+            animation-delay: 0.18s;
+        }
+
+        &:nth-child(5) > span:first-child {
+            animation-delay: 0.36s;
+        }
+    }
+}
+
+.o_crm_pls_tooltip_button img {
+    height: 1rem;
+}
+
+.o_crm_pls_tooltip_button.o-is-loading {
+    cursor: progress;
+
+    img {
+        animation: o_crm_pls_tooltip_button_loading 1s ease-in-out infinite;
+    }
+}
+
+@keyframes o_crm_pls_tooltip_ai_scan {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+@keyframes o_crm_pls_tooltip_ai_beam {
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(140%);
+    }
+}
+
+@keyframes o_crm_pls_tooltip_ai_pulse {
+    0%,
+    100% {
+        opacity: 0.35;
+        transform: scale(0.8);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes o_crm_pls_tooltip_button_loading {
+    0%,
+    100% {
+        filter: saturate(1.1);
+        opacity: 0.65;
+    }
+    50% {
+        filter: saturate(1.4) drop-shadow(0 0 4px rgba(#0f62fe, 0.45));
+        opacity: 1;
+    }
+}
