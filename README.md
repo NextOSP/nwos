@@ -11,7 +11,7 @@ module system, report engine, background jobs, and HTTP/XML-RPC integration
 interfaces.
 
 NextOSP is a fork of [Flectra](https://gitlab.com/flectra-hq/flectra), which is
-itself a fork of [Odoo](https://github.com/odoo/odoo). See
+itself a fork of [Odoo Community Edition](https://github.com/odoo/odoo). See
 [Credits](#credits) for details.
 
 ![All Apps dashboard](docs/readme/all-app.png)
@@ -41,6 +41,14 @@ The request form tracks the full approval and purchasing history in the chatter,
 and surfaces the linked purchases and receipts right from the header.
 
 ![Stock Request detail with approval flow and chatter](docs/readme/detail.png)
+
+### IBM Carbon Design throughout
+
+The backend and frontend are themed with the
+[IBM Carbon Design System](https://carbondesignsystem.com/), giving NextOSP a
+clean, consistent, enterprise-grade look. Spreadsheet dashboards are rendered in
+Carbon style with [`@carbon/charts`](https://charts.carbondesignsystem.com/),
+so KPIs and reports match the rest of the interface out of the box.
 
 ## Documentation
 
@@ -179,10 +187,13 @@ Security issues should be reported privately as described in
 
 NextOSP builds on the work of the open-source ERP community:
 
-- [Odoo](https://github.com/odoo/odoo) — the original ERP/CRM platform on which
-  this lineage is based.
+- [Odoo Community Edition](https://github.com/odoo/odoo) — the original
+  open-source ERP/CRM platform on which this lineage is based.
 - [Flectra](https://gitlab.com/flectra-hq/flectra) — the community fork of Odoo
-  that NextOSP is derived from.
+  Community Edition that NextOSP is derived from.
+- [IBM Carbon Design System](https://carbondesignsystem.com/) and
+  [`@carbon/charts`](https://charts.carbondesignsystem.com/) — the design system
+  and charting library behind the NextOSP theme and dashboards.
 
 NextOSP is an independent project and is not affiliated with, sponsored by, or
 endorsed by Odoo S.A. or the Flectra project. "Odoo" and "Flectra" are the
