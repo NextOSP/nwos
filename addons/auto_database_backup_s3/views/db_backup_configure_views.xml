@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<nwos>
+    <record id="view_db_backup_configure_form_s3" model="ir.ui.view">
+        <field name="name">db.backup.configure.form.s3</field>
+        <field name="model">db.backup.configure</field>
+        <field name="inherit_id" ref="auto_database_backup.view_db_backup_configure_form"/>
+        <field name="arch" type="xml">
+            <group name="local_section" position="after">
+                <group string="Amazon S3 Configuration" name="s3_section" invisible="backup_destination != 'amazon_s3'">
+                    <group>
+                        <field name="s3_access_key" required="backup_destination == 'amazon_s3'"/>
+                        <field name="s3_secret_key" required="backup_destination == 'amazon_s3'" password="True"/>
+                        <field name="s3_bucket" required="backup_destination == 'amazon_s3'"/>
+                    </group>
+                    <group>
+                        <field name="s3_region" required="backup_destination == 'amazon_s3'"/>
+                        <field name="s3_folder"/>
+                        <field name="s3_endpoint_url" placeholder="Leave empty for AWS S3"/>
+                        <button name="test_s3_connection" type="object" string="Test Connection" icon="fa-television"/>
+                    </group>
+                </group>
+            </group>
+        </field>
+    </record>
+</nwos>
