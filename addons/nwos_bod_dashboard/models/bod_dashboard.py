@@ -370,11 +370,95 @@ class BodDashboard(models.AbstractModel):
         content = re.sub(r'`([^`\n]+)`', r'\1', content)
         return content
 
+    def _local_ai_answer(self, question, dashboard_context=None):
+        """Answer common dashboard prompts from the already-loaded KPI snapshot.
+
+        The BOD panel should feel immediate for the suggested questions. These
+        answers avoid the external provider entirely, so slow or unavailable AI
+        endpoints do not block the core dashboard experience.
+        """
+        context = dashboard_context if isinstance(dashboard_context, dict) else {}
+        text = (question or '').casefold()
+        sales = context.get('sales') if isinstance(context.get('sales'), dict) else {}
+        invoicing = context.get('invoicing') if isinstance(context.get('invoicing'), dict) else {}
+
+        if 'revenue' in text and any(token in text for token in ('trend', 'previous', 'period', 'vs')):
+            revenue = (sales.get('revenue') or {}).get('formatted')
+            delta = sales.get('revenue_delta')
+            orders = sales.get('order_count')
+            trend = sales.get('trend') if isinstance(sales.get('trend'), list) else []
+            if not revenue:
+                return self.env._("Revenue data is not available for the selected period.")
+            if delta is None:
+                direction = self.env._("has no comparable previous-period revenue")
+            elif delta > 0:
+                direction = self.env._("is up %(delta)s%% vs the previous period", delta=abs(delta))
+            elif delta < 0:
+                direction = self.env._("is down %(delta)s%% vs the previous period", delta=abs(delta))
+            else:
+                direction = self.env._("is flat vs the previous period")
+            parts = [
+                self.env._(
+                    "Revenue for %(period)s is %(revenue)s and %(direction)s.",
+                    period=context.get('period') or self.env._("the selected period"),
+                    revenue=revenue,
+                    direction=direction,
+                )
+            ]
+            if orders is not None:
+                parts.append(self.env._("Confirmed orders: %(orders)s.", orders=orders))
+            if trend:
+                first = trend[0]
+                last = trend[-1]
+                parts.append(self.env._(
+                    "Monthly trend runs from %(first_label)s (%(first_value)s) to %(last_label)s (%(last_value)s).",
+                    first_label=first.get('label') or self.env._("first month"),
+                    first_value=self._money(first.get('value') or 0.0)['formatted'],
+                    last_label=last.get('label') or self.env._("last month"),
+                    last_value=self._money(last.get('value') or 0.0)['formatted'],
+                ))
+            return " ".join(parts)
+
+        if 'top' in text and 'customer' in text:
+            customers = sales.get('top_customers') if isinstance(sales.get('top_customers'), list) else []
+            if not customers:
+                return self.env._("There are no top customers for the selected period.")
+            rows = [
+                f"{index}. {customer.get('name')}: {customer.get('formatted')}"
+                for index, customer in enumerate(customers[:5], start=1)
+            ]
+            return self.env._("Top customers this period: %(customers)s", customers="; ".join(rows))
+
+        if any(token in text for token in ('overdue', 'receivable', 'receivables')):
+            overdue = (invoicing.get('overdue') or {}).get('formatted')
+            overdue_count = invoicing.get('overdue_count')
+            unpaid = (invoicing.get('unpaid') or {}).get('formatted')
+            if not overdue:
+                return self.env._("Overdue receivables are not available for the selected dashboard.")
+            if unpaid:
+                return self.env._(
+                    "Overdue receivables are %(overdue)s across %(count)s invoice(s). Total unpaid receivables are %(unpaid)s.",
+                    overdue=overdue,
+                    count=overdue_count or 0,
+                    unpaid=unpaid,
+                )
+            return self.env._(
+                "Overdue receivables are %(overdue)s across %(count)s invoice(s).",
+                overdue=overdue,
+                count=overdue_count or 0,
+            )
+
+        return None
+
     @api.model
     def ask_ai(self, question, dashboard_context=None):
         question = (question or '').strip()
         if not question:
             return {'error': self.env._("Please type a question.")}
+
+        local_answer = self._local_ai_answer(question, dashboard_context=dashboard_context)
+        if local_answer:
+            return {'answer': local_answer}
 
         bot = self.env['mail.bot']
         settings = bot._ai_get_settings(profile='report')
