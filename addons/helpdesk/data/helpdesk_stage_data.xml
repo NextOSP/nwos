@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nwos noupdate="1">
+
+    <record id="stage_new" model="helpdesk.stage">
+        <field name="name">New</field>
+        <field name="sequence">1</field>
+        <field name="is_close">False</field>
+        <field name="is_solved">False</field>
+    </record>
+
+    <record id="stage_in_progress" model="helpdesk.stage">
+        <field name="name">In Progress</field>
+        <field name="sequence">2</field>
+        <field name="is_close">False</field>
+        <field name="is_solved">False</field>
+    </record>
+
+    <record id="stage_solved" model="helpdesk.stage">
+        <field name="name">Solved</field>
+        <field name="sequence">3</field>
+        <field name="is_close">True</field>
+        <field name="is_solved">True</field>
+    </record>
+
+    <record id="stage_closed" model="helpdesk.stage">
+        <field name="name">Closed</field>
+        <field name="sequence">4</field>
+        <field name="is_close">True</field>
+        <field name="is_solved">False</field>
+        <field name="fold">True</field>
+    </record>
+
+</nwos>

@@ -45,6 +45,7 @@ Features
         'web.assets_backend': [
             'nwos_stock_request/static/src/views/stock_request_dashboard.js',
             'nwos_stock_request/static/src/views/stock_request_dashboard.xml',
+            'nwos_stock_request/static/src/views/stock_request_dashboard.scss',
             'nwos_stock_request/static/src/views/stock_request_listview.js',
             'nwos_stock_request/static/src/views/stock_request_listview.xml',
         ],

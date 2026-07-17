@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nwos>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.mcp</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="inside">
+                <app data-string="MCP Gateway" string="MCP Gateway" name="mcp" groups="mcp.group_mcp_admin">
+                    <block title="Connecting" name="mcp_connect_settings">
+                        <setting id="mcp_endpoint_url_setting" string="Endpoint URL"
+                            help="Point your MCP client here and authenticate with a Bearer API key.">
+                            <field name="mcp_endpoint_url" readonly="1" widget="CopyClipboardChar"/>
+                        </setting>
+                        <setting id="mcp_connect_wizard_setting" string="Create API Key">
+                            <div class="mt8">
+                                <button name="%(mcp_connection_wizard_action)d" type="action"
+                                    string="Create API Key &amp; Connect" class="btn-primary"
+                                    icon="fa-plug"/>
+                            </div>
+                            <div class="text-muted mt8">
+                                One click generates an API key for your account and shows the exact
+                                command to connect your MCP client.
+                            </div>
+                        </setting>
+                        <setting id="mcp_connect_help_setting" string="How to connect">
+                            <div class="text-muted">
+                                No per-model setup is required. Every model is
+                                <strong>discoverable, readable, creatable and updatable</strong>
+                                by default; deletion stays opt-in per model.
+                                All access is still limited to the permissions of the
+                                <strong>user whose API key you use</strong> &#8212; MCP never grants
+                                more than that account already has.
+                                <br/>
+                                To connect: enable the gateway above, create an API key from
+                                <strong>your user account &#8250; Preferences &#8250; Account Security &#8250; New API Key</strong>,
+                                then point your MCP client at the endpoint URL and send the key as a
+                                <code>Bearer</code> token. Use <strong>Model Policies</strong> only to enable
+                                deletes, expose workflow methods, or restrict fields.
+                            </div>
+                        </setting>
+                    </block>
+                    <block title="Protocol" name="mcp_protocol_settings">
+                        <setting id="mcp_enabled_setting" string="Enable MCP Gateway"
+                            help="Accept authenticated Model Context Protocol requests at /mcp.">
+                            <field name="mcp_enabled"/>
+                        </setting>
+                        <setting id="mcp_allowed_origins_setting" string="Allowed Origins"
+                            help="Additional browser origins allowed to call /mcp, separated by commas.">
+                            <field name="mcp_allowed_origins" placeholder="https://one.example, https://two.example"/>
+                        </setting>
+                    </block>
+                    <block title="Request Limits" name="mcp_request_limits">
+                        <setting id="mcp_max_request_bytes_setting" string="Maximum Request Size"
+                            help="Maximum JSON request body size in bytes.">
+                            <field name="mcp_max_request_bytes"/>
+                        </setting>
+                        <setting id="mcp_max_response_bytes_setting" string="Maximum Response Size"
+                            help="Maximum JSON tool or resource result size in bytes.">
+                            <field name="mcp_max_response_bytes"/>
+                        </setting>
+                        <setting id="mcp_max_batch_size_setting" string="Maximum Batch Size"
+                            help="Maximum number of JSON-RPC messages accepted in one batch.">
+                            <field name="mcp_max_batch_size"/>
+                        </setting>
+                        <setting id="mcp_max_page_size_setting" string="Maximum Page Size"
+                            help="Upper bound for records returned by one paginated operation.">
+                            <field name="mcp_max_page_size"/>
+                        </setting>
+                        <setting id="mcp_execution_timeout_setting" string="Execution Timeout"
+                            help="Maximum execution time for one MCP request, in seconds.">
+                            <field name="mcp_execution_timeout"/>
+                        </setting>
+                    </block>
+                    <block title="Security and Retention" name="mcp_security_settings">
+                        <setting id="mcp_confirmation_ttl_setting" string="Confirmation Lifetime"
+                            help="Lifetime of delete and workflow confirmation tokens, in seconds.">
+                            <field name="mcp_confirmation_ttl"/>
+                        </setting>
+                        <setting id="mcp_download_ttl_setting" string="Download Lifetime"
+                            help="Lifetime of single-use binary download tokens, in seconds.">
+                            <field name="mcp_download_ttl"/>
+                        </setting>
+                        <setting id="mcp_audit_retention_days_setting" string="Audit Retention"
+                            help="Number of days to retain MCP audit metadata.">
+                            <field name="mcp_audit_retention_days"/>
+                        </setting>
+                        <setting id="mcp_administration_setting" string="MCP Administration"
+                            help="Optional: restrict specific models, and inspect audit activity.">
+                            <div class="content-group">
+                                <div class="row mt16">
+                                    <div class="col-6">
+                                        <button name="%(mcp_policy_action)d" type="action" string="Model Policies (advanced)"
+                                            icon="oi-arrow-right" class="btn-link"/>
+                                    </div>
+                                    <div class="col-6">
+                                        <button name="%(mcp_audit_log_action)d" type="action" string="Audit Logs"
+                                            icon="oi-arrow-right" class="btn-link"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </setting>
+                    </block>
+                </app>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="mcp_config_settings_action" model="ir.actions.act_window">
+        <field name="name">MCP Settings</field>
+        <field name="res_model">res.config.settings</field>
+        <field name="view_mode">form</field>
+        <field name="context">{'module': 'mcp', 'bin_size': False}</field>
+    </record>
+</nwos>

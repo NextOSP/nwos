@@ -36,6 +36,13 @@ class TestMailBotAI(TransactionCase):
         ]).unlink()
         self.user.sudo().lang = 'vi_VN'
         self._enable_ai()
+        # Ignore chat history already stored in the database (e.g. when the
+        # test suite runs on a database that was used interactively).
+        last_message = self.env['mail.message'].search(
+            [('model', '=', 'discuss.channel'), ('res_id', '=', self.channel.id)],
+            order='id desc', limit=1,
+        )
+        self._message_baseline_id = last_message.id or 0
 
     def _enable_ai(self):
         ICP = self.env['ir.config_parameter'].sudo()
@@ -53,6 +60,10 @@ class TestMailBotAI(TransactionCase):
 
     def _mock_ai_response(self, content=None, tool_calls=None):
         class Response:
+            headers = {'Content-Type': 'application/json; charset=utf-8'}
+            encoding = 'utf-8'
+            status_code = 200
+
             def raise_for_status(self):
                 return None
 
@@ -89,6 +100,7 @@ class TestMailBotAI(TransactionCase):
             ('model', '=', 'discuss.channel'),
             ('res_id', '=', self.channel.id),
             ('author_id', '=', self.nwosbot_partner.id),
+            ('id', '>', self._message_baseline_id),
         ], order='id desc', limit=1)
         return message
 
@@ -103,6 +115,109 @@ class TestMailBotAI(TransactionCase):
         self.assertEqual('gpt-test', mock_post.call_args.kwargs['json']['model'])
         self.assertIn('Hello from configured AI.', self._last_bot_body())
         self.assertEqual(1, mock_post.call_count, 'Bot-authored messages must not recursively call AI.')
+
+    def test_chat_completion_reconstructs_streamed_tool_calls(self):
+        events = [
+            {'choices': [{'delta': {'role': 'assistant', 'content': 'Checking '}}]},
+            {'choices': [{'delta': {'content': 'records.'}}]},
+            {'choices': [{'delta': {'tool_calls': [{
+                'index': 0,
+                'id': 'call_1',
+                'type': 'function',
+                'function': {'name': 'search_', 'arguments': '{"model":'},
+            }]}}]},
+            {'choices': [{'delta': {'tool_calls': [{
+                'index': 0,
+                'function': {'name': 'records', 'arguments': '"res.partner"}'},
+            }]}}]},
+        ]
+
+        class StreamResponse:
+            headers = {'Content-Type': 'text/event-stream; charset=utf-8'}
+            closed = False
+
+            def raise_for_status(self):
+                return None
+
+            def iter_lines(self, decode_unicode=False):
+                for event in events:
+                    yield 'data: %s' % json.dumps(event)
+                yield 'data: [DONE]'
+
+            def close(self):
+                self.closed = True
+
+        response = StreamResponse()
+        deltas = []
+        with patch('nwos.addons.mail_bot.models.mail_bot.requests.post') as mock_post:
+            mock_post.return_value = response
+            message = self.env['mail.bot']._ai_chat_completion(
+                self.env['mail.bot']._ai_get_settings(),
+                [{'role': 'user', 'content': 'Find records'}],
+                on_delta=deltas.append,
+            )
+
+        self.assertEqual(['Checking ', 'records.'], deltas)
+        self.assertEqual('Checking records.', message['content'])
+        self.assertEqual('call_1', message['tool_calls'][0]['id'])
+        self.assertEqual('search_records', message['tool_calls'][0]['function']['name'])
+        self.assertEqual(
+            {'model': 'res.partner'},
+            json.loads(message['tool_calls'][0]['function']['arguments']),
+        )
+        self.assertTrue(response.closed)
+        self.assertTrue(mock_post.call_args.kwargs['stream'])
+        self.assertTrue(mock_post.call_args.kwargs['json']['stream'])
+
+    def test_chat_completion_stream_can_abort_cooperatively(self):
+        class StreamResponse:
+            headers = {'Content-Type': 'text/event-stream'}
+            closed = False
+
+            def raise_for_status(self):
+                return None
+
+            def iter_lines(self, decode_unicode=False):
+                for delta in ('first', 'second'):
+                    yield 'data: %s' % json.dumps({
+                        'choices': [{'delta': {'content': delta}}],
+                    })
+
+            def close(self):
+                self.closed = True
+
+        response = StreamResponse()
+        deltas = []
+
+        def stop_after_first(delta):
+            deltas.append(delta)
+            return False
+
+        with patch('nwos.addons.mail_bot.models.mail_bot.requests.post') as mock_post:
+            mock_post.return_value = response
+            message = self.env['mail.bot']._ai_chat_completion(
+                self.env['mail.bot']._ai_get_settings(),
+                [{'role': 'user', 'content': 'Stop'}],
+                on_delta=stop_after_first,
+            )
+
+        self.assertEqual(['first'], deltas)
+        self.assertEqual('first', message['content'])
+        self.assertTrue(message['_stream_aborted'])
+        self.assertTrue(response.closed)
+
+    def test_chat_completion_stream_falls_back_to_json(self):
+        deltas = []
+        with patch('nwos.addons.mail_bot.models.mail_bot.requests.post') as mock_post:
+            mock_post.return_value = self._mock_ai_response(content='Fallback response')
+            message = self.env['mail.bot']._ai_chat_completion(
+                self.env['mail.bot']._ai_get_settings(),
+                [{'role': 'user', 'content': 'Hello'}],
+                on_delta=deltas.append,
+            )
+
+        self.assertEqual('Fallback response', message['content'])
+        self.assertEqual(['Fallback response'], deltas)
 
     def test_nextbot_strips_markdown_from_ai_text(self):
         with patch('nwos.addons.mail_bot.models.mail_bot.requests.post') as mock_post:
@@ -666,7 +781,7 @@ class TestMailBotAI(TransactionCase):
         self.assertNotIn('Bạn muốn dùng sản phẩm nào', body)
 
         messages = bot._ai_prepare_messages(self.channel, {}, 'Make Quotation Emily for Fees 15 pcs at $12.3')
-        self.assertIn('ERP UI language is English', messages[0]['content'])
+        self.assertIn('response language is English', messages[0]['content'])
 
     def test_vietnamese_sales_report_is_local_card(self):
         if 'sale.order' not in self.env:
@@ -802,3 +917,31 @@ class TestMailBotAI(TransactionCase):
         result_message = self._last_bot_message()
         self.assertIn('Đã đính kèm tệp', html2plaintext(result_message.body))
         self.assertIn('/web/content/%s?download=true' % attachment.id, result_message.body)
+
+    def test_workspace_can_generate_answer_without_posting_it(self):
+        values = {
+            'author_id': self.partner.id,
+            'body': '<p>Hi from the workspace</p>',
+            'message_type': 'comment',
+        }
+        with patch('nwos.addons.mail_bot.models.mail_bot.requests.post') as mock_post:
+            mock_post.return_value = self._mock_ai_response(content='Workspace answer')
+            answer = self.env['mail.bot']._nextbot_get_answer(
+                self.channel,
+                values,
+                'Hi from the workspace',
+            )
+
+        self.assertEqual('Workspace answer', answer)
+        self.assertFalse(self._last_bot_message())
+
+    def test_workspace_context_skips_legacy_reply(self):
+        with patch('nwos.addons.mail_bot.models.mail_bot.requests.post') as mock_post:
+            self.channel.with_user(self.user).with_context(nextbot_skip_legacy=True).message_post(
+                body=Markup('<p>Workspace owns this turn</p>'),
+                message_type='comment',
+                subtype_xmlid='mail.mt_comment',
+            )
+
+        self.assertFalse(mock_post.called)
+        self.assertFalse(self._last_bot_message())

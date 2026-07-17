@@ -1,0 +1,22 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_nextbot_conversation_user,nextbot.conversation user,model_nextbot_conversation,base.group_user,1,0,0,0
+access_nextbot_run_user,nextbot.run user,model_nextbot_run,base.group_user,1,0,0,0
+access_nextbot_run_event_user,nextbot.run.event user,model_nextbot_run_event,base.group_user,1,0,0,0
+access_nextbot_approval_user,nextbot.approval user,model_nextbot_approval,base.group_user,1,0,0,0
+access_nextbot_artifact_user,nextbot.artifact user,model_nextbot_artifact,base.group_user,1,0,0,0
+access_nextbot_run_step_user,nextbot.run.step user,model_nextbot_run_step,base.group_user,1,0,0,0
+access_nextbot_tool_execution_user,nextbot.tool.execution user,model_nextbot_tool_execution,base.group_user,1,0,0,0
+access_nextbot_memory_user,nextbot.memory user,model_nextbot_memory,base.group_user,1,1,1,1
+access_nextbot_org_rule_user,nextbot.org.rule user,model_nextbot_org_rule,base.group_user,1,0,0,0
+access_nextbot_knowledge_document_user,nextbot.knowledge.document user,model_nextbot_knowledge_document,base.group_user,1,0,0,0
+access_nextbot_conversation_system,nextbot.conversation system,model_nextbot_conversation,base.group_system,1,1,1,1
+access_nextbot_run_system,nextbot.run system,model_nextbot_run,base.group_system,1,1,1,1
+access_nextbot_run_event_system,nextbot.run.event system,model_nextbot_run_event,base.group_system,1,1,1,1
+access_nextbot_approval_system,nextbot.approval system,model_nextbot_approval,base.group_system,1,1,1,1
+access_nextbot_artifact_system,nextbot.artifact system,model_nextbot_artifact,base.group_system,1,1,1,1
+access_nextbot_run_step_system,nextbot.run.step system,model_nextbot_run_step,base.group_system,1,1,1,1
+access_nextbot_tool_execution_system,nextbot.tool.execution system,model_nextbot_tool_execution,base.group_system,1,1,1,1
+access_nextbot_memory_system,nextbot.memory system,model_nextbot_memory,base.group_system,1,1,1,1
+access_nextbot_org_rule_system,nextbot.org.rule system,model_nextbot_org_rule,base.group_system,1,1,1,1
+access_nextbot_knowledge_document_system,nextbot.knowledge.document system,model_nextbot_knowledge_document,base.group_system,1,1,1,1
+access_nextbot_knowledge_chunk_system,nextbot.knowledge.chunk system,model_nextbot_knowledge_chunk,base.group_system,1,1,1,1

@@ -1,0 +1,526 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="nextbot_workspace.CarbonIcon">
+        <svg t-att-class="iconClass" t-att-width="props.size || 20" t-att-height="props.size || 20"
+             viewBox="0 0 32 32" fill="currentColor" aria-hidden="true" focusable="false">
+            <t t-if="props.name === 'add'"><path d="M17 15V7h-2v8H7v2h8v8h2v-8h8v-2z"/></t>
+            <t t-elif="props.name === 'search'"><path d="m29 27.59-7.55-7.55A11 11 0 1 0 20.04 21.45L27.59 29zM4 13a9 9 0 1 1 9 9 9.01 9.01 0 0 1-9-9"/></t>
+            <t t-elif="props.name === 'menu'"><path d="M4 7h24v2H4zm0 8h24v2H4zm0 8h24v2H4z"/></t>
+            <t t-elif="props.name === 'close'"><path d="m17.41 16 7.3-7.29-1.42-1.42-7.29 7.3-7.29-7.3-1.42 1.42 7.3 7.29-7.3 7.29 1.42 1.42 7.29-7.3 7.29 7.3 1.42-1.42z"/></t>
+            <t t-elif="props.name === 'overflow'"><circle cx="8" cy="16" r="2"/><circle cx="16" cy="16" r="2"/><circle cx="24" cy="16" r="2"/></t>
+            <t t-elif="props.name === 'edit'"><path d="M2 26h28v2H2zm3.41-4 4.29-4.29 4.59 4.59L10 26H5.41zM11.12 16.29 22.59 4.83l4.58 4.58L15.71 20.88zM24 3.41l1.29-1.29a2 2 0 0 1 2.83 0l1.76 1.76a2 2 0 0 1 0 2.83L28.59 8z"/></t>
+            <t t-elif="props.name === 'archive'"><path d="M28 5H4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2v13a2 2 0 0 0 2 2h20a2 2 0 0 0 2-2V14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2M26 27H6V14h20zm2-15H4V7h24zM11 19h10v2H11z"/></t>
+            <t t-elif="props.name === 'trash'"><path d="M12 12h2v12h-2zm6 0h2v12h-2z"/><path d="M4 6v2h2v20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8h2V6zm4 22V8h16v20zM12 2h8v2h-8z"/></t>
+            <t t-elif="props.name === 'panel'"><path d="M28 4H4a2 2 0 0 0-2 2v20a2 2 0 0 0 2 2h24a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2m0 22H12V6h16zM5 9h4v2H5zm0 6h4v2H5zm0 6h4v2H5z"/></t>
+            <t t-elif="props.name === 'send'"><path d="M2 3a1 1 0 0 1 1.35-.94l27 13a1 1 0 0 1 0 1.8l-27 13A1 1 0 0 1 2 29.95V19l16-3L2 13zm2 2.59v5.75L23.5 15 4 5.59m0 20.77L23.5 17 4 20.66z"/></t>
+            <t t-elif="props.name === 'stop'"><path d="M7 7h18v18H7z"/></t>
+            <t t-elif="props.name === 'attachment'"><path d="M27.33 14.76 17.71 24.38a7 7 0 0 1-9.9-9.9L19.12 3.17a5 5 0 0 1 7.07 7.07L14.88 21.55a3 3 0 1 1-4.24-4.24l9.2-9.2 1.42 1.41-9.2 9.2a1 1 0 1 0 1.41 1.42l11.31-11.31a3 3 0 0 0-4.24-4.25L9.22 15.9a5 5 0 0 0 7.08 7.07l9.62-9.62z"/></t>
+            <t t-elif="props.name === 'copy'"><path d="M28 10H18a2 2 0 0 0-2 2v4h-4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4h4a2 2 0 0 0 2-2V12a2 2 0 0 0-2-2m-6 18H12V18h10zm6-6h-4v-4a2 2 0 0 0-2-2h-4v-4h10zM8 4h6V2H8a6 6 0 0 0-6 6v6h2V8a4 4 0 0 1 4-4"/></t>
+            <t t-elif="props.name === 'regenerate'"><path d="M25.95 10.6A12 12 0 1 0 28 17h-2a10 10 0 1 1-1.64-5.48L20 16h10V6z"/></t>
+            <t t-elif="props.name === 'activity'"><path d="M2 17h6.28l3.34-10.02a1 1 0 0 1 1.89-.04L18.72 21l2.33-7.34A1 1 0 0 1 22 13h8v2h-7.27l-2.77 8.66a1 1 0 0 1-1.9.03L12.64 10 9.95 18.32A1 1 0 0 1 9 19H2z"/></t>
+            <t t-elif="props.name === 'tool'"><path d="M28.7 22.3 19 12.6a8 8 0 0 0-9.9-9.9l4.6 4.6-3.4 3.4-4.6-4.6a8 8 0 0 0 9.9 9.9l9.7 9.7a2.4 2.4 0 1 0 3.4-3.4M27.3 26.3a.4.4 0 0 1-.6 0L16.4 16a8 8 0 0 0 2.6-2.6l10.3 10.3a.4.4 0 0 1 0 .6z"/></t>
+            <t t-elif="props.name === 'source'"><path d="M29.25 6.76a6 6 0 0 0-8.49 0l-4.24 4.24 1.42 1.41 4.24-4.24a4 4 0 0 1 5.66 5.66l-5.66 5.66a4 4 0 0 1-5.66 0l-1.41 1.42a6 6 0 0 0 8.49 0l5.65-5.66a6 6 0 0 0 0-8.49"/><path d="m14.06 19.59-4.24 4.24a4 4 0 0 1-5.66-5.66l5.66-5.66a4 4 0 0 1 5.66 0l1.41-1.42a6 6 0 0 0-8.49 0l-5.65 5.66a6 6 0 0 0 8.49 8.49L15.48 21z"/></t>
+            <t t-elif="props.name === 'artifact'"><path d="M25.7 9.3 18.7 2.3A1 1 0 0 0 18 2H6a2 2 0 0 0-2 2v24a2 2 0 0 0 2 2h20a2 2 0 0 0 2-2V10a1 1 0 0 0-.3-.7M18 4.4l7.6 7.6H18zM26 28H6V4h10v10h10z"/></t>
+            <t t-elif="props.name === 'download'"><path d="m16 22 7-7-1.41-1.41L17 18.17V2h-2v16.17l-4.59-4.58L9 15z"/><path d="M26 24v4H6v-4H4v4a2 2 0 0 0 2 2h20a2 2 0 0 0 2-2v-4z"/></t>
+            <t t-elif="props.name === 'check'"><path d="m13 24-9-9 1.41-1.41L13 21.17 26.59 7.59 28 9z"/></t>
+            <t t-elif="props.name === 'warning'"><path d="M16 2a14 14 0 1 0 14 14A14 14 0 0 0 16 2m0 26a12 12 0 1 1 12-12 12 12 0 0 1-12 12"/><path d="M15 8h2v11h-2zm0 13h2v2h-2z"/></t>
+            <t t-elif="props.name === 'record'"><path d="M26 4H6a2 2 0 0 0-2 2v20a2 2 0 0 0 2 2h20a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2m0 22H6V6h20z"/><path d="M9 9h14v2H9zm0 6h14v2H9zm0 6h9v2H9z"/></t>
+            <t t-elif="props.name === 'chevron-right'"><path d="m12 26 10-10L12 6l-1.41 1.41L19.17 16l-8.58 8.59z"/></t>
+            <t t-elif="props.name === 'chevron-left'"><path d="m20 26 1.41-1.41L12.83 16l8.58-8.59L20 6 10 16z"/></t>
+            <t t-else=""><path d="M16 2a14 14 0 1 0 14 14A14 14 0 0 0 16 2m1 21h-2v-2h2zm2.1-8.75-.9.92A3.5 3.5 0 0 0 17 18h-2v-.5a4.5 4.5 0 0 1 1.32-3.18l1.24-1.26A2.5 2.5 0 1 0 13.5 11H11a5 5 0 1 1 8.1 3.25"/></t>
+        </svg>
+    </t>
+
+    <t t-name="nextbot_workspace.ConversationList">
+        <aside class="o_nextbot_history" aria-label="Conversation history">
+            <header class="o_nextbot_history__header">
+                <div class="o_nextbot_brand">
+                    <span class="o_nextbot_brand__mark" aria-hidden="true">
+                        <img src="/nextbot_workspace/static/description/icon.svg" alt=""/>
+                    </span>
+                    <div><strong>NextBot</strong></div>
+                </div>
+                <button t-if="props.onClose" class="o_nextbot_icon_button o_nextbot_mobile_only" type="button"
+                        title="Close history" aria-label="Close conversation history" t-on-click="props.onClose">
+                    <CarbonIcon name="'close'"/>
+                </button>
+            </header>
+            <div class="o_nextbot_history__controls">
+                <button class="o_nextbot_primary_button" type="button" t-on-click="props.onNew">
+                    <CarbonIcon name="'add'"/><span>New conversation</span>
+                </button>
+                <label class="o_nextbot_search">
+                    <span class="visually-hidden">Search conversations</span>
+                    <CarbonIcon name="'search'"/>
+                    <input type="search" placeholder="Search history" autocomplete="off"
+                           t-att-value="props.search" t-on-input="(event) => props.onSearch(event.target.value)"/>
+                </label>
+            </div>
+            <div class="o_nextbot_history__label">Recent</div>
+            <div class="o_nextbot_conversation_list" role="listbox" aria-label="Recent conversations">
+                <t t-if="props.loading">
+                    <div t-foreach="[1, 2, 3, 4, 5]" t-as="skeleton" t-key="skeleton" class="o_nextbot_conversation_skeleton" aria-hidden="true">
+                        <span/><span/>
+                    </div>
+                    <span class="visually-hidden" role="status">Loading conversations</span>
+                </t>
+                <t t-elif="!props.conversations.length">
+                    <div class="o_nextbot_history__empty">
+                        <CarbonIcon name="'search'" size="24"/>
+                        <p t-if="props.search">No conversations match “<t t-esc="props.search"/>”.</p>
+                        <p t-else="">Your conversations will appear here.</p>
+                    </div>
+                </t>
+                <div t-foreach="props.conversations" t-as="conversation" t-key="conversation.id"
+                     t-attf-class="o_nextbot_conversation {{conversation.id === props.activeId ? 'is-active' : ''}}"
+                     role="option" t-att-aria-selected="conversation.id === props.activeId ? 'true' : 'false'">
+                    <t t-if="conversation.id === props.renamingId">
+                        <label class="o_nextbot_conversation__rename">
+                            <span class="visually-hidden">Conversation title</span>
+                            <input type="text" maxlength="120" autofocus="autofocus"
+                                   t-att-value="props.renameDraft"
+                                   t-on-input="(event) => props.onRenameInput(event.target.value)"
+                                   t-on-blur="() => props.onCommitRename(conversation)"
+                                   t-on-keydown="(event) => props.onRenameKeydown(conversation, event)"/>
+                        </label>
+                    </t>
+                    <t t-else="">
+                        <button class="o_nextbot_conversation__select" type="button"
+                                t-on-click="() => props.onSelect(conversation.id)">
+                            <span class="o_nextbot_conversation__title" t-esc="conversation.title"/>
+                            <span class="o_nextbot_conversation__meta">
+                                <span class="o_nextbot_conversation__preview" t-esc="conversation.preview"/>
+                                <span t-if="conversation.updatedAt" t-esc="relative(conversation.updatedAt)"/>
+                            </span>
+                        </button>
+                        <button class="o_nextbot_conversation__more" type="button" title="Conversation options"
+                                aria-label="Conversation options"
+                                t-att-aria-expanded="conversation.id === props.menuId ? 'true' : 'false'"
+                                t-on-click.stop="() => props.onToggleMenu(conversation.id)">
+                            <CarbonIcon name="'overflow'"/>
+                        </button>
+                        <div t-if="conversation.id === props.menuId" class="o_nextbot_conversation_menu" role="menu">
+                            <button role="menuitem" type="button" t-on-click="() => props.onStartRename(conversation)">
+                                <CarbonIcon name="'edit'" size="16"/><span>Rename</span>
+                            </button>
+                            <button role="menuitem" type="button"
+                                    t-att-disabled="isProtected(conversation)"
+                                    t-att-title="isProtected(conversation) ? 'Stop the active run before archiving this conversation' : 'Archive conversation'"
+                                    t-on-click="() => props.onArchive(conversation)">
+                                <CarbonIcon name="'archive'" size="16"/><span>Archive</span>
+                            </button>
+                            <button role="menuitem" type="button" class="is-danger"
+                                    t-att-disabled="isProtected(conversation)"
+                                    t-att-title="isProtected(conversation) ? 'Stop the active run before deleting this conversation' : 'Delete conversation'"
+                                    t-on-click="() => props.onDelete(conversation)">
+                                <CarbonIcon name="'trash'" size="16"/><span>Delete</span>
+                            </button>
+                        </div>
+                    </t>
+                </div>
+            </div>
+        </aside>
+    </t>
+
+    <t t-name="nextbot_workspace.ResultCard">
+        <article t-attf-class="o_nextbot_result_card o_nextbot_result_card--{{kind}}">
+            <div class="o_nextbot_result_card__accent" aria-hidden="true"/>
+            <header class="o_nextbot_result_card__header">
+                <span class="o_nextbot_result_card__icon">
+                    <CarbonIcon t-if="kind === 'approval' &amp;&amp; approvalState === 'approved'" name="'check'"/>
+                    <CarbonIcon t-elif="kind === 'approval'" name="'warning'"/>
+                    <CarbonIcon t-elif="kind === 'artifact'" name="'artifact'"/>
+                    <CarbonIcon t-elif="kind === 'error'" name="'warning'"/>
+                    <CarbonIcon t-else="" name="'record'"/>
+                </span>
+                <div><strong t-esc="title"/><span t-if="subtitle" t-esc="subtitle"/></div>
+                <span t-if="kind === 'approval'" t-attf-class="o_nextbot_status o_nextbot_status--{{approvalState}}" t-esc="approvalState"/>
+            </header>
+
+            <t t-if="kind === 'approval'">
+                <t t-if="preview and preview.type === 'quotation'">
+                    <div class="o_nextbot_quote">
+                        <div><span>Customer</span><strong t-esc="preview.customer || '—'"/></div>
+                        <div t-if="preview.formatted_total" class="o_nextbot_quote__total"><span>Total</span><strong t-esc="preview.formatted_total"/></div>
+                    </div>
+                    <div t-if="previewLines.length" class="o_nextbot_quote_lines">
+                        <div t-foreach="previewLines" t-as="line" t-key="line_index" class="o_nextbot_quote_line">
+                            <div>
+                                <strong t-esc="line.name || 'Product'"/>
+                                <small><t t-esc="line.quantity"/> × <t t-esc="line.price_unit"/></small>
+                            </div>
+                            <span t-esc="line.subtotal"/>
+                        </div>
+                    </div>
+                </t>
+                <t t-elif="preview and preview.type === 'mass_update'">
+                    <div class="o_nextbot_approval_details">
+                        <dl>
+                            <dt>Model</dt><dd t-esc="preview.model_label || preview.model"/>
+                            <dt>Records</dt><dd t-esc="preview.count"/>
+                            <dt t-if="previewSample.length">Sample</dt><dd t-if="previewSample.length" t-esc="previewSample.join(', ') + (preview.count > previewSample.length ? '…' : '')"/>
+                        </dl>
+                        <dl t-if="previewValues.length" class="o_nextbot_record_fields" style="padding: 0; margin-top: 8px;">
+                            <t t-foreach="previewValues" t-as="field" t-key="field.key">
+                                <dt t-esc="field.label"/><dd t-esc="field.value"/>
+                            </t>
+                        </dl>
+                    </div>
+                </t>
+                <t t-elif="approvalOperations.length">
+                    <div class="o_nextbot_approval_batch">
+                        <section t-foreach="approvalOperations" t-as="operation" t-key="operation.id">
+                            <header t-if="approvalOperations.length > 1">
+                                <strong t-esc="approvalOperationTitle(operation)"/>
+                                <span t-esc="approvalOperationStatus(operation)"/>
+                            </header>
+                            <div t-if="showApprovalDetails &amp;&amp; operation.sample.length" class="o_nextbot_approval_batch__items">
+                                <button t-foreach="operation.sample" t-as="item" t-key="item_index" type="button"
+                                        t-attf-class="o_nextbot_approval_batch__item {{canOpenApprovalItem(operation, item) ? 'is-clickable' : ''}}"
+                                        t-att-disabled="!canOpenApprovalItem(operation, item)"
+                                        t-att-title="canOpenApprovalItem(operation, item) ? 'Open this ERP product' : ''"
+                                        t-on-click="() => this.openApprovalItem(operation, item)">
+                                    <CarbonIcon name="'record'" size="16"/>
+                                    <div>
+                                        <strong t-esc="approvalItemName(item)"/>
+                                        <small t-if="approvalItemMeta(item)" t-esc="approvalItemMeta(item)"/>
+                                    </div>
+                                    <CarbonIcon t-if="canOpenApprovalItem(operation, item)" name="'chevron-right'" size="16"/>
+                                </button>
+                            </div>
+                            <small t-if="showApprovalDetails &amp;&amp; operation.count > operation.sample.length" class="o_nextbot_approval_batch__more">
+                                And <t t-esc="operation.count - operation.sample.length"/> more records
+                            </small>
+                            <div t-if="showApprovalDetails &amp;&amp; operation.skippedSample.length" class="o_nextbot_approval_batch__skipped">
+                                <strong t-esc="approvalState === 'approved' ? 'Duplicates skipped' : 'Will not create duplicates'"/>
+                                <div t-foreach="operation.skippedSample" t-as="item" t-key="item_index" class="o_nextbot_approval_batch__item is-skipped">
+                                    <CarbonIcon name="'check'" size="16"/>
+                                    <div>
+                                        <strong t-esc="approvalSkippedName(item)"/>
+                                        <small t-esc="approvalSkippedMeta(item)"/>
+                                    </div>
+                                </div>
+                                <small t-if="operation.skippedCount > operation.skippedSample.length" class="o_nextbot_approval_batch__more">
+                                    And <t t-esc="operation.skippedCount - operation.skippedSample.length"/> more existing records
+                                </small>
+                            </div>
+                            <button t-if="!canResolve &amp;&amp; operation.sample.length" type="button"
+                                    class="o_nextbot_approval_batch__toggle"
+                                    t-att-aria-expanded="state.approvalDetailsOpen ? 'true' : 'false'"
+                                    t-on-click="toggleApprovalDetails">
+                                <span t-esc="approvalDetailsLabel(operation)"/>
+                                <CarbonIcon name="state.approvalDetailsOpen ? 'chevron-left' : 'chevron-right'" size="16"/>
+                            </button>
+                        </section>
+                    </div>
+                </t>
+                <div t-else="" class="o_nextbot_approval_details">
+                    <dl>
+                        <t t-if="(props.card.operation || props.card.action || props.card.tool) &amp;&amp; props.card.tool !== '__batch__'">
+                            <dt>Operation</dt><dd t-esc="props.card.operation || props.card.action || props.card.tool"/>
+                        </t>
+                        <t t-if="props.card.record_name || props.card.target">
+                            <dt>Record</dt><dd t-esc="props.card.record_name || props.card.target"/>
+                        </t>
+                        <t t-if="props.card.expires_at">
+                            <dt>Expires</dt><dd t-esc="props.card.expires_at"/>
+                        </t>
+                    </dl>
+                </div>
+                <footer class="o_nextbot_result_card__actions" t-if="canResolve">
+                    <button type="button" class="o_nextbot_secondary_button"
+                            t-on-click="() => props.onApproval(props.card, 'reject')">Reject</button>
+                    <button type="button" class="o_nextbot_primary_button"
+                            t-on-click="() => props.onApproval(props.card, 'approve')">
+                        <CarbonIcon name="'check'" size="16"/>Approve
+                    </button>
+                </footer>
+                <t t-else="">
+                    <div t-if="approvalState !== 'approved' || !approvalOperations.length" class="o_nextbot_approval_resolved">
+                        <CarbonIcon t-if="approvalState === 'approved'" name="'check'" size="16"/>
+                        <span t-esc="approvalResolutionLabel()"/>
+                    </div>
+                </t>
+            </t>
+
+            <t t-elif="kind === 'quotation'">
+                <div class="o_nextbot_quote">
+                    <div><span>Customer</span><strong t-esc="props.card.customer || props.card.partner_name || '—'"/></div>
+                    <div t-if="props.card.reference || props.card.number"><span>Reference</span><strong t-esc="props.card.reference || props.card.number"/></div>
+                    <div t-if="total" class="o_nextbot_quote__total"><span>Total</span><strong t-esc="total"/></div>
+                </div>
+                <div t-if="quoteLines.length" class="o_nextbot_quote_lines">
+                    <div t-foreach="quoteLines" t-as="line" t-key="line_index" class="o_nextbot_quote_line">
+                        <div>
+                            <strong t-esc="line.name || line.product_name || 'Product'"/>
+                            <small><t t-esc="line.quantity"/> × <t t-esc="line.price_unit || line.unit_price"/></small>
+                        </div>
+                        <span t-esc="line.subtotal"/>
+                    </div>
+                </div>
+                <button t-if="props.card.res_model &amp;&amp; props.card.res_id" type="button" class="o_nextbot_link_button"
+                        t-on-click="() => props.onOpenRecord(props.card)">Open quotation <CarbonIcon name="'chevron-right'" size="16"/></button>
+            </t>
+
+            <t t-elif="kind === 'artifact'">
+                <div class="o_nextbot_artifact_summary">
+                    <div><span t-esc="fileKind"/><small t-if="props.card.size" t-esc="formatBytes(props.card.size)"/></div>
+                    <a t-if="href" t-att-href="href" target="_blank" rel="noopener noreferrer" class="o_nextbot_primary_button" title="Download file">
+                        <CarbonIcon name="'download'" size="16"/><span>Download</span>
+                    </a>
+                </div>
+            </t>
+
+            <t t-elif="rows.length">
+                <div class="o_nextbot_table_scroll">
+                    <table>
+                        <thead><tr><th t-foreach="columns" t-as="column" t-key="column.key" t-esc="column.label"/></tr></thead>
+                        <tbody>
+                            <tr t-foreach="rows" t-as="row" t-key="row_index"
+                                t-att-class="canOpenRow(row) ? 'is-clickable' : ''"
+                                t-att-title="canOpenRow(row) ? 'Open record' : undefined"
+                                t-on-click="() => this.openRow(row)">
+                                <td t-foreach="columns" t-as="column" t-key="column.key" t-esc="fieldValue(row, column)"/>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div t-if="(props.card.rows || props.card.data || []).length > rows.length" class="o_nextbot_card_note">Showing the first <t t-esc="rows.length"/> rows.</div>
+            </t>
+
+            <t t-else="">
+                <p t-if="textContent" class="o_nextbot_card_text" t-esc="textContent"/>
+                <dl t-if="fields.length" class="o_nextbot_record_fields">
+                    <t t-foreach="fields" t-as="field" t-key="field.key">
+                        <dt t-esc="field.label"/><dd t-esc="field.value"/>
+                    </t>
+                </dl>
+                <button t-if="props.card.res_model &amp;&amp; props.card.res_id" type="button" class="o_nextbot_link_button"
+                        t-on-click="() => props.onOpenRecord(props.card)">Open record <CarbonIcon name="'chevron-right'" size="16"/></button>
+            </t>
+        </article>
+    </t>
+
+    <t t-name="nextbot_workspace.MessageBubble">
+        <article t-attf-class="o_nextbot_message o_nextbot_message--{{isAssistant ? 'assistant' : 'user'}}"
+                 t-att-aria-label="isAssistant ? 'NextBot message' : 'Your message'">
+            <div t-if="isAssistant" class="o_nextbot_message__avatar" aria-hidden="true">
+                <img src="/nextbot_workspace/static/description/icon.svg" alt=""/>
+            </div>
+            <div class="o_nextbot_message__column">
+                <div t-if="isAssistant" class="o_nextbot_message__meta">
+                    <strong>NextBot</strong>
+                    <span t-if="time" t-esc="time"/>
+                </div>
+                <div t-if="props.message.content" class="o_nextbot_message__body" t-out="body"/>
+                <div t-if="props.message.status === 'streaming' &amp;&amp; !props.message.content" class="o_nextbot_thinking" role="status" aria-label="NextBot is working">
+                    <span/><span/><span/><em>Working</em>
+                </div>
+                <div t-if="props.message.status === 'cancelled'" class="o_nextbot_inline_notice">Response stopped</div>
+                <div t-if="props.message.status === 'error'" class="o_nextbot_inline_notice is-error">
+                    <CarbonIcon name="'warning'" size="16"/><span t-esc="props.message.error || 'The response could not be completed.'"/>
+                </div>
+                <div t-if="props.message.attachments.length" class="o_nextbot_message_attachments">
+                    <t t-foreach="props.message.attachments" t-as="attachment" t-key="attachment.id || attachment_index">
+                        <a t-if="attachmentHref(attachment)" t-att-href="attachmentHref(attachment)" target="_blank" rel="noopener noreferrer">
+                            <CarbonIcon name="'attachment'" size="16"/><span t-esc="attachmentName(attachment)"/>
+                        </a>
+                        <span t-else=""><CarbonIcon name="'attachment'" size="16"/><span t-esc="attachmentName(attachment)"/></span>
+                    </t>
+                </div>
+                <div t-if="actionCards.length" class="o_nextbot_message_cards">
+                    <ResultCard t-foreach="actionCards" t-as="card" t-key="card.id || card_index"
+                                card="card" onApproval.bind="props.onApproval" onOpenRecord.bind="props.onOpenRecord"/>
+                </div>
+                <div t-if="props.message.sources.length" class="o_nextbot_message_sources">
+                    <span t-foreach="props.message.sources" t-as="source" t-key="source.id || source_index">
+                        <CarbonIcon name="'source'" size="14"/><t t-esc="source.title || source.name || 'Source'"/>
+                    </span>
+                </div>
+                <div t-if="isAssistant &amp;&amp; props.message.status !== 'streaming' &amp;&amp; props.message.content" class="o_nextbot_message__actions">
+                    <button type="button" class="o_nextbot_icon_button" title="Copy response" aria-label="Copy response"
+                            t-on-click="() => props.onCopy(props.message)"><CarbonIcon name="'copy'" size="16"/></button>
+                    <button t-if="props.isLastAssistant" type="button" class="o_nextbot_icon_button" title="Regenerate response" aria-label="Regenerate response"
+                            t-on-click="() => props.onRegenerate(props.message)"><CarbonIcon name="'regenerate'" size="16"/></button>
+                </div>
+            </div>
+        </article>
+    </t>
+
+    <t t-name="nextbot_workspace.ActivityInspector">
+        <aside class="o_nextbot_inspector" aria-label="Run details">
+            <header class="o_nextbot_inspector__header">
+                <div><span class="o_nextbot_eyebrow">Transparent activity</span><strong>Run details</strong></div>
+                <button class="o_nextbot_icon_button" type="button" title="Close details" aria-label="Close run details" t-on-click="props.onClose">
+                    <CarbonIcon name="'close'"/>
+                </button>
+            </header>
+            <nav class="o_nextbot_inspector_tabs" aria-label="Run detail categories">
+                <button t-att-class="props.tab === 'activity' ? 'is-active' : ''" type="button"
+                        t-att-aria-selected="props.tab === 'activity' ? 'true' : 'false'" t-on-click="() => props.onSelectTab('activity')">
+                    Activity <span t-esc="props.events.length"/>
+                </button>
+                <button t-att-class="props.tab === 'tools' ? 'is-active' : ''" type="button"
+                        t-att-aria-selected="props.tab === 'tools' ? 'true' : 'false'" t-on-click="() => props.onSelectTab('tools')">
+                    Tools <span t-esc="props.tools.length"/>
+                </button>
+                <button t-att-class="props.tab === 'sources' ? 'is-active' : ''" type="button"
+                        t-att-aria-selected="props.tab === 'sources' ? 'true' : 'false'" t-on-click="() => props.onSelectTab('sources')">
+                    Sources <span t-esc="props.sources.length"/>
+                </button>
+                <button t-att-class="props.tab === 'artifacts' ? 'is-active' : ''" type="button"
+                        t-att-aria-selected="props.tab === 'artifacts' ? 'true' : 'false'" t-on-click="() => props.onSelectTab('artifacts')">
+                    Artifacts <span t-esc="props.artifacts.length"/>
+                </button>
+            </nav>
+            <div class="o_nextbot_inspector__body">
+                <div t-if="props.running &amp;&amp; props.tab === 'activity'" class="o_nextbot_run_live" role="status">
+                    <span class="o_nextbot_live_dot"/> Run in progress
+                </div>
+                <div t-if="!items.length" class="o_nextbot_inspector_empty">
+                    <CarbonIcon t-if="props.tab === 'tools'" name="'tool'" size="28"/>
+                    <CarbonIcon t-elif="props.tab === 'sources'" name="'source'" size="28"/>
+                    <CarbonIcon t-elif="props.tab === 'artifacts'" name="'artifact'" size="28"/>
+                    <CarbonIcon t-else="" name="'activity'" size="28"/>
+                    <strong>Nothing here yet</strong>
+                    <p t-if="props.tab === 'activity'">Safe progress updates appear while NextBot works. Private model reasoning is never exposed.</p>
+                    <p t-elif="props.tab === 'tools'">Tool calls and their redacted results appear here.</p>
+                    <p t-elif="props.tab === 'sources'">Sources used for this answer appear here.</p>
+                    <p t-else="">Generated files and structured outputs appear here.</p>
+                </div>
+
+                <t t-if="props.tab === 'activity' || props.tab === 'tools'">
+                    <div t-foreach="items" t-as="event" t-key="event.id || event_index" class="o_nextbot_activity_item">
+                        <div t-attf-class="o_nextbot_activity_item__marker is-{{kind(event)}}">
+                            <CarbonIcon t-if="kind(event) === 'tool'" name="'tool'" size="16"/>
+                            <CarbonIcon t-elif="kind(event) === 'approval'" name="'warning'" size="16"/>
+                            <CarbonIcon t-elif="kind(event) === 'artifact'" name="'artifact'" size="16"/>
+                            <CarbonIcon t-elif="kind(event) === 'error'" name="'warning'" size="16"/>
+                            <CarbonIcon t-elif="kind(event) === 'complete'" name="'check'" size="16"/>
+                            <CarbonIcon t-else="" name="'activity'" size="16"/>
+                        </div>
+                        <div class="o_nextbot_activity_item__content">
+                            <div><strong t-esc="label(event)"/><time t-if="event.createdAt" t-esc="clock(event.createdAt)"/></div>
+                            <p t-if="event.rationale_summary" t-esc="event.rationale_summary"/>
+                            <details t-if="details(event)">
+                                <summary>View redacted details</summary><pre t-esc="details(event)"/>
+                            </details>
+                            <ResultCard t-if="kind(event) === 'approval' &amp;&amp; hasApprovalCard(event)" card="approvalCard(event)"
+                                        onApproval.bind="props.onApproval" onOpenRecord.bind="props.onOpenRecord"/>
+                        </div>
+                    </div>
+                </t>
+
+                <t t-elif="props.tab === 'sources'">
+                    <article t-foreach="items" t-as="source" t-key="source.id || source_index" class="o_nextbot_source_card">
+                        <span class="o_nextbot_source_card__number" t-esc="source_index + 1"/>
+                        <div><strong t-esc="source.title || source.name || source.label || 'Source'"/><p t-if="source.snippet || source.summary" t-esc="source.snippet || source.summary"/></div>
+                        <a t-if="sourceHref(source)" t-att-href="sourceHref(source)" target="_blank" rel="noopener noreferrer" aria-label="Open source">
+                            <CarbonIcon name="'chevron-right'" size="18"/>
+                        </a>
+                    </article>
+                </t>
+
+                <t t-else="">
+                    <article t-foreach="items" t-as="artifact" t-key="artifact.id || artifact_index" class="o_nextbot_artifact_card">
+                        <span><CarbonIcon name="'artifact'"/></span>
+                        <div><strong t-esc="artifact.title || artifact.name || 'Artifact'"/><small t-esc="artifact.mime_type || artifact.mimetype || artifact.type || 'Generated output'"/></div>
+                        <a t-if="artifactHref(artifact)" t-att-href="artifactHref(artifact)" target="_blank" rel="noopener noreferrer" aria-label="Open artifact">
+                            <CarbonIcon name="'download'" size="18"/>
+                        </a>
+                    </article>
+                </t>
+            </div>
+        </aside>
+    </t>
+
+    <t t-name="nextbot_workspace.TaskProgress">
+        <aside class="o_nextbot_task" aria-label="Current task progress">
+            <header class="o_nextbot_task__header">
+                <div>
+                    <span class="o_nextbot_eyebrow">Task plan</span>
+                    <strong t-esc="props.task.goal || 'Current task'"/>
+                </div>
+                <span t-attf-class="o_nextbot_task__status is-{{props.status}}">
+                    <span t-if="!isTerminal" class="o_nextbot_live_dot"/><t t-esc="statusLabel"/>
+                </span>
+            </header>
+            <div class="o_nextbot_task__progress" role="progressbar" aria-label="Task progress"
+                 aria-valuemin="0" aria-valuemax="100" t-att-aria-valuenow="progress.percent || 0">
+                <span t-att-style="`width: ${progress.percent || 0}%`"/>
+            </div>
+            <div class="o_nextbot_task__summary">
+                <span><t t-esc="progress.completed || 0"/> of <t t-esc="progress.total || steps.length"/> steps complete</span>
+                <span t-if="props.task.plan_revision">Plan revision <t t-esc="props.task.plan_revision"/></span>
+            </div>
+            <ol t-if="steps.length" class="o_nextbot_task__steps">
+                <li t-foreach="steps" t-as="step" t-key="step.id || step.key"
+                    t-attf-class="is-{{step.status || 'pending'}}">
+                    <span class="o_nextbot_task__step_icon">
+                        <CarbonIcon t-if="step.status === 'completed'" name="'check'" size="14"/>
+                        <CarbonIcon t-elif="step.status === 'failed'" name="'warning'" size="14"/>
+                        <CarbonIcon t-else="" name="'activity'" size="14"/>
+                    </span>
+                    <span class="o_nextbot_task__step_text">
+                        <strong t-esc="step.title || step.objective || 'Plan step'"/>
+                        <small t-esc="stepLabel(step)"/>
+                    </span>
+                </li>
+            </ol>
+            <div t-if="canContinue || !isTerminal" class="o_nextbot_task__actions">
+                <button t-if="canContinue" type="button" class="o_nextbot_primary_button" t-on-click="props.onContinue">
+                    Continue task
+                </button>
+                <button t-if="!isTerminal" type="button" class="o_nextbot_secondary_button" t-on-click="props.onStop">
+                    Stop
+                </button>
+            </div>
+        </aside>
+    </t>
+
+    <t t-name="nextbot_workspace.NextBotComposer">
+        <div t-attf-class="o_nextbot_composer_shell {{state.dragging ? 'is-dragging' : ''}}"
+             t-on-dragover="onDragOver" t-on-dragleave="onDragLeave" t-on-drop="onDrop">
+            <div t-if="state.dragging" class="o_nextbot_drop_overlay" role="status">
+                <CarbonIcon name="'attachment'" size="28"/><strong>Drop files to add them</strong>
+            </div>
+            <div t-if="props.attachments.length" class="o_nextbot_attachment_tray" aria-label="Selected attachments">
+                <div t-foreach="props.attachments" t-as="attachment" t-key="attachment.localId" t-attf-class="o_nextbot_attachment_chip is-{{attachment.status}}">
+                    <span class="o_nextbot_attachment_chip__icon">
+                        <img t-if="attachment.previewUrl" t-att-src="attachment.previewUrl" alt=""/>
+                        <CarbonIcon t-else="" name="'attachment'" size="16"/>
+                    </span>
+                    <div><strong t-esc="attachment.name"/><small><t t-esc="formatBytes(attachment.size)"/><t t-if="attachment.error"> · <span t-esc="attachment.error"/></t></small></div>
+                    <button type="button" title="Remove attachment" aria-label="Remove attachment"
+                            t-on-click="() => props.onRemoveAttachment(attachment.localId)"><CarbonIcon name="'close'" size="16"/></button>
+                    <span t-if="attachment.status === 'uploading'" class="o_nextbot_attachment_progress" t-att-style="`--progress: ${attachment.progress || 0}%`"/>
+                </div>
+            </div>
+            <div class="o_nextbot_composer">
+                <input t-ref="files" type="file" class="visually-hidden" multiple="multiple" t-on-change="onFileInput"/>
+                <button type="button" class="o_nextbot_icon_button o_nextbot_composer__attach" title="Attach files" aria-label="Attach files"
+                        t-att-disabled="props.sending" t-on-click="openFilePicker">
+                    <CarbonIcon name="'attachment'"/>
+                </button>
+                <label class="o_nextbot_composer__input">
+                    <span class="visually-hidden">Message NextBot</span>
+                    <textarea t-ref="input" rows="1" maxlength="32000" t-att-value="props.draft"
+                              t-att-placeholder="props.running ? 'Update the current task…' : 'Message NextBot…'"
+                              t-att-disabled="props.sending || props.disabled"
+                              aria-describedby="o_nextbot_composer_hint" spellcheck="true"
+                              t-on-input="onComposerInput" t-on-keydown="onKeydown" t-on-paste="onPaste"/>
+                </label>
+                <button t-if="props.running &amp;&amp; !props.draft.trim() &amp;&amp; !props.attachments.length" type="button" class="o_nextbot_send_button is-stop" title="Stop task" aria-label="Stop task"
+                        t-on-click="props.onStop"><CarbonIcon name="'stop'" size="18"/></button>
+                <button t-else="" type="button" class="o_nextbot_send_button" title="Send message" aria-label="Send message"
+                        t-att-disabled="props.sending || props.disabled || (!props.draft.trim() &amp;&amp; !props.attachments.length)"
+                        t-on-click="submit"><CarbonIcon name="'send'" size="18"/></button>
+            </div>
+            <div id="o_nextbot_composer_hint" class="o_nextbot_composer_hint">
+                <span t-if="props.running">New messages update this task · Enter to send</span>
+                <span t-else="">Enter to send · Shift+Enter for a new line</span>
+                <span>NextBot can make mistakes. Verify important ERP changes.</span>
+            </div>
+        </div>
+    </t>
+</templates>

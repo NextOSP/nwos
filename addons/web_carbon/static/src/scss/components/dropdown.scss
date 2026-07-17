@@ -69,9 +69,13 @@
         > a,
         > .dropdown-item {
             flex: 1 1 auto;
-            display: flex;
-            align-items: center;
+            // Keep the option contents in normal inline flow. Search matches
+            // are wrapped in <mark>; making the anchor a flex container turns
+            // the surrounding text into separate anonymous flex items and
+            // drops boundary spaces ("Phường An" became "PhườngAn").
+            display: block;
             min-height: 40px;
+            line-height: 40px;
             margin: 0;
             // Align the option text with the typed text: form inputs sit at 12px
             // (spacing-04), so options do too instead of the 16px list-box gutter.

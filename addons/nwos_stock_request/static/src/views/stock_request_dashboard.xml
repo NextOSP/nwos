@@ -24,38 +24,35 @@
             <div class="row g-2">
                 <div class="col" t-on-click="setSearchContext"
                      t-att-filter_name="my ? 'draft,my' : 'draft'">
-                    <a href="#" class="btn w-100 p-2 text-start bg-secondary-subtle text-secondary-emphasis">
+                    <a href="#" class="btn w-100 p-2 text-start o_stock_request_dashboard_card o_stock_request_dashboard_card_draft">
                         <div t-attf-class="{{ my ? '' : 'fs-3' }}" t-out="data[scope]['draft']"/>
                         <span t-if="!my">Draft</span>
                     </a>
                 </div>
                 <div class="col" t-on-click="setSearchContext"
                      t-att-filter_name="my ? 'to_approve,my' : 'to_approve'">
-                    <a href="#" class="btn w-100 p-2 text-start"
-                       t-attf-class="{{ data[scope]['to_approve'] == 0 ? 'bg-secondary-subtle text-secondary-emphasis' : 'bg-info-subtle text-info-emphasis' }}">
+                    <a href="#" class="btn w-100 p-2 text-start o_stock_request_dashboard_card o_stock_request_dashboard_card_to_approve">
                         <div t-attf-class="{{ my ? '' : 'fs-3' }}" t-out="data[scope]['to_approve']"/>
                         <span t-if="!my">To Approve</span>
                     </a>
                 </div>
                 <div class="col" t-on-click="setSearchContext"
                      t-att-filter_name="'awaiting'">
-                    <a href="#" class="btn w-100 p-2 text-start"
-                       t-attf-class="{{ data[scope]['awaiting'] == 0 ? 'bg-secondary-subtle text-secondary-emphasis' : 'bg-warning-subtle text-warning-emphasis' }}">
+                    <a href="#" class="btn w-100 p-2 text-start o_stock_request_dashboard_card o_stock_request_dashboard_card_awaiting">
                         <div t-attf-class="{{ my ? '' : 'fs-3' }}" t-out="data[scope]['awaiting']"/>
                         <span t-if="!my">Awaiting My Approval</span>
                     </a>
                 </div>
                 <div class="col" t-on-click="setSearchContext"
                      t-att-filter_name="my ? 'approved,my' : 'approved'">
-                    <a href="#" class="btn w-100 p-2 text-start"
-                       t-attf-class="{{ data[scope]['approved'] == 0 ? 'bg-secondary-subtle text-secondary-emphasis' : 'bg-success-subtle text-success-emphasis' }}">
+                    <a href="#" class="btn w-100 p-2 text-start o_stock_request_dashboard_card o_stock_request_dashboard_card_approved">
                         <div t-attf-class="{{ my ? '' : 'fs-3' }}" t-out="data[scope]['approved']"/>
                         <span t-if="!my">Approved</span>
                     </a>
                 </div>
                 <div class="col" t-on-click="setSearchContext"
                      t-att-filter_name="my ? 'done,my' : 'done'">
-                    <a href="#" class="btn w-100 p-2 text-start bg-secondary-subtle text-secondary-emphasis">
+                    <a href="#" class="btn w-100 p-2 text-start o_stock_request_dashboard_card o_stock_request_dashboard_card_purchased">
                         <div t-attf-class="{{ my ? '' : 'fs-3' }}" t-out="data[scope]['done']"/>
                         <span t-if="!my">Purchased</span>
                     </a>

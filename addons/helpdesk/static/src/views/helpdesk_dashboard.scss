@@ -1,0 +1,67 @@
+// IBM Carbon styling — tokens from web_carbon (carbon_tokens.scss)
+$hd-ink: #161616; // gray-100
+$hd-border: #e0e0e0; // gray-20
+$hd-muted: #525252; // gray-70
+$hd-blue: #0f62fe; // interactive
+$hd-blue-hover: #0043ce;
+$hd-red: #da1e28; // error
+$hd-tile-bg: #f4f4f4; // gray-10
+
+.o_helpdesk_dashboard {
+    background-color: #ffffff;
+    border-bottom: 1px solid $hd-border;
+    color: $hd-ink;
+
+    .fw-bold.fs-5 {
+        font-weight: 600;
+        letter-spacing: 0.16px;
+    }
+
+    .o_helpdesk_dashboard_card {
+        background-color: $hd-blue;
+        border-radius: 0; // Carbon: sharp corners
+        border-left: 3px solid $hd-blue-hover;
+        transition: background-color 0.11s cubic-bezier(0.2, 0, 0.38, 0.9);
+
+        &:hover {
+            background-color: $hd-blue-hover;
+        }
+    }
+
+    .o_helpdesk_dashboard_failed {
+        color: $hd-red;
+    }
+
+    .text-muted {
+        color: $hd-muted !important;
+    }
+}
+
+// Team cards on the Overview kanban
+.o_helpdesk_dashboard_kanban {
+    .o_kanban_record {
+        border: 1px solid $hd-border;
+        border-radius: 0;
+        box-shadow: none;
+
+        &:hover {
+            border-color: #c6c6c6; // gray-30
+        }
+
+        .btn-primary {
+            background-color: $hd-blue;
+            border-color: $hd-blue;
+            border-radius: 0;
+
+            &:hover {
+                background-color: $hd-blue-hover;
+                border-color: $hd-blue-hover;
+            }
+        }
+
+        .text-primary { color: $hd-blue !important; }
+        .text-danger { color: $hd-red !important; }
+        .text-warning { color: #8d6708 !important; }
+        .text-success { color: #24a148 !important; }
+    }
+}

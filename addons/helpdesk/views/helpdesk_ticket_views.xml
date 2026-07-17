@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nwos>
+
+    <record id="view_helpdesk_ticket_search" model="ir.ui.view">
+        <field name="name">helpdesk.ticket.search</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="arch" type="xml">
+            <search string="Helpdesk Tickets">
+                <field name="name" string="Ticket" filter_domain="['|', ('name', 'ilike', self), ('ticket_ref', 'ilike', self)]"/>
+                <field name="partner_id"/>
+                <field name="partner_email"/>
+                <field name="user_id"/>
+                <field name="team_id"/>
+                <field name="stage_id"/>
+                <field name="tag_ids"/>
+                <filter string="My Tickets" name="my_tickets" domain="[('user_id', '=', uid)]"/>
+                <filter string="Followed" name="followed" domain="[('message_is_follower', '=', True)]"/>
+                <filter string="Unassigned" name="unassigned" domain="[('user_id', '=', False)]"/>
+                <separator/>
+                <filter string="Open" name="open" domain="[('is_closed', '=', False)]"/>
+                <filter string="Closed" name="closed" domain="[('is_closed', '=', True)]"/>
+                <filter string="Urgent" name="urgent" domain="[('priority', '=', '3')]"/>
+                <separator/>
+                <filter string="Failed SLA" name="failed_sla" domain="[('sla_fail', '=', True)]"/>
+                <filter string="SLA in Progress" name="sla_in_progress" domain="[('sla_deadline', '!=', False)]"/>
+                <separator/>
+                <filter string="Late Activities" name="activities_overdue" domain="[('my_activity_date_deadline', '&lt;', 'today')]"/>
+                <separator/>
+                <filter string="Creation Date" name="filter_create_date" date="create_date"/>
+                <filter string="Closing Date" name="filter_closed_date" date="closed_date"/>
+                <separator/>
+                <filter string="Archived" name="archived" domain="[('active', '=', False)]"/>
+                <group>
+                    <filter string="Team" name="group_team" context="{'group_by': 'team_id'}"/>
+                    <filter string="Assigned to" name="group_user" context="{'group_by': 'user_id'}"/>
+                    <filter string="Stage" name="group_stage" context="{'group_by': 'stage_id'}"/>
+                    <filter string="Priority" name="group_priority" context="{'group_by': 'priority'}"/>
+                    <filter string="Customer" name="group_partner" context="{'group_by': 'partner_id'}"/>
+                    <filter string="Kanban State" name="group_kanban_state" context="{'group_by': 'kanban_state'}"/>
+                    <filter string="Creation Date" name="group_create_date" context="{'group_by': 'create_date'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_helpdesk_ticket_list" model="ir.ui.view">
+        <field name="name">helpdesk.ticket.list</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="arch" type="xml">
+            <list string="Helpdesk Tickets" multi_edit="1" sample="1"
+                  decoration-danger="sla_fail" decoration-muted="is_closed">
+                <field name="ticket_ref" optional="show" readonly="1"/>
+                <field name="name" readonly="1"/>
+                <field name="partner_id"/>
+                <field name="team_id"/>
+                <field name="user_id" widget="many2one_avatar_user"/>
+                <field name="stage_id"/>
+                <field name="kanban_state" widget="state_selection" optional="hide"/>
+                <field name="priority" widget="priority" optional="show"/>
+                <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}" optional="show"/>
+                <field name="sla_deadline" optional="show"/>
+                <field name="create_date" optional="show" readonly="1"/>
+                <field name="closed_date" optional="hide" readonly="1"/>
+                <field name="close_hours" widget="float_time" optional="hide"/>
+                <field name="sla_fail" optional="hide"/>
+                <field name="company_id" groups="base.group_multi_company" optional="hide"/>
+                <field name="activity_ids" widget="list_activity" optional="hide"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_helpdesk_ticket_form" model="ir.ui.view">
+        <field name="name">helpdesk.ticket.form</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="arch" type="xml">
+            <form string="Helpdesk Ticket">
+                <header>
+                    <button name="assign_ticket_to_self" string="Assign to Me" type="object"
+                            invisible="user_id or is_closed"/>
+                    <button name="action_close_ticket" string="Close" type="object"
+                            class="oe_highlight" invisible="is_closed"/>
+                    <button name="action_reopen_ticket" string="Reopen" type="object"
+                            invisible="not is_closed"/>
+                    <field name="stage_id" widget="statusbar" options="{'clickable': '1'}"/>
+                </header>
+                <sheet>
+                    <field name="active" invisible="1"/>
+                    <field name="use_sla" invisible="1"/>
+                    <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger" invisible="active"/>
+                    <div class="oe_title">
+                        <h1 class="d-flex align-items-center gap-2">
+                            <field name="priority" widget="priority" class="me-2"/>
+                            <field name="name" placeholder="Ticket Subject..."/>
+                        </h1>
+                        <div class="text-muted" invisible="not ticket_ref">
+                            <field name="ticket_ref" readonly="1" nolabel="1"/>
+                        </div>
+                    </div>
+                    <group>
+                        <group name="customer">
+                            <field name="partner_id" context="{'show_email': True, 'show_phone': True}"/>
+                            <field name="partner_name" invisible="partner_id"/>
+                            <field name="partner_email"/>
+                            <field name="partner_phone" widget="phone"/>
+                        </group>
+                        <group name="organisation">
+                            <field name="team_id"/>
+                            <field name="user_id" widget="many2one_avatar_user"/>
+                            <field name="kanban_state" widget="state_selection"/>
+                            <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                            <field name="sla_deadline" invisible="not use_sla" readonly="1"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Description" name="description">
+                            <field name="description" placeholder="Describe the issue..."/>
+                        </page>
+                        <page string="SLA" name="sla" invisible="not use_sla">
+                            <group>
+                                <group string="Time Spent">
+                                    <field name="open_hours" string="Total Open Time" widget="float_time"/>
+                                    <field name="assign_hours" string="Time to First Assignment" widget="float_time"/>
+                                    <field name="close_hours" string="Time to Close" widget="float_time"
+                                           invisible="not is_closed"/>
+                                </group>
+                                <group string="Deadlines">
+                                    <field name="create_date" string="Created on" readonly="1"/>
+                                    <field name="sla_deadline" readonly="1"/>
+                                    <field name="sla_fail" string="SLA Failed" readonly="1"/>
+                                </group>
+                            </group>
+                            <field name="sla_status_ids" readonly="1">
+                                <list string="SLA Statuses">
+                                    <field name="sla_id"/>
+                                    <field name="sla_stage_id"/>
+                                    <field name="deadline"/>
+                                    <field name="reached_datetime"/>
+                                    <field name="reached_hours" string="Time to Reach" widget="float_time"/>
+                                    <field name="exceeded_hours" string="Exceeded by" widget="float_time"/>
+                                    <field name="status" decoration-success="status == 'reached'"
+                                           decoration-danger="status == 'failed'"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Extra Info" name="extra_info">
+                            <group>
+                                <group string="Dates">
+                                    <field name="create_date" readonly="1"/>
+                                    <field name="assign_date" readonly="1"/>
+                                    <field name="closed_date" readonly="1"/>
+                                </group>
+                                <group string="Performance">
+                                    <field name="assign_hours" widget="float_time"/>
+                                    <field name="close_hours" widget="float_time"/>
+                                    <field name="open_hours" widget="float_time"/>
+                                    <field name="sla_fail" readonly="1"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_helpdesk_ticket_kanban" model="ir.ui.view">
+        <field name="name">helpdesk.ticket.kanban</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="stage_id" quick_create="true" sample="1"
+                    quick_create_view="helpdesk.view_helpdesk_ticket_quick_create">
+                <field name="color"/>
+                <field name="sla_fail"/>
+                <field name="sla_deadline"/>
+                <templates>
+                    <t t-name="card">
+                        <div class="d-flex flex-column">
+                            <div class="d-flex justify-content-between">
+                                <span class="fw-bold"><field name="name"/></span>
+                                <span class="text-muted small">#<field name="ticket_ref"/></span>
+                            </div>
+                            <div class="text-muted"><field name="partner_id"/></div>
+                            <div class="mt-1">
+                                <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                            </div>
+                            <div class="mt-2 d-flex justify-content-between align-items-center">
+                                <div class="d-flex align-items-center gap-2">
+                                    <field name="priority" widget="priority"/>
+                                    <field name="activity_ids" widget="kanban_activity"/>
+                                </div>
+                                <div class="d-flex align-items-center gap-2">
+                                    <span t-if="record.sla_fail.raw_value" class="badge text-bg-danger">Failed SLA</span>
+                                    <field name="kanban_state" widget="state_selection"/>
+                                    <field name="user_id" widget="many2one_avatar_user"/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="view_helpdesk_ticket_quick_create" model="ir.ui.view">
+        <field name="name">helpdesk.ticket.form.quick_create</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="name" placeholder="Subject"/>
+                    <field name="partner_id"/>
+                    <field name="team_id"/>
+                    <field name="priority" widget="priority"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_helpdesk_ticket_activity" model="ir.ui.view">
+        <field name="name">helpdesk.ticket.activity</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="arch" type="xml">
+            <activity string="Helpdesk Tickets">
+                <templates>
+                    <div t-name="activity-box">
+                        <div class="flex-grow-1">
+                            <field name="name" display="full" class="o_text_block o_text_bold"/>
+                            <div class="d-flex justify-content-between">
+                                <field name="partner_id" muted="1" display="full"/>
+                                <field name="user_id" widget="many2one_avatar_user"/>
+                            </div>
+                        </div>
+                    </div>
+                </templates>
+            </activity>
+        </field>
+    </record>
+
+    <record id="view_helpdesk_ticket_pivot" model="ir.ui.view">
+        <field name="name">helpdesk.ticket.pivot</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="arch" type="xml">
+            <pivot string="Tickets Analysis" sample="1">
+                <field name="team_id" type="row"/>
+                <field name="stage_id" type="col"/>
+                <field name="close_hours" type="measure"/>
+                <field name="assign_hours" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="view_helpdesk_ticket_graph" model="ir.ui.view">
+        <field name="name">helpdesk.ticket.graph</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="arch" type="xml">
+            <graph string="Tickets Analysis" type="bar" sample="1">
+                <field name="create_date" interval="day"/>
+                <field name="team_id"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="action_helpdesk_ticket_all" model="ir.actions.act_window">
+        <field name="name">Tickets</field>
+        <field name="res_model">helpdesk.ticket</field>
+        <field name="view_mode">kanban,list,form,activity,graph,pivot</field>
+        <field name="search_view_id" ref="view_helpdesk_ticket_search"/>
+        <field name="context">{'search_default_open': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new ticket
+            </p>
+            <p>
+                Track customer issues from intake to resolution, with SLA deadlines and customer ratings.
+            </p>
+        </field>
+    </record>
+
+    <record id="action_helpdesk_ticket_my" model="ir.actions.act_window">
+        <field name="name">My Tickets</field>
+        <field name="res_model">helpdesk.ticket</field>
+        <field name="view_mode">kanban,list,form,activity</field>
+        <field name="search_view_id" ref="view_helpdesk_ticket_search"/>
+        <field name="context">{'search_default_my_tickets': 1, 'search_default_open': 1}</field>
+    </record>
+
+</nwos>

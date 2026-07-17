@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nwos>
+
+    <!--
+        Language fix: honor an explicit `report_lang` context key (set by the
+        Review and Export dialog) and fall back to the customer's language when
+        it is absent, so the default behavior is unchanged.
+
+        As an *extension* of the base document, this patch is also applied to the
+        `report_saleorder_image_document` primary variant below (Flectra combines
+        base + extensions + primary diff), so it must not be duplicated there.
+    -->
+    <template id="report_saleorder_document_report_lang" inherit_id="sale.report_saleorder_document">
+        <xpath expr="//t[@t-set='doc']" position="replace">
+            <t t-set="report_lang" t-value="env.context.get('report_lang') or doc.partner_id.lang"/>
+            <t t-set="doc" t-value="doc.with_context(lang=report_lang)"/>
+        </xpath>
+    </template>
+
+    <!-- Use the selected language for the static template terms too. -->
+    <template id="report_saleorder_raw_report_lang" inherit_id="sale.report_saleorder_raw">
+        <xpath expr="//t[@t-call='sale.report_saleorder_document']" position="attributes">
+            <attribute name="t-lang">env.context.get('report_lang') or doc.partner_id.lang</attribute>
+        </xpath>
+    </template>
+
+    <template id="report_saleorder_pro_forma_report_lang" inherit_id="sale.report_saleorder_pro_forma">
+        <xpath expr="//t[@t-call='sale.report_saleorder_document']" position="attributes">
+            <attribute name="t-lang">env.context.get('report_lang') or doc.partner_id.lang</attribute>
+        </xpath>
+    </template>
+
+    <!--
+        Same language fix for customer invoices/credit notes. Patching the single
+        `lang` variable is enough: it drives both the `t-lang` of the t-call and
+        the `o.with_context(lang=lang)` inside report_invoice_document.
+    -->
+    <template id="report_invoice_report_lang" inherit_id="account.report_invoice">
+        <xpath expr="//t[@t-set='lang']" position="replace">
+            <t t-set="lang" t-value="env.context.get('report_lang') or o.partner_id.lang"/>
+        </xpath>
+    </template>
+
+    <!--
+        "Quotation with Image": the same clean layout as the standard Quotation,
+        rendered with show_images=True so each product row shows a thumbnail. It
+        reuses report_saleorder_clean_document (no separate layout to maintain).
+    -->
+    <template id="report_saleorder_image">
+        <t t-call="web.html_container">
+            <t t-foreach="docs.with_context(show_images=True)" t-as="doc">
+                <t t-call="nwos_sale_report_image.report_saleorder_clean_document"
+                   t-lang="env.context.get('report_lang') or doc.partner_id.lang"/>
+            </t>
+        </t>
+    </template>
+
+</nwos>

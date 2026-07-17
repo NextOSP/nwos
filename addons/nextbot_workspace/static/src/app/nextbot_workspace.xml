@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="nextbot_workspace.NextBotWorkspace">
+        <div t-attf-class="o_action o_nextbot_workspace {{state.historyOpen ? 'is-history-open' : ''}} {{state.inspectorOpen ? 'is-inspector-open' : ''}}">
+            <ConversationList
+                conversations="filteredConversations"
+                activeId="state.activeConversationId"
+                search="state.search"
+                loading="state.loadingConversations"
+                menuId="state.conversationMenuId"
+                renamingId="state.renamingConversationId"
+                renameDraft="state.renameDraft"
+                protectedId="state.activeRun?.conversationId"
+                onSearch.bind="onSearch"
+                onNew.bind="createConversation"
+                onSelect.bind="selectConversation"
+                onToggleMenu.bind="toggleConversationMenu"
+                onStartRename.bind="startRename"
+                onRenameInput.bind="(value) => state.renameDraft = value"
+                onCommitRename.bind="commitRename"
+                onRenameKeydown.bind="onRenameKeydown"
+                onArchive.bind="archiveConversation"
+                onDelete.bind="deleteConversation"
+                onClose.bind="() => state.historyOpen = false"/>
+
+            <main class="o_nextbot_chat" aria-label="NextBot conversation">
+                <header class="o_nextbot_chat_header">
+                    <div class="o_nextbot_chat_header__start">
+                        <button type="button" class="o_nextbot_icon_button o_nextbot_history_toggle" title="Open history" aria-label="Open conversation history"
+                                t-on-click="() => state.historyOpen = true">
+                            <CarbonIcon name="'menu'"/>
+                        </button>
+                        <div class="o_nextbot_chat_title">
+                            <div><h1 t-esc="currentTitle"/></div>
+                            <p t-if="isRunning">
+                                <span class="o_nextbot_live_dot"/> <t t-esc="runStatusLabel"/>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="o_nextbot_chat_header__end">
+                        <span t-if="state.runConnection === 'reconnecting'" class="o_nextbot_connection_notice" role="status">
+                            Reconnecting…
+                        </span>
+                        <button type="button" t-attf-class="o_nextbot_details_button {{state.inspectorOpen ? 'is-active' : ''}}"
+                                t-att-aria-expanded="state.inspectorOpen ? 'true' : 'false'"
+                                t-on-click="() => state.inspectorOpen = !state.inspectorOpen">
+                            <CarbonIcon name="'panel'" size="18"/><span>Details</span>
+                            <span t-if="activityEvents.length" class="o_nextbot_count" t-esc="activityEvents.length"/>
+                        </button>
+                    </div>
+                </header>
+
+                <div t-if="state.error" class="o_nextbot_error_banner" role="alert">
+                    <CarbonIcon name="'warning'" size="18"/>
+                    <span t-esc="state.error"/>
+                    <button type="button" t-on-click="bootstrap">Retry</button>
+                    <button type="button" class="o_nextbot_icon_button" title="Dismiss" aria-label="Dismiss error" t-on-click="() => state.error = null">
+                        <CarbonIcon name="'close'" size="16"/>
+                    </button>
+                </div>
+
+                <div t-ref="messageScroll" class="o_nextbot_message_scroll" tabindex="-1" t-on-scroll="onMessageScroll">
+                    <div t-if="state.loadingMessages" class="o_nextbot_message_skeletons" aria-busy="true" aria-label="Loading messages">
+                        <div class="o_nextbot_message_skeleton"><span/><div><i/><i/><i/></div></div>
+                        <div class="o_nextbot_message_skeleton is-user"><span/><div><i/><i/></div></div>
+                        <div class="o_nextbot_message_skeleton"><span/><div><i/><i/><i/></div></div>
+                    </div>
+
+                    <section t-elif="!state.messages.length" class="o_nextbot_welcome" aria-labelledby="o_nextbot_welcome_title">
+                        <div class="o_nextbot_welcome__orb" aria-hidden="true">
+                            <img src="/nextbot_workspace/static/description/icon.svg" alt=""/>
+                        </div>
+                        <h2 id="o_nextbot_welcome_title">How can I help?</h2>
+                        <div class="o_nextbot_starters" aria-label="Example prompts">
+                            <button type="button" t-on-click="() => this.useStarter('Summarize sales performance for this month')">
+                                <span><CarbonIcon name="'activity'"/></span>
+                                <strong>Analyze performance</strong>
+                                <small>Summarize this month’s sales</small>
+                                <CarbonIcon name="'chevron-right'" size="18"/>
+                            </button>
+                            <button type="button" t-on-click="() => this.useStarter('Show me the latest quotations that need attention')">
+                                <span><CarbonIcon name="'record'"/></span>
+                                <strong>Review quotations</strong>
+                                <small>Find work that needs attention</small>
+                                <CarbonIcon name="'chevron-right'" size="18"/>
+                            </button>
+                            <button type="button" t-on-click="() => this.useStarter('What receivables are overdue right now?')">
+                                <span><CarbonIcon name="'artifact'"/></span>
+                                <strong>Check receivables</strong>
+                                <small>Understand overdue balances</small>
+                                <CarbonIcon name="'chevron-right'" size="18"/>
+                            </button>
+                            <button type="button" t-on-click="() => this.useStarter('Find the contact record for ') ">
+                                <span><CarbonIcon name="'search'"/></span>
+                                <strong>Find a record</strong>
+                                <small>Search your ERP securely</small>
+                                <CarbonIcon name="'chevron-right'" size="18"/>
+                            </button>
+                        </div>
+                    </section>
+
+                    <section t-else="" class="o_nextbot_messages" aria-live="polite" aria-relevant="additions text">
+                        <div class="o_nextbot_history_loader">
+                            <button t-if="state.hasMoreMessages" type="button" class="o_nextbot_secondary_button"
+                                    t-att-disabled="state.loadingOlder || isRunning"
+                                    t-att-title="isRunning ? 'Wait for the active response before loading older messages' : 'Load earlier messages'"
+                                    t-on-click="loadOlderMessages">
+                                <t t-esc="state.loadingOlder ? 'Loading…' : 'Load earlier messages'"/>
+                            </button>
+                            <span t-if="hiddenMessageCount" class="o_nextbot_history_window_note">
+                                <t t-esc="hiddenMessageCount"/> earlier messages are hidden for performance.
+                            </span>
+                        </div>
+                        <MessageBubble t-foreach="visibleMessages" t-as="message" t-key="message.id"
+                                       message="message" isLastAssistant="message.id === lastAssistantId"
+                                       onCopy.bind="copyMessage" onRegenerate.bind="regenerate"
+                                       onApproval.bind="resolveApproval" onOpenRecord.bind="openRecord"/>
+                    </section>
+                </div>
+
+                <TaskProgress t-if="state.activeTask"
+                    task="state.activeTask"
+                    status="currentRun?.status || state.activeTask.status"
+                    pauseReason="currentRun?.pauseReason"
+                    onContinue.bind="continueRun"
+                    onStop.bind="stopRun"/>
+
+                <NextBotComposer
+                    draft="state.draft"
+                    attachments="state.attachments"
+                    running="isRunning"
+                    sending="state.sending"
+                    onInput.bind="(value) => state.draft = value"
+                    onFiles.bind="addFiles"
+                    onRemoveAttachment.bind="removeAttachment"
+                    onSend.bind="sendMessage"
+                    onStop.bind="stopRun"/>
+            </main>
+
+            <ActivityInspector t-if="state.inspectorOpen"
+                tab="state.inspectorTab"
+                events="activityEvents"
+                tools="toolEvents"
+                sources="sources"
+                artifacts="artifacts"
+                running="isRunning"
+                onSelectTab.bind="(tab) => state.inspectorTab = tab"
+                onClose.bind="() => state.inspectorOpen = false"
+                onApproval.bind="resolveApproval"
+                onOpenRecord.bind="openRecord"/>
+
+            <button t-if="state.historyOpen || state.inspectorOpen"
+                    type="button" class="o_nextbot_panel_backdrop" aria-label="Close open panel"
+                    t-on-click="closePanels"/>
+        </div>
+    </t>
+</templates>

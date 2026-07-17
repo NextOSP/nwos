@@ -28,10 +28,10 @@
                     <field name="city_id"
                            placeholder="City"
                            class="o_address_city"
-                           domain="[('country_id', '=', country_id)]"
+                           domain="[('country_id', '=', country_id), ('state_id', '=?', state_id)]"
                            invisible="not country_enforce_cities"
                            readonly="type == 'contact' and parent_id"
-                           context="{'default_country_id': country_id, 'default_state_id': state_id, 'default_zipcode': zip}"/>
+                           context="{'default_country_id': country_id, 'default_state_id': state_id, 'default_zipcode': zip, 'show_state_name': not state_id}"/>
                     <field name="city"
                            placeholder="City"
                            class="o_address_city"
@@ -69,9 +69,9 @@
                 <field name="city_id"
                        placeholder="City"
                        class="o_address_city"
-                       domain="[('country_id', '=', country_id)]"
+                       domain="[('country_id', '=', country_id), ('state_id', '=?', state_id)]"
                        invisible="not country_enforce_cities"
-                       context="{'default_country_id': country_id, 'default_state_id': state_id, 'default_zipcode': zip}"/>
+                       context="{'default_country_id': country_id, 'default_state_id': state_id, 'default_zipcode': zip, 'show_state_name': not state_id}"/>
             </field>
 
             <xpath expr="//field[@name='child_ids']//form//field[@name='city']" position="attributes">
@@ -82,9 +82,9 @@
                 <field name="city_id"
                        placeholder="City"
                        class="o_address_city"
-                       domain="[('country_id', '=', country_id)]"
+                       domain="[('country_id', '=', country_id), ('state_id', '=?', state_id)]"
                        invisible="not country_enforce_cities"
-                       context="{'default_country_id': country_id, 'default_state_id': state_id, 'default_zipcode': zip}"/>
+                       context="{'default_country_id': country_id, 'default_state_id': state_id, 'default_zipcode': zip, 'show_state_name': not state_id}"/>
             </xpath>
         </field>
     </record>

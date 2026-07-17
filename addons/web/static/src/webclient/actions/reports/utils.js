@@ -22,7 +22,11 @@ export function getReportUrl(action, type, userContext) {
         if (actionContext.active_ids) {
             url += `/${actionContext.active_ids.join(",")}`;
         }
-        if (type === "html") {
+        // Forward the context (lang, paperformat, ...) when a userContext is
+        // provided. This is used by in-browser previews (html and pdf); the
+        // download flow calls this helper without a userContext and passes the
+        // context separately, so it is unaffected.
+        if (userContext) {
             const context = encodeURIComponent(JSON.stringify(userContext));
             url += `?context=${context}`;
         }

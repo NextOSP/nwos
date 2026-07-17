@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title">
+  <title id="title">NextBot</title>
+  <defs>
+    <linearGradient id="ai" x1="18" y1="112" x2="110" y2="16" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#8a3ffc"/>
+      <stop offset="1" stop-color="#0f62fe"/>
+    </linearGradient>
+  </defs>
+  <rect width="128" height="128" fill="#161616"/>
+  <path d="M22 29h84v59H61L39 108V88H22z" fill="url(#ai)"/>
+  <path d="M38 46h52v8H38zm0 17h38v8H38z" fill="#fff"/>
+  <path d="m94 18 3.4 8.6L106 30l-8.6 3.4L94 42l-3.4-8.6L82 30l8.6-3.4z" fill="#fff"/>
+</svg>

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nwos>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.nextbot.agent</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="inside">
+                <app data-string="NextBot" string="NextBot" name="nextbot_agent" groups="base.group_system">
+                    <block title="AI Provider" name="nextbot_agent_ai_provider">
+                        <div class="col-12 o_setting_box o_searchable_setting" id="nextbot_ai_provider_settings">
+                            <div class="o_setting_left_pane">
+                                <field name="ai_enabled"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">AI</span>
+                                <div class="text-muted">
+                                    NextBot answers with this AI provider. The same configuration is
+                                    shared by every AI feature (emails, lead scoring, reports).
+                                </div>
+                                <div class="content-group mt16" invisible="not ai_enabled">
+                                    <div class="row g-3">
+                                        <div class="col-12">
+                                            <label string="Provider" for="ai_provider" class="o_light_label mb-1"/>
+                                            <div>
+                                                <field name="ai_provider" widget="radio" options="{'horizontal': true}" required="ai_enabled"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-xl-6">
+                                            <label string="Base URL" for="ai_endpoint" class="o_light_label mb-1"/>
+                                            <field name="ai_endpoint" placeholder="https://api.openai.com/v1" required="ai_enabled" class="w-100"/>
+                                        </div>
+                                        <div class="col-12 col-xl-6">
+                                            <label string="API Key" for="ai_api_key" class="o_light_label mb-1"/>
+                                            <field name="ai_api_key" password="True" required="ai_enabled" class="w-100"/>
+                                        </div>
+                                        <div class="col-12">
+                                            <button name="action_ai_load_models" type="object" string="Load Models" icon="oi-arrow-right" class="btn btn-secondary"/>
+                                        </div>
+                                        <div class="col-12 col-xl-6">
+                                            <div class="fw-bold mb-2">Default model</div>
+                                            <div class="row g-2">
+                                                <div class="col-12">
+                                                    <label string="Model" for="ai_model_id" class="o_light_label mb-1"/>
+                                                    <field name="ai_model_id" placeholder="Select a loaded model" class="w-100"/>
+                                                </div>
+                                                <div class="col-12" invisible="ai_provider != 'custom'">
+                                                    <label string="Model ID" for="ai_model" class="o_light_label mb-1"/>
+                                                    <field name="ai_model" placeholder="gpt-4o-mini" required="ai_enabled and ai_provider == 'custom'" class="w-100"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-xl-6">
+                                            <div class="fw-bold mb-2">NextBot model (Intelligent profile)</div>
+                                            <div class="row g-2">
+                                                <div class="col-12">
+                                                    <label string="Model" for="ai_intelligent_model_id" class="o_light_label mb-1"/>
+                                                    <field name="ai_intelligent_model_id" placeholder="Select a loaded model" class="w-100"/>
+                                                </div>
+                                                <div class="col-12" invisible="ai_provider != 'custom'">
+                                                    <label string="Model ID" for="ai_intelligent_model" class="o_light_label mb-1"/>
+                                                    <field name="ai_intelligent_model" placeholder="Leave empty to use the default model" class="w-100"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </block>
+                    <block title="Memory and Language" name="nextbot_agent_memory">
+                        <setting string="Response language" help="Leave empty to answer each user in their own interface language.">
+                            <field name="nextbot_force_response_lang"/>
+                        </setting>
+                        <setting string="User memory" help="NextBot remembers durable facts and preferences per user.">
+                            <field name="nextbot_memory_enabled"/>
+                        </setting>
+                        <setting string="Learn from chats" help="Automatically extract new memories from completed conversations.">
+                            <field name="nextbot_auto_learn_enabled"/>
+                        </setting>
+                        <setting string="Memory cap" help="Maximum stored memories per user before compaction.">
+                            <field name="nextbot_memory_max_per_user"/>
+                        </setting>
+                    </block>
+                    <block title="Agent Runtime" name="nextbot_agent_runtime">
+                        <setting string="Approval lifetime" help="Minutes before a pending write approval expires.">
+                            <field name="nextbot_approval_ttl_minutes"/>
+                        </setting>
+                        <setting string="Tool-call limit" help="Maximum tool calls allowed in one run.">
+                            <field name="nextbot_max_tool_calls"/>
+                        </setting>
+                        <setting string="Model-call limit" help="Pauses with a Continue action instead of failing when reached.">
+                            <field name="nextbot_max_model_calls"/>
+                        </setting>
+                        <setting string="Coordinator iterations" help="Maximum plan/act/revise cycles before pausing for the user.">
+                            <field name="nextbot_max_iterations"/>
+                        </setting>
+                        <setting string="Read-step tool limit" help="Maximum tools used by one independently scheduled read step.">
+                            <field name="nextbot_max_step_tool_calls"/>
+                        </setting>
+                        <setting string="Context budget" help="Approximate model context budget in tokens before compaction.">
+                            <field name="nextbot_context_token_budget"/>
+                        </setting>
+                        <setting string="Prompt limit" help="Maximum user message length in characters.">
+                            <field name="nextbot_prompt_character_limit"/>
+                        </setting>
+                    </block>
+                    <block title="Attachments" name="nextbot_agent_security">
+                        <setting string="Attachment count" help="Maximum attachments accepted on one message.">
+                            <field name="nextbot_attachment_count_limit"/>
+                        </setting>
+                        <setting string="Attachment size" help="Maximum size of each attachment in megabytes.">
+                            <field name="nextbot_attachment_size_limit_mb"/>
+                        </setting>
+                    </block>
+                </app>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="nextbot_agent_config_settings_action" model="ir.actions.act_window">
+        <field name="name">NextBot Settings</field>
+        <field name="res_model">res.config.settings</field>
+        <field name="view_mode">form</field>
+        <field name="context">{'module': 'nextbot_agent', 'bin_size': False}</field>
+    </record>
+</nwos>

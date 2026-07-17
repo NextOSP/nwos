@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nwos noupdate="1">
+
+    <record id="team_customer_care" model="helpdesk.team">
+        <field name="name">Customer Care</field>
+        <field name="sequence">1</field>
+    </record>
+
+    <record id="team_vip_support" model="helpdesk.team">
+        <field name="name">VIP Support</field>
+        <field name="sequence">2</field>
+    </record>
+
+</nwos>

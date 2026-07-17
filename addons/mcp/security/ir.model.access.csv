@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_mcp_policy_admin,mcp.policy administrator,model_mcp_policy,mcp.group_mcp_admin,1,1,1,1
+access_mcp_audit_log_admin,mcp.audit.log administrator,model_mcp_audit_log,mcp.group_mcp_admin,1,0,0,0
+access_mcp_confirmation_token_admin,mcp.confirmation.token administrator,model_mcp_confirmation_token,mcp.group_mcp_admin,1,0,0,1
+access_mcp_download_token_admin,mcp.download.token administrator,model_mcp_download_token,mcp.group_mcp_admin,1,0,0,1
+access_mcp_connection_wizard_admin,mcp.connection.wizard administrator,model_mcp_connection_wizard,mcp.group_mcp_admin,1,1,1,1

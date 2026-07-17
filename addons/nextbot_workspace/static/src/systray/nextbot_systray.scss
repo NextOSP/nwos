@@ -1,0 +1,19 @@
+.o-nextbot-systray {
+    display: flex;
+    align-items: center;
+    height: 100%;
+
+    .o-nextbot-systray-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        padding: 0 0.5rem;
+        border: 0;
+    }
+
+    .o-nextbot-systray-icon {
+        width: 20px;
+        height: 20px;
+    }
+}

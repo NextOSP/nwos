@@ -63,6 +63,8 @@ class ResUsers(models.Model):
     def _auth_oauth_validate(self, provider, access_token):
         """ return the validation data corresponding to the access token """
         oauth_provider = self.env['auth.oauth.provider'].browse(provider)
+        if not oauth_provider.exists() or not oauth_provider.enabled:
+            raise AccessDenied()
         validation = self._auth_oauth_rpc(oauth_provider.validation_endpoint, access_token)
         if validation.get("error"):
             raise Exception(validation['error'])
@@ -157,7 +159,11 @@ class ResUsers(models.Model):
                 raise
             passwd_allowed = env['interactive'] or not self.env.user._rpc_api_keys_only()
             if passwd_allowed and self.env.user.active:
-                res = self.sudo().search([('id', '=', self.env.uid), ('oauth_access_token', '=', credential['token'])])
+                res = self.sudo().search([
+                    ('id', '=', self.env.uid),
+                    ('oauth_access_token', '=', credential['token']),
+                    ('oauth_provider_id.enabled', '=', True),
+                ])
                 if res:
                     return {
                         'uid': self.env.user.id,

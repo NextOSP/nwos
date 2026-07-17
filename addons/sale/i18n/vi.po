@@ -1742,7 +1742,7 @@ msgstr "Cấu hình"
 #. nwos-javascript
 #: code:addons/sale/static/src/js/product_configurator_dialog/product_configurator_dialog.js:0
 msgid "Configure your product"
-msgstr "Cấu hình sản phẩm của bạn"
+msgstr "Cấu hình sản phẩm"
 
 #. module: sale
 #. nwos-javascript

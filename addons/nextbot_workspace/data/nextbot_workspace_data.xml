@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nwos>
+    <record id="action_nextbot_workspace" model="ir.actions.client">
+        <field name="name">NextBot</field>
+        <field name="path">nextbot</field>
+        <field name="tag">nextbot_workspace</field>
+        <field name="target">main</field>
+    </record>
+
+    <menuitem
+        id="menu_nextbot_workspace_root"
+        name="NextBot"
+        action="action_nextbot_workspace"
+        sequence="4"
+        groups="base.group_user"
+        web_icon="nextbot_workspace,static/description/icon.svg"/>
+
+    <menuitem
+        id="menu_nextbot_workspace_chat"
+        name="Chat"
+        parent="menu_nextbot_workspace_root"
+        action="action_nextbot_workspace"
+        sequence="10"
+        groups="base.group_user"/>
+
+    <menuitem
+        id="menu_nextbot_workspace_memory"
+        name="My Memory"
+        parent="menu_nextbot_workspace_root"
+        action="nextbot_agent.nextbot_my_memory_action"
+        sequence="20"
+        groups="base.group_user"/>
+
+    <!-- Fold the standalone "NextBot Administration" app into the NextBot app so
+         it no longer shows as a separate card in the All Apps grid. -->
+    <menuitem id="nextbot_agent.nextbot_agent_admin_menu_root"
+        name="Administration"
+        parent="menu_nextbot_workspace_root"
+        sequence="90"/>
+</nwos>

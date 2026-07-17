@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nwos>
+    <record id="mcp_confirmation_token_view_list" model="ir.ui.view">
+        <field name="name">mcp.confirmation.token.list</field>
+        <field name="model">mcp.confirmation.token</field>
+        <field name="arch" type="xml">
+            <list string="MCP Confirmation Tokens" create="false" edit="false"
+                decoration-muted="consumed_at" decoration-danger="not consumed_at and expires_at &lt; now">
+                <field name="create_date"/>
+                <field name="user_id"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+                <field name="operation"/>
+                <field name="model_name"/>
+                <field name="record_ids" optional="show"/>
+                <field name="method_name" optional="hide"/>
+                <field name="expires_at"/>
+                <field name="consumed_at"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="mcp_confirmation_token_view_form" model="ir.ui.view">
+        <field name="name">mcp.confirmation.token.form</field>
+        <field name="model">mcp.confirmation.token</field>
+        <field name="arch" type="xml">
+            <form string="MCP Confirmation Token" create="false" edit="false">
+                <sheet>
+                    <group>
+                        <group string="Owner">
+                            <field name="user_id"/>
+                            <field name="company_id"/>
+                            <field name="expires_at"/>
+                            <field name="consumed_at"/>
+                        </group>
+                        <group string="Operation">
+                            <field name="operation"/>
+                            <field name="model_name"/>
+                            <field name="record_ids"/>
+                            <field name="method_name"/>
+                        </group>
+                    </group>
+                    <group string="Integrity Digests">
+                        <field name="arguments_digest"/>
+                        <field name="version_digest"/>
+                    </group>
+                    <group string="Preview">
+                        <field name="preview" nolabel="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="mcp_confirmation_token_action" model="ir.actions.act_window">
+        <field name="name">Confirmation Tokens</field>
+        <field name="res_model">mcp.confirmation.token</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[]</field>
+    </record>
+
+    <record id="mcp_download_token_view_list" model="ir.ui.view">
+        <field name="name">mcp.download.token.list</field>
+        <field name="model">mcp.download.token</field>
+        <field name="arch" type="xml">
+            <list string="MCP Download Tokens" create="false" edit="false"
+                decoration-muted="consumed_at" decoration-danger="not consumed_at and expires_at &lt; now">
+                <field name="create_date"/>
+                <field name="user_id"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+                <field name="name"/>
+                <field name="mimetype" optional="show"/>
+                <field name="model_name" optional="show"/>
+                <field name="res_id" optional="show"/>
+                <field name="expires_at"/>
+                <field name="consumed_at"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="mcp_download_token_view_form" model="ir.ui.view">
+        <field name="name">mcp.download.token.form</field>
+        <field name="model">mcp.download.token</field>
+        <field name="arch" type="xml">
+            <form string="MCP Download Token" create="false" edit="false">
+                <sheet>
+                    <group>
+                        <group string="Owner">
+                            <field name="user_id"/>
+                            <field name="company_id"/>
+                            <field name="expires_at"/>
+                            <field name="consumed_at"/>
+                        </group>
+                        <group string="File">
+                            <field name="name"/>
+                            <field name="mimetype"/>
+                        </group>
+                    </group>
+                    <group string="Source">
+                        <field name="model_name"/>
+                        <field name="res_id"/>
+                        <field name="field_name"/>
+                        <field name="attachment_id"/>
+                        <field name="report_id"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="mcp_download_token_action" model="ir.actions.act_window">
+        <field name="name">Download Tokens</field>
+        <field name="res_model">mcp.download.token</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[]</field>
+    </record>
+</nwos>

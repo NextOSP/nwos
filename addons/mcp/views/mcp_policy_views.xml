@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nwos>
+    <record id="mcp_policy_view_list" model="ir.ui.view">
+        <field name="name">mcp.policy.list</field>
+        <field name="model">mcp.policy</field>
+        <field name="arch" type="xml">
+            <list string="MCP Model Policies" decoration-muted="not active">
+                <field name="name"/>
+                <field name="model_name" optional="show"/>
+                <field name="allow_discovery" optional="show"/>
+                <field name="allow_read" optional="show"/>
+                <field name="allow_create" optional="show"/>
+                <field name="allow_update" optional="show"/>
+                <field name="allow_delete" optional="show"/>
+                <field name="allow_reports" optional="hide"/>
+                <field name="allow_attachments" optional="hide"/>
+                <field name="max_results" optional="show"/>
+                <field name="active" widget="boolean_toggle" optional="show"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="mcp_policy_view_form" model="ir.ui.view">
+        <field name="name">mcp.policy.form</field>
+        <field name="model">mcp.policy</field>
+        <field name="arch" type="xml">
+            <form string="MCP Model Policy">
+                <sheet>
+                    <widget name="web_ribbon" title="Archived" bg_color="bg-danger" invisible="active"/>
+                    <div class="oe_title">
+                        <label for="model_id"/>
+                        <h1>
+                            <field name="model_id" options="{'no_create': True, 'no_open': True}"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="Availability">
+                            <field name="name" invisible="1"/>
+                            <field name="model_name" readonly="1"/>
+                            <field name="active"/>
+                            <field name="allow_discovery"/>
+                            <field name="allow_read"/>
+                            <field name="max_results"/>
+                        </group>
+                        <group string="Operations">
+                            <field name="allow_create"/>
+                            <field name="allow_update"/>
+                            <field name="allow_delete"/>
+                            <field name="allow_reports"/>
+                            <field name="allow_attachments"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Fields" name="fields">
+                            <group>
+                                <field name="allowed_field_ids" widget="many2many_tags"
+                                    domain="[('model_id', '=', model_id)]"
+                                    options="{'no_create': True, 'no_open': True}"/>
+                                <field name="blocked_field_ids" widget="many2many_tags"
+                                    domain="[('model_id', '=', model_id)]"
+                                    options="{'no_create': True, 'no_open': True}"/>
+                            </group>
+                            <div class="alert alert-info" role="alert">
+                                Leave <strong>Allowed Fields</strong> empty to use every safe field.
+                                Blocked fields and framework-defined secrets are always excluded.
+                                Archiving this policy denies all MCP access to the model.
+                            </div>
+                        </page>
+                        <page string="Workflow Methods" name="workflow_methods">
+                            <field name="workflow_methods" nolabel="1"
+                                placeholder="action_confirm&#10;action_cancel"/>
+                            <div class="text-muted mt8">
+                                Enter one public model method per line. Workflow calls always require preview and confirmation.
+                            </div>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="mcp_policy_view_search" model="ir.ui.view">
+        <field name="name">mcp.policy.search</field>
+        <field name="model">mcp.policy</field>
+        <field name="arch" type="xml">
+            <search string="MCP Model Policies">
+                <field name="name"/>
+                <field name="model_name"/>
+                <filter name="readable" string="Readable" domain="[('allow_read', '=', True)]"/>
+                <filter name="mutable" string="Mutations Enabled"
+                    domain="['|', '|', ('allow_create', '=', True), ('allow_update', '=', True), ('allow_delete', '=', True)]"/>
+                <filter name="archived" string="Archived" domain="[('active', '=', False)]"/>
+                <group name="group_by">
+                    <filter name="group_active" string="Active" context="{'group_by': 'active'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="mcp_policy_action" model="ir.actions.act_window">
+        <field name="name">Model Policies</field>
+        <field name="res_model">mcp.policy</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="mcp_policy_view_search"/>
+        <field name="context">{'active_test': False}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">No policy needed to get started</p>
+            <p>Every model is already discoverable, readable, creatable and updatable through MCP, limited to the permissions of the API key's user. Create a policy only to enable deletes, expose workflow methods, restrict fields, or otherwise narrow a model.</p>
+        </field>
+    </record>
+</nwos>

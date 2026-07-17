@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nwos noupdate="1">
+
+    <record id="sla_standard_solve" model="helpdesk.sla">
+        <field name="name">Standard Solve Time</field>
+        <field name="team_id" ref="team_customer_care"/>
+        <field name="stage_id" ref="stage_solved"/>
+        <field name="priority">0</field>
+        <field name="time_days">1</field>
+        <field name="time_hours">0</field>
+    </record>
+
+    <record id="sla_vip_solve" model="helpdesk.sla">
+        <field name="name">VIP Solve Time</field>
+        <field name="team_id" ref="team_vip_support"/>
+        <field name="stage_id" ref="stage_solved"/>
+        <field name="priority">3</field>
+        <field name="time_days">0</field>
+        <field name="time_hours">4</field>
+    </record>
+
+</nwos>

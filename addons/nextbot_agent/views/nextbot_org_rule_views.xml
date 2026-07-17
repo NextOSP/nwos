@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nwos>
+    <record id="nextbot_org_rule_view_list" model="ir.ui.view">
+        <field name="name">nextbot.org.rule.list</field>
+        <field name="model">nextbot.org.rule</field>
+        <field name="arch" type="xml">
+            <list string="NextBot Organization Rules">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="content"/>
+                <field name="company_id" optional="show"/>
+                <field name="active" widget="boolean_toggle" optional="show"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="nextbot_org_rule_view_form" model="ir.ui.view">
+        <field name="name">nextbot.org.rule.form</field>
+        <field name="model">nextbot.org.rule</field>
+        <field name="arch" type="xml">
+            <form string="NextBot Organization Rule">
+                <sheet>
+                    <widget name="web_ribbon" title="Archived" bg_color="bg-danger" invisible="active"/>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1><field name="name" placeholder="Quotation validity"/></h1>
+                    </div>
+                    <group>
+                        <field name="content" placeholder="Always mention that quotations are valid for 30 days."/>
+                        <field name="company_id"/>
+                        <field name="sequence"/>
+                        <field name="active"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="nextbot_org_rule_action" model="ir.actions.act_window">
+        <field name="name">Organization Rules</field>
+        <field name="res_model">nextbot.org.rule</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Write standing instructions for NextBot</p>
+            <p>
+                Every active rule is always given to NextBot, so it follows them in every
+                conversation — for example "Always answer in Vietnamese" or
+                "Quotations are valid for 30 days".
+            </p>
+        </field>
+    </record>
+</nwos>

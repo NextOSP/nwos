@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nwos>
+    <record id="nextbot_knowledge_document_view_list" model="ir.ui.view">
+        <field name="name">nextbot.knowledge.document.list</field>
+        <field name="model">nextbot.knowledge.document</field>
+        <field name="arch" type="xml">
+            <list string="NextBot Knowledge">
+                <field name="name"/>
+                <field name="file_name"/>
+                <field name="company_id" optional="show"/>
+                <field name="state" widget="badge"
+                    decoration-success="state == 'indexed'"
+                    decoration-danger="state == 'failed'"
+                    decoration-info="state == 'pending'"/>
+                <field name="chunk_count"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="nextbot_knowledge_document_view_form" model="ir.ui.view">
+        <field name="name">nextbot.knowledge.document.form</field>
+        <field name="model">nextbot.knowledge.document</field>
+        <field name="arch" type="xml">
+            <form string="NextBot Knowledge Document">
+                <header>
+                    <button name="action_reindex" type="object" string="Reindex" class="btn-secondary"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <widget name="web_ribbon" title="Archived" bg_color="bg-danger" invisible="active"/>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1><field name="name" placeholder="Price list 2026"/></h1>
+                    </div>
+                    <group>
+                        <field name="file" filename="file_name"/>
+                        <field name="file_name" invisible="1"/>
+                        <field name="company_id"/>
+                        <field name="chunk_count"/>
+                        <field name="error_message" invisible="not error_message"/>
+                        <field name="active"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="nextbot_knowledge_document_action" model="ir.actions.act_window">
+        <field name="name">Knowledge</field>
+        <field name="res_model">nextbot.knowledge.document</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Upload documents NextBot should know</p>
+            <p>
+                PDF, Office, and text documents are indexed automatically and NextBot
+                quotes the relevant parts when answering.
+            </p>
+        </field>
+    </record>
+
+    <record id="nextbot_memory_view_list" model="ir.ui.view">
+        <field name="name">nextbot.memory.list</field>
+        <field name="model">nextbot.memory</field>
+        <field name="arch" type="xml">
+            <list string="NextBot Memories">
+                <field name="user_id"/>
+                <field name="content"/>
+                <field name="source" optional="show"/>
+                <field name="last_used_at" optional="show"/>
+                <field name="active" widget="boolean_toggle" optional="show"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="nextbot_memory_view_form" model="ir.ui.view">
+        <field name="name">nextbot.memory.form</field>
+        <field name="model">nextbot.memory</field>
+        <field name="arch" type="xml">
+            <form string="NextBot Memory">
+                <sheet>
+                    <widget name="web_ribbon" title="Archived" bg_color="bg-danger" invisible="active"/>
+                    <group>
+                        <field name="user_id"/>
+                        <field name="content"/>
+                        <field name="source"/>
+                        <field name="last_used_at"/>
+                        <field name="use_count"/>
+                        <field name="active"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="nextbot_memory_action" model="ir.actions.act_window">
+        <field name="name">Memories</field>
+        <field name="res_model">nextbot.memory</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">No memories yet</p>
+            <p>
+                NextBot automatically remembers durable facts and preferences from chats.
+                You can also just tell it: "remember that ...".
+            </p>
+        </field>
+    </record>
+
+    <record id="nextbot_my_memory_action" model="ir.actions.act_window">
+        <field name="name">My NextBot Memory</field>
+        <field name="res_model">nextbot.memory</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('user_id', '=', uid)]</field>
+        <field name="context">{'default_user_id': uid}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">NextBot has not remembered anything yet</p>
+            <p>
+                Add a note here, or just tell NextBot "remember that ..." in a chat.
+                Archived memories are forgotten.
+            </p>
+        </field>
+    </record>
+</nwos>

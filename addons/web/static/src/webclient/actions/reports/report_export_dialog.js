@@ -31,6 +31,7 @@ export class ReportExportDialog extends Component {
             selectedLang: this.props.action.context?.lang || user.context.lang,
             selectedPaperformatId: "",
             previewUrl: "",
+            isPreviewLoading: false,
             isExporting: false,
         });
 
@@ -118,6 +119,9 @@ export class ReportExportDialog extends Component {
             context: {
                 ...(this.props.action.context || {}),
                 lang: this.state.selectedLang,
+                // Reports (e.g. sale quotations) force the customer's language;
+                // `report_lang` lets the template honor the language picked here.
+                report_lang: this.state.selectedLang,
                 ...(this.state.selectedPaperformatId
                     ? { report_paperformat_id: Number(this.state.selectedPaperformatId) }
                     : {}),
@@ -129,13 +133,26 @@ export class ReportExportDialog extends Component {
     refreshPreview() {
         if (!this.selectedReport?.report_name) {
             this.state.previewUrl = "";
+            this.state.isPreviewLoading = false;
             return;
         }
-        const previewAction = this.getSelectedAction("qweb-html");
-        this.state.previewUrl = getReportUrl(previewAction, "html", {
+        // Render the preview as PDF (not HTML) so the selected paper format and
+        // language are actually reflected: paper format only affects PDF output,
+        // and the PDF is rendered inline by the browser's viewer.
+        const previewAction = this.getSelectedAction("qweb-pdf");
+        let previewUrl = getReportUrl(previewAction, "pdf", {
             ...user.context,
             ...(previewAction.context || {}),
         });
+        // Cache-buster: the report URL is otherwise identical across renders, so
+        // the browser would serve a stale cached PDF after a template change.
+        previewUrl += (previewUrl.includes("?") ? "&" : "?") + "_ts=" + Date.now();
+        this.state.isPreviewLoading = previewUrl !== this.state.previewUrl;
+        this.state.previewUrl = previewUrl;
+    }
+
+    onPreviewLoaded() {
+        this.state.isPreviewLoading = false;
     }
 
     onReportChange(ev) {

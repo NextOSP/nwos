@@ -13,11 +13,13 @@ import { AutoComplete } from "@web/core/autocomplete/autocomplete";
  * Carbon dropdown.
  *
  * We hook the existing `onPositioned` callback (invoked on every reposition, so
- * it survives scroll/resize) to stretch the menu to the width of its field cell
- * and align it to the field's left edge. Fixed positioning and Odoo's automatic
+ * it survives scroll/resize) to stretch the menu to the width of its visible
+ * input control and align it to that control's left edge. This distinction
+ * matters for composite product fields, whose outer field widget also contains
+ * a description/configuration button. Fixed positioning and Odoo's automatic
  * flip-above-when-clipped behaviour are left untouched — we only override width
- * and horizontal origin. Outside a field (e.g. the search bar), we fall back to
- * the input width so nothing regresses.
+ * and horizontal origin. Outside an input wrapper/field (e.g. the search bar),
+ * we fall back to the input width so nothing regresses.
  */
 patch(AutoComplete.prototype, {
     get dropdownOptions() {
@@ -28,7 +30,10 @@ patch(AutoComplete.prototype, {
             onPositioned: (popper, solution) => {
                 previous?.(popper, solution);
                 const input = this.targetDropdown;
-                const anchor = (input && input.closest(".o_field_widget")) || input;
+                const anchor =
+                    input?.closest(".o_input_dropdown") ||
+                    input?.closest(".o_field_widget") ||
+                    input;
                 if (anchor && popper) {
                     const rect = anchor.getBoundingClientRect();
                     popper.style.width = `${rect.width}px`;

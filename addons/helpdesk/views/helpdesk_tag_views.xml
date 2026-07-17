@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nwos>
+
+    <record id="view_helpdesk_tag_list" model="ir.ui.view">
+        <field name="name">helpdesk.tag.list</field>
+        <field name="model">helpdesk.tag</field>
+        <field name="arch" type="xml">
+            <list string="Helpdesk Tags" editable="bottom">
+                <field name="name"/>
+                <field name="color" widget="color_picker"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_helpdesk_tag_form" model="ir.ui.view">
+        <field name="name">helpdesk.tag.form</field>
+        <field name="model">helpdesk.tag</field>
+        <field name="arch" type="xml">
+            <form string="Helpdesk Tag">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="color" widget="color_picker"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_helpdesk_tag" model="ir.actions.act_window">
+        <field name="name">Tags</field>
+        <field name="res_model">helpdesk.tag</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+</nwos>

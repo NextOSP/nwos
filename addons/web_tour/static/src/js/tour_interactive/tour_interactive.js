@@ -39,7 +39,19 @@ export class TourInteractive {
         env.bus.addEventListener("ACTION_MANAGER:UI-UPDATED", () => (this.isBusy = false));
 
         this.pointer = pointer;
-        this.debouncedToggleOpen = debounce(this.pointer.showContent, 50, true);
+        this.pointerCloseGeneration = 0;
+        this.openPointer = () => {
+            this.pointerCloseGeneration++;
+            this.pointer.showContent(true);
+        };
+        this.closePointer = () => {
+            const generation = ++this.pointerCloseGeneration;
+            setTimeout(() => {
+                if (generation === this.pointerCloseGeneration) {
+                    this.pointer.showContent(false);
+                }
+            }, 200);
+        };
         this.onTourEnd = onTourEnd;
         this.observer = new MacroMutationObserver(() => this._onMutation());
         this.observer.observe(document.body);
@@ -83,6 +95,7 @@ export class TourInteractive {
     }
 
     play() {
+        this.pointerCloseGeneration++;
         this.removeListeners();
         if (this.currentActionIndex === this.actions.length) {
             this.observer.disconnect();
@@ -117,8 +130,10 @@ export class TourInteractive {
                 this.currentAction.event === "drop"
             );
             this.pointer.setState({
-                onMouseEnter: () => this.debouncedToggleOpen(true),
-                onMouseLeave: () => this.debouncedToggleOpen(false),
+                onMouseEnter: this.openPointer,
+                // Once the user reaches the tooltip, keep it open so its actions
+                // remain reachable even if the expanding panel moves under the cursor.
+                onMouseLeave: () => {},
             });
         }
     }
@@ -144,8 +159,8 @@ export class TourInteractive {
             if (index === 0) {
                 return this.setupListeners({
                     ...toListen,
-                    onMouseEnter: () => this.pointer.showContent(true),
-                    onMouseLeave: () => this.pointer.showContent(false),
+                    onMouseEnter: this.openPointer,
+                    onMouseLeave: this.closePointer,
                     onScroll: () => this.updatePointer(),
                 });
             } else {

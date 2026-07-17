@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nwos>
+    <record id="nextbot_conversation_user_rule" model="ir.rule">
+        <field name="name">NextBot conversations owned by the current user</field>
+        <field name="model_id" ref="model_nextbot_conversation"/>
+        <field name="domain_force">[('user_id', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <record id="nextbot_run_user_rule" model="ir.rule">
+        <field name="name">NextBot runs owned by the current user</field>
+        <field name="model_id" ref="model_nextbot_run"/>
+        <field name="domain_force">[('user_id', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <record id="nextbot_run_event_user_rule" model="ir.rule">
+        <field name="name">NextBot events owned by the current user</field>
+        <field name="model_id" ref="model_nextbot_run_event"/>
+        <field name="domain_force">[('user_id', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <record id="nextbot_approval_user_rule" model="ir.rule">
+        <field name="name">NextBot approvals owned by the current user</field>
+        <field name="model_id" ref="model_nextbot_approval"/>
+        <field name="domain_force">[('user_id', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <record id="nextbot_artifact_user_rule" model="ir.rule">
+        <field name="name">NextBot artifacts owned by the current user</field>
+        <field name="model_id" ref="model_nextbot_artifact"/>
+        <field name="domain_force">[('user_id', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+    <record id="nextbot_run_step_user_rule" model="ir.rule">
+        <field name="name">NextBot plan steps owned by the current user</field>
+        <field name="model_id" ref="model_nextbot_run_step"/>
+        <field name="domain_force">[('user_id', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+    <record id="nextbot_tool_execution_user_rule" model="ir.rule">
+        <field name="name">NextBot tool executions owned by the current user</field>
+        <field name="model_id" ref="model_nextbot_tool_execution"/>
+        <field name="domain_force">[('user_id', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <record id="nextbot_memory_user_rule" model="ir.rule">
+        <field name="name">NextBot memories owned by the current user</field>
+        <field name="model_id" ref="model_nextbot_memory"/>
+        <field name="domain_force">[('user_id', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <record id="nextbot_org_rule_company_rule" model="ir.rule">
+        <field name="name">NextBot organization rules: company scope</field>
+        <field name="model_id" ref="model_nextbot_org_rule"/>
+        <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <record id="nextbot_knowledge_document_company_rule" model="ir.rule">
+        <field name="name">NextBot knowledge documents: company scope</field>
+        <field name="model_id" ref="model_nextbot_knowledge_document"/>
+        <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <record id="nextbot_memory_system_rule" model="ir.rule">
+        <field name="name">NextBot memories: system administrators</field>
+        <field name="model_id" ref="model_nextbot_memory"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('base.group_system'))]"/>
+    </record>
+    <record id="nextbot_org_rule_system_rule" model="ir.rule">
+        <field name="name">NextBot organization rules: system administrators</field>
+        <field name="model_id" ref="model_nextbot_org_rule"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('base.group_system'))]"/>
+    </record>
+    <record id="nextbot_knowledge_document_system_rule" model="ir.rule">
+        <field name="name">NextBot knowledge documents: system administrators</field>
+        <field name="model_id" ref="model_nextbot_knowledge_document"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('base.group_system'))]"/>
+    </record>
+
+    <record id="nextbot_conversation_system_rule" model="ir.rule">
+        <field name="name">NextBot conversations: system administrators</field>
+        <field name="model_id" ref="model_nextbot_conversation"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('base.group_system'))]"/>
+    </record>
+    <record id="nextbot_run_system_rule" model="ir.rule">
+        <field name="name">NextBot runs: system administrators</field>
+        <field name="model_id" ref="model_nextbot_run"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('base.group_system'))]"/>
+    </record>
+    <record id="nextbot_run_event_system_rule" model="ir.rule">
+        <field name="name">NextBot events: system administrators</field>
+        <field name="model_id" ref="model_nextbot_run_event"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('base.group_system'))]"/>
+    </record>
+    <record id="nextbot_approval_system_rule" model="ir.rule">
+        <field name="name">NextBot approvals: system administrators</field>
+        <field name="model_id" ref="model_nextbot_approval"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('base.group_system'))]"/>
+    </record>
+    <record id="nextbot_artifact_system_rule" model="ir.rule">
+        <field name="name">NextBot artifacts: system administrators</field>
+        <field name="model_id" ref="model_nextbot_artifact"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('base.group_system'))]"/>
+    </record>
+    <record id="nextbot_run_step_system_rule" model="ir.rule">
+        <field name="name">NextBot plan steps: system administrators</field>
+        <field name="model_id" ref="model_nextbot_run_step"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('base.group_system'))]"/>
+    </record>
+    <record id="nextbot_tool_execution_system_rule" model="ir.rule">
+        <field name="name">NextBot tool executions: system administrators</field>
+        <field name="model_id" ref="model_nextbot_tool_execution"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('base.group_system'))]"/>
+    </record>
+</nwos>

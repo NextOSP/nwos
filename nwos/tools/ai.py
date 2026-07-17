@@ -9,11 +9,11 @@ AI_PROVIDER_DEFAULTS = {
     'openrouter': {
         'label': 'OpenRouter',
         'endpoint': 'https://openrouter.ai/api/v1',
-        'model': '~openai/gpt-latest',
-        'small_model': 'openai/gpt-4o-mini',
-        'intelligent_model': '~openai/gpt-latest',
-        'email_model': 'openai/gpt-4o-mini',
-        'report_model': '~openai/gpt-latest',
+        'model': 'openai/gpt-5.6-terra',
+        'small_model': 'openai/gpt-5.6-luna',
+        'intelligent_model': 'openai/gpt-5.6-sol',
+        'email_model': 'openai/gpt-5.6-luna',
+        'report_model': 'openai/gpt-5.6-terra',
     },
     'openai': {
         'label': 'OpenAI',

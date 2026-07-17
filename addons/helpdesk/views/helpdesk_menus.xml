@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nwos>
+
+    <menuitem id="menu_helpdesk_root"
+              name="Helpdesk"
+              web_icon="helpdesk,static/description/icon.png"
+              sequence="50"/>
+
+    <menuitem id="menu_helpdesk_overview"
+              name="Overview"
+              parent="menu_helpdesk_root"
+              action="action_helpdesk_overview"
+              sequence="1"/>
+
+    <menuitem id="menu_helpdesk_tickets"
+              name="Tickets"
+              parent="menu_helpdesk_root"
+              action="action_helpdesk_ticket_all"
+              sequence="10"/>
+
+    <menuitem id="menu_helpdesk_reporting"
+              name="Reporting"
+              parent="menu_helpdesk_root"
+              sequence="20"/>
+
+    <menuitem id="menu_helpdesk_ticket_reporting"
+              name="Tickets Analysis"
+              parent="menu_helpdesk_reporting"
+              action="action_helpdesk_ticket_reporting"
+              sequence="1"/>
+
+    <menuitem id="menu_helpdesk_configuration"
+              name="Configuration"
+              parent="menu_helpdesk_root"
+              sequence="100"
+              groups="helpdesk.group_helpdesk_manager"/>
+
+    <menuitem id="menu_helpdesk_team"
+              name="Teams"
+              parent="menu_helpdesk_configuration"
+              action="action_helpdesk_team"
+              sequence="10"/>
+
+    <menuitem id="menu_helpdesk_stage"
+              name="Stages"
+              parent="menu_helpdesk_configuration"
+              action="action_helpdesk_stage"
+              sequence="20"/>
+
+    <menuitem id="menu_helpdesk_tag"
+              name="Tags"
+              parent="menu_helpdesk_configuration"
+              action="action_helpdesk_tag"
+              sequence="30"/>
+
+    <menuitem id="menu_helpdesk_sla"
+              name="SLA Policies"
+              parent="menu_helpdesk_configuration"
+              action="action_helpdesk_sla"
+              sequence="40"/>
+
+</nwos>

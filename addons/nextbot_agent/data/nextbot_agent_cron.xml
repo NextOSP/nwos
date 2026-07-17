@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nwos>
+    <record id="ir_cron_process_nextbot_runs" model="ir.cron">
+        <field name="name">NextBot: process queued agent runs</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">minutes</field>
+        <field name="model_id" ref="model_nextbot_run"/>
+        <field name="code">model._cron_process_queued_runs()</field>
+        <field name="state">code</field>
+    </record>
+    <record id="ir_cron_process_nextbot_steps_1" model="ir.cron">
+        <field name="name">NextBot: read worker 1</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">minutes</field>
+        <field name="model_id" ref="model_nextbot_run_step"/>
+        <field name="code">model._cron_process_ready_steps()</field>
+        <field name="state">code</field>
+    </record>
+    <record id="ir_cron_process_nextbot_steps_2" model="ir.cron">
+        <field name="name">NextBot: read worker 2</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">minutes</field>
+        <field name="model_id" ref="model_nextbot_run_step"/>
+        <field name="code">model._cron_process_ready_steps()</field>
+        <field name="state">code</field>
+    </record>
+    <record id="ir_cron_process_nextbot_steps_3" model="ir.cron">
+        <field name="name">NextBot: read worker 3</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">minutes</field>
+        <field name="model_id" ref="model_nextbot_run_step"/>
+        <field name="code">model._cron_process_ready_steps()</field>
+        <field name="state">code</field>
+    </record>
+    <record id="ir_cron_recover_nextbot_leases" model="ir.cron">
+        <field name="name">NextBot: recover interrupted workers</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">minutes</field>
+        <field name="model_id" ref="model_nextbot_run"/>
+        <field name="code">model._cron_recover_expired_leases()</field>
+        <field name="state">code</field>
+    </record>
+    <record id="ir_cron_expire_nextbot_approvals" model="ir.cron">
+        <field name="name">NextBot: expire pending approvals</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">minutes</field>
+        <field name="model_id" ref="model_nextbot_approval"/>
+        <field name="code">model._cron_expire_pending()</field>
+        <field name="state">code</field>
+    </record>
+    <record id="ir_cron_nextbot_memory_extraction" model="ir.cron">
+        <field name="name">NextBot: learn memories from completed runs</field>
+        <field name="interval_number">5</field>
+        <field name="interval_type">minutes</field>
+        <field name="model_id" ref="model_nextbot_run"/>
+        <field name="code">model._cron_extract_memories()</field>
+        <field name="state">code</field>
+    </record>
+    <record id="ir_cron_nextbot_memory_compaction" model="ir.cron">
+        <field name="name">NextBot: compact user memories</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="model_id" ref="model_nextbot_memory"/>
+        <field name="code">model._cron_compact_memories()</field>
+        <field name="state">code</field>
+    </record>
+    <record id="ir_cron_nextbot_knowledge_index" model="ir.cron">
+        <field name="name">NextBot: index knowledge documents</field>
+        <field name="interval_number">5</field>
+        <field name="interval_type">minutes</field>
+        <field name="model_id" ref="model_nextbot_knowledge_document"/>
+        <field name="code">model._cron_index_knowledge()</field>
+        <field name="state">code</field>
+    </record>
+</nwos>

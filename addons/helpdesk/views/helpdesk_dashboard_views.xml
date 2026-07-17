@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nwos>
+
+    <record id="view_helpdesk_dashboard_kanban" model="ir.ui.view">
+        <field name="name">helpdesk.team.dashboard.kanban</field>
+        <field name="model">helpdesk.team</field>
+        <field name="arch" type="xml">
+            <kanban class="o_helpdesk_dashboard_kanban" js_class="helpdesk_dashboard_kanban" create="false">
+                <field name="name"/>
+                <field name="ticket_count"/>
+                <field name="open_ticket_count"/>
+                <field name="unassigned_ticket_count"/>
+                <field name="urgent_ticket_count"/>
+                <field name="failed_ticket_count"/>
+                <field name="closed_ticket_count"/>
+                <field name="sla_success_rate"/>
+                <field name="avg_rating"/>
+                <templates>
+                    <t t-name="card">
+                        <div class="d-flex flex-column h-100 p-2">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <field name="name" class="fw-bold fs-5"/>
+                            </div>
+                            <div class="row mt-3 text-center">
+                                <div class="col-3">
+                                    <span class="d-block fw-bold fs-4 text-primary"><field name="open_ticket_count"/></span>
+                                    <small>Open</small>
+                                </div>
+                                <div class="col-3">
+                                    <span class="d-block fw-bold fs-4 text-warning"><field name="unassigned_ticket_count"/></span>
+                                    <small>Unassigned</small>
+                                </div>
+                                <div class="col-3">
+                                    <span class="d-block fw-bold fs-4 text-danger"><field name="urgent_ticket_count"/></span>
+                                    <small>Urgent</small>
+                                </div>
+                                <div class="col-3">
+                                    <span class="d-block fw-bold fs-4 text-muted"><field name="failed_ticket_count"/></span>
+                                    <small>Failed</small>
+                                </div>
+                            </div>
+                            <div class="row mt-3 text-center">
+                                <div class="col-6">
+                                    <div class="text-success">Tickets Closed</div>
+                                    <field name="closed_ticket_count" class="fw-bold"/>
+                                </div>
+                                <div class="col-6">
+                                    <div class="text-success">Average Rating</div>
+                                    <field name="avg_rating" widget="float" options="{'decimal_precision': 1}" class="fw-bold"/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="action_helpdesk_overview" model="ir.actions.act_window">
+        <field name="name">Helpdesk Overview</field>
+        <field name="res_model">helpdesk.team</field>
+        <field name="view_mode">kanban</field>
+        <field name="view_id" ref="view_helpdesk_dashboard_kanban"/>
+    </record>
+
+    <record id="action_helpdesk_ticket_reporting" model="ir.actions.act_window">
+        <field name="name">Tickets Analysis</field>
+        <field name="res_model">helpdesk.ticket</field>
+        <field name="view_mode">graph,pivot</field>
+        <field name="search_view_id" ref="view_helpdesk_ticket_search"/>
+    </record>
+
+</nwos>

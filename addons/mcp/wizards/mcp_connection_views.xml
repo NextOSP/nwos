@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nwos>
+    <record id="mcp_connection_wizard_view_form" model="ir.ui.view">
+        <field name="name">mcp.connection.wizard.form</field>
+        <field name="model">mcp.connection.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Connect to MCP">
+                <field name="mcp_enabled" invisible="1"/>
+                <field name="generated" invisible="1"/>
+                <header>
+                    <button name="action_generate_key" type="object" string="Generate API Key"
+                        class="btn-primary" invisible="generated"/>
+                    <button name="action_generate_key" type="object" string="Generate Another Key"
+                        invisible="not generated"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>Connect to MCP</h1>
+                    </div>
+
+                    <div class="alert alert-warning" role="alert" invisible="mcp_enabled">
+                        The MCP Gateway is currently <strong>off</strong>. Generating a key
+                        below will turn it on automatically.
+                    </div>
+
+                    <!-- Newly generated key (shown once) -->
+                    <div invisible="not generated">
+                        <div class="alert alert-success" role="alert">
+                            <strong>Copy your new API key now.</strong> For security it is shown only
+                            once and cannot be retrieved later. If you lose it, just generate a new one.
+                        </div>
+                        <group>
+                            <field name="api_key" readonly="1" widget="CopyClipboardChar"/>
+                            <field name="endpoint_url" readonly="1" widget="CopyClipboardChar"/>
+                        </group>
+                        <separator string="Add to Claude Code (CLI)"/>
+                        <field name="cli_command" readonly="1" widget="CopyClipboardChar" nolabel="1"/>
+                        <separator string="Or paste into your client config (JSON)"/>
+                        <field name="client_config" readonly="1" nolabel="1"/>
+                    </div>
+
+                    <!-- Create a new key -->
+                    <div invisible="generated">
+                        <p>
+                            No per-model setup is needed. Give the key a label, then click
+                            <strong>Generate API Key</strong> above &#8212; every model is readable and
+                            writable through MCP, limited to <strong>your own account's permissions</strong>.
+                            Deletion stays opt-in.
+                        </p>
+                        <group>
+                            <field name="key_name"/>
+                            <field name="expiration_date"/>
+                            <field name="endpoint_url" readonly="1" widget="CopyClipboardChar"/>
+                        </group>
+                    </div>
+
+                    <!-- Existing keys (always visible) -->
+                    <separator string="Your existing API keys"/>
+                    <p class="text-muted">
+                        Existing keys are listed for reference. Their secret value cannot be shown
+                        again &#8212; if you don't have it saved, revoke the key and generate a new one.
+                    </p>
+                    <field name="existing_key_ids" nolabel="1" readonly="1">
+                        <list create="false" edit="false" delete="false">
+                            <field name="name"/>
+                            <field name="scope"/>
+                            <field name="create_date"/>
+                            <field name="expiration_date"/>
+                            <button name="action_mcp_revoke" type="object" string="Revoke"
+                                icon="fa-trash" class="text-danger"
+                                confirm="Revoke this API key? Any client using it will stop working."/>
+                        </list>
+                    </field>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="mcp_connection_wizard_action" model="ir.actions.act_window">
+        <field name="name">Connect to MCP</field>
+        <field name="res_model">mcp.connection.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">current</field>
+    </record>
+</nwos>

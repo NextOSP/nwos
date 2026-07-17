@@ -55,6 +55,13 @@ class ResPartner(models.Model):
             self.zip = False
             self.state_id = False
 
+    @api.onchange('state_id')
+    def _onchange_state_id(self):
+        if self.city_id.state_id and self.city_id.state_id != self.state_id:
+            self.city_id = False
+            self.city = False
+            self.zip = False
+
     @api.onchange('country_id')
     def _onchange_country_id(self):
         super()._onchange_country_id()
@@ -62,7 +69,7 @@ class ResPartner(models.Model):
             self.city_id = False
 
     @api.model
-    def _get_res_city_by_name(self, name, country_id):
+    def _get_res_city_by_name(self, name, country_id, state_id=False):
         ResCity = self.env['res.city']
         if not name or not country_id:
             return ResCity
@@ -70,7 +77,10 @@ class ResPartner(models.Model):
         if self.env.user._is_public():
             ResCity = ResCity.sudo()
 
-        return ResCity.search([
+        domain = [
             ('name', '=ilike', name),
             ('country_id', '=', country_id),
-        ], limit=1)
+        ]
+        if state_id:
+            domain.append(('state_id', '=', state_id))
+        return ResCity.search(domain, limit=1)

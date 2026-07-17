@@ -5,7 +5,7 @@
     <link rel="icon" href="/web/static/img/nwos-icon.svg?v=carbon" type="image/svg+xml" />
     <link rel="stylesheet" href="/web/static/src/libs/fontawesome/css/font-awesome.css" />
     <link rel="stylesheet" href="/web/static/lib/bootstrap/dist/css/bootstrap.css" />
-    <link rel="stylesheet" href="/web_carbon/static/src/css/database_manager.css" />
+    <link rel="stylesheet" href="/web_carbon/static/src/css/database_manager.css?v=onboarding-10" />
     <script src="/web/static/lib/bootstrap/js/dist/util/index.js" ></script>
     <script src="/web/static/lib/bootstrap/js/dist/dom/data.js" ></script>
     <script src="/web/static/lib/bootstrap/js/dist/dom/event-handler.js" ></script>
@@ -19,7 +19,7 @@
     <script src="/web/static/lib/bootstrap/js/dist/base-component.js" ></script>
     <script src="/web/static/lib/bootstrap/js/dist/modal.js" ></script>
 
-    <script src="/web/static/src/public/database_manager.js" ></script>
+    <script src="/web/static/src/public/database_manager.js?v=onboarding-10" ></script>
     <style>
         a {
             text-decoration: none;
@@ -44,7 +44,17 @@
                     </div>
                 </t>
                 <t t-if="error">
-                    <div class="alert alert-danger" t-out="error"></div>
+                    <div class="alert alert-danger o_database_error" role="alert">
+                        <div class="o_database_error_content">
+                            <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                            <div><strong>Database setup did not finish</strong><p t-out="error"></p></div>
+                        </div>
+                        <div class="o_database_error_actions">
+                            <a t-if="failed_database" t-attf-href="/nwos?db={{ failed_database }}" class="btn btn-secondary">Open database</a>
+                            <button type="button" class="btn btn-primary o_database_error_retry">Retry setup</button>
+                            <button type="button" class="btn btn-link o_database_error_dismiss">Dismiss</button>
+                        </div>
+                    </div>
                 </t>
                 <t t-if="list_db and databases">
                     <div class="list-group">
@@ -75,7 +85,7 @@
                     </div>
                     <t t-if="manage">
                         <div class="d-flex mt-2">
-                            <button type="button" data-bs-toggle="modal" data-bs-target=".o_database_create" class="btn btn-primary flex-grow-1">Create Database</button>
+                            <button type="button" class="btn btn-primary flex-grow-1 o_database_create_start">Create Database</button>
                             <button type="button" data-bs-toggle="modal" data-bs-target=".o_database_restore" class="btn btn-primary flex-grow-1 ms-2">Restore Database</button>
                             <button type="button" data-bs-toggle="modal" data-bs-target=".o_database_master" class="btn btn-primary flex-grow-1 ms-2">Set Master Password</button>
                         </div>
@@ -87,37 +97,283 @@
                     </t>
                 </t>
                 <t t-elif="list_db">
-                    <form role="form" action="/web/database/create" method="post">
-                        <t t-call="create_form" />
-                        <input type="submit" value="Create database" class="btn btn-primary float-start"/>
-                    </form>
-                    <a role="button" data-bs-toggle="modal" data-bs-target=".o_database_restore" class="btn btn-link">or restore a database</a>
+                    <div class="d-flex mt-2">
+                        <button type="button" class="btn btn-primary flex-grow-1 o_database_create_start">Create Database</button>
+                        <button type="button" data-bs-toggle="modal" data-bs-target=".o_database_restore" class="btn btn-secondary flex-grow-1 ms-2">Restore Database</button>
+                    </div>
                 </t>
             </div>
         </div>
 
-        <!-- Create -->
-        <div class="modal fade o_database_create" role="dialog">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <form role="form" action="/web/database/create" method="post">
-                        <div class="modal-header">
-                            <h4 class="modal-title">Create Database</h4>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <!-- Create onboarding -->
+        <section class="o_database_onboarding" hidden="hidden" aria-labelledby="database_onboarding_title">
+            <form role="form" action="/web/database/create" method="post" enctype="multipart/form-data" class="o_database_onboarding_form">
+                <input type="hidden" name="setup_token" class="o_setup_token"/>
+                <input type="hidden" name="sop_profile_submitted" value="1"/>
+                <aside class="o_onboarding_sidebar">
+                    <button type="button" class="o_onboarding_close" aria-label="Back to databases">
+                        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                    </button>
+                    <div>
+                        <p class="o_onboarding_eyebrow">New workspace</p>
+                        <h1 id="database_onboarding_title">Create your database</h1>
+                    </div>
+                    <ol class="o_onboarding_progress">
+                        <li class="is-active" data-step-indicator="1"><span>1</span><div><strong>Workspace</strong><small>Database and administrator</small></div></li>
+                        <li data-step-indicator="2"><span>2</span><div><strong>Company setup</strong><small>Identity and localization</small></div></li>
+                        <li data-step-indicator="3"><span>3</span><div><strong>Applications</strong><small>Choose your workspace</small></div></li>
+                        <li data-step-indicator="4"><span>4</span><div><strong>Operations</strong><small>Configure your SOPs</small></div></li>
+                        <li data-step-indicator="5"><span>5</span><div><strong>Review</strong><small>Confirm and create</small></div></li>
+                    </ol>
+                </aside>
+                <div class="o_onboarding_content">
+                    <div class="o_onboarding_step is-active" data-step="1">
+                        <div class="o_onboarding_heading">
+                            <p>Step 1 of 5</p>
+                            <h2>Set up your workspace</h2>
                         </div>
-                        <div class="modal-body">
-                            <t t-call="create_form" />
-                            <small class="text-muted">
-                                To enhance your experience, some data may be sent to NWOS online services. See our <a href="https://www.nwos.com/privacy" target="_blank">Privacy Policy</a>.
-                            </small>
+                        <div class="o_onboarding_fields">
+                            <div class="o_onboarding_notice o_onboarding_field_full">
+                                <i class="fa fa-lock" aria-hidden="true"></i>
+                                <div><strong>System authorization</strong><p>The master password protects database creation and maintenance. It is separate from your administrator login.</p></div>
+                            </div>
+                            <div class="o_onboarding_field o_onboarding_field_full">
+                                <label for="master_pwd_create">System master password</label>
+                                <div class="input-group">
+                                    <input id="master_pwd_create" type="password" name="master_pwd" class="form-control" required="required" autocomplete="current-password" placeholder="Enter the database manager password"/>
+                                    <button class="o_little_eye input-group-text" type="button" aria-label="Show password"><i class="fa fa-eye" aria-hidden="true"></i></button>
+                                </div>
+                                <small class="o_field_help">Use the database manager password configured by your system administrator.</small>
+                            </div>
+                            <div class="o_onboarding_field o_onboarding_field_full">
+                                <label for="dbname">Database ID</label>
+                                <input id="dbname" type="text" name="name" class="form-control" required="required" autocomplete="off" placeholder="example: nwc_production" t-att-value="create_values.get('name')" t-att-pattern="pattern" title="Only alphanumerical characters, underscore, hyphen and dot are allowed"/>
+                                <small class="o_field_help">Technical workspace identifier used in the URL and backups. It cannot contain spaces.</small>
+                            </div>
+                            <div class="o_onboarding_field">
+                                <label for="login">Administrator email</label>
+                                <input id="login" type="email" name="login" class="form-control" required="required" autocomplete="email" placeholder="admin@company.com" t-att-value="create_values.get('login')"/>
+                                <small class="o_field_help">Used to sign in to the new workspace.</small>
+                            </div>
+                            <div class="o_onboarding_field">
+                                <label for="password">Administrator password</label>
+                                <div class="input-group">
+                                    <input id="password" type="password" name="password" class="form-control" required="required" autocomplete="new-password" placeholder="Create a login password"/>
+                                    <button class="o_little_eye input-group-text" type="button" aria-label="Show password"><i class="fa fa-eye" aria-hidden="true"></i></button>
+                                </div>
+                                <small class="o_field_help">This is the password for the administrator account above.</small>
+                            </div>
                         </div>
-                        <div class="modal-footer">
-                            <input type="submit" value="Continue" class="btn btn-primary float-end"/>
+                    </div>
+                    <div class="o_onboarding_step" data-step="2">
+                        <div class="o_onboarding_heading">
+                            <p>Step 2 of 5</p>
+                            <h2>Set up your company</h2>
                         </div>
-                    </form>
+                        <div class="o_onboarding_fields">
+                            <div class="o_onboarding_field o_onboarding_field_full">
+                                <label for="company_name">Company name</label>
+                                <input id="company_name" type="text" name="company_name" class="form-control" required="required" autocomplete="organization" t-att-value="create_values.get('company_name')"/>
+                            </div>
+                            <div class="o_onboarding_logos o_onboarding_field_full">
+                                <label class="o_logo_upload" for="company_logo">
+                                    <input id="company_logo" type="file" name="company_logo" accept="image/png,image/jpeg,image/webp,image/svg+xml" hidden="hidden"/>
+                                    <span class="o_logo_preview o_logo_preview_light"><i class="fa fa-image" aria-hidden="true"></i></span>
+                                    <strong>Primary logo</strong><small>For documents and light backgrounds</small>
+                                </label>
+                                <label class="o_logo_upload o_logo_upload_dark" for="company_logo_white">
+                                    <input id="company_logo_white" type="file" name="company_logo_white" accept="image/png,image/jpeg,image/webp,image/svg+xml" hidden="hidden"/>
+                                    <span class="o_logo_preview o_logo_preview_dark"><i class="fa fa-image" aria-hidden="true"></i></span>
+                                    <strong>White logo</strong><small>For Carbon headers and dark backgrounds</small>
+                                </label>
+                            </div>
+                            <div class="o_onboarding_field o_onboarding_field_full">
+                                <label for="street">Street address</label>
+                                <input id="street" type="text" name="street" class="form-control" autocomplete="street-address" t-att-value="create_values.get('street')"/>
+                            </div>
+                            <div class="o_onboarding_field">
+                                <label for="city">City</label>
+                                <input id="city" type="text" name="city" class="form-control" autocomplete="address-level2" t-att-value="create_values.get('city')"/>
+                            </div>
+                            <div class="o_onboarding_field">
+                                <label for="zip">Postal code</label>
+                                <input id="zip" type="text" name="zip" class="form-control" autocomplete="postal-code" t-att-value="create_values.get('zip')"/>
+                            </div>
+                            <div class="o_onboarding_field o_onboarding_field_full">
+                                <label for="vat">Tax ID <span>Optional</span></label>
+                                <input id="vat" type="text" name="vat" class="form-control" autocomplete="off" t-att-value="create_values.get('vat')"/>
+                            </div>
+                            <div class="o_onboarding_field">
+                                <label for="lang">Language</label>
+                                <select id="lang" name="lang" class="form-select o_carbon_select" required="required">
+                                    <t t-foreach="langs" t-as="lang">
+                                        <option t-att-value="lang[0]" t-out="lang[1]" t-att-selected="lang[0] == (create_values.get('lang') or 'en_US') and 'selected' or None"/>
+                                    </t>
+                                </select>
+                            </div>
+                            <div class="o_onboarding_field">
+                                <label for="country">Country</label>
+                                <select id="country" name="country_code" class="form-select o_carbon_select" required="required">
+                                    <option value="">Select a country</option>
+                                    <t t-foreach="countries" t-as="country"><option t-att-value="country[0]" t-att-data-currency="country_currencies.get(country[0].lower())" t-out="country[1]" t-att-selected="country[0] == create_values.get('country_code') and 'selected' or None"/></t>
+                                </select>
+                            </div>
+                            <div class="o_onboarding_field o_onboarding_field_full">
+                                <label for="currency">Company currency</label>
+                                <select id="currency" name="currency_code" class="form-select o_carbon_select" required="required">
+                                    <option value="">Select a country to choose its currency</option>
+                                    <t t-foreach="currencies" t-as="currency">
+                                        <option t-att-value="currency['code']" t-att-data-symbol="currency['symbol']" t-att-selected="currency['code'] == create_values.get('currency_code') and 'selected' or None"><t t-out="currency['code']"/> — <t t-out="currency['name']"/></option>
+                                    </t>
+                                </select>
+                                <small class="o_field_help">Defaults from the company country. This becomes the accounting and reporting currency.</small>
+                            </div>
+                            <div class="o_onboarding_field o_onboarding_field_full">
+                                <label for="phone">Phone number <span>Optional</span></label>
+                                <input id="phone" type="tel" name="phone" class="form-control" autocomplete="tel" t-att-value="create_values.get('phone')"/>
+                            </div>
+                            <label class="o_onboarding_toggle o_onboarding_field_full" for="load_demo_checkbox">
+                                <span><strong>Load sample data</strong><small>Add example records to explore the workspace.</small></span>
+                                <input type="checkbox" id="load_demo_checkbox" name="demo" value="1" t-att-checked="create_values.get('demo') and 'checked' or None"/>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="o_onboarding_step" data-step="3">
+                        <div class="o_onboarding_heading">
+                            <p>Step 3 of 5</p>
+                            <h2>Choose your applications</h2>
+                        </div>
+                        <div class="o_onboarding_apps">
+                            <label><input type="checkbox" name="install_crm" value="1" t-att-checked="create_values.get('install_crm') and 'checked' or None"/><span class="fa fa-filter"></span><strong>CRM</strong><small>Leads and opportunities</small></label>
+                            <label><input type="checkbox" name="install_sales" value="1" t-att-checked="create_values.get('install_sales') and 'checked' or None"/><span class="fa fa-line-chart"></span><strong>Sales</strong><small>Quotations and orders</small></label>
+                            <label><input type="checkbox" name="install_accounting" value="1" t-att-checked="create_values.get('install_accounting') and 'checked' or None"/><span class="fa fa-calculator"></span><strong>Accounting</strong><small>Invoices and finance</small></label>
+                            <label><input type="checkbox" name="install_inventory" value="1" t-att-checked="create_values.get('install_inventory') and 'checked' or None"/><span class="fa fa-cubes"></span><strong>Inventory</strong><small>Products and warehouses</small></label>
+                            <label><input type="checkbox" name="install_purchase" value="1" t-att-checked="create_values.get('install_purchase') and 'checked' or None"/><span class="fa fa-shopping-cart"></span><strong>Purchase</strong><small>Vendors and purchasing</small></label>
+                            <label><input type="checkbox" name="install_stock_requests" value="1" t-att-checked="create_values.get('install_stock_requests') and 'checked' or None"/><span class="fa fa-clipboard"></span><strong>Stock Requests</strong><small>Internal requests and approvals</small></label>
+                            <label><input type="checkbox" name="install_project" value="1" t-att-checked="create_values.get('install_project') and 'checked' or None"/><span class="fa fa-tasks"></span><strong>Project</strong><small>Projects and tasks</small></label>
+                            <label><input type="checkbox" name="install_website" value="1" t-att-checked="create_values.get('install_website') and 'checked' or None"/><span class="fa fa-globe"></span><strong>Website</strong><small>Pages and publishing</small></label>
+                            <label><input type="checkbox" name="install_pos" value="1" t-att-checked="create_values.get('install_pos') and 'checked' or None"/><span class="fa fa-credit-card"></span><strong>Point of Sale</strong><small>Retail checkout</small></label>
+                            <label><input type="checkbox" name="install_manufacturing" value="1" t-att-checked="create_values.get('install_manufacturing') and 'checked' or None"/><span class="fa fa-cogs"></span><strong>Manufacturing</strong><small>Bills of materials and orders</small></label>
+                            <label><input type="checkbox" name="install_employees" value="1" t-att-checked="create_values.get('install_employees') and 'checked' or None"/><span class="fa fa-users"></span><strong>Employees</strong><small>People and departments</small></label>
+                        </div>
+                    </div>
+                    <div class="o_onboarding_step" data-step="4">
+                        <div class="o_onboarding_heading">
+                            <p>Step 4 of 5</p>
+                            <h2>Tailor your workflows</h2>
+                            <span>Only questions for your selected applications are shown. You can refine advanced settings after sign-in.</span>
+                        </div>
+                        <div class="o_sop_empty" hidden="hidden">
+                            <i class="fa fa-check-circle" aria-hidden="true"></i>
+                            <div><strong>Core workspace only</strong><p>No application-specific workflow settings are needed.</p></div>
+                        </div>
+                        <div class="o_sop_sections">
+                            <t t-foreach="sop_sections" t-as="section">
+                                <section class="o_sop_section" t-att-data-sop-app="section['option']" t-att-data-sop-name="section['name']" t-att-data-sop-flow="section['sop']" hidden="hidden">
+                                    <header>
+                                        <span t-attf-class="fa #{section['icon']}" aria-hidden="true"></span>
+                                        <div><h3 t-out="section['name']"></h3><p>Essential settings and operating decisions</p></div>
+                                    </header>
+                                    <div class="o_sop_flow"><strong>Suggested SOP</strong><span t-out="section['sop']"></span></div>
+                                    <div class="o_sop_questions">
+                                        <t t-foreach="section['questions']" t-as="question">
+                                            <t t-if="question['type'] == 'boolean'">
+                                                <label class="o_sop_toggle o_sop_control" t-att-for="question['name']" t-att-data-sop-label="question['label']" t-att-data-enabled-by="question.get('enabled_by')">
+                                                    <span><strong t-out="question['label']"></strong><small t-out="question['help']"></small></span>
+                                                    <input type="checkbox" t-att-id="question['name']" t-att-name="question['name']" value="1" t-att-checked="(create_values.get(question['name']) or (not create_values.get('sop_profile_submitted') and question.get('default'))) and 'checked' or None"/>
+                                                </label>
+                                            </t>
+                                            <t t-elif="question['type'] == 'country_template'">
+                                                <div class="o_sop_field o_sop_control" t-att-data-sop-label="question['label']">
+                                                    <label t-out="question['label']"></label>
+                                                    <div class="o_sop_derived" data-derived-value="true" data-tax-template="true">Automatic from company country</div>
+                                                    <small t-out="question['help']"></small>
+                                                </div>
+                                            </t>
+                                            <t t-else="">
+                                                <div class="o_sop_field o_sop_control" t-att-data-sop-label="question['label']" t-att-data-enabled-by="question.get('enabled_by')">
+                                                    <label t-att-for="question['name']" t-out="question['label']"></label>
+                                                    <select t-if="question['type'] == 'select'" class="form-select o_carbon_select" t-att-id="question['name']" t-att-name="question['name']" required="required">
+                                                        <t t-foreach="question['options']" t-as="option">
+                                                            <option t-att-value="option[0]" t-out="option[1]" t-att-selected="option[0] == create_values.get(question['name'], question.get('default')) and 'selected' or None"/>
+                                                        </t>
+                                                    </select>
+                                                    <div t-else="" t-att-class="'o_currency_input' if question.get('currency') else 'o_number_input'">
+                                                        <input type="number" class="form-control" t-att-id="question['name']" t-att-name="question['name']" min="0" t-att-max="question.get('max')" step="1" required="required" t-att-value="create_values.get(question['name'], question.get('default'))"/>
+                                                        <span t-if="question.get('currency')" data-currency-code="true">Currency</span>
+                                                    </div>
+                                                    <small t-out="question['help']"></small>
+                                                </div>
+                                            </t>
+                                        </t>
+                                    </div>
+                                </section>
+                            </t>
+                        </div>
+                    </div>
+                    <div class="o_onboarding_step" data-step="5">
+                        <div class="o_onboarding_heading">
+                            <p>Step 5 of 5</p>
+                            <h2>Review your setup</h2>
+                        </div>
+                        <dl class="o_onboarding_review">
+                            <div><dt>Database</dt><dd data-review="name"></dd></div>
+                            <div><dt>Company</dt><dd data-review="company_name"></dd></div>
+                            <div><dt>Address</dt><dd data-review="address"></dd></div>
+                            <div><dt>Tax ID</dt><dd data-review="vat"></dd></div>
+                            <div><dt>Administrator</dt><dd data-review="login"></dd></div>
+                            <div><dt>Language</dt><dd data-review="lang"></dd></div>
+                            <div><dt>Country</dt><dd data-review="country_code"></dd></div>
+                            <div><dt>Currency</dt><dd data-review="currency_code"></dd></div>
+                            <div><dt>Applications</dt><dd data-review="modules"></dd></div>
+                            <div><dt>Sample data</dt><dd data-review="demo"></dd></div>
+                            <div class="o_review_operations"><dt>Operating profile</dt><dd><div data-review="operations"></div></dd></div>
+                        </dl>
+                    </div>
+                    <div class="o_onboarding_actions">
+                        <button type="button" class="btn btn-secondary o_onboarding_back" hidden="hidden"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button>
+                        <button type="button" class="btn btn-primary o_onboarding_next">Continue <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+                        <button type="submit" class="btn btn-primary o_onboarding_submit" hidden="hidden">Create database <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+                    </div>
+                </div>
+            </form>
+            <div class="o_database_creation_progress" hidden="hidden" role="status" aria-live="polite">
+                <div class="o_creation_progress_inner" data-creation-state="running">
+                    <div class="o_creation_intro">
+                        <div class="o_creation_loader" aria-hidden="true"><span></span></div>
+                        <div>
+                            <div class="o_creation_meta">
+                                <p class="o_onboarding_eyebrow">Creating workspace</p>
+                                <span class="o_creation_elapsed">00:00 elapsed</span>
+                            </div>
+                            <h2>Setting up your database</h2>
+                        </div>
+                    </div>
+                    <div class="o_creation_current">
+                        <span class="o_creation_current_marker" aria-hidden="true"></span>
+                        <div>
+                            <strong class="o_creation_status">Validating your setup...</strong>
+                            <small class="o_creation_detail">Checking the information required to create your workspace.</small>
+                        </div>
+                        <span class="o_creation_percent">2%</span>
+                    </div>
+                    <div class="o_creation_progress_track" role="progressbar" aria-label="Database creation progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="2"><span></span></div>
+                    <div class="o_creation_stage_heading"><strong>Setup progress</strong><span>5 stages</span></div>
+                    <ol class="o_creation_stages">
+                        <li data-progress-stage="database"><span>1</span><div><strong>Database foundation</strong><small>Core schema and administrator</small></div></li>
+                        <li data-progress-stage="carbon"><span>2</span><div><strong>Carbon interface</strong><small>NWOS shell and theme</small></div></li>
+                        <li data-progress-stage="company"><span>3</span><div><strong>Company setup</strong><small>Identity and localization</small></div></li>
+                        <li data-progress-stage="applications"><span>4</span><div><strong>Applications and SOPs</strong><small>Packages and operating settings</small></div></li>
+                        <li data-progress-stage="signin"><span>5</span><div><strong>First sign-in</strong><small>Secure administrator session</small></div></li>
+                    </ol>
+                    <div class="o_creation_log_panel">
+                        <div class="o_creation_log_header"><span>Detailed activity</span><span class="o_creation_log_count">0 events</span></div>
+                        <div class="o_creation_log" aria-live="polite"><p class="o_creation_log_empty">Waiting for the first server event...</p></div>
+                    </div>
+                    <p class="o_creation_note"><i class="fa fa-info-circle" aria-hidden="true"></i><span>Keep this tab open. Application installation can take several minutes.</span></p>
                 </div>
             </div>
-        </div>
+        </section>
 
         <!-- Restore -->
         <div class="modal fade o_database_restore" role="dialog">

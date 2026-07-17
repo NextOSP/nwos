@@ -20,7 +20,8 @@ it does not modify any core file, so it can be installed or removed cleanly.
     # Depend on web_nwos (the auto-installed legacy NWOS theme) so web_carbon's
     # assets load AFTER it in every bundle and win the cascade.
     'depends': ['web', 'web_nwos'],
-    'auto_install': False,
+    # Every NWOS database should use the Carbon interface from first login.
+    'auto_install': True,
     'data': [
         'views/login_templates.xml',
     ],

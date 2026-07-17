@@ -1,0 +1,60 @@
+.o_stock_request_dashboard {
+    .o_stock_request_dashboard_card {
+        --stock-request-card-bg: #f4f4f4;
+        --stock-request-card-border: #8d8d8d;
+        --stock-request-card-color: #393939;
+
+        min-height: 68px;
+        border: 1px solid var(--stock-request-card-border) !important;
+        border-left-width: 4px !important;
+        border-radius: 4px;
+        background-color: var(--stock-request-card-bg) !important;
+        color: var(--stock-request-card-color) !important;
+        box-shadow: none;
+
+        div,
+        span {
+            color: inherit;
+        }
+
+        span {
+            font-weight: 600;
+        }
+
+        &:hover,
+        &:focus {
+            filter: brightness(.97);
+            box-shadow: inset 0 0 0 1px var(--stock-request-card-border);
+        }
+    }
+
+    .o_stock_request_dashboard_card_draft {
+        --stock-request-card-bg: #f4f4f4;
+        --stock-request-card-border: #8d8d8d;
+        --stock-request-card-color: #393939;
+    }
+
+    .o_stock_request_dashboard_card_to_approve {
+        --stock-request-card-bg: #fff4d6;
+        --stock-request-card-border: #ff832b;
+        --stock-request-card-color: #8a3800;
+    }
+
+    .o_stock_request_dashboard_card_awaiting {
+        --stock-request-card-bg: #fff1f1;
+        --stock-request-card-border: #da1e28;
+        --stock-request-card-color: #750e13;
+    }
+
+    .o_stock_request_dashboard_card_approved {
+        --stock-request-card-bg: #defbe6;
+        --stock-request-card-border: #24a148;
+        --stock-request-card-color: #0e6027;
+    }
+
+    .o_stock_request_dashboard_card_purchased {
+        --stock-request-card-bg: #e5f6ff;
+        --stock-request-card-border: #0072c3;
+        --stock-request-card-color: #004b7a;
+    }
+}

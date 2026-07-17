@@ -126,6 +126,34 @@ class TestResConfig(TransactionCase):
         self.assertEqual('openai/gpt-4o-mini', values['ai_model'])
         self.assertEqual('legacy-key', values['ai_api_key'])
 
+    def test_ai_settings_default_model_is_available_without_cache(self):
+        ICP = self.env['ir.config_parameter'].sudo()
+        ICP.search([('key', 'in', [
+            'base.ai.model_list',
+            'base.ai.enabled',
+            'base.ai.provider',
+            'base.ai.endpoint',
+            'base.ai.model',
+            'base.ai.api_key',
+        ])]).unlink()
+
+        values = self.env['res.config.settings'].default_get([
+            'ai_enabled',
+            'ai_provider',
+            'ai_endpoint',
+            'ai_model',
+            'ai_model_id',
+        ])
+
+        self.assertFalse(values['ai_enabled'])
+        self.assertEqual('openrouter', values['ai_provider'])
+        self.assertEqual('https://openrouter.ai/api/v1', values['ai_endpoint'])
+        self.assertEqual('openai/gpt-5.6-terra', values['ai_model'])
+        self.assertEqual('openai/gpt-5.6-terra', values['ai_model_id'])
+
+        selection = self.env['res.config.settings']._get_ai_model_selection()
+        self.assertIn(('openai/gpt-5.6-terra', 'openai/gpt-5.6-terra'), selection)
+
     def test_ai_load_models(self):
         ICP = self.env['ir.config_parameter'].sudo()
         ICP.set_param('base.ai.model_list', '{}')

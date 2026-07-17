@@ -1,0 +1,2342 @@
+/// NextBot workspace — native OWL implementation of Carbon for AI patterns.
+
+.o_nextbot_workspace {
+    --nb-background: #{$carbon-background};
+    --nb-layer-01: #{$carbon-layer-01};
+    --nb-layer-02: #{$carbon-layer-02};
+    --nb-layer-accent: #{$carbon-layer-accent-01};
+    --nb-text-primary: #{$carbon-text-primary};
+    --nb-text-secondary: #{$carbon-text-secondary};
+    --nb-text-helper: #{$carbon-text-helper};
+    --nb-border: #{$carbon-border-subtle};
+    --nb-border-strong: #{$carbon-border-strong};
+    --nb-highlight: #{$carbon-highlight};
+    --nb-radius-sm: 6px;
+    --nb-radius: 10px;
+    --nb-radius-lg: 16px;
+    --nb-shadow: 0 1px 2px rgba(#{$carbon-gray-100}, 0.04), 0 4px 14px rgba(#{$carbon-gray-100}, 0.05);
+
+    position: relative;
+    display: grid;
+    grid-template-columns: 288px minmax(480px, 1fr) 360px;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+    color: var(--nb-text-primary);
+    background: var(--nb-background);
+    font-family: $carbon-font-sans, sans-serif;
+    font-size: $carbon-font-size-body;
+    line-height: 1.45;
+
+    &:not(.is-inspector-open) {
+        grid-template-columns: 288px minmax(480px, 1fr);
+    }
+
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+    }
+
+    button,
+    input,
+    textarea {
+        font: inherit;
+    }
+
+    button,
+    a,
+    input,
+    textarea,
+    summary {
+        &:focus-visible {
+            outline: $carbon-focus-width solid $carbon-focus;
+            outline-offset: -#{$carbon-focus-width};
+        }
+    }
+
+    .o_nextbot_icon {
+        display: block;
+        flex: 0 0 auto;
+    }
+}
+
+// web core ships `html .o_web_client > .o_action_manager > .o_action { display: flex }`
+// (specificity 0-3-1), which beats `.o_nextbot_workspace` alone and collapses the grid.
+.o_web_client .o_action_manager .o_action.o_nextbot_workspace {
+    display: grid;
+}
+
+.o_nextbot_history {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    min-height: 0;
+    color: var(--nb-text-primary);
+    background: var(--nb-layer-01);
+    border-right: 1px solid var(--nb-border);
+}
+
+.o_nextbot_history__header,
+.o_nextbot_chat_header,
+.o_nextbot_inspector__header {
+    flex: 0 0 56px;
+    min-height: 56px;
+    border-bottom: 1px solid var(--nb-border);
+}
+
+.o_nextbot_history__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 $carbon-spacing-05;
+}
+
+.o_nextbot_brand {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    gap: $carbon-spacing-04;
+
+    > div:last-child {
+        display: grid;
+        min-width: 0;
+    }
+
+    strong {
+        font-size: $carbon-font-size-body-02;
+        font-weight: $carbon-font-weight-semibold;
+        letter-spacing: 0.1px;
+    }
+
+    span:not(.o_nextbot_brand__mark) {
+        color: var(--nb-text-secondary);
+        font-size: $carbon-font-size-label;
+    }
+}
+
+.o_nextbot_brand__mark,
+.o_nextbot_message__avatar,
+.o_nextbot_welcome__orb {
+    position: relative;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    color: $carbon-text-on-color;
+    background: var(--nb-layer-accent);
+    font-weight: $carbon-font-weight-semibold;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+.o_nextbot_brand__mark {
+    width: 28px;
+    height: 28px;
+    border-radius: var(--nb-radius-sm);
+}
+
+.o_nextbot_history__controls {
+    display: grid;
+    gap: $carbon-spacing-04;
+    padding: $carbon-spacing-05;
+}
+
+.o_nextbot_primary_button,
+.o_nextbot_secondary_button,
+.o_nextbot_details_button,
+.o_nextbot_link_button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: $carbon-field-height;
+    gap: $carbon-spacing-03;
+    border: 0;
+    border-radius: var(--nb-radius-sm);
+    padding: 0 $carbon-spacing-05;
+    font-weight: $carbon-font-weight-regular;
+    text-decoration: none;
+    cursor: pointer;
+
+    &:disabled {
+        cursor: not-allowed;
+        opacity: 0.5;
+    }
+}
+
+.o_nextbot_primary_button {
+    background: $carbon-interactive;
+
+    // !important: browsers restrict/override :visited link colors, and global
+    // anchor rules keep winning — white-on-blue is not negotiable here.
+    &,
+    &:link,
+    &:visited,
+    &:focus,
+    &:active {
+        color: $carbon-text-on-color !important;
+    }
+
+    &:hover:not(:disabled) {
+        color: $carbon-text-on-color !important;
+        background: $carbon-blue-70;
+    }
+}
+
+.o_nextbot_secondary_button {
+    color: var(--nb-text-primary);
+    background: transparent;
+    border: 1px solid var(--nb-border-strong);
+
+    &:hover:not(:disabled) {
+        background: var(--nb-layer-accent);
+    }
+}
+
+.o_nextbot_icon_button {
+    display: inline-grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    flex: 0 0 40px;
+    padding: 0;
+    color: var(--nb-text-primary);
+    background: transparent;
+    border: 0;
+    border-radius: var(--nb-radius-sm);
+    text-decoration: none;
+    cursor: pointer;
+
+    &:hover:not(:disabled) {
+        color: var(--nb-text-primary);
+        background: var(--nb-layer-accent);
+    }
+
+    &:disabled {
+        color: $carbon-gray-40;
+        cursor: not-allowed;
+    }
+}
+
+.o_nextbot_search {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: $carbon-field-height;
+    color: var(--nb-text-secondary);
+    background: var(--nb-background);
+    border: 1px solid var(--nb-border);
+    border-radius: var(--nb-radius-sm);
+    transition: border-color 120ms ease;
+
+    &:focus-within {
+        border-color: $carbon-blue-60;
+    }
+
+    > svg {
+        position: absolute;
+        left: $carbon-spacing-04;
+        width: 16px;
+        height: 16px;
+        pointer-events: none;
+    }
+
+    input {
+        width: 100%;
+        height: 100%;
+        padding: 0 $carbon-spacing-05 0 $carbon-spacing-08;
+        color: var(--nb-text-primary);
+        background: transparent;
+        border: 0;
+        outline: 0;
+
+        &::placeholder {
+            color: $carbon-text-placeholder;
+        }
+
+        &:focus {
+            outline: 0;
+        }
+    }
+}
+
+.o_nextbot_history__label,
+.o_nextbot_eyebrow {
+    color: var(--nb-text-secondary);
+    font-size: $carbon-font-size-label;
+    font-weight: $carbon-font-weight-semibold;
+    letter-spacing: 0.32px;
+    text-transform: uppercase;
+}
+
+.o_nextbot_history__label {
+    padding: $carbon-spacing-03 $carbon-spacing-05;
+}
+
+.o_nextbot_conversation_list {
+    position: relative;
+    flex: 1 1 auto;
+    min-height: 0;
+    padding-bottom: $carbon-spacing-05;
+    overflow-x: hidden;
+    overflow-y: auto;
+    scrollbar-width: thin;
+}
+
+.o_nextbot_conversation {
+    position: relative;
+    display: flex;
+    min-height: 56px;
+    margin: 0 $carbon-spacing-03 2px;
+    border-radius: var(--nb-radius-sm);
+
+    &:hover {
+        background: var(--nb-layer-accent);
+
+        .o_nextbot_conversation__more {
+            opacity: 1;
+        }
+    }
+
+    &.is-active {
+        background: var(--nb-highlight);
+    }
+}
+
+.o_nextbot_conversation__select {
+    display: grid;
+    min-width: 0;
+    flex: 1 1 auto;
+    align-content: center;
+    gap: $carbon-spacing-02;
+    padding: $carbon-spacing-04 $carbon-spacing-09 $carbon-spacing-04 $carbon-spacing-04;
+    color: var(--nb-text-primary);
+    text-align: left;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+}
+
+.o_nextbot_conversation__title,
+.o_nextbot_conversation__preview {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.o_nextbot_conversation__title {
+    font-weight: $carbon-font-weight-semibold;
+}
+
+.o_nextbot_conversation__meta {
+    display: flex;
+    min-width: 0;
+    gap: $carbon-spacing-03;
+    color: var(--nb-text-secondary);
+    font-size: $carbon-font-size-label;
+
+    .o_nextbot_conversation__preview {
+        flex: 1 1 auto;
+    }
+}
+
+.o_nextbot_conversation__more {
+    position: absolute;
+    top: $carbon-spacing-04;
+    right: $carbon-spacing-02;
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    color: var(--nb-text-primary);
+    background: transparent;
+    border: 0;
+    opacity: 0;
+    cursor: pointer;
+
+    &:focus-visible,
+    &[aria-expanded="true"] {
+        opacity: 1;
+    }
+}
+
+.o_nextbot_conversation_menu {
+    position: absolute;
+    z-index: 12;
+    top: 44px;
+    right: $carbon-spacing-03;
+    display: grid;
+    width: 168px;
+    padding: $carbon-spacing-02;
+    background: var(--nb-layer-02);
+    border: 1px solid var(--nb-border);
+    border-radius: var(--nb-radius);
+    box-shadow: 0 8px 24px rgba($carbon-gray-100, 0.14);
+
+    button {
+        border-radius: var(--nb-radius-sm);
+    }
+
+    button {
+        display: flex;
+        align-items: center;
+        min-height: 40px;
+        gap: $carbon-spacing-03;
+        padding: 0 $carbon-spacing-04;
+        color: var(--nb-text-primary);
+        text-align: left;
+        background: transparent;
+        border: 0;
+        cursor: pointer;
+
+        &:hover {
+            background: var(--nb-layer-01);
+        }
+
+        &.is-danger {
+            color: $carbon-support-error;
+        }
+
+        &:disabled {
+            color: var(--nb-text-helper);
+            cursor: not-allowed;
+            opacity: 0.55;
+        }
+    }
+}
+
+.o_nextbot_conversation__rename {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: $carbon-spacing-04;
+
+    input {
+        width: 100%;
+        height: 36px;
+        padding: 0 $carbon-spacing-03;
+        color: var(--nb-text-primary);
+        background: var(--nb-background);
+        border: 0;
+        border-bottom: 1px solid var(--nb-border-strong);
+    }
+}
+
+.o_nextbot_history__empty,
+.o_nextbot_inspector_empty {
+    display: grid;
+    justify-items: center;
+    gap: $carbon-spacing-03;
+    padding: $carbon-spacing-08 $carbon-spacing-05;
+    color: var(--nb-text-secondary);
+    text-align: center;
+
+    p {
+        margin: 0;
+    }
+}
+
+.o_nextbot_history__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 48px;
+    padding: 0 $carbon-spacing-05;
+    color: var(--nb-text-secondary);
+    border-top: 1px solid var(--nb-border);
+    font-size: $carbon-font-size-label;
+}
+
+.o_nextbot_ai_slug {
+    display: inline-flex;
+    align-items: center;
+    width: fit-content;
+    height: 18px;
+    gap: $carbon-spacing-02;
+    padding: 0 $carbon-spacing-03;
+    color: var(--nb-text-secondary);
+    background: var(--nb-layer-accent);
+    border: 0;
+    border-radius: 9px;
+    font-size: 11px;
+    font-weight: $carbon-font-weight-semibold;
+    letter-spacing: 0.32px;
+}
+
+.o_nextbot_chat {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    min-width: 0;
+    min-height: 0;
+    flex-direction: column;
+    background: var(--nb-background);
+}
+
+.o_nextbot_chat_header {
+    position: relative;
+    z-index: 4;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $carbon-spacing-04;
+    padding: 0 $carbon-spacing-05 0 $carbon-spacing-06;
+    background: var(--nb-background);
+}
+
+.o_nextbot_chat_header__start,
+.o_nextbot_chat_header__end,
+.o_nextbot_chat_title > div {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+}
+
+.o_nextbot_chat_header__start {
+    gap: $carbon-spacing-03;
+}
+
+.o_nextbot_chat_title {
+    min-width: 0;
+
+    > div {
+        gap: $carbon-spacing-03;
+    }
+
+    h1 {
+        max-width: 680px;
+        margin: 0;
+        overflow: hidden;
+        font-size: $carbon-font-size-body-02;
+        font-weight: $carbon-font-weight-semibold;
+        line-height: 1.25;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    p {
+        display: flex;
+        align-items: center;
+        gap: $carbon-spacing-03;
+        margin: $carbon-spacing-01 0 0;
+        color: var(--nb-text-secondary);
+        font-size: $carbon-font-size-label;
+    }
+}
+
+.o_nextbot_history_toggle,
+.o_nextbot_mobile_only {
+    display: none;
+}
+
+.o_nextbot_details_button {
+    min-height: 34px;
+    color: var(--nb-text-secondary);
+    background: transparent;
+    border: 1px solid var(--nb-border);
+
+    &:hover,
+    &.is-active {
+        color: var(--nb-text-primary);
+        background: var(--nb-layer-01);
+    }
+
+    &.is-active {
+        border-color: $carbon-blue-60;
+    }
+}
+
+.o_nextbot_count {
+    display: grid;
+    place-items: center;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 $carbon-spacing-02;
+    color: var(--nb-text-secondary);
+    background: var(--nb-layer-accent);
+    border-radius: 9px;
+    font-size: 11px;
+}
+
+.o_nextbot_connection_notice {
+    margin-right: $carbon-spacing-03;
+    color: var(--nb-text-secondary);
+    font-size: $carbon-font-size-label;
+}
+
+.o_nextbot_error_banner {
+    position: relative;
+    z-index: 4;
+    display: flex;
+    align-items: center;
+    min-height: 48px;
+    gap: $carbon-spacing-03;
+    padding: $carbon-spacing-03 $carbon-spacing-05;
+    color: var(--nb-text-primary);
+    background: $carbon-notification-error-bg;
+    border-left: 3px solid $carbon-support-error;
+
+    > span {
+        flex: 1 1 auto;
+    }
+
+    > button:not(.o_nextbot_icon_button) {
+        min-height: 32px;
+        padding: 0 $carbon-spacing-04;
+        color: $carbon-link-primary;
+        background: transparent;
+        border: 0;
+        font-weight: $carbon-font-weight-semibold;
+    }
+}
+
+.o_nextbot_message_scroll {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    scroll-behavior: smooth;
+
+    // Programmatic focus target only; a viewport-sized focus ring is noise.
+    &:focus,
+    &:focus-visible {
+        outline: 0;
+    }
+}
+
+.o_nextbot_messages {
+    display: flex;
+    width: calc(100% - #{$carbon-spacing-09 * 2});
+    max-width: 860px;
+    min-height: 100%;
+    margin: 0 auto;
+    padding: $carbon-spacing-07 0 $carbon-spacing-06;
+    flex-direction: column;
+    gap: $carbon-spacing-07;
+}
+
+.o_nextbot_message {
+    display: flex;
+    width: 100%;
+    align-items: flex-start;
+    gap: $carbon-spacing-04;
+
+    &--user {
+        flex-direction: row-reverse;
+
+        .o_nextbot_message__column {
+            align-items: flex-end;
+            width: fit-content;
+            max-width: 78%;
+            margin-left: auto;
+        }
+
+        .o_nextbot_message__body {
+            padding: $carbon-spacing-04 $carbon-spacing-05;
+            background: var(--nb-layer-01);
+            border-radius: var(--nb-radius-lg);
+            border-bottom-right-radius: var(--nb-radius-sm);
+        }
+    }
+
+    &:hover .o_nextbot_message__actions,
+    &:focus-within .o_nextbot_message__actions {
+        opacity: 1;
+    }
+}
+
+.o_nextbot_message__avatar {
+    width: 28px;
+    height: 28px;
+    flex: 0 0 28px;
+    border-radius: 50%;
+    font-size: $carbon-font-size-label;
+}
+
+.o_nextbot_message__column {
+    display: flex;
+    min-width: 0;
+    max-width: calc(100% - 48px);
+    flex: 1 1 auto;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: $carbon-spacing-03;
+}
+
+.o_nextbot_message__meta {
+    display: flex;
+    align-items: center;
+    min-height: 20px;
+    gap: $carbon-spacing-03;
+
+    strong {
+        font-weight: $carbon-font-weight-semibold;
+    }
+
+    > span:not(.o_nextbot_ai_slug) {
+        color: var(--nb-text-helper);
+        font-size: $carbon-font-size-label;
+    }
+}
+
+.o_nextbot_message__body {
+    max-width: 100%;
+    color: var(--nb-text-primary);
+    font-size: $carbon-font-size-body-02;
+    line-height: 1.58;
+    overflow-wrap: anywhere;
+
+    b {
+        font-weight: $carbon-font-weight-semibold;
+    }
+
+    .o_tag {
+        color: var(--nb-text-primary);
+        background: var(--nb-layer-01);
+        border-radius: 0 !important;
+        font-family: $carbon-font-mono, monospace;
+        font-size: 0.875em;
+    }
+
+    .o_nextbot_markdown_table {
+        max-width: 100%;
+        margin: $carbon-spacing-03 0;
+        overflow-x: auto;
+        border: 1px solid var(--nb-border);
+        border-radius: var(--nb-radius-sm);
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: $carbon-font-size-body;
+        }
+
+        th,
+        td {
+            padding: $carbon-spacing-03 $carbon-spacing-04;
+            text-align: left;
+            vertical-align: top;
+            border-right: 1px solid var(--nb-border);
+            border-bottom: 1px solid var(--nb-border);
+            white-space: nowrap;
+
+            &:last-child {
+                border-right: 0;
+            }
+        }
+
+        th {
+            background: var(--nb-layer-01);
+            font-weight: $carbon-font-weight-semibold;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: 0;
+        }
+    }
+}
+
+.o_nextbot_message__actions {
+    display: flex;
+    min-height: 32px;
+    opacity: 0;
+    transition: opacity 120ms ease;
+
+    .o_nextbot_icon_button {
+        width: 32px;
+        height: 32px;
+        flex-basis: 32px;
+    }
+}
+
+.o_nextbot_message_attachments,
+.o_nextbot_message_sources {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $carbon-spacing-03;
+
+    > a,
+    > span {
+        display: inline-flex;
+        align-items: center;
+        min-height: 32px;
+        gap: $carbon-spacing-03;
+        padding: 0 $carbon-spacing-04;
+        color: var(--nb-text-primary);
+        background: var(--nb-layer-01);
+        border: 1px solid var(--nb-border);
+        border-radius: var(--nb-radius-sm);
+        text-decoration: none;
+    }
+}
+
+.o_nextbot_message_sources > span {
+    min-height: 24px;
+    padding: 0 $carbon-spacing-03;
+    color: var(--nb-text-secondary);
+    font-size: $carbon-font-size-label;
+}
+
+.o_nextbot_message_cards {
+    display: grid;
+    width: 100%;
+    max-width: 720px;
+    gap: $carbon-spacing-04;
+}
+
+.o_nextbot_card_drawer {
+    width: 100%;
+    max-width: 720px;
+
+    &__toggle {
+        display: inline-flex;
+        align-items: center;
+        min-height: 28px;
+        gap: $carbon-spacing-02;
+        padding: 0 $carbon-spacing-03;
+        color: var(--nb-text-helper);
+        background: transparent;
+        border: 0;
+        border-radius: var(--nb-radius-sm);
+        font-size: $carbon-font-size-label;
+        cursor: pointer;
+
+        &:hover {
+            color: var(--nb-text-primary);
+            background: var(--nb-layer-01);
+        }
+    }
+
+    &__chevron {
+        transition: transform 120ms ease;
+    }
+
+    &.is-open &__chevron {
+        transform: rotate(90deg);
+    }
+
+    .o_nextbot_message_cards {
+        margin-top: $carbon-spacing-03;
+    }
+}
+
+.o_nextbot_tool_lines {
+    display: grid;
+    margin-top: $carbon-spacing-02;
+    padding: $carbon-spacing-02 0;
+    border-left: 2px solid var(--nb-border);
+}
+
+.o_nextbot_tool_line {
+    display: flex;
+    align-items: center;
+    min-height: 26px;
+    gap: $carbon-spacing-03;
+    padding: 0 $carbon-spacing-03 0 $carbon-spacing-04;
+    font-size: $carbon-font-size-label;
+
+    &__title {
+        color: var(--nb-text-secondary);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    &__meta {
+        color: var(--nb-text-helper);
+        white-space: nowrap;
+    }
+
+    &__action {
+        display: grid;
+        place-items: center;
+        width: 24px;
+        height: 24px;
+        padding: 0;
+        color: var(--nb-text-helper);
+        background: transparent;
+        border: 0;
+        border-radius: var(--nb-radius-sm);
+        cursor: pointer;
+
+        &:hover {
+            color: $carbon-blue-60;
+            background: var(--nb-layer-01);
+        }
+    }
+}
+
+.o_nextbot_inline_notice {
+    padding: $carbon-spacing-03 $carbon-spacing-04;
+    color: var(--nb-text-secondary);
+    background: var(--nb-layer-01);
+    border-left: 3px solid var(--nb-border-strong);
+    border-radius: var(--nb-radius-sm);
+    font-size: $carbon-font-size-label;
+
+    &.is-error {
+        display: flex;
+        align-items: center;
+        gap: $carbon-spacing-03;
+        color: $carbon-text-error;
+        background: $carbon-notification-error-bg;
+        border-left-color: $carbon-support-error;
+    }
+}
+
+.o_nextbot_thinking {
+    display: flex;
+    align-items: center;
+    height: 32px;
+    gap: $carbon-spacing-02;
+    color: var(--nb-text-secondary);
+
+    span {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: $carbon-blue-60;
+        animation: o-nextbot-pulse 1.2s ease-in-out infinite;
+
+        &:nth-child(2) { animation-delay: 120ms; }
+        &:nth-child(3) { animation-delay: 240ms; }
+    }
+
+    em {
+        margin-left: $carbon-spacing-02;
+        font-size: $carbon-font-size-label;
+        font-style: normal;
+    }
+}
+
+.o_nextbot_result_card {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    background: var(--nb-layer-02);
+    border: 1px solid var(--nb-border);
+    border-radius: var(--nb-radius);
+    box-shadow: var(--nb-shadow);
+
+    &__accent {
+        display: none;
+    }
+
+    &__header {
+        display: flex;
+        align-items: center;
+        min-height: 52px;
+        gap: $carbon-spacing-04;
+        padding: $carbon-spacing-04 $carbon-spacing-05;
+        border-bottom: 1px solid var(--nb-border);
+
+        > div {
+            display: grid;
+            min-width: 0;
+            flex: 1 1 auto;
+            gap: $carbon-spacing-02;
+        }
+
+        strong {
+            font-weight: $carbon-font-weight-semibold;
+        }
+
+        span:not(.o_nextbot_result_card__icon):not(.o_nextbot_status) {
+            color: var(--nb-text-secondary);
+            font-size: $carbon-font-size-label;
+        }
+    }
+
+    &__icon {
+        display: grid;
+        place-items: center;
+        width: 32px;
+        height: 32px;
+        color: $carbon-blue-60;
+        background: rgba($carbon-blue-40, 0.14);
+        border-radius: var(--nb-radius-sm);
+    }
+
+    &--approval .o_nextbot_result_card__icon,
+    &--error .o_nextbot_result_card__icon {
+        color: $carbon-orange-40;
+        background: rgba($carbon-yellow-30, 0.18);
+    }
+
+    &__actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: $carbon-spacing-03;
+        padding: $carbon-spacing-04 $carbon-spacing-05;
+        background: var(--nb-layer-01);
+
+        .o_nextbot_primary_button,
+        .o_nextbot_secondary_button {
+            min-width: 104px;
+        }
+    }
+}
+
+.o_nextbot_status {
+    display: inline-flex;
+    min-height: 22px;
+    align-items: center;
+    padding: 0 $carbon-spacing-03;
+    color: var(--nb-text-primary);
+    background: $carbon-yellow-30;
+    border-radius: 11px;
+    font-size: $carbon-font-size-label;
+    text-transform: capitalize;
+
+    &--approved { color: $carbon-text-on-color; background: $carbon-green-50; }
+    &--rejected,
+    &--failed,
+    &--expired { color: $carbon-text-on-color; background: $carbon-red-60; }
+    &--executing { color: $carbon-text-on-color; background: $carbon-blue-60; }
+}
+
+.o_nextbot_approval_details {
+    padding: $carbon-spacing-05 $carbon-spacing-05 $carbon-spacing-04 $carbon-spacing-06;
+
+    dl,
+    pre {
+        margin: 0;
+    }
+
+    dl {
+        display: grid;
+        grid-template-columns: 112px 1fr;
+        gap: $carbon-spacing-03 $carbon-spacing-05;
+    }
+
+    dt {
+        color: var(--nb-text-secondary);
+        font-size: $carbon-font-size-label;
+        font-weight: $carbon-font-weight-regular;
+    }
+
+    dd {
+        margin: 0;
+        overflow-wrap: anywhere;
+    }
+
+    pre {
+        max-height: 200px;
+        margin-top: $carbon-spacing-04;
+        padding: $carbon-spacing-04;
+        overflow: auto;
+        color: var(--nb-text-primary);
+        background: var(--nb-layer-01);
+        font: 12px/1.45 $carbon-font-mono, monospace;
+        white-space: pre-wrap;
+    }
+}
+
+.o_nextbot_approval_batch {
+    display: grid;
+    gap: $carbon-spacing-04;
+    padding: $carbon-spacing-05;
+
+    > section {
+        overflow: hidden;
+        border: 1px solid var(--nb-border);
+        border-radius: var(--nb-radius-sm);
+
+        > header {
+            display: flex;
+            min-height: 44px;
+            align-items: center;
+            justify-content: space-between;
+            gap: $carbon-spacing-04;
+            padding: $carbon-spacing-03 $carbon-spacing-04;
+            background: var(--nb-layer-01);
+
+            strong {
+                font-weight: $carbon-font-weight-semibold;
+            }
+
+            span {
+                flex: 0 0 auto;
+                color: var(--nb-text-secondary);
+                font-size: $carbon-font-size-label;
+            }
+        }
+    }
+
+    &__items {
+        display: grid;
+    }
+
+    &__item {
+        display: flex;
+        width: 100%;
+        min-height: 48px;
+        align-items: center;
+        gap: $carbon-spacing-03;
+        padding: $carbon-spacing-03 $carbon-spacing-04;
+        color: inherit;
+        font: inherit;
+        text-align: left;
+        background: transparent;
+        border-right: 0;
+        border-bottom: 0;
+        border-left: 0;
+        border-top: 1px solid var(--nb-border);
+
+        &:disabled {
+            cursor: default;
+            opacity: 1;
+        }
+
+        &.is-clickable {
+            cursor: pointer;
+
+            &:hover,
+            &:focus-visible {
+                background: var(--nb-layer-accent);
+            }
+
+            > .o_nextbot_icon:last-child {
+                margin-left: auto;
+                color: var(--nb-text-secondary);
+            }
+        }
+
+        > .o_nextbot_icon {
+            flex: 0 0 auto;
+            color: $carbon-blue-60;
+        }
+
+        > div {
+            display: grid;
+            min-width: 0;
+            gap: $carbon-spacing-02;
+        }
+
+        strong,
+        small {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        strong {
+            font-weight: $carbon-font-weight-semibold;
+        }
+
+        small {
+            color: var(--nb-text-secondary);
+        }
+    }
+
+    &__more {
+        display: block;
+        padding: $carbon-spacing-03 $carbon-spacing-04;
+        color: var(--nb-text-secondary);
+        border-top: 1px solid var(--nb-border);
+    }
+
+    &__skipped {
+        border-top: 1px solid var(--nb-border);
+        background: rgba($carbon-green-50, 0.07);
+
+        > strong {
+            display: block;
+            padding: $carbon-spacing-03 $carbon-spacing-04;
+            color: $carbon-support-success;
+            font-size: $carbon-font-size-label;
+            font-weight: $carbon-font-weight-semibold;
+        }
+
+        .o_nextbot_approval_batch__item.is-skipped {
+            border-top-color: rgba($carbon-green-50, 0.2);
+
+            > .o_nextbot_icon {
+                color: $carbon-support-success;
+            }
+        }
+    }
+
+    &__toggle {
+        display: flex;
+        width: 100%;
+        min-height: 40px;
+        align-items: center;
+        justify-content: center;
+        gap: $carbon-spacing-03;
+        padding: 0 $carbon-spacing-04;
+        color: $carbon-link-primary;
+        font: inherit;
+        background: transparent;
+        border: 0;
+        border-top: 1px solid var(--nb-border);
+        cursor: pointer;
+
+        &:hover,
+        &:focus-visible {
+            background: var(--nb-layer-accent);
+        }
+    }
+}
+
+.o_nextbot_approval_resolved {
+    display: flex;
+    align-items: center;
+    min-height: 48px;
+    gap: $carbon-spacing-03;
+    padding: 0 $carbon-spacing-06;
+    color: var(--nb-text-secondary);
+    background: var(--nb-layer-01);
+}
+
+.o_nextbot_quote {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    gap: $carbon-spacing-05;
+    padding: $carbon-spacing-05 $carbon-spacing-05 $carbon-spacing-04 $carbon-spacing-06;
+
+    > div {
+        display: grid;
+        gap: $carbon-spacing-02;
+    }
+
+    span {
+        color: var(--nb-text-secondary);
+        font-size: $carbon-font-size-label;
+    }
+
+    strong {
+        font-weight: $carbon-font-weight-semibold;
+    }
+
+    &__total strong {
+        font-size: $carbon-font-size-h03;
+    }
+}
+
+.o_nextbot_quote_lines {
+    margin: 0 $carbon-spacing-05;
+    padding: $carbon-spacing-03 0;
+    border-top: 1px solid var(--nb-border);
+}
+
+.o_nextbot_quote_line {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 40px;
+    gap: $carbon-spacing-04;
+
+    > div {
+        display: grid;
+        min-width: 0;
+    }
+
+    strong {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-weight: $carbon-font-weight-semibold;
+    }
+
+    small {
+        color: var(--nb-text-secondary);
+    }
+
+    > span {
+        flex: 0 0 auto;
+        font-weight: $carbon-font-weight-semibold;
+    }
+}
+
+.o_nextbot_link_button {
+    justify-content: flex-start;
+    margin: 0 0 $carbon-spacing-04 $carbon-spacing-03;
+    color: $carbon-link-primary;
+    background: transparent;
+
+    &:hover {
+        color: $carbon-link-primary-hover;
+        background: var(--nb-layer-01);
+    }
+}
+
+.o_nextbot_record_fields {
+    display: grid;
+    grid-template-columns: minmax(100px, 0.4fr) 1fr;
+    gap: $carbon-spacing-03 $carbon-spacing-05;
+    margin: 0;
+    padding: $carbon-spacing-05 $carbon-spacing-05 $carbon-spacing-04 $carbon-spacing-06;
+
+    dt {
+        color: var(--nb-text-secondary);
+        font-size: $carbon-font-size-label;
+        font-weight: $carbon-font-weight-regular;
+        text-transform: capitalize;
+    }
+
+    dd {
+        margin: 0;
+        overflow-wrap: anywhere;
+        white-space: pre-wrap;
+    }
+}
+
+.o_nextbot_card_text {
+    max-height: 240px;
+    margin: 0;
+    padding: $carbon-spacing-04 $carbon-spacing-05 $carbon-spacing-04 $carbon-spacing-06;
+    overflow: auto;
+    color: var(--nb-text-primary);
+    background: var(--nb-layer-01);
+    font: 12px/1.5 $carbon-font-mono, monospace;
+    white-space: pre-wrap;
+}
+
+.o_nextbot_table_scroll {
+    max-height: 320px;
+    overflow: auto;
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th,
+    td {
+        min-width: 112px;
+        padding: $carbon-spacing-03 $carbon-spacing-04;
+        text-align: left;
+        border-right: 1px solid var(--nb-border);
+        border-bottom: 1px solid var(--nb-border);
+        vertical-align: top;
+    }
+
+    th {
+        position: sticky;
+        z-index: 1;
+        top: 0;
+        color: var(--nb-text-secondary);
+        background: var(--nb-layer-01);
+        font-size: $carbon-font-size-label;
+        font-weight: $carbon-font-weight-semibold;
+        text-transform: capitalize;
+    }
+
+    tr.is-clickable {
+        cursor: pointer;
+
+        &:hover td {
+            background: var(--nb-highlight);
+        }
+    }
+}
+
+.o_nextbot_card_note {
+    padding: $carbon-spacing-03 $carbon-spacing-05;
+    color: var(--nb-text-secondary);
+    font-size: $carbon-font-size-label;
+}
+
+.o_nextbot_artifact_summary,
+.o_nextbot_artifact_card {
+    display: flex;
+    align-items: center;
+}
+
+.o_nextbot_artifact_summary {
+    min-height: 56px;
+    padding: $carbon-spacing-03 $carbon-spacing-04 $carbon-spacing-03 $carbon-spacing-06;
+
+    > div {
+        display: grid;
+        flex: 1 1 auto;
+    }
+
+    span,
+    small {
+        color: var(--nb-text-secondary);
+        font-size: $carbon-font-size-label;
+    }
+}
+
+.o_nextbot_history_loader {
+    display: grid;
+    justify-items: center;
+    gap: $carbon-spacing-03;
+}
+
+.o_nextbot_history_window_note {
+    color: var(--nb-text-helper);
+    font-size: $carbon-font-size-label;
+}
+
+.o_nextbot_welcome {
+    display: grid;
+    width: calc(100% - #{$carbon-spacing-09 * 2});
+    max-width: 780px;
+    min-height: 100%;
+    margin: 0 auto;
+    padding: $carbon-spacing-09 0 $carbon-spacing-07;
+    align-content: center;
+    justify-items: center;
+    text-align: center;
+
+    h2 {
+        margin: $carbon-spacing-04 0 $carbon-spacing-03;
+        font-size: 2.625rem;
+        font-weight: $carbon-font-weight-light;
+        letter-spacing: -0.6px;
+        line-height: 1.15;
+    }
+
+    > p {
+        max-width: 600px;
+        margin: 0;
+        color: var(--nb-text-secondary);
+        font-size: $carbon-font-size-body-02;
+    }
+}
+
+.o_nextbot_welcome__orb {
+    width: 64px;
+    height: 64px;
+    margin-bottom: $carbon-spacing-05;
+    border-radius: var(--nb-radius);
+    font-size: $carbon-font-size-h04;
+}
+
+.o_nextbot_starters {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: $carbon-spacing-04;
+    margin-top: $carbon-spacing-07;
+
+    button {
+        border: 1px solid var(--nb-border);
+        border-radius: var(--nb-radius);
+        transition: border-color 120ms ease, box-shadow 120ms ease;
+        display: grid;
+        min-height: 96px;
+        grid-template-columns: 40px minmax(0, 1fr) 24px;
+        grid-template-rows: auto auto;
+        align-items: center;
+        gap: 0 $carbon-spacing-04;
+        padding: $carbon-spacing-04;
+        color: var(--nb-text-primary);
+        text-align: left;
+        background: var(--nb-layer-02);
+        cursor: pointer;
+
+        > span {
+            display: grid;
+            width: 40px;
+            height: 40px;
+            grid-row: 1 / span 2;
+            place-items: center;
+            color: $carbon-blue-60;
+            background: rgba($carbon-blue-40, 0.13);
+            border-radius: var(--nb-radius-sm);
+        }
+
+        > svg {
+            grid-row: 1 / span 2;
+            grid-column: 3;
+            color: var(--nb-text-secondary);
+        }
+
+        strong {
+            align-self: end;
+            font-weight: $carbon-font-weight-semibold;
+        }
+
+        small {
+            align-self: start;
+            color: var(--nb-text-secondary);
+        }
+
+        &:hover {
+            border-color: $carbon-blue-60;
+            box-shadow: var(--nb-shadow);
+
+            > svg {
+                color: $carbon-blue-60;
+                transform: translateX(2px);
+            }
+        }
+    }
+}
+
+.o_nextbot_welcome__trust {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: $carbon-spacing-05;
+    margin-top: $carbon-spacing-06;
+    color: var(--nb-text-secondary);
+    font-size: $carbon-font-size-label;
+
+    span {
+        display: inline-flex;
+        align-items: center;
+        gap: $carbon-spacing-03;
+    }
+}
+
+.o_nextbot_task {
+    flex: 0 0 auto;
+    width: calc(100% - #{$carbon-spacing-09 * 2});
+    max-width: 900px;
+    margin: 0 auto $carbon-spacing-03;
+    padding: $carbon-spacing-04 $carbon-spacing-05;
+    background: var(--nb-layer-01);
+    border: 1px solid var(--nb-border);
+    border-radius: var(--nb-radius);
+    box-shadow: var(--nb-shadow);
+}
+
+.o_nextbot_task__header,
+.o_nextbot_task__summary,
+.o_nextbot_task__actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $carbon-spacing-04;
+}
+
+.o_nextbot_task__header {
+    > div {
+        display: grid;
+        min-width: 0;
+        gap: $carbon-spacing-02;
+    }
+
+    strong {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}
+
+.o_nextbot_task__status {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: $carbon-spacing-03;
+    color: var(--nb-text-secondary);
+    font-size: $carbon-font-size-label;
+
+    &.is-completed { color: $carbon-support-success; }
+    &.is-failed,
+    &.is-interrupted { color: $carbon-red-60; }
+}
+
+.o_nextbot_task__progress {
+    height: 3px;
+    margin-top: $carbon-spacing-04;
+    overflow: hidden;
+    background: var(--nb-layer-accent);
+
+    > span {
+        display: block;
+        height: 100%;
+        background: $carbon-blue-60;
+        transition: width 180ms ease;
+    }
+}
+
+.o_nextbot_task__summary {
+    padding-top: $carbon-spacing-03;
+    color: var(--nb-text-helper);
+    font-size: 11px;
+}
+
+.o_nextbot_task__steps {
+    display: grid;
+    max-height: 142px;
+    gap: $carbon-spacing-02;
+    margin: $carbon-spacing-04 0 0;
+    padding: 0;
+    overflow-y: auto;
+    list-style: none;
+
+    li {
+        display: flex;
+        min-height: 30px;
+        align-items: center;
+        gap: $carbon-spacing-03;
+        padding: $carbon-spacing-02 $carbon-spacing-03;
+        background: var(--nb-layer-02);
+        border-left: 2px solid var(--nb-border-strong);
+
+        &.is-running,
+        &.is-queued { border-left-color: $carbon-blue-60; }
+        &.is-completed { border-left-color: $carbon-green-50; }
+        &.is-failed { border-left-color: $carbon-red-50; }
+        &.is-skipped,
+        &.is-cancelled { opacity: 0.7; }
+    }
+}
+
+.o_nextbot_task__step_icon {
+    color: var(--nb-text-secondary);
+}
+
+.o_nextbot_task__step_text {
+    display: flex;
+    min-width: 0;
+    flex: 1 1 auto;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: $carbon-spacing-04;
+
+    strong {
+        overflow: hidden;
+        font-size: $carbon-font-size-label;
+        font-weight: $carbon-font-weight-regular;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    small {
+        flex: 0 0 auto;
+        color: var(--nb-text-helper);
+    }
+}
+
+.o_nextbot_task__actions {
+    justify-content: flex-end;
+    margin-top: $carbon-spacing-04;
+
+    button { min-height: 32px; }
+}
+
+.o_nextbot_composer_shell {
+    position: relative;
+    z-index: 5;
+    flex: 0 0 auto;
+    width: calc(100% - #{$carbon-spacing-09 * 2});
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 0 $carbon-spacing-04;
+    background: var(--nb-background);
+
+    &.is-dragging {
+        outline: 2px solid $carbon-focus;
+        outline-offset: -2px;
+    }
+}
+
+.o_nextbot_composer {
+    position: relative;
+    display: flex;
+    min-height: 56px;
+    align-items: flex-end;
+    gap: $carbon-spacing-02;
+    padding: $carbon-spacing-02;
+    background: var(--nb-layer-02);
+    border: 1px solid var(--nb-border);
+    border-radius: var(--nb-radius-lg);
+    box-shadow: var(--nb-shadow);
+    transition: border-color 120ms ease, box-shadow 120ms ease;
+
+    &:focus-within {
+        border-color: $carbon-blue-60;
+        box-shadow: 0 0 0 1px $carbon-blue-60, var(--nb-shadow);
+    }
+}
+
+.o_nextbot_composer__attach {
+    margin: 0 0 $carbon-spacing-02 $carbon-spacing-02;
+    width: 36px;
+    height: 36px;
+    flex-basis: 36px;
+    border-radius: 50%;
+    color: var(--nb-text-secondary);
+}
+
+.o_nextbot_composer_hint span:last-child {
+    text-align: right;
+}
+
+.o_nextbot_composer__input {
+    display: flex;
+    min-width: 0;
+    min-height: 48px;
+    flex: 1 1 auto;
+    align-items: center;
+
+    // The composer container is the focus indicator; without this, the root
+    // Carbon focus rule draws a second outline inside the focused border.
+    textarea:focus-visible {
+        outline: 0;
+    }
+
+    textarea {
+        width: 100%;
+        max-height: 176px;
+        min-height: 24px;
+        margin: 0;
+        padding: $carbon-spacing-04 $carbon-spacing-03;
+        resize: none;
+        overflow-y: auto;
+        color: var(--nb-text-primary);
+        background: transparent;
+        border: 0;
+        outline: 0;
+        line-height: 1.5;
+
+        &::placeholder {
+            color: $carbon-text-placeholder;
+        }
+    }
+}
+
+.o_nextbot_send_button {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    flex: 0 0 36px;
+    margin: 0 $carbon-spacing-02 $carbon-spacing-02 0;
+    padding: 0;
+    color: $carbon-text-on-color;
+    background: $carbon-blue-60;
+    border: 0;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 120ms ease;
+
+    &:hover:not(:disabled) { background: $carbon-blue-70; }
+    &:disabled { color: $carbon-gray-50; background: $carbon-gray-30; cursor: not-allowed; }
+    &.is-stop { background: $carbon-gray-100; }
+}
+
+.o_nextbot_composer_hint {
+    display: flex;
+    justify-content: space-between;
+    gap: $carbon-spacing-04;
+    padding-top: $carbon-spacing-02;
+    color: var(--nb-text-helper);
+    font-size: 11px;
+}
+
+.o_nextbot_attachment_tray {
+    display: flex;
+    max-width: 100%;
+    gap: $carbon-spacing-03;
+    padding: $carbon-spacing-03 0;
+    overflow-x: auto;
+}
+
+.o_nextbot_attachment_chip {
+    position: relative;
+    display: flex;
+    min-width: 200px;
+    max-width: 280px;
+    height: 48px;
+    align-items: center;
+    gap: $carbon-spacing-03;
+    padding: $carbon-spacing-03 $carbon-spacing-02 $carbon-spacing-03 $carbon-spacing-03;
+    overflow: hidden;
+    background: var(--nb-layer-01);
+    border: 1px solid var(--nb-border);
+    border-radius: var(--nb-radius-sm);
+
+    > div {
+        display: grid;
+        min-width: 0;
+        flex: 1 1 auto;
+    }
+
+    strong,
+    small {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    strong { font-size: $carbon-font-size-label; font-weight: $carbon-font-weight-semibold; }
+    small { color: var(--nb-text-secondary); font-size: 11px; }
+
+    > button {
+        display: grid;
+        width: 28px;
+        height: 28px;
+        place-items: center;
+        padding: 0;
+        color: var(--nb-text-primary);
+        background: transparent;
+        border: 0;
+    }
+
+    &.is-error {
+        border-left: 3px solid $carbon-support-error;
+
+        small { color: $carbon-text-error; }
+    }
+}
+
+.o_nextbot_attachment_chip__icon {
+    display: grid;
+    width: 32px;
+    height: 32px;
+    flex: 0 0 32px;
+    place-items: center;
+    color: $carbon-blue-60;
+    background: var(--nb-layer-02);
+    border-radius: var(--nb-radius-sm);
+    overflow: hidden;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+.o_nextbot_attachment_progress {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    background: linear-gradient(90deg, $carbon-blue-60 var(--progress), var(--nb-border) var(--progress));
+}
+
+.o_nextbot_drop_overlay {
+    position: absolute;
+    z-index: 20;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $carbon-spacing-03;
+    color: $carbon-blue-70;
+    background: rgba($carbon-blue-20, 0.94);
+    border-radius: var(--nb-radius-lg);
+    pointer-events: none;
+}
+
+.o_nextbot_inspector {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    min-width: 0;
+    min-height: 0;
+    flex-direction: column;
+    background: var(--nb-layer-01);
+    border-left: 1px solid var(--nb-border);
+}
+
+.o_nextbot_inspector__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 $carbon-spacing-04 $carbon-spacing-03 $carbon-spacing-05;
+
+    > div {
+        display: grid;
+        gap: $carbon-spacing-02;
+    }
+
+    strong {
+        font-size: $carbon-font-size-body-02;
+        font-weight: $carbon-font-weight-semibold;
+    }
+}
+
+.o_nextbot_inspector_tabs {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-bottom: 1px solid var(--nb-border);
+
+    button {
+        position: relative;
+        display: grid;
+        min-width: 0;
+        min-height: 48px;
+        place-items: center;
+        gap: $carbon-spacing-01;
+        padding: $carbon-spacing-03 $carbon-spacing-02;
+        color: var(--nb-text-secondary);
+        background: transparent;
+        border: 0;
+        font-size: $carbon-font-size-label;
+        cursor: pointer;
+
+        span {
+            color: var(--nb-text-helper);
+            font-size: 10px;
+        }
+
+        &:hover { background: var(--nb-layer-accent); }
+
+        &.is-active {
+            color: var(--nb-text-primary);
+            font-weight: $carbon-font-weight-semibold;
+
+            &::after {
+                position: absolute;
+                right: 0;
+                bottom: -1px;
+                left: 0;
+                height: 2px;
+                background: $carbon-blue-60;
+                content: "";
+            }
+        }
+    }
+}
+
+.o_nextbot_inspector__body {
+    flex: 1 1 auto;
+    min-height: 0;
+    padding: $carbon-spacing-05;
+    overflow-x: hidden;
+    overflow-y: auto;
+    scrollbar-width: thin;
+}
+
+.o_nextbot_run_live {
+    display: flex;
+    align-items: center;
+    min-height: 40px;
+    gap: $carbon-spacing-03;
+    margin-bottom: $carbon-spacing-05;
+    padding: 0 $carbon-spacing-04;
+    color: $carbon-blue-70;
+    background: rgba($carbon-blue-40, 0.15);
+    border-radius: var(--nb-radius-sm);
+    font-size: $carbon-font-size-label;
+    font-weight: $carbon-font-weight-semibold;
+}
+
+.o_nextbot_live_dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    flex: 0 0 7px;
+    border-radius: 50%;
+    background: $carbon-green-50;
+    animation: o-nextbot-live 1.6s ease-in-out infinite;
+}
+
+.o_nextbot_activity_item {
+    position: relative;
+    display: grid;
+    grid-template-columns: 32px minmax(0, 1fr);
+    gap: $carbon-spacing-03;
+    padding-bottom: $carbon-spacing-05;
+
+    &:not(:last-child)::before {
+        position: absolute;
+        top: 30px;
+        bottom: 0;
+        left: 15px;
+        width: 1px;
+        background: var(--nb-border);
+        content: "";
+    }
+}
+
+.o_nextbot_activity_item__marker {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    width: 32px;
+    height: 32px;
+    place-items: center;
+    color: var(--nb-text-secondary);
+    background: var(--nb-layer-02);
+    border: 1px solid var(--nb-border);
+    border-radius: 50%;
+
+    &.is-tool { color: $carbon-blue-60; }
+    &.is-approval { color: $carbon-orange-40; }
+    &.is-error { color: $carbon-red-60; }
+    &.is-complete { color: $carbon-green-50; }
+}
+
+.o_nextbot_activity_item__content {
+    min-width: 0;
+    padding-top: $carbon-spacing-02;
+
+    > div:first-child {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: $carbon-spacing-03;
+    }
+
+    strong {
+        font-weight: $carbon-font-weight-semibold;
+    }
+
+    time {
+        flex: 0 0 auto;
+        color: var(--nb-text-helper);
+        font-size: 11px;
+    }
+
+    > p {
+        margin: $carbon-spacing-02 0 0;
+        color: var(--nb-text-secondary);
+        font-size: $carbon-font-size-label;
+    }
+
+    details {
+        margin-top: $carbon-spacing-03;
+
+        summary {
+            color: $carbon-link-primary;
+            font-size: $carbon-font-size-label;
+            cursor: pointer;
+        }
+
+        pre {
+            max-height: 220px;
+            margin: $carbon-spacing-03 0 0;
+            padding: $carbon-spacing-03;
+            overflow: auto;
+            color: var(--nb-text-primary);
+            background: var(--nb-layer-02);
+            border: 1px solid var(--nb-border);
+            font: 11px/1.45 $carbon-font-mono, monospace;
+            white-space: pre-wrap;
+        }
+    }
+
+    .o_nextbot_result_card {
+        margin-top: $carbon-spacing-04;
+    }
+}
+
+.o_nextbot_source_card,
+.o_nextbot_artifact_card {
+    display: flex;
+    min-height: 64px;
+    align-items: center;
+    gap: $carbon-spacing-03;
+    margin-bottom: $carbon-spacing-03;
+    padding: $carbon-spacing-03;
+    background: var(--nb-layer-02);
+    border: 1px solid var(--nb-border);
+    border-radius: var(--nb-radius);
+
+    > div {
+        display: grid;
+        min-width: 0;
+        flex: 1 1 auto;
+        gap: $carbon-spacing-02;
+    }
+
+    strong,
+    p,
+    small {
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    strong { font-weight: $carbon-font-weight-semibold; white-space: nowrap; }
+    p { display: -webkit-box; margin: 0; color: var(--nb-text-secondary); font-size: $carbon-font-size-label; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
+    small { color: var(--nb-text-secondary); font-size: $carbon-font-size-label; }
+
+    > a {
+        display: grid;
+        width: 32px;
+        height: 32px;
+        flex: 0 0 32px;
+        place-items: center;
+        color: $carbon-link-primary;
+    }
+}
+
+.o_nextbot_source_card__number,
+.o_nextbot_artifact_card > span {
+    display: grid;
+    width: 32px;
+    height: 32px;
+    flex: 0 0 32px;
+    place-items: center;
+    color: $carbon-blue-60;
+    background: rgba($carbon-blue-40, 0.14);
+    font-size: $carbon-font-size-label;
+    font-weight: $carbon-font-weight-semibold;
+}
+
+.o_nextbot_panel_backdrop {
+    display: none;
+}
+
+.o_nextbot_conversation_skeleton,
+.o_nextbot_message_skeleton {
+    span,
+    i {
+        display: block;
+        background: linear-gradient(90deg, var(--nb-layer-accent) 20%, var(--nb-layer-02) 40%, var(--nb-layer-accent) 60%);
+        background-size: 240% 100%;
+        animation: o-nextbot-skeleton 1.4s linear infinite;
+    }
+}
+
+.o_nextbot_conversation_skeleton {
+    display: grid;
+    gap: $carbon-spacing-03;
+    height: 64px;
+    padding: $carbon-spacing-04 $carbon-spacing-05;
+
+    span:first-child { width: 72%; height: 12px; }
+    span:last-child { width: 92%; height: 9px; }
+}
+
+.o_nextbot_message_skeletons {
+    display: grid;
+    width: calc(100% - #{$carbon-spacing-09 * 2});
+    max-width: 860px;
+    margin: 0 auto;
+    padding-top: $carbon-spacing-07;
+    gap: $carbon-spacing-08;
+}
+
+.o_nextbot_message_skeleton {
+    display: flex;
+    gap: $carbon-spacing-04;
+
+    > span { width: 32px; height: 32px; flex: 0 0 32px; }
+    > div { display: grid; width: 68%; gap: $carbon-spacing-03; }
+    i { width: 100%; height: 12px; }
+    i:nth-child(2) { width: 86%; }
+    i:nth-child(3) { width: 52%; }
+
+    &.is-user {
+        flex-direction: row-reverse;
+        > div { width: 48%; }
+    }
+}
+
+@keyframes o-nextbot-skeleton {
+    from { background-position: 100% 0; }
+    to { background-position: -100% 0; }
+}
+
+@keyframes o-nextbot-pulse {
+    0%, 80%, 100% { opacity: 0.35; transform: translateY(0); }
+    40% { opacity: 1; transform: translateY(-3px); }
+}
+
+@keyframes o-nextbot-live {
+    0%, 100% { box-shadow: 0 0 0 0 rgba($carbon-green-50, 0.28); }
+    50% { box-shadow: 0 0 0 5px rgba($carbon-green-50, 0); }
+}
+
+@media (max-width: 1199px) {
+    .o_nextbot_workspace,
+    .o_nextbot_workspace:not(.is-inspector-open) {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .o_nextbot_history,
+    .o_nextbot_inspector {
+        position: absolute;
+        z-index: 31;
+        top: 0;
+        bottom: 0;
+        width: 92vw;
+        max-width: 360px;
+        box-shadow: 0 0 24px rgba($carbon-gray-100, 0.22);
+        transition: transform 180ms ease;
+    }
+
+    .o_nextbot_history {
+        left: 0;
+        transform: translateX(-102%);
+    }
+
+    .o_nextbot_workspace.is-history-open .o_nextbot_history {
+        transform: translateX(0);
+    }
+
+    .o_nextbot_inspector {
+        right: 0;
+    }
+
+    .o_nextbot_history_toggle,
+    .o_nextbot_mobile_only {
+        display: inline-grid;
+    }
+
+    .o_nextbot_panel_backdrop {
+        position: absolute;
+        z-index: 30;
+        inset: 0;
+        display: block;
+        padding: 0;
+        background: $carbon-overlay;
+        border: 0;
+    }
+}
+
+@media (max-width: 767px) {
+    .o_nextbot_chat_header {
+        min-height: 56px;
+        flex-basis: 56px;
+        padding: 0 $carbon-spacing-03;
+    }
+
+    .o_nextbot_chat_title {
+        h1 { max-width: 45vw; }
+        .o_nextbot_ai_slug { display: none; }
+    }
+
+    .o_nextbot_details_button {
+        min-width: 40px;
+        width: 40px;
+        padding: 0;
+
+        > span:not(.o_nextbot_count) { display: none; }
+        .o_nextbot_count { position: absolute; top: 5px; right: 2px; min-width: 16px; height: 16px; }
+    }
+
+    .o_nextbot_history,
+    .o_nextbot_inspector {
+        width: 100%;
+    }
+
+    .o_nextbot_messages,
+    .o_nextbot_message_skeletons {
+        width: calc(100% - #{$carbon-spacing-05 * 2});
+        padding-top: $carbon-spacing-05;
+        gap: $carbon-spacing-06;
+    }
+
+    .o_nextbot_message--user .o_nextbot_message__column {
+        max-width: 88%;
+    }
+
+    .o_nextbot_message__avatar {
+        width: 28px;
+        height: 28px;
+        flex-basis: 28px;
+    }
+
+    .o_nextbot_message__column {
+        max-width: calc(100% - 40px);
+    }
+
+    .o_nextbot_message__body {
+        font-size: $carbon-font-size-body;
+    }
+
+    .o_nextbot_welcome {
+        width: calc(100% - #{$carbon-spacing-05 * 2});
+        padding: $carbon-spacing-06 0;
+        align-content: start;
+
+        h2 { font-size: $carbon-font-size-h04; }
+    }
+
+    .o_nextbot_welcome__orb {
+        width: 56px;
+        height: 56px;
+        margin-top: $carbon-spacing-05;
+    }
+
+    .o_nextbot_starters {
+        grid-template-columns: 1fr;
+        margin-top: $carbon-spacing-06;
+
+        button { min-height: 80px; }
+    }
+
+    .o_nextbot_welcome__trust {
+        display: none;
+    }
+
+    .o_nextbot_task {
+        width: 100%;
+        margin-bottom: 0;
+        border-right: 0;
+        border-left: 0;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    .o_nextbot_task__steps {
+        max-height: 106px;
+    }
+
+    .o_nextbot_composer_shell {
+        width: 100%;
+        padding: 0;
+        border-top: 1px solid var(--nb-border);
+    }
+
+    .o_nextbot_composer {
+        border-right: 0;
+        border-left: 0;
+    }
+
+    .o_nextbot_composer_hint {
+        display: none;
+    }
+
+    .o_nextbot_attachment_tray {
+        padding: $carbon-spacing-03;
+    }
+
+    .o_nextbot_quote {
+        grid-template-columns: 1fr 1fr;
+
+        &__total { grid-column: 1 / -1; }
+    }
+
+    .o_nextbot_result_card__actions {
+        .o_nextbot_primary_button,
+        .o_nextbot_secondary_button { flex: 1 1 0; min-width: 0; }
+    }
+
+    .o_nextbot_connection_notice {
+        display: none;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    .o_nextbot_workspace {
+        --nb-background: #{$carbon-gray-100};
+        --nb-layer-01: #{$carbon-gray-90};
+        --nb-layer-02: #{$carbon-gray-80};
+        --nb-layer-accent: #{$carbon-gray-70};
+        --nb-text-primary: #{$carbon-gray-10};
+        --nb-text-secondary: #{$carbon-gray-30};
+        --nb-text-helper: #{$carbon-gray-40};
+        --nb-border: #{$carbon-gray-70};
+        --nb-border-strong: #{$carbon-gray-50};
+        --nb-highlight: #{$carbon-gray-80};
+
+        .o_nextbot_ai_slug { color: $carbon-blue-20; }
+        .o_nextbot_error_banner { color: $carbon-gray-100; }
+        .o_nextbot_drop_overlay { color: $carbon-gray-100; }
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .o_nextbot_workspace *,
+    .o_nextbot_workspace *::before,
+    .o_nextbot_workspace *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}

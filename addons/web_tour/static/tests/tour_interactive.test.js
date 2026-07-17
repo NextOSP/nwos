@@ -290,7 +290,7 @@ test("hovering to the anchor element should show the content and not when conten
     expect(".o_tour_pointer_content:not(.invisible)").toHaveCount(1);
     expect(".o_tour_pointer_content:not(.invisible) span").toHaveText("content");
     await contains(".other").hover();
-    await animationFrame();
+    await advanceTime(250);
     expect(".o_tour_pointer_content.invisible").toHaveCount(1);
 
     await click("button.inc");
@@ -300,6 +300,61 @@ test("hovering to the anchor element should show the content and not when conten
     await animationFrame();
     expect(".o_tour_pointer_content.invisible").toHaveCount(1);
 
+    await click("button.inc");
+    await animationFrame();
+    expect(".o_tour_pointer").toHaveCount(0);
+});
+
+test("moving from the tour anchor to Stop Tour keeps the pointer open", async () => {
+    patchWithCleanup(browser.location, {
+        reload: () => expect.step("reload"),
+    });
+    onRpc("res.users", "switch_tour_enabled", ({ args }) => {
+        if (args[0] === false) {
+            expect.step("disable tours");
+        }
+        return args[0];
+    });
+    registry.category("web_tour.tours").add("stop_tour", {
+        steps: () => [
+            {
+                content: "Tour content",
+                trigger: "button.inc",
+                run: "click",
+            },
+        ],
+    });
+    class Root extends Component {
+        static props = ["*"];
+        static components = { Counter };
+        static template = xml`<Counter />`;
+    }
+
+    await mountWithCleanup(Root);
+    await getService("tour_service").startTour("stop_tour", { mode: "manual" });
+    await animationFrame();
+
+    await contains("button.inc").hover();
+    await animationFrame();
+    expect(".o_tour_pointer").toHaveClass("o_open");
+
+    queryFirst("button.inc").dispatchEvent(new MouseEvent("mouseleave"));
+    await advanceTime(100);
+    await animationFrame();
+    expect(".o_tour_pointer").toHaveClass("o_open");
+
+    await hover(".o_tour_pointer button");
+    await advanceTime(250);
+    await animationFrame();
+    expect(".o_tour_pointer").toHaveClass("o_open");
+    expect(".o_tour_pointer button").toHaveText("Stop Tour");
+
+    await click(".o_tour_pointer button");
+    await animationFrame();
+    expect.verifySteps(["disable tours", "reload"]);
+    expect(browser.localStorage.getItem("current_tour")).toBe(null);
+
+    // Complete the running instance because the test replaces the real page reload.
     await click("button.inc");
     await animationFrame();
     expect(".o_tour_pointer").toHaveCount(0);
@@ -418,6 +473,7 @@ test("scrolling to next step should update the pointer's height", async (assert)
     expect(".o_tour_pointer span").toHaveText(content);
     expect(".o_tour_pointer").toHaveClass("o_open");
     await contains(".interval input").hover();
+    await advanceTime(250);
     expect(".o_tour_pointer").not.toHaveClass("o_open");
 
     await contains(".scrollable-parent").scroll({ top: 1000 });
@@ -442,6 +498,7 @@ test("scrolling to next step should update the pointer's height", async (assert)
     expect(".o_tour_pointer").toHaveClass("o_open");
     expect(".o_tour_pointer span").toHaveText(content);
     await contains(".interval input").hover();
+    await advanceTime(250);
     const secondOpenHeight = queryFirst(".o_tour_pointer").style.height;
     const secondOpenWidth = queryFirst(".o_tour_pointer").style.width;
     expect(secondOpenHeight).toEqual(firstOpenHeight);

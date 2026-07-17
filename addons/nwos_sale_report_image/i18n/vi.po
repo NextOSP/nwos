@@ -1,0 +1,225 @@
+# Translation of NextOSP Server.
+# This file contains the translation of the following modules:
+# 	* nwos_sale_report_image
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: NextOSP Server\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: nwos_sale_report_image
+#: model_terms:ir.ui.view,arch_db:nwos_sale_report_image.report_saleorder_clean_document
+msgid "Quotation"
+msgstr "Báo giá"
+
+#. module: nwos_sale_report_image
+#: model_terms:ir.ui.view,arch_db:nwos_sale_report_image.report_saleorder_clean_document
+msgid "Order"
+msgstr "Đơn hàng"
+
+#. module: nwos_sale_report_image
+#: model_terms:ir.ui.view,arch_db:nwos_sale_report_image.report_saleorder_clean_document
+msgid "Quotation No."
+msgstr "Số báo giá"
+
+#. module: nwos_sale_report_image
+#: model_terms:ir.ui.view,arch_db:nwos_sale_report_image.report_saleorder_clean_document
+msgid "Quotation Date"
+msgstr "Ngày báo giá"
+
+#. module: nwos_sale_report_image
+#: model_terms:ir.ui.view,arch_db:nwos_sale_report_image.report_saleorder_clean_document
+msgid "Valid Till"
+msgstr "Có hiệu lực đến"
+
+#. module: nwos_sale_report_image
+#: model_terms:ir.ui.view,arch_db:nwos_sale_report_image.report_saleorder_clean_document
+msgid "Customer"
+msgstr "Khách hàng"
+
+#. module: nwos_sale_report_image
+#: model_terms:ir.ui.view,arch_db:nwos_sale_report_image.report_saleorder_clean_document
+msgid "Prepared By"
+msgstr "Người lập"
+
+#. module: nwos_sale_report_image
+#: model_terms:ir.ui.view,arch_db:nwos_sale_report_image.report_saleorder_clean_document
+msgid "Currency"
+msgstr "Tiền tệ"
+
+#. module: nwos_sale_report_image
+#: model_terms:ir.ui.view,arch_db:nwos_sale_report_image.report_saleorder_clean_document
+msgid "1. Products &amp; prices"
+msgstr "1. Sản phẩm &amp; giá"
+
+#. module: nwos_sale_report_image
+#: model_terms:ir.ui.view,arch_db:nwos_sale_report_image.report_saleorder_clean_document
+msgid "No."
+msgstr "STT"
+
+#. module: nwos_sale_report_image
+#: model_terms:ir.ui.view,arch_db:nwos_sale_report_image.report_saleorder_clean_document
+msgid "Item &amp; Specification"
+msgstr "Sản phẩm &amp; quy cách"
+
+#. module: nwos_sale_report_image
+#: model_terms:ir.ui.view,arch_db:nwos_sale_report_image.report_saleorder_clean_document
+msgid "Qty"
+msgstr "SL"
+
+#. module: nwos_sale_report_image
+#: model_terms:ir.ui.view,arch_db:nwos_sale_report_image.report_saleorder_clean_document
+msgid "Unit Price"
+msgstr "Đơn giá"
+
+#. module: nwos_sale_report_image
+#: model_terms:ir.ui.view,arch_db:nwos_sale_report_image.report_saleorder_clean_document
+msgid "Amount"
+msgstr "Thành tiền"
+
+#. module: nwos_sale_report_image
+#: model_terms:ir.ui.view,arch_db:nwos_sale_report_image.report_saleorder_clean_document
+msgid "Subtotal"
+msgstr "Tạm tính"
+
+#. module: nwos_sale_report_image
+#: model_terms:ir.ui.view,arch_db:nwos_sale_report_image.report_saleorder_clean_document
+msgid "Taxes"
+msgstr "Thuế"
+
+#. module: nwos_sale_report_image
+#: model_terms:ir.ui.view,arch_db:nwos_sale_report_image.report_saleorder_clean_document
+msgid "Grand Total"
+msgstr "Tổng cộng"
+
+#. module: nwos_sale_report_image
+#: model_terms:ir.ui.view,arch_db:nwos_sale_report_image.report_saleorder_clean_document
+msgid "<strong>In words:</strong>"
+msgstr "<strong>Bằng chữ:</strong>"
+
+#. module: nwos_sale_report_image
+#: model_terms:ir.ui.view,arch_db:nwos_sale_report_image.report_saleorder_clean_document
+msgid "2. Remarks"
+msgstr "2. Ghi chú"
+
+#. module: nwos_sale_report_image
+#: model_terms:ir.ui.view,arch_db:nwos_sale_report_image.report_saleorder_clean_document
+msgid "Delivery Address"
+msgstr "Địa chỉ giao hàng"
+
+#. module: nwos_sale_report_image
+#: model_terms:ir.ui.view,arch_db:nwos_sale_report_image.report_saleorder_clean_document
+msgid "Payment Terms"
+msgstr "Điều khoản thanh toán"
+
+#. module: nwos_sale_report_image
+#: model_terms:ir.ui.view,arch_db:nwos_sale_report_image.report_saleorder_clean_document
+msgid "Same as customer"
+msgstr "Giống khách hàng"
+
+#. module: nwos_sale_report_image
+#: model_terms:ir.ui.view,arch_db:nwos_sale_report_image.report_saleorder_clean_document
+msgid "Tax ID:"
+msgstr "Mã số thuế:"
+
+#. module: nwos_sale_report_image
+#: model_terms:ir.ui.view,arch_db:nwos_sale_report_image.report_saleorder_clean_document
+msgid "Quotation Details"
+msgstr "Thông tin báo giá"
+
+#. module: nwos_sale_report_image
+#: model_terms:ir.ui.view,arch_db:nwos_sale_report_image.report_saleorder_clean_document
+msgid "Order Details"
+msgstr "Thông tin đơn hàng"
+
+#. module: nwos_sale_report_image
+#: model_terms:ir.ui.view,arch_db:nwos_sale_report_image.report_saleorder_clean_document
+msgid "UoM"
+msgstr "ĐVT"
+
+#. module: nwos_sale_report_image
+#: model_terms:ir.ui.view,arch_db:nwos_sale_report_image.report_saleorder_clean_document
+msgid "Terms &amp; Conditions"
+msgstr "Điều khoản &amp; điều kiện"
+
+#. module: nwos_sale_report_image
+#: model_terms:ir.ui.view,arch_db:nwos_sale_report_image.report_saleorder_clean_document
+msgid "This quotation is valid until"
+msgstr "Báo giá này có hiệu lực đến"
+
+#. module: nwos_sale_report_image
+#: model_terms:ir.ui.view,arch_db:nwos_sale_report_image.report_saleorder_clean_document
+msgid "the date agreed by both parties."
+msgstr "ngày do hai bên thỏa thuận."
+
+#. module: nwos_sale_report_image
+#: model_terms:ir.ui.view,arch_db:nwos_sale_report_image.report_saleorder_clean_document
+msgid "Prices are quoted in"
+msgstr "Giá được niêm yết bằng"
+
+#. module: nwos_sale_report_image
+#: model_terms:ir.ui.view,arch_db:nwos_sale_report_image.report_saleorder_clean_document
+msgid "and include VAT where applicable."
+msgstr "và đã bao gồm thuế GTGT (nếu có)."
+
+#. module: nwos_sale_report_image
+#: model_terms:ir.ui.view,arch_db:nwos_sale_report_image.report_saleorder_clean_document
+msgid "Delivery time and location as agreed between both parties."
+msgstr "Thời gian và địa điểm giao hàng theo thỏa thuận giữa hai bên."
+
+#. module: nwos_sale_report_image
+#: model_terms:ir.ui.view,arch_db:nwos_sale_report_image.report_saleorder_clean_document
+msgid "Payment terms:"
+msgstr "Điều khoản thanh toán:"
+
+#. module: nwos_sale_report_image
+#: model_terms:ir.ui.view,arch_db:nwos_sale_report_image.report_saleorder_clean_document
+msgid "as agreed between both parties."
+msgstr "theo thỏa thuận giữa hai bên."
+
+#. module: nwos_sale_report_image
+#: model_terms:ir.ui.view,arch_db:nwos_sale_report_image.report_saleorder_clean_document
+msgid "Warranty and after-sales support as per the supplier's policy."
+msgstr "Bảo hành và hỗ trợ sau bán hàng theo chính sách của nhà cung cấp."
+
+#. module: nwos_sale_report_image
+#: model_terms:ir.ui.view,arch_db:nwos_sale_report_image.report_saleorder_clean_document
+msgid "Notes"
+msgstr "Ghi chú"
+
+#. module: nwos_sale_report_image
+#: model_terms:ir.ui.view,arch_db:nwos_sale_report_image.report_saleorder_clean_document
+msgid "Payment Information"
+msgstr "Thông tin thanh toán"
+
+#. module: nwos_sale_report_image
+#: model_terms:ir.ui.view,arch_db:nwos_sale_report_image.report_saleorder_clean_document
+msgid "Bank"
+msgstr "Ngân hàng"
+
+#. module: nwos_sale_report_image
+#: model_terms:ir.ui.view,arch_db:nwos_sale_report_image.report_saleorder_clean_document
+msgid "Account:"
+msgstr "Số tài khoản:"
+
+#. module: nwos_sale_report_image
+#: model_terms:ir.ui.view,arch_db:nwos_sale_report_image.report_saleorder_clean_document
+msgid "On behalf of the Seller"
+msgstr "Đại diện bên bán"
+
+#. module: nwos_sale_report_image
+#: model_terms:ir.ui.view,arch_db:nwos_sale_report_image.report_saleorder_clean_document
+msgid "(Sign and print full name)"
+msgstr "(Ký, ghi rõ họ tên)"
+
+#. module: nwos_sale_report_image
+#: model_terms:ir.ui.view,arch_db:nwos_sale_report_image.report_saleorder_clean_document
+msgid "Page"
+msgstr "Trang"

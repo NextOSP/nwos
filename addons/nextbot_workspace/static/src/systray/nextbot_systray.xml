@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="nextbot_workspace.NextBotSystray">
+        <div class="o-nextbot-systray">
+            <button class="o-nextbot-systray-button btn btn-link" t-att-title="title"
+                t-att-aria-label="title" t-on-click="onClick">
+                <img class="o-nextbot-systray-icon" src="/nextbot_workspace/static/description/icon.svg"
+                    alt="NextBot"/>
+            </button>
+        </div>
+    </t>
+
+</templates>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nwos>
+
+    <template id="helpdesk_ticket_rating_page" name="Helpdesk Ticket Rating">
+        <t t-call="portal.frontend_layout">
+            <div class="container py-5">
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
+                        <h2>How did we do?</h2>
+                        <p class="text-muted">Ticket: <t t-esc="ticket.name"/></p>
+                        <form method="post" action="/helpdesk/rating/submit">
+                            <input type="hidden" name="ticket_id" t-att-value="ticket.id"/>
+                            <input type="hidden" name="token" t-att-value="token"/>
+                            <div class="mb-3">
+                                <label class="form-label">Rating</label>
+                                <select name="rating" class="form-select">
+                                    <option value="5">5 - Excellent</option>
+                                    <option value="4">4 - Good</option>
+                                    <option value="3" selected="1">3 - Average</option>
+                                    <option value="2">2 - Poor</option>
+                                    <option value="1">1 - Terrible</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Feedback</label>
+                                <textarea name="feedback" class="form-control" rows="4"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit Rating</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="helpdesk_ticket_rating_thanks" name="Helpdesk Rating Thanks">
+        <t t-call="portal.frontend_layout">
+            <div class="container py-5 text-center">
+                <h2>Thank you for your feedback!</h2>
+                <p class="text-muted">Your rating helps us improve our support.</p>
+            </div>
+        </t>
+    </template>
+
+</nwos>

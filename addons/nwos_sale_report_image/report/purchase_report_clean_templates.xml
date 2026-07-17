@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nwos>
+
+    <!--
+        Clean Purchase Order / RFQ - self-contained layout matching the clean
+        quotation (shared chrome in nwos_report_common.xml). Vendor + order info,
+        product table, totals. Title switches RFQ / Purchase Order by state.
+    -->
+    <template id="report_purchaseorder_clean_document">
+        <t t-set="doc" t-value="doc.with_context(lang=env.context.get('report_lang') or doc.partner_id.lang)"/>
+        <t t-set="company" t-value="doc.company_id"/>
+        <t t-set="is_rfq" t-value="doc.state in ('draft', 'sent', 'to approve')"/>
+
+        <div class="article o_nw"
+             t-att-data-oe-model="doc._name"
+             t-att-data-oe-id="doc.id"
+             t-att-data-oe-lang="doc.env.context.get('lang')">
+            <t t-call="nwos_sale_report_image.nwos_report_style"/>
+            <t t-call="nwos_sale_report_image.nwos_letterhead"/>
+
+            <!-- Title -->
+            <t t-set="title">
+                <t t-if="doc.state == 'cancel'">Cancelled Order</t>
+                <t t-elif="is_rfq">Request for Quotation</t>
+                <t t-else="">Purchase Order</t>
+            </t>
+            <t t-set="subtitle">
+                <span class="fw-bold" t-field="doc.name"/>
+                <t t-if="doc.date_order"> · <span t-field="doc.date_order" t-options='{"widget": "date"}'/></t>
+            </t>
+            <t t-call="nwos_sale_report_image.nwos_title"/>
+
+            <!-- Vendor (left) + order meta (right) -->
+            <table style="width: 100%; table-layout: fixed; margin-bottom: 18px;">
+                <tr>
+                    <td style="width: 48%; padding-right: 16px; vertical-align: top;">
+                        <div class="o_nw_label o_nw_rule" style="padding-bottom: 3px; margin-bottom: 6px;">Vendor</div>
+                        <div class="fw-bold" style="font-size: 12px;"><span t-field="doc.partner_id.name"/></div>
+                        <div class="o_nw_muted" style="line-height: 1.5; font-size: 11px;">
+                            <span t-field="doc.partner_id"
+                                  t-options='{"widget": "contact", "fields": ["address", "phone"], "no_marker": true}'/>
+                        </div>
+                        <div t-if="doc.partner_id.vat" style="font-size: 11px;">Tax ID: <span t-field="doc.partner_id.vat"/></div>
+                        <t t-if="doc.dest_address_id">
+                            <div class="o_nw_label" style="margin-top: 6px;">Ship To</div>
+                            <div class="o_nw_muted" style="line-height: 1.5; font-size: 11px;">
+                                <span t-field="doc.dest_address_id"
+                                      t-options='{"widget": "contact", "fields": ["address", "phone"], "no_marker": true}'/>
+                            </div>
+                        </t>
+                    </td>
+                    <td style="width: 52%; vertical-align: top;">
+                        <div class="o_nw_label o_nw_rule" style="padding-bottom: 3px; margin-bottom: 6px;">
+                            <t t-if="is_rfq">RFQ Details</t>
+                            <t t-else="">Order Details</t>
+                        </div>
+                        <table style="width: 100%; font-size: 11px;">
+                            <tr>
+                                <td style="padding: 2px 8px 5px 0; width: 50%;">
+                                    <div class="o_nw_label">Order No.</div>
+                                    <div class="fw-bold"><span t-field="doc.name"/></div>
+                                </td>
+                                <td style="padding: 2px 0 5px;">
+                                    <div class="o_nw_label">Order Date</div>
+                                    <div><span t-field="doc.date_order" t-options='{"widget": "date"}'/></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 2px 8px 5px 0;">
+                                    <div class="o_nw_label">Expected Arrival</div>
+                                    <div>
+                                        <span t-if="doc.date_planned" t-field="doc.date_planned" t-options='{"widget": "date"}'/>
+                                        <t t-else="">—</t>
+                                    </div>
+                                </td>
+                                <td style="padding: 2px 0 5px;">
+                                    <div class="o_nw_label">Buyer</div>
+                                    <div><span t-field="doc.user_id.name"/></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 2px 8px 0 0;">
+                                    <div class="o_nw_label">Your Reference</div>
+                                    <div>
+                                        <span t-if="doc.partner_ref" t-field="doc.partner_ref"/>
+                                        <t t-else="">—</t>
+                                    </div>
+                                </td>
+                                <td style="padding: 2px 0 0;">
+                                    <div class="o_nw_label">Currency</div>
+                                    <div><span t-field="doc.currency_id.name"/></div>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+
+            <!-- Products -->
+            <table class="o_nw_products" style="width: 100%; font-size: 11px; margin-bottom: 14px;">
+                <thead>
+                    <tr>
+                        <th style="width: 6%; padding: 7px 6px; text-align: center;">No.</th>
+                        <th style="padding: 7px 6px; text-align: left;">Item &amp; Specification</th>
+                        <th style="width: 10%; padding: 7px 6px; text-align: center;">UoM</th>
+                        <th style="width: 10%; padding: 7px 6px; text-align: right;">Qty</th>
+                        <th style="width: 16%; padding: 7px 6px; text-align: right;">Unit Price</th>
+                        <th style="width: 18%; padding: 7px 6px; text-align: right;">Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-set="idx" t-value="0"/>
+                    <t t-foreach="doc.order_line" t-as="line">
+                        <t t-if="line.display_type == 'line_section'">
+                            <tr>
+                                <td colspan="6" class="fw-bold" style="background: #f4f4f4; padding: 6px;">
+                                    <span t-field="line.name"/>
+                                </td>
+                            </tr>
+                        </t>
+                        <t t-elif="line.display_type == 'line_note'">
+                            <tr>
+                                <td colspan="6" class="fst-italic o_nw_muted" style="padding: 5px 6px;">
+                                    <span t-field="line.name"/>
+                                </td>
+                            </tr>
+                        </t>
+                        <t t-elif="not line.display_type">
+                            <t t-set="idx" t-value="idx + 1"/>
+                            <tr>
+                                <td style="padding: 7px 6px; text-align: center;" t-out="idx"/>
+                                <td style="padding: 7px 6px;">
+                                    <div class="fw-bold"><span t-field="line.product_id.display_name"/></div>
+                                    <t t-set="desc" t-value="line.name or ''"/>
+                                    <div t-if="desc and desc != line.product_id.display_name" class="o_nw_muted"
+                                         style="font-size: 10px; white-space: pre-line; margin-top: 1px;" t-out="desc"/>
+                                </td>
+                                <td style="padding: 7px 6px; text-align: center;" class="text-nowrap">
+                                    <span t-field="line.product_uom_id"/>
+                                </td>
+                                <td style="padding: 7px 6px; text-align: right;" class="text-nowrap">
+                                    <span t-field="line.product_qty"/>
+                                </td>
+                                <td style="padding: 7px 6px; text-align: right;" class="text-nowrap">
+                                    <span t-field="line.price_unit"
+                                          t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+                                </td>
+                                <td style="padding: 7px 6px; text-align: right;" class="text-nowrap fw-bold">
+                                    <span t-field="line.price_subtotal"
+                                          t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+                                </td>
+                            </tr>
+                        </t>
+                    </t>
+                </tbody>
+            </table>
+
+            <!-- Totals -->
+            <table style="width: 100%;" class="o_nw_avoid">
+                <tr>
+                    <td style="width: 56%;"/>
+                    <td style="width: 44%;">
+                        <table style="width: 100%; font-size: 11px;">
+                            <tr>
+                                <td style="padding: 3px 6px;">Subtotal</td>
+                                <td style="padding: 3px 6px; text-align: right;" class="text-nowrap">
+                                    <span t-field="doc.amount_untaxed"
+                                          t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+                                </td>
+                            </tr>
+                            <tr t-if="doc.amount_tax">
+                                <td style="padding: 3px 6px;">Taxes</td>
+                                <td style="padding: 3px 6px; text-align: right;" class="text-nowrap">
+                                    <span t-field="doc.amount_tax"
+                                          t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+                                </td>
+                            </tr>
+                            <tr class="o_nw_grand">
+                                <td class="fw-bold" style="padding: 6px; font-size: 12px;">Grand Total</td>
+                                <td class="text-nowrap fw-bold" style="padding: 6px; text-align: right; font-size: 12px;">
+                                    <span t-field="doc.amount_total"
+                                          t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+
+            <!-- Signatures -->
+            <div class="o_nw_avoid" style="margin-top: 24px;">
+                <table style="width: 100%; table-layout: fixed; text-align: center; font-size: 11px;">
+                    <tr>
+                        <td style="width: 50%; padding: 0 12px 2px;" class="fw-bold">Vendor</td>
+                        <td style="width: 50%; padding: 0 12px 2px;" class="fw-bold">On behalf of the Buyer</td>
+                    </tr>
+                    <tr>
+                        <td class="o_nw_muted fst-italic" style="padding: 0 12px;">(Sign and print full name)</td>
+                        <td class="o_nw_muted fst-italic" style="padding: 0 12px;">(Sign and print full name)</td>
+                    </tr>
+                    <tr>
+                        <td style="height: 62px;"/>
+                        <td style="height: 62px; vertical-align: bottom; padding-bottom: 4px;" class="fw-bold">
+                            <span t-field="doc.user_id.name"/>
+                        </td>
+                    </tr>
+                    <tr class="o_nw_signline">
+                        <td style="padding-top: 3px;">&#160;</td>
+                        <td style="padding-top: 3px;">&#160;</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <t t-call="nwos_sale_report_image.nwos_footer"/>
+    </template>
+
+    <template id="report_purchaseorder_clean">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="nwos_sale_report_image.report_purchaseorder_clean_document"
+                   t-lang="env.context.get('report_lang') or doc.partner_id.lang"/>
+            </t>
+        </t>
+    </template>
+
+</nwos>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nwos>
+
+    <record id="action_report_saleorder_image" model="ir.actions.report">
+        <field name="name">Quotation with Image</field>
+        <field name="model">sale.order</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">nwos_sale_report_image.report_saleorder_image</field>
+        <field name="report_file">nwos_sale_report_image.report_saleorder_image</field>
+        <field name="print_report_name">'Quotation - %s' % (object.name)</field>
+        <field name="paperformat_id" ref="base.paperformat_euro"/>
+        <field name="binding_model_id" ref="sale.model_sale_order"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <!--
+        "update all templates to my template": repoint the default sale
+        quotation/order report (labelled "PDF Quote" when sale_pdf_quote_builder
+        is installed) to the clean layout, so the standard Print uses it.
+        Reversible - only report_name/report_file change. The report is also
+        renamed to "Quotation" by _nwos_consolidate_sale_reports below.
+    -->
+    <record id="sale.action_report_saleorder" model="ir.actions.report">
+        <field name="report_name">nwos_sale_report_image.report_saleorder_clean</field>
+        <field name="report_file">nwos_sale_report_image.report_saleorder_clean</field>
+        <field name="paperformat_id" ref="base.paperformat_euro"/>
+    </record>
+
+    <!--
+        Collapse the redundant quotation reports so Print / the report-preview
+        template selector show only three: "Quotation" (clean), "Quotation with
+        Image" and "PRO-FORMA Invoice". The former duplicate "Quotation (Clean)"
+        action is dropped from this file (orphan-cleaned on update); the rename
+        and the removal of "Quotation / Order" run here on install and update.
+    -->
+    <function model="ir.actions.report" name="_nwos_consolidate_sale_reports"/>
+
+</nwos>

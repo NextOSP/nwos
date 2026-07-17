@@ -73,8 +73,12 @@ class AutoCompleteController(http.Controller):
                     standard_data[field_standard] = google_field['long_name']
         city_name = standard_data.get('city')
         country = standard_data.get('country')
+        state = standard_data.get('state')
         country_id = country[0] if country else False
-        if city := self.env['res.partner']._get_res_city_by_name(city_name, country_id):
+        state_id = state[0] if state else False
+        if city := self.env['res.partner']._get_res_city_by_name(
+            city_name, country_id, state_id=state_id,
+        ):
             standard_data['city_id'] = [city.id, city.name]
             if not standard_data.get('state') and city.state_id:  # Derive state from city if missing
                 standard_data['state'] = [city.state_id.id, city.state_id.name]

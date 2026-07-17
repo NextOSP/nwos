@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nwos>
+
+    <!--
+        Clean Invoice / Credit Note - self-contained layout matching the clean
+        quotation (shared chrome). Title switches Invoice / Credit Note / Bill by
+        move_type + state. Lines, totals, amount in words, bank details.
+    -->
+    <template id="report_invoice_clean_document">
+        <t t-set="doc" t-value="doc.with_context(lang=env.context.get('report_lang') or doc.partner_id.lang)"/>
+        <t t-set="company" t-value="doc.company_id"/>
+        <t t-set="is_refund" t-value="doc.move_type in ('out_refund', 'in_refund')"/>
+
+        <div class="article o_nw"
+             t-att-data-oe-model="doc._name"
+             t-att-data-oe-id="doc.id"
+             t-att-data-oe-lang="doc.env.context.get('lang')">
+            <t t-call="nwos_sale_report_image.nwos_report_style"/>
+            <t t-call="nwos_sale_report_image.nwos_letterhead"/>
+
+            <!-- Title -->
+            <t t-set="title">
+                <t t-if="doc.move_type == 'out_refund'"><t t-if="doc.state == 'draft'">Draft </t>Credit Note</t>
+                <t t-elif="doc.move_type == 'in_refund'">Vendor Credit Note</t>
+                <t t-elif="doc.move_type == 'in_invoice'">Vendor Bill</t>
+                <t t-else=""><t t-if="doc.state == 'draft'">Draft </t>Invoice</t>
+            </t>
+            <t t-set="subtitle">
+                <t t-if="doc.name and doc.name != '/'"><span class="fw-bold" t-field="doc.name"/><t t-if="doc.invoice_date"> · </t></t>
+                <span t-if="doc.invoice_date" t-field="doc.invoice_date" t-options='{"widget": "date"}'/>
+            </t>
+            <t t-call="nwos_sale_report_image.nwos_title"/>
+
+            <!-- Customer (left) + invoice meta (right) -->
+            <table style="width: 100%; table-layout: fixed; margin-bottom: 18px;">
+                <tr>
+                    <td style="width: 48%; padding-right: 16px; vertical-align: top;">
+                        <div class="o_nw_label o_nw_rule" style="padding-bottom: 3px; margin-bottom: 6px;">
+                            <t t-if="doc.move_type in ('in_invoice', 'in_refund')">Vendor</t>
+                            <t t-else="">Customer</t>
+                        </div>
+                        <div class="fw-bold" style="font-size: 12px;"><span t-field="doc.partner_id.name"/></div>
+                        <div class="o_nw_muted" style="line-height: 1.5; font-size: 11px;">
+                            <span t-field="doc.partner_id"
+                                  t-options='{"widget": "contact", "fields": ["address", "phone"], "no_marker": true}'/>
+                        </div>
+                        <div t-if="doc.partner_id.vat" style="font-size: 11px;">Tax ID: <span t-field="doc.partner_id.vat"/></div>
+                    </td>
+                    <td style="width: 52%; vertical-align: top;">
+                        <div class="o_nw_label o_nw_rule" style="padding-bottom: 3px; margin-bottom: 6px;">
+                            <t t-if="is_refund">Credit Note Details</t>
+                            <t t-else="">Invoice Details</t>
+                        </div>
+                        <table style="width: 100%; font-size: 11px;">
+                            <tr>
+                                <td style="padding: 2px 8px 5px 0; width: 50%;">
+                                    <div class="o_nw_label">Number</div>
+                                    <div class="fw-bold"><span t-field="doc.name"/></div>
+                                </td>
+                                <td style="padding: 2px 0 5px;">
+                                    <div class="o_nw_label">Date</div>
+                                    <div>
+                                        <span t-if="doc.invoice_date" t-field="doc.invoice_date" t-options='{"widget": "date"}'/>
+                                        <t t-else="">—</t>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 2px 8px 5px 0;">
+                                    <div class="o_nw_label">Due Date</div>
+                                    <div>
+                                        <span t-if="doc.invoice_date_due" t-field="doc.invoice_date_due" t-options='{"widget": "date"}'/>
+                                        <t t-else="">—</t>
+                                    </div>
+                                </td>
+                                <td style="padding: 2px 0 5px;">
+                                    <div class="o_nw_label">Reference</div>
+                                    <div>
+                                        <span t-if="doc.ref" t-field="doc.ref"/>
+                                        <t t-else="">—</t>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 2px 8px 0 0;">
+                                    <div class="o_nw_label">Source</div>
+                                    <div>
+                                        <span t-if="doc.invoice_origin" t-field="doc.invoice_origin"/>
+                                        <t t-else="">—</t>
+                                    </div>
+                                </td>
+                                <td style="padding: 2px 0 0;">
+                                    <div class="o_nw_label">Currency</div>
+                                    <div><span t-field="doc.currency_id.name"/></div>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+
+            <!-- Lines -->
+            <table class="o_nw_products" style="width: 100%; font-size: 11px; margin-bottom: 14px;">
+                <thead>
+                    <tr>
+                        <th style="width: 6%; padding: 7px 6px; text-align: center;">No.</th>
+                        <th style="padding: 7px 6px; text-align: left;">Description</th>
+                        <th style="width: 10%; padding: 7px 6px; text-align: center;">UoM</th>
+                        <th style="width: 10%; padding: 7px 6px; text-align: right;">Qty</th>
+                        <th style="width: 16%; padding: 7px 6px; text-align: right;">Unit Price</th>
+                        <th style="width: 18%; padding: 7px 6px; text-align: right;">Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-set="idx" t-value="0"/>
+                    <t t-foreach="doc.invoice_line_ids" t-as="line">
+                        <t t-if="line.display_type == 'line_section'">
+                            <tr>
+                                <td colspan="6" class="fw-bold" style="background: #f4f4f4; padding: 6px;">
+                                    <span t-field="line.name"/>
+                                </td>
+                            </tr>
+                        </t>
+                        <t t-elif="line.display_type == 'line_note'">
+                            <tr>
+                                <td colspan="6" class="fst-italic o_nw_muted" style="padding: 5px 6px;">
+                                    <span t-field="line.name"/>
+                                </td>
+                            </tr>
+                        </t>
+                        <t t-elif="line.display_type == 'product'">
+                            <t t-set="idx" t-value="idx + 1"/>
+                            <tr>
+                                <td style="padding: 7px 6px; text-align: center;" t-out="idx"/>
+                                <td style="padding: 7px 6px;">
+                                    <div class="fw-bold"><span t-field="line.product_id.display_name"/></div>
+                                    <div t-if="line.name and line.name != line.product_id.display_name" class="o_nw_muted"
+                                         style="font-size: 10px; white-space: pre-line; margin-top: 1px;"
+                                         t-field="line.name" t-options='{"widget": "text"}'/>
+                                </td>
+                                <td style="padding: 7px 6px; text-align: center;" class="text-nowrap">
+                                    <span t-field="line.product_uom_id"/>
+                                </td>
+                                <td style="padding: 7px 6px; text-align: right;" class="text-nowrap">
+                                    <span t-field="line.quantity"/>
+                                </td>
+                                <td style="padding: 7px 6px; text-align: right;" class="text-nowrap">
+                                    <span t-field="line.price_unit"
+                                          t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+                                </td>
+                                <td style="padding: 7px 6px; text-align: right;" class="text-nowrap fw-bold">
+                                    <span t-field="line.price_subtotal"
+                                          t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+                                </td>
+                            </tr>
+                        </t>
+                    </t>
+                </tbody>
+            </table>
+
+            <!-- Totals -->
+            <table style="width: 100%;" class="o_nw_avoid">
+                <tr>
+                    <td style="width: 56%;"/>
+                    <td style="width: 44%;">
+                        <table style="width: 100%; font-size: 11px;">
+                            <tr>
+                                <td style="padding: 3px 6px;">Subtotal</td>
+                                <td style="padding: 3px 6px; text-align: right;" class="text-nowrap">
+                                    <span t-field="doc.amount_untaxed"
+                                          t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+                                </td>
+                            </tr>
+                            <tr t-if="doc.amount_tax">
+                                <td style="padding: 3px 6px;">Taxes</td>
+                                <td style="padding: 3px 6px; text-align: right;" class="text-nowrap">
+                                    <span t-field="doc.amount_tax"
+                                          t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+                                </td>
+                            </tr>
+                            <tr class="o_nw_grand">
+                                <td class="fw-bold" style="padding: 6px; font-size: 12px;">Total</td>
+                                <td class="text-nowrap fw-bold" style="padding: 6px; text-align: right; font-size: 12px;">
+                                    <span t-field="doc.amount_total"
+                                          t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+                                </td>
+                            </tr>
+                            <tr t-if="doc.state == 'posted' and doc.amount_residual and doc.amount_residual != doc.amount_total">
+                                <td style="padding: 3px 6px;" class="fw-bold">Amount Due</td>
+                                <td style="padding: 3px 6px; text-align: right;" class="text-nowrap fw-bold">
+                                    <span t-field="doc.amount_residual"
+                                          t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+
+            <!-- Amount in words -->
+            <table style="width: 100%; margin: 8px 0 16px;" class="o_nw_avoid">
+                <tr>
+                    <td class="o_nw_band" style="padding: 9px 12px; font-size: 11px;">
+                        <strong>In words:</strong>
+                        <span t-out="doc.currency_id.amount_to_text(doc.amount_total)"/>
+                    </td>
+                </tr>
+            </table>
+
+            <!-- Terms / narration -->
+            <div t-if="doc.narration" class="o_nw_avoid" style="margin-bottom: 14px;">
+                <div class="o_nw_sect" style="padding-bottom: 4px; margin-bottom: 8px;">
+                    <span style="font-weight: 700; font-size: 12px; color: #161616;">Terms &amp; Conditions</span>
+                </div>
+                <div style="font-size: 10.5px; line-height: 1.5;" t-field="doc.narration"/>
+            </div>
+
+            <!-- Payment / bank details (customer invoices) -->
+            <t t-set="banks" t-value="doc.company_id.partner_id.bank_ids"/>
+            <t t-if="banks and doc.move_type == 'out_invoice'" t-call="nwos_sale_report_image.nwos_payment_info"/>
+        </div>
+
+        <t t-call="nwos_sale_report_image.nwos_footer"/>
+    </template>
+
+    <template id="report_invoice_clean">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="nwos_sale_report_image.report_invoice_clean_document"
+                   t-lang="env.context.get('report_lang') or doc.partner_id.lang"/>
+            </t>
+        </t>
+    </template>
+
+    <!--
+        Clean Payment Receipt (account.payment) - self-contained layout matching
+        the clean quotation (shared chrome). Payer/payee + payment details, an
+        amount band, and the reconciled invoices/bills table.
+    -->
+    <template id="report_payment_receipt_clean_document">
+        <t t-set="doc" t-value="doc.with_context(lang=env.context.get('report_lang') or doc.partner_id.lang)"/>
+        <t t-set="company" t-value="doc.company_id"/>
+        <t t-set="invoices" t-value="doc.reconciled_invoice_ids or doc.reconciled_bill_ids"/>
+
+        <div class="article o_nw"
+             t-att-data-oe-model="doc._name"
+             t-att-data-oe-id="doc.id"
+             t-att-data-oe-lang="doc.env.context.get('lang')">
+            <t t-call="nwos_sale_report_image.nwos_report_style"/>
+            <t t-call="nwos_sale_report_image.nwos_letterhead"/>
+
+            <!-- Title -->
+            <t t-set="title">Payment Receipt</t>
+            <t t-set="subtitle">
+                <span class="fw-bold" t-field="doc.name"/>
+                <t t-if="doc.date"> · <span t-field="doc.date" t-options='{"widget": "date"}'/></t>
+            </t>
+            <t t-call="nwos_sale_report_image.nwos_title"/>
+
+            <!-- Partner (left) + payment meta (right) -->
+            <table style="width: 100%; table-layout: fixed; margin-bottom: 18px;">
+                <tr>
+                    <td style="width: 48%; padding-right: 16px; vertical-align: top;">
+                        <div class="o_nw_label o_nw_rule" style="padding-bottom: 3px; margin-bottom: 6px;">
+                            <t t-if="doc.partner_type == 'supplier'">Paid To</t>
+                            <t t-else="">Received From</t>
+                        </div>
+                        <div class="fw-bold" style="font-size: 12px;"><span t-field="doc.partner_id.name"/></div>
+                        <div class="o_nw_muted" style="line-height: 1.5; font-size: 11px;">
+                            <span t-field="doc.partner_id"
+                                  t-options='{"widget": "contact", "fields": ["address", "phone"], "no_marker": true}'/>
+                        </div>
+                    </td>
+                    <td style="width: 52%; vertical-align: top;">
+                        <div class="o_nw_label o_nw_rule" style="padding-bottom: 3px; margin-bottom: 6px;">Payment Details</div>
+                        <table style="width: 100%; font-size: 11px;">
+                            <tr>
+                                <td style="padding: 2px 8px 5px 0; width: 50%;">
+                                    <div class="o_nw_label">Reference</div>
+                                    <div class="fw-bold"><span t-field="doc.name"/></div>
+                                </td>
+                                <td style="padding: 2px 0 5px;">
+                                    <div class="o_nw_label">Payment Date</div>
+                                    <div>
+                                        <span t-if="doc.date" t-field="doc.date" t-options='{"widget": "date"}'/>
+                                        <t t-else="">—</t>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 2px 8px 0 0;">
+                                    <div class="o_nw_label">Method</div>
+                                    <div>
+                                        <span t-if="doc.payment_method_id" t-field="doc.payment_method_id.name"/>
+                                        <t t-else="">—</t>
+                                    </div>
+                                </td>
+                                <td style="padding: 2px 0 0;">
+                                    <div class="o_nw_label">Memo</div>
+                                    <div>
+                                        <span t-if="doc.memo" t-field="doc.memo"/>
+                                        <t t-else="">—</t>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+
+            <!-- Amount band -->
+            <table style="width: 100%; margin: 4px 0 16px;" class="o_nw_avoid">
+                <tr>
+                    <td class="o_nw_band" style="padding: 10px 12px; font-size: 13px;">
+                        <strong>Amount Paid:</strong>
+                        <span class="fw-bold" style="font-size: 15px;" t-field="doc.amount"
+                              t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}"/>
+                        <span class="o_nw_muted" style="font-size: 11px;"> — <t t-out="doc.currency_id.amount_to_text(doc.amount)"/></span>
+                    </td>
+                </tr>
+            </table>
+
+            <!-- Reconciled invoices / bills -->
+            <table t-if="invoices" class="o_nw_products" style="width: 100%; font-size: 11px; margin-bottom: 14px;">
+                <thead>
+                    <tr>
+                        <th style="width: 18%; padding: 7px 6px; text-align: left;">Date</th>
+                        <th style="padding: 7px 6px; text-align: left;">Document</th>
+                        <th style="padding: 7px 6px; text-align: left;">Reference</th>
+                        <th style="width: 20%; padding: 7px 6px; text-align: right;">Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-foreach="invoices" t-as="inv">
+                        <tr>
+                            <td style="padding: 7px 6px;" class="text-nowrap"><span t-field="inv.invoice_date"/></td>
+                            <td style="padding: 7px 6px;" class="fw-bold"><span t-field="inv.name"/></td>
+                            <td style="padding: 7px 6px;"><span t-if="inv.ref" t-field="inv.ref"/></td>
+                            <td style="padding: 7px 6px; text-align: right;" class="text-nowrap">
+                                <span t-field="inv.amount_total"
+                                      t-options="{'widget': 'monetary', 'display_currency': inv.currency_id}"/>
+                            </td>
+                        </tr>
+                    </t>
+                </tbody>
+            </table>
+        </div>
+
+        <t t-call="nwos_sale_report_image.nwos_footer"/>
+    </template>
+
+    <template id="report_payment_receipt_clean">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="nwos_sale_report_image.report_payment_receipt_clean_document"
+                   t-lang="env.context.get('report_lang') or doc.partner_id.lang"/>
+            </t>
+        </t>
+    </template>
+
+</nwos>

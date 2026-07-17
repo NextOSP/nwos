@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nwos>
+    <menuitem id="nextbot_agent_admin_menu_root" name="NextBot Administration"
+        sequence="550" groups="base.group_system"/>
+    <menuitem id="nextbot_agent_org_rule_menu" name="Organization Rules"
+        parent="nextbot_agent_admin_menu_root" action="nextbot_org_rule_action"
+        sequence="10" groups="base.group_system"/>
+    <menuitem id="nextbot_agent_knowledge_menu" name="Knowledge"
+        parent="nextbot_agent_admin_menu_root" action="nextbot_knowledge_document_action"
+        sequence="20" groups="base.group_system"/>
+    <menuitem id="nextbot_agent_memory_menu" name="Memories"
+        parent="nextbot_agent_admin_menu_root" action="nextbot_memory_action"
+        sequence="30" groups="base.group_system"/>
+    <menuitem id="nextbot_agent_settings_menu" name="Settings"
+        parent="nextbot_agent_admin_menu_root" action="nextbot_agent_config_settings_action"
+        sequence="90" groups="base.group_system"/>
+</nwos>

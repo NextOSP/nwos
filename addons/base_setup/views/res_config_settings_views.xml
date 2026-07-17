@@ -178,9 +178,9 @@
                                                         <label string="Model" for="ai_model_id" class="o_light_label mb-1"/>
                                                         <field name="ai_model_id" placeholder="Select a loaded model" class="w-100"/>
                                                     </div>
-                                                    <div class="col-12">
+                                                    <div class="col-12" invisible="ai_provider != 'custom'">
                                                         <label string="Model ID" for="ai_model" class="o_light_label mb-1"/>
-                                                        <field name="ai_model" placeholder="gpt-4o-mini" required="ai_enabled" class="w-100"/>
+                                                        <field name="ai_model" placeholder="gpt-4o-mini" required="ai_enabled and ai_provider == 'custom'" class="w-100"/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -191,7 +191,7 @@
                                                         <label string="Model" for="ai_small_model_id" class="o_light_label mb-1"/>
                                                         <field name="ai_small_model_id" placeholder="Select a loaded model" class="w-100"/>
                                                     </div>
-                                                    <div class="col-12">
+                                                    <div class="col-12" invisible="ai_provider != 'custom'">
                                                         <label string="Model ID" for="ai_small_model" class="o_light_label mb-1"/>
                                                         <field name="ai_small_model" placeholder="gpt-4o-mini" class="w-100"/>
                                                     </div>
@@ -204,7 +204,7 @@
                                                         <label string="Model" for="ai_intelligent_model_id" class="o_light_label mb-1"/>
                                                         <field name="ai_intelligent_model_id" placeholder="Select a loaded model" class="w-100"/>
                                                     </div>
-                                                    <div class="col-12">
+                                                    <div class="col-12" invisible="ai_provider != 'custom'">
                                                         <label string="Model ID" for="ai_intelligent_model" class="o_light_label mb-1"/>
                                                         <field name="ai_intelligent_model" placeholder="gpt-4o" class="w-100"/>
                                                     </div>
@@ -217,7 +217,7 @@
                                                         <label string="Model" for="ai_email_model_id" class="o_light_label mb-1"/>
                                                         <field name="ai_email_model_id" placeholder="Select a loaded model" class="w-100"/>
                                                     </div>
-                                                    <div class="col-12">
+                                                    <div class="col-12" invisible="ai_provider != 'custom'">
                                                         <label string="Model ID" for="ai_email_model" class="o_light_label mb-1"/>
                                                         <field name="ai_email_model" placeholder="gpt-4o-mini" class="w-100"/>
                                                     </div>
@@ -230,7 +230,7 @@
                                                         <label string="Model" for="ai_report_model_id" class="o_light_label mb-1"/>
                                                         <field name="ai_report_model_id" placeholder="Select a loaded model" class="w-100"/>
                                                     </div>
-                                                    <div class="col-12">
+                                                    <div class="col-12" invisible="ai_provider != 'custom'">
                                                         <label string="Model ID" for="ai_report_model" class="o_light_label mb-1"/>
                                                         <field name="ai_report_model" placeholder="gpt-4o" class="w-100"/>
                                                     </div>

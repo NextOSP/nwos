@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nwos>
+    <menuitem id="mcp_menu_root" name="MCP Gateway" sequence="540" groups="mcp.group_mcp_admin"
+        web_icon="mcp,static/description/icon.png"/>
+
+    <menuitem id="mcp_menu_connect" name="Connect" parent="mcp_menu_root"
+        action="mcp_connection_wizard_action" sequence="5" groups="mcp.group_mcp_admin"/>
+    <menuitem id="mcp_menu_audit_logs" name="Audit Logs" parent="mcp_menu_root"
+        action="mcp_audit_log_action" sequence="20" groups="mcp.group_mcp_admin"/>
+    <menuitem id="mcp_menu_settings" name="Settings" parent="mcp_menu_root"
+        action="mcp_config_settings_action" sequence="90" groups="mcp.group_mcp_admin"/>
+
+    <menuitem id="mcp_menu_security" name="Security Metadata" parent="mcp_menu_root"
+        sequence="100" groups="mcp.group_mcp_admin"/>
+    <menuitem id="mcp_menu_confirmation_tokens" name="Confirmation Tokens" parent="mcp_menu_security"
+        action="mcp_confirmation_token_action" sequence="10" groups="mcp.group_mcp_admin"/>
+    <menuitem id="mcp_menu_download_tokens" name="Download Tokens" parent="mcp_menu_security"
+        action="mcp_download_token_action" sequence="20" groups="mcp.group_mcp_admin"/>
+</nwos>

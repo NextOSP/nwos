@@ -1,0 +1,98 @@
+.o_sale_product_configurator_dialog {
+    .modal-header {
+        align-items: flex-start;
+        padding: $spacer * 1.5 $spacer * 1.75 $spacer;
+
+        .modal-title {
+            font-size: 1.375rem;
+            line-height: 1.25;
+        }
+
+        .btn-close {
+            flex: 0 0 auto;
+            width: 2.5rem;
+            height: 2.5rem;
+            margin: -0.5rem -0.5rem 0 $spacer;
+            padding: 0.75rem;
+            box-shadow: none;
+        }
+    }
+
+    .modal-body {
+        padding: 0 $spacer * 1.75 $spacer * 1.25;
+    }
+
+    .modal-footer {
+        justify-content: flex-end !important;
+        align-items: center !important;
+        gap: $spacer * 0.75 !important;
+        padding: $spacer $spacer * 1.75 $spacer * 1.5 !important;
+        border-top: 1px solid $border-color !important;
+
+        .btn {
+            flex: 0 0 auto !important;
+            width: auto !important;
+            min-width: 7rem !important;
+            max-width: none !important;
+            min-height: 2.5rem !important;
+            justify-content: center !important;
+            margin: 0 !important;
+        }
+
+        [name="sale_product_configurator_cancel_button"] {
+            order: 1 !important;
+        }
+
+        [name="sale_product_configurator_confirm_button"] {
+            order: 2 !important;
+        }
+
+        .o_configurator_price_total {
+            order: 0 !important;
+            flex: 1 1 auto !important;
+            width: auto !important;
+            margin: 0 auto 0 0 !important;
+            text-align: left !important;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+    }
+
+    .o_sale_product_configurator_table {
+        table-layout: fixed;
+    }
+
+    .product_name_description {
+        max-width: none;
+    }
+
+    .o_sale_product_configurator_img {
+        padding-right: $spacer * 1.5 !important;
+
+        img {
+            border-radius: 0 !important;
+        }
+    }
+
+    @include media-breakpoint-down(sm) {
+        .modal-header,
+        .modal-body,
+        .modal-footer {
+            padding-left: $spacer !important;
+            padding-right: $spacer !important;
+        }
+
+        .modal-footer {
+            .o_configurator_price_total {
+                flex-basis: 100% !important;
+                margin: 0 0 $spacer * 0.5 !important;
+                text-align: right !important;
+            }
+
+            .btn {
+                flex: 1 1 0 !important;
+                min-width: 0 !important;
+            }
+        }
+    }
+}

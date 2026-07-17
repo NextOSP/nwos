@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nwos>
+
+    <record id="digest.digest_digest_default" model="digest.digest">
+        <field name="kpi_helpdesk_tickets">True</field>
+        <field name="kpi_helpdesk_rating">True</field>
+    </record>
+
+</nwos>

@@ -58,11 +58,20 @@
                         </select>
                     </div>
                 </div>
-                <div class="border rounded overflow-hidden bg-100" style="height: 65vh;">
+                <div class="border rounded overflow-hidden bg-100 position-relative" style="height: 65vh;">
+                    <div
+                        t-if="state.isPreviewLoading"
+                        class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center bg-white bg-opacity-75 text-muted"
+                        style="z-index: 1;"
+                    >
+                        <i class="fa fa-fw fa-spin fa-circle-o-notch me-1"/>
+                        Loading preview…
+                    </div>
                     <iframe
                         t-if="state.previewUrl"
                         class="w-100 h-100 d-block bg-white"
                         t-att-src="state.previewUrl"
+                        t-on-load="onPreviewLoaded"
                     />
                     <div t-else="" class="h-100 d-flex align-items-center justify-content-center text-muted">
                         Preview unavailable

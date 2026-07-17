@@ -302,6 +302,24 @@ class ResConfigSettings(models.TransientModel):
             if isinstance(model_values, list):
                 yield from model_values
 
+    @staticmethod
+    def _ai_format_price_number(value):
+        text = f'{value:.4f}'.rstrip('0').rstrip('.')
+        return text or '0'
+
+    @api.model
+    def _ai_format_model_price(self, model_value):
+        input_price = model_value.get('input_price')
+        output_price = model_value.get('output_price')
+        parts = []
+        if input_price is not None:
+            parts.append(_('in $%s') % self._ai_format_price_number(input_price))
+        if output_price is not None:
+            parts.append(_('out $%s') % self._ai_format_price_number(output_price))
+        if not parts:
+            return ''
+        return ' — %s /1M' % ' / '.join(parts)
+
     @api.model
     def _get_ai_model_selection(self):
         selection = []
@@ -314,14 +332,20 @@ class ResConfigSettings(models.TransientModel):
                 continue
             seen_model_ids.add(model_id)
             name = str(model_value.get('name') or model_id).strip() or model_id
-            selection.append((model_id, name if name == model_id else f'{name} ({model_id})'))
+            label = name if name == model_id else f'{name} ({model_id})'
+            selection.append((model_id, label + self._ai_format_model_price(model_value)))
 
         values = self._get_ai_settings_values()
+        provider_defaults = AI_PROVIDER_DEFAULTS.get(values.get('ai_provider') or 'openrouter', {})
         for meta in AI_MODEL_PROFILES.values():
             configured_model = values.get(meta['field'])
             if configured_model and configured_model not in seen_model_ids:
                 seen_model_ids.add(configured_model)
                 selection.append((configured_model, configured_model))
+            default_model = provider_defaults.get(meta['default_key']) or provider_defaults.get('model')
+            if default_model and default_model not in seen_model_ids:
+                seen_model_ids.add(default_model)
+                selection.append((default_model, default_model))
         return selection
 
     @api.model
@@ -338,6 +362,27 @@ class ResConfigSettings(models.TransientModel):
         return f'{endpoint}/models'
 
     @api.model
+    def _ai_extract_model_pricing(self, item):
+        """Return (input_price, output_price) per 1M tokens, or (None, None).
+
+        OpenRouter reports ``pricing`` as USD per token (e.g. ``"0.0000015"``);
+        other OpenAI-compatible providers may omit it or use input/output keys.
+        """
+        pricing = item.get('pricing') if isinstance(item, dict) else None
+        if not isinstance(pricing, dict):
+            return None, None
+
+        def _per_million(value):
+            try:
+                return round(float(value) * 1_000_000, 4)
+            except (TypeError, ValueError):
+                return None
+
+        input_price = _per_million(pricing.get('prompt', pricing.get('input')))
+        output_price = _per_million(pricing.get('completion', pricing.get('output')))
+        return input_price, output_price
+
+    @api.model
     def _ai_extract_model_values(self, response_data):
         data = response_data.get('data') if isinstance(response_data, dict) else response_data
         if not isinstance(data, list):
@@ -346,12 +391,14 @@ class ResConfigSettings(models.TransientModel):
         model_values = []
         seen_model_ids = set()
         for item in data:
+            input_price = output_price = None
             if isinstance(item, str):
                 model_id = item
                 name = item
             elif isinstance(item, dict):
                 model_id = item.get('id') or item.get('model') or item.get('name')
                 name = item.get('name') or item.get('display_name') or model_id
+                input_price, output_price = self._ai_extract_model_pricing(item)
             else:
                 continue
 
@@ -362,6 +409,8 @@ class ResConfigSettings(models.TransientModel):
             model_values.append({
                 'model_id': model_id,
                 'name': str(name or model_id).strip() or model_id,
+                'input_price': input_price,
+                'output_price': output_price,
             })
         return model_values
 

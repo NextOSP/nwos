@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nwos>
+
+    <!--
+        Clean Delivery Slip / Picking - self-contained layout matching the clean
+        quotation (shared chrome). Quantities only (no prices). Shows demand vs
+        done quantity. Title from the picking type (Delivery / Receipt / ...).
+    -->
+    <template id="report_delivery_clean_document">
+        <t t-set="doc" t-value="doc.with_context(lang=env.context.get('report_lang') or (doc.partner_id and doc.partner_id.lang))"/>
+        <t t-set="company" t-value="doc.company_id"/>
+        <t t-set="moves" t-value="doc.move_ids.filtered(lambda m: m.product_uom_qty or m.quantity)"/>
+
+        <div class="article o_nw"
+             t-att-data-oe-model="doc._name"
+             t-att-data-oe-id="doc.id"
+             t-att-data-oe-lang="doc.env.context.get('lang')">
+            <t t-call="nwos_sale_report_image.nwos_report_style"/>
+            <t t-call="nwos_sale_report_image.nwos_letterhead"/>
+
+            <!-- Title -->
+            <t t-set="title"><span t-out="doc.picking_type_id._get_code_report_name()"/></t>
+            <t t-set="subtitle">
+                <span class="fw-bold" t-field="doc.name"/>
+                <t t-if="doc.state == 'done' and doc.date_done"> · <span t-field="doc.date_done" t-options='{"widget": "date"}'/></t>
+                <t t-elif="doc.scheduled_date"> · <span t-field="doc.scheduled_date" t-options='{"widget": "date"}'/></t>
+            </t>
+            <t t-call="nwos_sale_report_image.nwos_title"/>
+
+            <!-- Address (left) + shipping meta (right) -->
+            <table style="width: 100%; table-layout: fixed; margin-bottom: 18px;">
+                <tr>
+                    <td style="width: 48%; padding-right: 16px; vertical-align: top;">
+                        <div class="o_nw_label o_nw_rule" style="padding-bottom: 3px; margin-bottom: 6px;">
+                            <t t-if="doc.picking_type_id.code == 'incoming'">Receive From</t>
+                            <t t-else="">Deliver To</t>
+                        </div>
+                        <t t-if="doc.partner_id">
+                            <div class="fw-bold" style="font-size: 12px;"><span t-field="doc.partner_id.name"/></div>
+                            <div class="o_nw_muted" style="line-height: 1.5; font-size: 11px;">
+                                <span t-field="doc.partner_id"
+                                      t-options='{"widget": "contact", "fields": ["address", "phone"], "no_marker": true}'/>
+                            </div>
+                        </t>
+                        <div t-else="" class="o_nw_muted" style="font-size: 11px;">—</div>
+                    </td>
+                    <td style="width: 52%; vertical-align: top;">
+                        <div class="o_nw_label o_nw_rule" style="padding-bottom: 3px; margin-bottom: 6px;">Shipping Details</div>
+                        <table style="width: 100%; font-size: 11px;">
+                            <tr>
+                                <td style="padding: 2px 8px 5px 0; width: 50%;">
+                                    <div class="o_nw_label">Reference</div>
+                                    <div class="fw-bold"><span t-field="doc.name"/></div>
+                                </td>
+                                <td style="padding: 2px 0 5px;">
+                                    <div class="o_nw_label">Operation</div>
+                                    <div><span t-field="doc.picking_type_id.name"/></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 2px 8px 5px 0;">
+                                    <div class="o_nw_label"><t t-if="doc.state == 'done'">Done On</t><t t-else="">Scheduled</t></div>
+                                    <div>
+                                        <span t-if="doc.state == 'done' and doc.date_done" t-field="doc.date_done" t-options='{"widget": "date"}'/>
+                                        <span t-elif="doc.scheduled_date" t-field="doc.scheduled_date" t-options='{"widget": "date"}'/>
+                                        <t t-else="">—</t>
+                                    </div>
+                                </td>
+                                <td style="padding: 2px 0 5px;">
+                                    <div class="o_nw_label">Source Document</div>
+                                    <div>
+                                        <span t-if="doc.origin" t-field="doc.origin"/>
+                                        <t t-else="">—</t>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 2px 8px 0 0;">
+                                    <div class="o_nw_label">From</div>
+                                    <div><span t-field="doc.location_id.display_name"/></div>
+                                </td>
+                                <td style="padding: 2px 0 0;">
+                                    <div class="o_nw_label">To</div>
+                                    <div><span t-field="doc.location_dest_id.display_name"/></div>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+
+            <!-- Moves (quantities only) -->
+            <table class="o_nw_products" style="width: 100%; font-size: 11px; margin-bottom: 14px;">
+                <thead>
+                    <tr>
+                        <th style="width: 6%; padding: 7px 6px; text-align: center;">No.</th>
+                        <th style="padding: 7px 6px; text-align: left;">Product</th>
+                        <th style="width: 16%; padding: 7px 6px; text-align: right;">Ordered</th>
+                        <th style="width: 16%; padding: 7px 6px; text-align: right;">Done</th>
+                        <th style="width: 12%; padding: 7px 6px; text-align: center;">UoM</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-set="idx" t-value="0"/>
+                    <t t-foreach="moves" t-as="move">
+                        <t t-set="idx" t-value="idx + 1"/>
+                        <tr>
+                            <td style="padding: 7px 6px; text-align: center;" t-out="idx"/>
+                            <td style="padding: 7px 6px;">
+                                <div class="fw-bold"><span t-field="move.product_id.display_name"/></div>
+                                <div t-if="move.description_picking" class="o_nw_muted"
+                                     style="font-size: 10px; white-space: pre-line; margin-top: 1px;"
+                                     t-field="move.description_picking"/>
+                            </td>
+                            <td style="padding: 7px 6px; text-align: right;" class="text-nowrap">
+                                <span t-field="move.product_uom_qty"/>
+                            </td>
+                            <td style="padding: 7px 6px; text-align: right;" class="text-nowrap fw-bold">
+                                <span t-field="move.quantity"/>
+                            </td>
+                            <td style="padding: 7px 6px; text-align: center;" class="text-nowrap">
+                                <span t-field="move.product_uom"/>
+                            </td>
+                        </tr>
+                    </t>
+                </tbody>
+            </table>
+
+            <!-- Signatures -->
+            <div class="o_nw_avoid" style="margin-top: 28px;">
+                <table style="width: 100%; table-layout: fixed; text-align: center; font-size: 11px;">
+                    <tr>
+                        <td style="width: 50%; padding: 0 12px 2px;" class="fw-bold">Received By</td>
+                        <td style="width: 50%; padding: 0 12px 2px;" class="fw-bold">Delivered By</td>
+                    </tr>
+                    <tr>
+                        <td class="o_nw_muted fst-italic" style="padding: 0 12px;">(Sign and print full name)</td>
+                        <td class="o_nw_muted fst-italic" style="padding: 0 12px;">(Sign and print full name)</td>
+                    </tr>
+                    <tr>
+                        <td style="height: 62px;"/>
+                        <td style="height: 62px; vertical-align: bottom; padding-bottom: 4px;" class="fw-bold">
+                            <span t-if="doc.user_id" t-field="doc.user_id.name"/>
+                        </td>
+                    </tr>
+                    <tr class="o_nw_signline">
+                        <td style="padding-top: 3px;">&#160;</td>
+                        <td style="padding-top: 3px;">&#160;</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <t t-call="nwos_sale_report_image.nwos_footer"/>
+    </template>
+
+    <template id="report_delivery_clean">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="nwos_sale_report_image.report_delivery_clean_document"
+                   t-lang="env.context.get('report_lang') or (doc.partner_id and doc.partner_id.lang)"/>
+            </t>
+        </t>
+    </template>
+
+</nwos>

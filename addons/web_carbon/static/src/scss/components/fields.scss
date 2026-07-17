@@ -45,6 +45,22 @@
         padding: $carbon-spacing-03 $carbon-spacing-04;   // 8px 12px
     }
 
+    // Core places dropdown/date-picker indicators using the native input's
+    // small vertical padding. Carbon controls are taller (40px desktop, 48px
+    // mobile), so that fixed offset leaves the indicator visibly too high.
+    // Give the indicator the control's full height and center its glyph. The
+    // editable-list override may still change its right edge, but it does not
+    // need a separate vertical-position rule anymore.
+    .o_field_widget .o_input_dropdown > .o_dropdown_button,
+    .o_field_widget .o_datepicker > .o_datepicker_button {
+        top: 0;
+        bottom: auto;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        line-height: 1;
+    }
+
     .o_field_date,
     .o_field_datetime {
         .o_input,
@@ -56,7 +72,7 @@
     // Monetary widget → its currency-positioning overlay is a <span> that
     // carries `.o_input` only to align the symbol/ghost value over the real
     // input. It must NOT get the fill+underline: the overlay is shorter than
-    // the 36px input (the height rule above only targets <input>), so its
+    // the 40px input (the height rule above only targets <input>), so its
     // bottom border showed as a stray line partway up the field.
     //
     // The overlay is `position-absolute` and only as tall as its text, so the
@@ -75,17 +91,22 @@
     }
 
     // Editable list rows → use Odoo's NATIVE input layout. My form-field
-    // treatment (gray fill, underline, fixed 36px height) fought the list grid
+    // treatment (gray fill, underline, fixed 40px height) fought the list grid
     // and caused width/arrow/baseline bugs. Here we neutralize it back to native;
     // Carbon colors + sharp corners still come from the variable layer, and the
     // editing row keeps Odoo's own blue underline.
-    .o_list_table .o_data_cell {
-        input.o_input,
-        textarea.o_input,
-        .o_input,
-        .o-autocomplete--input {
+    .o_list_renderer .o_list_table .o_data_cell {
+        // Keep `.o_field_widget` in this selector: without it, the global
+        // single-line selector above wins through its two `:not()` clauses.
+        // Reset min-height as well as height so list editors return to their
+        // compact native row metrics instead of retaining the 40px form floor.
+        .o_field_widget input.o_input:not([type="checkbox"]):not([type="radio"]),
+        .o_field_widget textarea.o_input,
+        .o_field_widget .o_input,
+        .o_field_widget .o-autocomplete--input {
             background-color: transparent;
             border: 0;
+            min-height: 0;
             height: auto;
             line-height: normal;
             padding: 0 $carbon-spacing-02;    // 0 4px, native-ish

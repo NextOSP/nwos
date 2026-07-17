@@ -14,8 +14,11 @@ class ResCity(models.Model):
     country_id = fields.Many2one(comodel_name='res.country', string='Country', required=True)
     state_id = fields.Many2one(comodel_name='res.country.state', string='State', domain="[('country_id', '=', country_id)]")
 
-    @api.depends('zipcode')
+    @api.depends('name', 'zipcode', 'state_id.name')
+    @api.depends_context('show_state_name')
     def _compute_display_name(self):
         for city in self:
             name = city.name if not city.zipcode else f'{city.name} ({city.zipcode})'
+            if self.env.context.get('show_state_name') and city.state_id:
+                name = f'{name}, {city.state_id.name}'
             city.display_name = name

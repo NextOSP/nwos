@@ -14,6 +14,16 @@ import nwos
 from nwos.modules.registry import Registry
 from nwos.tests.common import BaseCase, HttpCase, tagged
 from nwos.tools import config
+from nwos.addons.web.controllers.database import (
+    DATABASE_CREATION_PROGRESS,
+    Database,
+    ONBOARDING_MODULES,
+    ONBOARDING_OPTIONAL_MODULES,
+    ONBOARDING_SOP_FIELDS,
+    ONBOARDING_SOP_SECTIONS,
+    _get_database_localization_data,
+    _update_database_creation_progress,
+)
 
 
 class TestDatabaseManager(HttpCase):
@@ -29,8 +39,134 @@ class TestDatabaseManager(HttpCase):
         self.assertIn('.o_database_delete', res.text)
 
         # check that basic db actions are present
-        self.assertIn('.o_database_create', res.text)
+        self.assertIn('o_database_create_start', res.text)
         self.assertIn('.o_database_restore', res.text)
+        self.assertEqual(res.text.count('data-step-indicator='), 5)
+        self.assertEqual(res.text.count('class="o_onboarding_step'), 5)
+        self.assertEqual(res.text.count('data-sop-app='), len(ONBOARDING_MODULES))
+        self.assertIn('Step 5 of 5', res.text)
+        self.assertIn('Tailor your workflows', res.text)
+        self.assertIn('Suggested SOP', res.text)
+        self.assertIn('name="currency_code"', res.text)
+        self.assertIn('Fiscal localization / tax template', res.text)
+        self.assertIn('Detailed activity', res.text)
+        self.assertIn('o_creation_elapsed', res.text)
+
+
+class TestDatabaseOnboardingConfiguration(BaseCase):
+    def setUp(self):
+        self.controller = Database()
+
+    def test_boolean_coercion_and_module_selection(self):
+        for value in ('1', 'true', 'TRUE', 'on', 'yes'):
+            self.assertTrue(self.controller._post_is_true({'field': value}, 'field'))
+        for value in (None, '', '0', 'false', 'off', 'no', 'unexpected'):
+            self.assertFalse(self.controller._post_is_true({'field': value}, 'field'))
+
+        self.assertEqual(
+            self.controller._get_onboarding_modules({
+                'install_inventory': '1',
+                'sop_inventory_barcode': '1',  # Not available in this edition.
+                'sop_purchase_agreements': '1',  # Parent app was not selected.
+            }),
+            ['stock'],
+        )
+        self.assertEqual(
+            self.controller._get_onboarding_modules({
+                'install_purchase': '1',
+                'sop_purchase_agreements': '1',
+                'install_employees': 'true',
+                'sop_hr_attendance': 'on',
+                'sop_hr_skills': 'yes',
+            }),
+            ['purchase', 'hr', 'purchase_requisition', 'hr_attendance', 'hr_skills'],
+        )
+        self.assertEqual(
+            self.controller._get_onboarding_modules({
+                'install_stock_requests': '1',
+            }),
+            ['nwos_stock_request'],
+        )
+
+    def test_sop_catalog_is_whitelisted(self):
+        self.assertEqual(len(ONBOARDING_SOP_SECTIONS), len(ONBOARDING_MODULES))
+        self.assertEqual(
+            {section['option'] for section in ONBOARDING_SOP_SECTIONS},
+            set(ONBOARDING_MODULES),
+        )
+        self.assertEqual(len(ONBOARDING_SOP_FIELDS), len(set(ONBOARDING_SOP_FIELDS)))
+        self.assertTrue(set(ONBOARDING_OPTIONAL_MODULES).issubset(ONBOARDING_SOP_FIELDS))
+
+        currencies, country_currencies = _get_database_localization_data()
+        self.assertIn('VND', {currency['code'] for currency in currencies})
+        self.assertEqual(country_currencies['vn'], 'VND')
+
+    def test_sop_validation_is_scoped_and_strict(self):
+        # Stale answers for an unselected app are ignored.
+        self.controller._validate_onboarding_sop({
+            'sop_profile_submitted': '1',
+            'sop_sales_acceptance': 'not-valid',
+            'sop_hr_expiry_notice_days': '1.5',
+        })
+
+        with self.assertRaises(ValueError):
+            self.controller._validate_onboarding_sop({
+                'sop_profile_submitted': '1',
+                'install_sales': '1',
+                'sop_sales_acceptance': 'not-valid',
+            })
+        with self.assertRaises(ValueError):
+            self.controller._validate_onboarding_sop({
+                'sop_profile_submitted': '1',
+                'install_employees': '1',
+                'sop_hr_expiry_notice_days': '1.5',
+            })
+        with self.assertRaises(ValueError):
+            self.controller._validate_onboarding_sop({
+                'sop_profile_submitted': '1',
+                'install_purchase': '1',
+                'sop_purchase_approval': '1',
+                'sop_purchase_approval_amount': 'nan',
+            })
+        with self.assertRaises(ValueError):
+            self.controller._validate_onboarding_sop({
+                'sop_profile_submitted': '1',
+                'currency_code': 'NOT-A-CURRENCY',
+            })
+        with self.assertRaises(ValueError):
+            self.controller._validate_onboarding_sop({
+                'sop_profile_submitted': '1',
+                'install_stock_requests': '1',
+                'sop_stock_request_approval_amount': 'infinite',
+            })
+        # A hidden dependent value is ignored while its controlling answer is off.
+        self.controller._validate_onboarding_sop({
+            'sop_profile_submitted': '1',
+            'install_purchase': '1',
+            'sop_purchase_approval_amount': 'nan',
+        })
+
+    def test_detailed_creation_progress_events(self):
+        token = 'test-detailed-creation-progress'
+        self.addCleanup(DATABASE_CREATION_PROGRESS.pop, token, None)
+        _update_database_creation_progress(
+            token, 'validating', 3,
+            'Setup request received',
+            'Checking workspace inputs.',
+        )
+        _update_database_creation_progress(
+            token, 'database', 16,
+            'Creating the database',
+            'Initializing core records.',
+            'success',
+        )
+        payload = DATABASE_CREATION_PROGRESS[token]
+        self.assertEqual(payload['stage'], 'database')
+        self.assertEqual(payload['percent'], 16)
+        self.assertEqual(len(payload['logs']), 2)
+        self.assertEqual(payload['logs'][0]['id'], 1)
+        self.assertEqual(payload['logs'][1]['level'], 'success')
+        self.assertIn('started_at', payload)
 
 
 @tagged('-at_install', 'post_install', '-standard', 'database_operations')

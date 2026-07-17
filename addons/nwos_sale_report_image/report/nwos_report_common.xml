@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nwos>
+
+    <!--
+        Shared "chrome" for the clean NWOS document reports (sale quotation,
+        purchase order, delivery slip, invoice, ...). These self-contained
+        reports do NOT use web.external_layout; they render their own
+        .article / .footer regions which the PDF engine extracts separately
+        (see ir_actions_report._prepare_html), so the <style> must be emitted
+        into EACH region.
+
+        Keeping the style + letterhead + footer here means the IBM-Carbon look
+        (and the wkhtmltopdf border fix below) lives in ONE place. Each document
+        template sets `company` (res.company) then t-calls these.
+
+        Rendered by wkhtmltopdf 0.12.6 (old WebKit): table-based layout, inline
+        styles, no flexbox / grid.
+    -->
+    <template id="nwos_report_style">
+        <style>
+            .o_nw { font-family: 'Noto Sans', 'DejaVu Sans', Arial, sans-serif; color: #161616; -webkit-print-color-adjust: exact; }
+            /* wkhtmltopdf's old WebKit draws Bootstrap Reboot's
+               `border-style: solid; border-width: 0` (from web.report_assets_common)
+               as hairline boxes, and IGNORES border overrides on
+               border-collapse:collapse tables. border-collapse: separate +
+               border-spacing: 0 makes each cell honour its OWN (reset) border,
+               killing the boxes while our explicit border-bottom/top rules below
+               still render as lines. */
+            .o_nw table { border-collapse: separate !important; border-spacing: 0 !important; }
+            .o_nw table, .o_nw thead, .o_nw tbody, .o_nw tfoot, .o_nw tr, .o_nw td, .o_nw th {
+                border: 0 none !important; border-width: 0 !important; border-style: none !important;
+            }
+            .o_nw td, .o_nw th { vertical-align: top; }
+            .o_nw .o_nw_muted { color: #525252 !important; }
+            .o_nw .o_nw_label { color: #525252 !important; font-size: 8.5px; text-transform: uppercase; letter-spacing: .4px; }
+            .o_nw .o_nw_rule { border-bottom: 1px solid #e0e0e0 !important; }
+            .o_nw .o_nw_sect { border-bottom: 1px solid #161616 !important; }
+            .o_nw .o_nw_products thead &gt; tr &gt; th { background: #e0e0e0 !important; color: #161616 !important; border-bottom: 1px solid #c6c6c6 !important; }
+            .o_nw .o_nw_products tbody &gt; tr &gt; td { border-bottom: 1px solid #e0e0e0 !important; }
+            .o_nw .o_nw_grand &gt; td { border-top: 2px solid #161616 !important; }
+            .o_nw .o_nw_band { background: #edf5ff !important; border-left: 3px solid #0f62fe !important; }
+            .o_nw .o_nw_signline &gt; td { border-top: 1px solid #8d8d8d !important; }
+            .o_nw .o_nw_avoid { page-break-inside: avoid; }
+        </style>
+    </template>
+
+    <!-- Company letterhead. Caller sets `company` (res.company). -->
+    <template id="nwos_letterhead">
+        <table style="width: 100%; margin-bottom: 14px;">
+            <tr>
+                <td style="vertical-align: bottom;">
+                    <div class="fw-bold" style="color: #161616; font-weight: 700; font-size: 17px; letter-spacing: .3px;"><span t-field="company.name"/></div>
+                    <div class="o_nw_muted" style="font-size: 9px; line-height: 1.55; margin-top: 2px;">
+                        <div>
+                            <span t-field="company.partner_id"
+                                  t-options='{"widget": "contact", "fields": ["address"], "no_marker": true}'/>
+                        </div>
+                        <div>
+                            <t t-if="company.phone">Tel: <span t-field="company.phone"/></t>
+                            <t t-if="company.email"> · Email: <span t-field="company.email"/></t>
+                            <t t-if="company.website"> · <span t-field="company.website"/></t>
+                        </div>
+                        <div t-if="company.vat">
+                            Tax ID: <span t-field="company.vat"/>
+                        </div>
+                    </div>
+                </td>
+                <td t-if="company.logo" style="text-align: right; vertical-align: bottom; width: 28%;">
+                    <img t-att-src="image_data_uri(company.logo)" style="max-height: 62px; max-width: 100%;" alt="Logo"/>
+                </td>
+            </tr>
+        </table>
+    </template>
+
+    <!-- Centered document title. Caller sets `title` (text) and `subtitle`
+         (inline nodes, e.g. number · date). -->
+    <template id="nwos_title">
+        <div class="o_nw_sect" style="text-align: center; padding-bottom: 8px; margin-bottom: 16px;">
+            <div style="color: #161616; font-weight: 300; font-size: 26px; letter-spacing: 1px; line-height: 1.1; text-transform: uppercase;">
+                <t t-out="title"/>
+            </div>
+            <div class="o_nw_muted" style="font-size: 11px; margin-top: 3px;">
+                <t t-out="subtitle"/>
+            </div>
+        </div>
+    </template>
+
+    <!-- Payment / bank details, one multi-line block per account. Caller sets
+         `banks` (res.partner.bank recordset). Each populated field renders on
+         its own label/value row, so it auto-expands as more bank data is filled
+         in (Accounting > Configuration > Bank Accounts). -->
+    <template id="nwos_payment_info">
+        <div class="o_nw_avoid" style="margin-bottom: 16px;">
+            <div class="o_nw_sect" style="padding-bottom: 4px; margin-bottom: 8px;">
+                <span style="font-weight: 700; font-size: 12px; color: #161616;">Payment Information</span>
+            </div>
+            <t t-foreach="banks" t-as="bank">
+                <table style="width: 100%; font-size: 10.5px; margin-bottom: 8px;">
+                    <tr t-if="bank.bank_id">
+                        <td class="o_nw_label" style="width: 28%; padding: 1px 8px 1px 0;">Bank</td>
+                        <td class="fw-bold" style="padding: 1px 0;"><span t-field="bank.bank_id.name"/></td>
+                    </tr>
+                    <tr>
+                        <td class="o_nw_label" style="width: 28%; padding: 1px 8px 1px 0;">Account No.</td>
+                        <td class="fw-bold" style="padding: 1px 0;"><span t-field="bank.acc_number"/></td>
+                    </tr>
+                    <tr t-if="bank.acc_holder_name or bank.partner_id">
+                        <td class="o_nw_label" style="padding: 1px 8px 1px 0;">Account Holder</td>
+                        <td style="padding: 1px 0;">
+                            <span t-if="bank.acc_holder_name" t-field="bank.acc_holder_name"/>
+                            <span t-elif="bank.partner_id" t-field="bank.partner_id.name"/>
+                        </td>
+                    </tr>
+                    <tr t-if="bank.bank_id and bank.bank_id.bic">
+                        <td class="o_nw_label" style="padding: 1px 8px 1px 0;">BIC / SWIFT</td>
+                        <td style="padding: 1px 0;"><span t-field="bank.bank_id.bic"/></td>
+                    </tr>
+                    <tr t-if="bank.bank_id and (bank.bank_id.street or bank.bank_id.city)">
+                        <td class="o_nw_label" style="padding: 1px 8px 1px 0;">Branch</td>
+                        <td style="padding: 1px 0;">
+                            <span t-if="bank.bank_id.street" t-field="bank.bank_id.street"/>
+                            <t t-if="bank.bank_id.street and bank.bank_id.city">, </t>
+                            <span t-if="bank.bank_id.city" t-field="bank.bank_id.city"/>
+                        </td>
+                    </tr>
+                    <tr t-if="bank.currency_id">
+                        <td class="o_nw_label" style="padding: 1px 8px 1px 0;">Currency</td>
+                        <td style="padding: 1px 0;"><span t-field="bank.currency_id.name"/></td>
+                    </tr>
+                </table>
+            </t>
+        </div>
+    </template>
+
+    <!-- Repeating page footer. Caller sets `company`. -->
+    <template id="nwos_footer">
+        <div class="footer o_nw">
+            <t t-call="nwos_sale_report_image.nwos_report_style"/>
+            <table class="o_nw_footer o_nw_muted" style="width: 100%; font-size: 8.5px; padding-top: 3px;">
+                <tr>
+                    <td style="text-align: left;">
+                        <span t-field="company.name"/>
+                        <t t-if="company.vat">&#160;·&#160;Tax ID: <span t-field="company.vat"/></t>
+                        <t t-if="company.phone">&#160;·&#160;Tel: <span t-field="company.phone"/></t>
+                    </td>
+                    <td t-if="report_type == 'pdf'" style="text-align: right;" class="text-nowrap">
+                        Page <span class="page"/> / <span class="topage"/>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </template>
+
+</nwos>

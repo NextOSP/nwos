@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+
+    <t t-name="helpdesk.Dashboard">
+        <div class="o_helpdesk_dashboard container-fluid py-3">
+            <div class="row g-4">
+                <!-- Tickets block -->
+                <div class="col-12 col-lg-6">
+                    <t t-set="cols" t-value="[['all', 'Open Tickets', []], ['high', 'High Priority', [['priority', '=', '2']]], ['urgent', 'Urgent', [['priority', '=', '3']]]]"/>
+                    <div class="row g-2 align-items-end">
+                        <div class="col-3"><div class="fw-bold fs-5">Tickets</div></div>
+                        <t t-foreach="cols" t-as="col" t-key="col[0]">
+                            <div class="col-3">
+                                <a href="#" class="o_helpdesk_dashboard_card d-block p-2 text-center text-white text-decoration-none"
+                                   t-on-click.prevent="() => this.openTickets(col[1], [['is_closed', '=', false]].concat(col[2]))">
+                                    <div class="fs-3 fw-bold" t-out="data.open[col[0]].count"/>
+                                    <div class="small" t-out="col[1]"/>
+                                </a>
+                            </div>
+                        </t>
+                    </div>
+                    <div class="row g-2 mt-1">
+                        <div class="col-3 text-muted small">Avg Open Hours</div>
+                        <t t-foreach="cols" t-as="col" t-key="col[0]">
+                            <div class="col-3 text-center small" t-out="fmtHours(data.open[col[0]].hours)"/>
+                        </t>
+                    </div>
+                    <div class="row g-2">
+                        <div class="col-3 text-muted small">Failed Tickets</div>
+                        <t t-foreach="cols" t-as="col" t-key="col[0]">
+                            <div class="col-3 text-center small">
+                                <a href="#" class="text-decoration-none"
+                                   t-att-class="data.open[col[0]].failed ? 'o_helpdesk_dashboard_failed fw-bold' : 'text-muted'"
+                                   t-on-click.prevent="() => this.openTickets('Failed SLA', [['is_closed', '=', false], ['sla_fail', '=', true]].concat(col[2]))">
+                                    <t t-out="data.open[col[0]].failed"/>
+                                </a>
+                            </div>
+                        </t>
+                    </div>
+                </div>
+                <!-- Performance block -->
+                <div class="col-12 col-lg-6">
+                    <div class="row g-2 align-items-end">
+                        <div class="col-3"><div class="fw-bold fs-5">Performance</div></div>
+                        <div class="col-3 text-center text-muted small">Closed Tickets</div>
+                        <div class="col-3 text-center text-muted small">SLA Success Rate</div>
+                        <div class="col-3 text-center text-muted small">Average Rating</div>
+                    </div>
+                    <div class="row g-2 mt-1">
+                        <div class="col-3 text-muted small">Today</div>
+                        <div class="col-3 text-center fw-bold" t-out="data.today.closed"/>
+                        <div class="col-3 text-center fw-bold" t-out="fmtPercent(data.today.success_rate)"/>
+                        <div class="col-3 text-center fw-bold" t-out="fmtRating(data.today.rating)"/>
+                    </div>
+                    <div class="row g-2">
+                        <div class="col-3 text-muted small">Avg Last 7 days</div>
+                        <div class="col-3 text-center small" t-out="data.last7.closed.toFixed(1)"/>
+                        <div class="col-3 text-center small" t-out="fmtPercent(data.last7.success_rate)"/>
+                        <div class="col-3 text-center small" t-out="fmtRating(data.last7.rating)"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="helpdesk.DashboardKanbanRenderer" t-inherit="web.KanbanRenderer" t-inherit-mode="primary">
+        <xpath expr="//div[hasclass('o_kanban_renderer')]" position="before">
+            <HelpdeskDashboard list="props.list"/>
+        </xpath>
+    </t>
+
+</templates>

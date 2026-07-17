@@ -24,6 +24,13 @@ It also enables the "optional products" feature.
     'assets': {
         'web.assets_backend': [
             'sale_product_configurator/static/src/**/*',
+            # The configurator is implemented directly by `sale` now.  Loading
+            # this legacy patch runs the product-template handler twice and its
+            # old tuple-style many2one access sends an empty template id.
+            ('remove', 'sale_product_configurator/static/src/js/sale_product_field.js'),
+        ],
+        'web.assets_unit_tests': [
+            'sale_product_configurator/static/tests/**/*.test.js',
         ],
     },
     'auto_install': True,

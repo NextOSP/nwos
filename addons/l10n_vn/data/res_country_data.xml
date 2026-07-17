@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nwos>
+    <record id="base.vn" model="res.country">
+        <field name="enforce_cities" eval="1"/>
+        <field name="address_format" eval="'%(street)s\n%(street2)s\n%(city)s, %(state_name)s %(zip)s\n%(country_name)s'"/>
+    </record>
+
+    <record id="base.state_vn_VN-26" model="res.country.state">
+        <field name="name">TP Huế</field>
+    </record>
+
+    <record id="base.state_vn_VN-39" model="res.country.state">
+        <field name="name">TP Đồng Nai</field>
+    </record>
+</nwos>
