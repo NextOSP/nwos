@@ -5,19 +5,19 @@
             <img
                 class="w-75 w-lg-100 border rounded"
                 t-att-src="imageUrl"
-                alt="Product Image"
+                t-att-alt="this.props.display_name"
             />
         </td>
         <td class="p-0 p-md-3 product_name_description">
             <div
                 name="o_sale_product_configurator_name"
-                class="mb-1 mb-lg-3 text-break text-truncate"
+                class="mb-1 mb-lg-3 text-break"
             >
                 <span class="h5" t-out="this.props.display_name"/>
                 <div
                     t-if="this.props.description_sale"
                     t-out="this.props.description_sale"
-                    class="text-muted small text-truncate"
+                    class="text-muted small"
                 />
                 <div t-if="this.props.selectedComboItems" class="text-muted small">
                     <div
@@ -44,14 +44,16 @@
             <td
                 class="o_sale_product_configurator_qty w-25 py-3 px-0 text-end"
             >
+                <span t-if="env.showPrice" class="o_configurator_section_label">Price</span>
                 <div
                     t-if="env.showPrice"
-                    class="d-md-flex gap-2 align-items-baseline justify-content-end"
+                    class="o_configurator_product_price d-md-flex gap-2 align-items-baseline justify-content-end"
                 >
                     <t t-call="sale.product_price" name="sale_product_configurator_price"/>
                 </div>
                 <t t-set="isComboProduct" t-value="isMainProduct &amp;&amp; this.props.selectedComboItems.length"/>
                 <t t-if="env.showQuantity &amp;&amp; !isComboProduct">
+                    <span class="o_configurator_section_label mt-4">Quantity</span>
                     <QuantityButtons
                         quantity="this.props.quantity"
                         setQuantity="quantity => this.env.setQuantity(this.props.product_tmpl_id, quantity)"

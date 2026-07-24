@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_econtract_template_user,econtract.template.user,model_econtract_template,base.group_user,1,0,0,0
+access_econtract_template_manager,econtract.template.manager,model_econtract_template,group_econtract_manager,1,1,1,1
+access_econtract_template_field_user,econtract.template.field.user,model_econtract_template_field,base.group_user,1,0,0,0
+access_econtract_template_field_manager,econtract.template.field.manager,model_econtract_template_field,group_econtract_manager,1,1,1,1
+access_econtract_contract_user,econtract.contract.user,model_econtract_contract,base.group_user,1,1,1,0
+access_econtract_contract_manager,econtract.contract.manager,model_econtract_contract,group_econtract_manager,1,1,1,1
+access_econtract_contract_value_user,econtract.contract.value.user,model_econtract_contract_value,base.group_user,1,1,1,1
+access_econtract_generate_wizard_user,econtract.generate.wizard.user,model_econtract_generate_wizard,base.group_user,1,1,1,1
+access_econtract_contract_portal,econtract.contract.portal,model_econtract_contract,base.group_portal,1,0,0,0
+access_econtract_contract_value_portal,econtract.contract.value.portal,model_econtract_contract_value,base.group_portal,1,0,0,0

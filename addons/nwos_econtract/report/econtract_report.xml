@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nwos>
+    <record id="paperformat_econtract" model="report.paperformat">
+        <field name="name">eContract A4</field>
+        <field name="format">A4</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">20</field>
+        <field name="margin_bottom">18</field>
+        <field name="margin_left">20</field>
+        <field name="margin_right">20</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">0</field>
+        <field name="dpi">90</field>
+    </record>
+
+    <record id="action_report_econtract" model="ir.actions.report">
+        <field name="name">Contract</field>
+        <field name="model">econtract.contract</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">nwos_econtract.report_econtract</field>
+        <field name="report_file">nwos_econtract.report_econtract</field>
+        <field name="print_report_name">(object.title or object.name)</field>
+        <field name="binding_model_id" ref="model_econtract_contract"/>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="paperformat_econtract"/>
+    </record>
+
+    <template id="report_econtract">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="contract">
+                <t t-call="web.basic_layout">
+                    <div class="page">
+                        <style>
+                            .econtract-doc {
+                                font-family: 'IBM Plex Serif', 'Times New Roman', 'DejaVu Serif', serif;
+                                font-size: 11pt;
+                                color: #000000;
+                                line-height: 1.45;
+                            }
+                            .econtract-doc h1, .econtract-doc h2, .econtract-doc h3, .econtract-doc h4 {
+                                font-family: 'IBM Plex Serif', 'Times New Roman', 'DejaVu Serif', serif;
+                                font-size: 13pt;
+                                font-weight: bold;
+                                border: 0 !important;
+                                color: #000000;
+                            }
+                            /* wkhtmltopdf: bootstrap reboot zeroes cell borders and old
+                               webkit ignores overrides on collapsed tables — force
+                               separate borders back on tables authored with border="1" */
+                            .econtract-doc table { border-collapse: separate !important; border-spacing: 0 !important; width: 100%; }
+                            .econtract-doc table[border] td, .econtract-doc table[border] th {
+                                border: 0.6px solid #444444 !important;
+                                padding: 4px 8px;
+                                vertical-align: top;
+                            }
+                            .econtract-doc h3, .econtract-doc h4 { margin-top: 14px; }
+                            /* let long lists/tables flow across pages instead of
+                               jumping whole to the next page and leaving gaps */
+                            .econtract-doc ul, .econtract-doc ol,
+                            .econtract-doc div, .econtract-doc table { page-break-inside: auto !important; }
+                            .econtract-doc li { page-break-inside: avoid; }
+                            .econtract-doc tr { page-break-inside: avoid; }
+                            .econtract-doc h1, .econtract-doc h2,
+                            .econtract-doc h3, .econtract-doc h4 { page-break-after: avoid; }
+                        </style>
+                        <div class="econtract-doc">
+                            <t t-out="contract._render_body()"/>
+                        </div>
+                        <div t-if="contract.state == 'signed'" class="mt-4 pt-2"
+                             style="border-top:1px solid #ccc;font-size:8.5pt;color:#444;">
+                            Signed electronically by <span t-field="contract.signed_by"/>
+                            on <span t-field="contract.signed_on"/>
+                            — <span t-field="contract.name"/>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</nwos>

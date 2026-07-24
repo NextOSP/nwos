@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nwos>
+    <record id="stock_picking_form_rfid" model="ir.ui.view">
+        <field name="name">stock.picking.form.rfid</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <field name="partner_id" position="after">
+                <field name="rfid_site_id" readonly="state in ('done', 'cancel')"/>
+                <field name="rfid_payment_blocked" invisible="1"/>
+            </field>
+            <xpath expr="//header" position="after">
+                <div class="alert alert-danger" role="alert" invisible="not rfid_payment_blocked or picking_type_code != 'outgoing'">
+                    This Nextwaves Kit delivery is blocked until all Kit Item invoices are fully paid.
+                </div>
+            </xpath>
+        </field>
+    </record>
+</nwos>

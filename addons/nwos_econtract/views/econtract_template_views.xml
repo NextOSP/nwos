@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nwos>
+    <record id="econtract_template_view_list" model="ir.ui.view">
+        <field name="name">econtract.template.list</field>
+        <field name="model">econtract.template</field>
+        <field name="arch" type="xml">
+            <list string="Templates">
+                <field name="name"/>
+                <field name="field_count" string="Fields"/>
+                <field name="contract_count" string="Contracts"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="econtract_template_view_form" model="ir.ui.view">
+        <field name="name">econtract.template.form</field>
+        <field name="model">econtract.template</field>
+        <field name="arch" type="xml">
+            <form string="Template">
+                <header>
+                    <button name="action_detect_fields" type="object" string="Detect Fields"
+                            class="btn-secondary"
+                            help="Re-scan the body for {{placeholders}}."/>
+                    <button name="action_new_contract" type="object" string="New Contract"
+                            class="btn-primary"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_contracts" type="object" class="oe_stat_button"
+                                icon="fa-file-text-o">
+                            <field name="contract_count" widget="statinfo" string="Contracts"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1><field name="name" placeholder="e.g. Service Agreement"/></h1>
+                    </div>
+                    <group>
+                        <field name="engine" widget="radio" options="{'horizontal': true}"/>
+                        <field name="note" placeholder="Internal note"/>
+                        <field name="company_id" groups="base.group_multi_company"/>
+                        <field name="active" invisible="1"/>
+                    </group>
+                    <notebook>
+                        <page string="Body" name="body">
+                            <div class="alert alert-info" role="alert" invisible="engine != 'placeholder'">
+                                Write your document below. Drop smart fields as
+                                <code>{{Label}}</code> — add a type with
+                                <code>{{Label:type}}</code>
+                                (text, number, monetary, date, datetime, boolean, signature).
+                                Fields are detected when you save.
+                            </div>
+                            <div class="alert alert-info" role="alert" invisible="engine != 'jinja2'">
+                                <strong>Jinja2 template.</strong> Full Jinja2 syntax with the source
+                                document available as <code>object</code>:
+                                <ul class="mb-1">
+                                    <li>Expressions: <code>{{ object.partner_id.name }}</code>,
+                                        <code>{{ format_amount(object.amount_total) }}</code>,
+                                        <code>{{ format_date(object.date_order) }}</code></li>
+                                    <li>Loops: <code>{% for line in object.order_line %}</code> …
+                                        <code>{{ line.name }}</code> … <code>{% endfor %}</code></li>
+                                    <li>Conditions: <code>{% if object.amount_total > 1000 %}</code> …
+                                        <code>{% endif %}</code></li>
+                                    <li>Other variables: <code>contract</code>, <code>partner</code>,
+                                        <code>company</code>, <code>user</code>, <code>currency</code>,
+                                        <code>today</code>, <code>now</code>, <code>values</code></li>
+                                    <li>Hand-fillable smart fields still work with an explicit type:
+                                        <code>{{Sign Date:date}}</code>, <code>{{Signature:signature}}</code></li>
+                                </ul>
+                            </div>
+                            <field name="body_html" widget="html"
+                                   options="{'height': 500}"/>
+                        </page>
+                        <page string="Fields" name="fields">
+                            <field name="field_ids">
+                                <list string="Fields" editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="label"/>
+                                    <field name="name" readonly="1"/>
+                                    <field name="field_type"/>
+                                    <field name="required"/>
+                                    <field name="mapping"
+                                           placeholder="e.g. partner_id.name"/>
+                                    <field name="default_value"/>
+                                </list>
+                            </field>
+                            <p class="text-muted">
+                                <strong>Auto-fill Path</strong> pulls a value from the source
+                                record when generating a contract — e.g. from a Sales Order use
+                                <code>partner_id.name</code>, <code>amount_total</code>,
+                                <code>date_order</code>. Leave blank to fill by hand.
+                            </p>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="econtract_template_action" model="ir.actions.act_window">
+        <field name="name">Templates</field>
+        <field name="res_model">econtract.template</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Create your first contract template</p>
+            <p>Design a document with <code>{{smart fields}}</code> and generate contracts
+               from Sales Orders, Purchase Orders or Contacts.</p>
+        </field>
+    </record>
+</nwos>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nwos>
+    <menuitem id="menu_rfid_root" name="Nextwaves Kit" sequence="55"
+        groups="nwos_rfid_service.group_rfid_user"/>
+    <menuitem id="menu_rfid_orders" name="Sales Orders" parent="menu_rfid_root"
+        action="action_nextwaves_kit_orders" sequence="5"/>
+    <menuitem id="menu_rfid_sites" name="Installation Sites" parent="menu_rfid_root"
+        action="action_rfid_site" sequence="10"/>
+    <menuitem id="menu_rfid_subscriptions" name="Subscriptions" parent="menu_rfid_root"
+        action="action_rfid_subscription" sequence="20"/>
+    <menuitem id="menu_rfid_configuration" name="Configuration" parent="menu_rfid_root"
+        sequence="90" groups="nwos_rfid_service.group_rfid_manager"/>
+    <menuitem id="menu_rfid_settings" name="Settings" parent="menu_rfid_configuration"
+        action="project.project_config_settings_action" sequence="10"/>
+</nwos>

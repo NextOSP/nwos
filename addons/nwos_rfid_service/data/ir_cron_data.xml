@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nwos noupdate="1">
+    <record id="ir_cron_rfid_payment_release" model="ir.cron">
+        <field name="name">Nextwaves Kit: Release paid sites</field>
+        <field name="model_id" ref="model_rfid_service_site"/>
+        <field name="state">code</field>
+        <field name="code">model._cron_refresh_payment_release()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">hours</field>
+        <field name="active" eval="True"/>
+    </record>
+    <record id="ir_cron_rfid_subscription_invoice" model="ir.cron">
+        <field name="name">Nextwaves Kit: Generate subscription draft invoices</field>
+        <field name="model_id" ref="model_rfid_subscription"/>
+        <field name="state">code</field>
+        <field name="code">model._cron_generate_invoices()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="active" eval="True"/>
+    </record>
+</nwos>

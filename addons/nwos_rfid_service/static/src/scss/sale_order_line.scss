@@ -1,0 +1,26 @@
+// Vertically center the product label in sale-order-line list rows.
+//
+// The framework forces `.o_list_many2one .o_field_widget { display: inline }`
+// on non-selected (readonly) list rows so plain many2one text truncates on one
+// line. The Product column, however, uses the block-based
+// ProductLabelSectionAndNoteField widget (`o_sol_product_many2one_cell`). Made
+// `inline`, its block content collapses to a zero-height baseline box and the
+// product name renders ~9px below the row's vertical centre, so it no longer
+// lines up with Quantity / Item Type / Unit / Unit Price / etc. in the same row.
+//
+// Restore a real block/flex box for that widget (readonly rows only) so the
+// table cell's `vertical-align: middle` can centre it. Scoped to the sale line
+// product cell and to non-selected rows, leaving inline edit mode untouched.
+.o_list_renderer .o_data_row:not(.o_selected_row) .o_sol_product_many2one_cell {
+    .o_field_widget {
+        display: flex !important;
+        align-items: center;
+    }
+
+    .o_field_product_label_section_and_note_cell {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 100%;
+    }
+}

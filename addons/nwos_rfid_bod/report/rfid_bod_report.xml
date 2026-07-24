@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nwos>
+    <record id="action_report_rfid_bod_monthly" model="ir.actions.report">
+        <field name="name">Nextwaves Kit Monthly Report</field>
+        <field name="model">res.company</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">nwos_rfid_bod.report_rfid_bod_monthly</field>
+        <field name="report_file">nwos_rfid_bod.report_rfid_bod_monthly</field>
+        <field name="print_report_name">'Nextwaves Kit Report - %s' % object.name</field>
+        <field name="binding_model_id" ref="base.model_res_company"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_rfid_bod_monthly">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="company">
+                <t t-set="d" t-value="company.get_rfid_bod_report_data()"/>
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h2>Nextwaves Kit — Monthly BOD Report</h2>
+                        <p><strong t-field="company.name"/> · <span t-esc="d['date_from']"/> to <span t-esc="d['date_to']"/></p>
+
+                        <h4 class="mt-4">Executive KPIs</h4>
+                        <table class="table table-sm table-bordered">
+                            <tbody>
+                                <tr><th>Total sites</th><td t-esc="d['site_count']"/><th>Active sites</th><td t-esc="d['active_sites']"/><th>New activations</th><td t-esc="d['new_activations']"/></tr>
+                                <tr><th>Kit Item revenue</th><td t-esc="d['kit_revenue']['formatted']"/><th>Estimated gross margin</th><td t-esc="d['estimated_gross_margin']['formatted']"/><th>Technician hours</th><td t-esc="d['technician_hours']"/></tr>
+                                <tr><th>MRR</th><td t-esc="d['mrr']['formatted']"/><th>ARR</th><td t-esc="d['arr']['formatted']"/><th>Active subscriptions</th><td t-esc="d['active_subscriptions']"/></tr>
+                                <tr><th>On-time delivery</th><td><span t-esc="d['on_time_delivery_pct'] if d['on_time_delivery_pct'] is not None else '—'"/>%</td><th>On-time acceptance</th><td><span t-esc="d['on_time_install_pct'] if d['on_time_install_pct'] is not None else '—'"/>%</td><th>Average lead time</th><td><span t-esc="d['average_lead_days'] if d['average_lead_days'] is not None else '—'"/> days</td></tr>
+                                <tr><th>Open tickets</th><td t-esc="d['open_tickets']"/><th>SLA breaches</th><td t-esc="d['sla_failed_tickets']"/><th>Overdue tasks</th><td t-esc="d['overdue_tasks']"/></tr>
+                                <tr><th>Average RFID read rate</th><td><span t-esc="d['average_read_rate'] if d['average_read_rate'] is not None else '—'"/>%</td><th>Overdue subscriptions</th><td t-esc="d['overdue_subscriptions']"/><th/><td/></tr>
+                            </tbody>
+                        </table>
+
+                        <h4 class="mt-4">Site pipeline</h4>
+                        <table class="table table-sm table-striped">
+                            <thead><tr><th>Stage</th><th class="text-end">Sites</th></tr></thead>
+                            <tbody><tr t-foreach="d['by_state']" t-as="row"><td t-esc="row['label']"/><td class="text-end" t-esc="row['count']"/></tr></tbody>
+                        </table>
+                        <p class="text-muted small">Estimated gross margin uses standard product costs for lines marked Kit Item. Subscription invoices are created as drafts for Finance review.</p>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</nwos>

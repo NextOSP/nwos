@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nwos>
+    <record id="view_rfid_subscription_list" model="ir.ui.view">
+        <field name="name">rfid.subscription.list</field>
+        <field name="model">rfid.subscription</field>
+        <field name="arch" type="xml">
+            <list decoration-danger="collection_state == 'overdue'" decoration-muted="state == 'closed'">
+                <field name="name"/>
+                <field name="partner_id"/>
+                <field name="site_id"/>
+                <field name="product_id"/>
+                <field name="billing_interval_months"/>
+                <field name="mrr" sum="MRR"/>
+                <field name="start_date"/>
+                <field name="next_invoice_date"/>
+                <field name="collection_state" widget="badge"/>
+                <field name="state" widget="badge"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_rfid_subscription_search" model="ir.ui.view">
+        <field name="name">rfid.subscription.search</field>
+        <field name="model">rfid.subscription</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/><field name="partner_id"/><field name="site_id"/><field name="product_id"/>
+                <filter name="active" string="Active" domain="[('state', '=', 'active')]"/>
+                <filter name="pending" string="Pending Activation" domain="[('state', '=', 'pending')]"/>
+                <filter name="overdue" string="Overdue" domain="[('collection_state', '=', 'overdue')]"/>
+                <separator/>
+                <filter name="customer" string="Customer" context="{'group_by': 'partner_id'}"/>
+                <filter name="state" string="State" context="{'group_by': 'state'}"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_rfid_subscription_form" model="ir.ui.view">
+        <field name="name">rfid.subscription.form</field>
+        <field name="model">rfid.subscription</field>
+        <field name="arch" type="xml">
+            <form string="Nextwaves Kit Subscription">
+                <header>
+                    <button name="action_pause" type="object" string="Pause" invisible="state != 'active'"/>
+                    <button name="action_resume" type="object" string="Resume" class="btn-primary" invisible="state != 'paused'"/>
+                    <button name="action_close" type="object" string="Close" invisible="state == 'closed'" confirm="Close this subscription?"/>
+                    <field name="state" widget="statusbar" statusbar_visible="pending,active,paused,closed"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_invoices" type="object" class="oe_stat_button" icon="fa-pencil-square-o" invisible="invoice_count == 0"><field name="invoice_count" widget="statinfo" string="Invoices"/></button>
+                    </div>
+                    <div class="oe_title"><label for="name"/><h1><field name="name"/></h1></div>
+                    <group>
+                        <group><field name="site_id"/><field name="partner_id"/><field name="source_sale_line_id"/><field name="product_id"/></group>
+                        <group><field name="start_date"/><field name="next_invoice_date"/><field name="billing_interval_months"/><field name="collection_state" widget="badge"/></group>
+                    </group>
+                    <group string="Locked Commercial Terms">
+                        <field name="price_unit"/><field name="discount"/><field name="tax_ids" widget="many2many_tags"/><field name="payment_term_id"/><field name="mrr"/>
+                    </group>
+                    <notebook>
+                        <page string="Billing Periods">
+                            <field name="period_ids" readonly="1">
+                                <list decoration-danger="state == 'due'">
+                                    <field name="date_start"/><field name="date_end"/><field name="billing_months"/><field name="amount" sum="Total"/><field name="invoice_id"/><field name="state" widget="badge"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_rfid_subscription" model="ir.actions.act_window">
+        <field name="name">Kit Subscriptions</field>
+        <field name="res_model">rfid.subscription</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_rfid_subscription_search"/>
+        <field name="context">{'create': False}</field>
+    </record>
+</nwos>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nwos>
+    <record id="action_bod_dashboard_rfid" model="ir.actions.client">
+        <field name="name">Nextwaves Kit</field>
+        <field name="path">bod-dashboard-rfid</field>
+        <field name="tag">nwos_bod_dashboard</field>
+        <field name="context">{'default_bod_tab': 'rfid'}</field>
+    </record>
+    <menuitem id="menu_bod_dashboard_rfid" name="Nextwaves Kit" parent="nwos_bod_dashboard.menu_bod_root" action="action_bod_dashboard_rfid" sequence="3"/>
+</nwos>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="nwos_rfid_bod.BodDashboard" t-inherit="nwos_bod_dashboard.BodDashboard" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('o_bod_title')]/h1" position="replace">
+            <h1 t-if="state.tab === 'overview'">Executive Overview</h1>
+            <h1 t-elif="state.tab === 'salesman'">Revenue/Sales by Salesman</h1>
+            <h1 t-else="">Nextwaves Kit</h1>
+        </xpath>
+        <xpath expr="//div[hasclass('o_bod_tabs')]" position="inside">
+            <button type="button" role="tab" class="o_bod_tab"
+                t-att-class="{ 'o_bod_tab--active': state.tab === 'rfid' }"
+                t-on-click="() => state.tab = 'rfid'">Nextwaves Kit</button>
+        </xpath>
+        <xpath expr="//div[hasclass('o_bod_main')]" position="inside">
+            <t t-if="state.tab === 'rfid' and state.data.rfid">
+                <div class="d-flex justify-content-end mb-2">
+                    <button type="button" class="btn btn-secondary" t-on-click="() => this.printRfidBod()"><i class="fa fa-file-pdf-o me-1"/>Previous Month PDF</button>
+                </div>
+                <section class="o_bod_section">
+                    <h2>Commercial</h2>
+                    <div class="o_bod_tiles">
+                        <div class="o_bod_tile o_bod_tile--clickable o_bod_tile--hero" role="button" t-on-click="() => this.openRfidSites()"><span class="o_bod_tile_label">Total Kit sites</span><span class="o_bod_tile_value" t-esc="state.data.rfid.site_count"/><i class="fa fa-arrow-right o_bod_tile_arrow"/></div>
+                        <div class="o_bod_tile o_bod_tile--clickable" role="button" t-on-click="() => this.openRfidSites('active')"><span class="o_bod_tile_label">Active sites</span><span class="o_bod_tile_value" t-esc="state.data.rfid.active_sites"/><span class="o_bod_tile_sub"><t t-esc="state.data.rfid.new_activations"/> activated this period</span><i class="fa fa-arrow-right o_bod_tile_arrow"/></div>
+                        <div class="o_bod_tile"><span class="o_bod_tile_label">Kit Item revenue</span><span class="o_bod_tile_value" t-esc="state.data.rfid.kit_revenue.formatted"/></div>
+                        <div class="o_bod_tile"><span class="o_bod_tile_label">Estimated gross margin</span><span class="o_bod_tile_value" t-esc="state.data.rfid.estimated_gross_margin.formatted"/><span class="o_bod_tile_sub">Based on standard Kit cost</span></div>
+                    </div>
+                </section>
+                <section class="o_bod_section">
+                    <h2>Recurring Revenue</h2>
+                    <div class="o_bod_tiles">
+                        <div class="o_bod_tile"><span class="o_bod_tile_label">MRR</span><span class="o_bod_tile_value" t-esc="state.data.rfid.mrr.formatted"/></div>
+                        <div class="o_bod_tile"><span class="o_bod_tile_label">ARR</span><span class="o_bod_tile_value" t-esc="state.data.rfid.arr.formatted"/></div>
+                        <div class="o_bod_tile o_bod_tile--clickable" role="button" t-on-click="() => this.openRfidSubscriptions()"><span class="o_bod_tile_label">Active subscriptions</span><span class="o_bod_tile_value" t-esc="state.data.rfid.active_subscriptions"/><i class="fa fa-arrow-right o_bod_tile_arrow"/></div>
+                        <div class="o_bod_tile o_bod_tile--clickable o_bod_tile--warn" role="button" t-on-click="() => this.openRfidSubscriptions(true)"><span class="o_bod_tile_label">Overdue subscriptions</span><span class="o_bod_tile_value" t-esc="state.data.rfid.overdue_subscriptions"/><i class="fa fa-arrow-right o_bod_tile_arrow"/></div>
+                    </div>
+                </section>
+                <section class="o_bod_section">
+                    <h2>Delivery &amp; Quality</h2>
+                    <div class="o_bod_tiles">
+                        <div class="o_bod_tile"><span class="o_bod_tile_label">On-time delivery</span><span class="o_bod_tile_value"><t t-esc="state.data.rfid.on_time_delivery_pct ?? '—'"/>%</span></div>
+                        <div class="o_bod_tile"><span class="o_bod_tile_label">On-time acceptance</span><span class="o_bod_tile_value"><t t-esc="state.data.rfid.on_time_install_pct ?? '—'"/>%</span></div>
+                        <div class="o_bod_tile"><span class="o_bod_tile_label">Average implementation lead time</span><span class="o_bod_tile_value"><t t-esc="state.data.rfid.average_lead_days ?? '—'"/> days</span></div>
+                        <div class="o_bod_tile"><span class="o_bod_tile_label">Average RFID read rate</span><span class="o_bod_tile_value"><t t-esc="state.data.rfid.average_read_rate ?? '—'"/>%</span></div>
+                        <div class="o_bod_tile"><span class="o_bod_tile_label">Technician hours</span><span class="o_bod_tile_value" t-esc="state.data.rfid.technician_hours"/></div>
+                    </div>
+                </section>
+                <section class="o_bod_section">
+                    <h2>Exceptions &amp; Support</h2>
+                    <div class="o_bod_tiles">
+                        <div class="o_bod_tile o_bod_tile--clickable" role="button" t-on-click="() => this.openRfidTickets(false)"><span class="o_bod_tile_label">Open tickets</span><span class="o_bod_tile_value" t-esc="state.data.rfid.open_tickets"/><i class="fa fa-arrow-right o_bod_tile_arrow"/></div>
+                        <div class="o_bod_tile o_bod_tile--clickable o_bod_tile--warn" role="button" t-on-click="() => this.openRfidTickets(true)"><span class="o_bod_tile_label">SLA breaches</span><span class="o_bod_tile_value" t-esc="state.data.rfid.sla_failed_tickets"/><i class="fa fa-arrow-right o_bod_tile_arrow"/></div>
+                        <div class="o_bod_tile o_bod_tile--clickable o_bod_tile--warn" role="button" t-on-click="() => this.openRfidTasks()"><span class="o_bod_tile_label">Overdue implementation tasks</span><span class="o_bod_tile_value" t-esc="state.data.rfid.overdue_tasks"/><i class="fa fa-arrow-right o_bod_tile_arrow"/></div>
+                    </div>
+                    <div class="o_bod_tile mt-2">
+                        <h3>Site pipeline</h3>
+                        <div class="o_rfid_stage_grid">
+                            <button t-foreach="state.data.rfid.by_state" t-as="row" t-key="row.key" type="button" class="o_rfid_stage" t-on-click="() => this.openRfidSites(row.key)"><strong t-esc="row.count"/><span t-esc="row.label"/></button>
+                        </div>
+                    </div>
+                </section>
+            </t>
+        </xpath>
+    </t>
+</templates>

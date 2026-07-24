@@ -1,0 +1,376 @@
+# Translation of NWOS Server.
+# This file contains the translation of the following modules:
+# 	* nwos_rfid_bod
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: NWOS Server 4.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-21 16:09+0000\n"
+"PO-Revision-Date: 2026-07-21 16:09+0000\n"
+"Last-Translator: Nextwaves\n"
+"Language-Team: Vietnamese\n"
+"Language: vi_VN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. module: nwos_rfid_bod
+#: model:ir.actions.report,print_report_name:nwos_rfid_bod.action_report_rfid_bod_monthly
+msgid "'Nextwaves Kit Report - %s' % object.name"
+msgstr "'Báo cáo Nextwaves Kit - %s' % object.name"
+
+#. module: nwos_rfid_bod
+#. nwos-python
+#: code:addons/nwos_rfid_bod/models/res_company.py:0
+msgid ""
+"<p>Please find attached the Nextwaves Kit report for %(date_from)s to "
+"%(date_to)s.</p>"
+msgstr ""
+"<p>Vui lòng xem báo cáo Nextwaves Kit đính kèm cho giai đoạn từ "
+"%(date_from)s đến %(date_to)s.</p>"
+
+#. module: nwos_rfid_bod
+#. nwos-javascript
+#: code:addons/nwos_rfid_bod/static/src/rfid_bod.xml:0
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_bod.report_rfid_bod_monthly
+msgid "ARR"
+msgstr "ARR"
+
+#. module: nwos_rfid_bod
+#. nwos-javascript
+#: code:addons/nwos_rfid_bod/static/src/rfid_bod.xml:0
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_bod.report_rfid_bod_monthly
+msgid "Active sites"
+msgstr "Địa điểm đang hoạt động"
+
+#. module: nwos_rfid_bod
+#. nwos-javascript
+#: code:addons/nwos_rfid_bod/static/src/rfid_bod.xml:0
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_bod.report_rfid_bod_monthly
+msgid "Active subscriptions"
+msgstr "Đăng ký đang hoạt động"
+
+#. module: nwos_rfid_bod
+#. nwos-javascript
+#: code:addons/nwos_rfid_bod/static/src/rfid_bod.xml:0
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_bod.report_rfid_bod_monthly
+msgid "Average RFID read rate"
+msgstr "Tỷ lệ đọc RFID trung bình"
+
+#. module: nwos_rfid_bod
+#. nwos-javascript
+#: code:addons/nwos_rfid_bod/static/src/rfid_bod.xml:0
+msgid "Average implementation lead time"
+msgstr "Thời gian triển khai trung bình"
+
+#. module: nwos_rfid_bod
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_bod.report_rfid_bod_monthly
+msgid "Average lead time"
+msgstr "Thời gian thực hiện trung bình"
+
+#. module: nwos_rfid_bod
+#. nwos-javascript
+#: code:addons/nwos_rfid_bod/static/src/rfid_bod.xml:0
+msgid "Based on standard Kit cost"
+msgstr "Dựa trên giá vốn Kit tiêu chuẩn"
+
+#. module: nwos_rfid_bod
+#: model:ir.model,name:nwos_rfid_bod.model_bod_dashboard
+msgid "Board of Directors Executive Dashboard"
+msgstr "Bảng điều hành Ban Giám đốc"
+
+#. module: nwos_rfid_bod
+#: model:ir.model.fields,help:nwos_rfid_bod.field_res_company__rfid_bod_recipient_emails
+#: model:ir.model.fields,help:nwos_rfid_bod.field_res_config_settings__rfid_bod_recipient_emails
+msgid "Comma-separated email addresses for the automatic monthly PDF report."
+msgstr ""
+"Các địa chỉ email, phân tách bằng dấu phẩy, nhận báo cáo PDF hàng tháng tự "
+"động."
+
+#. module: nwos_rfid_bod
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_bod.res_config_settings_view_form_rfid_bod
+msgid ""
+"Comma-separated email addresses that receive the previous month's Nextwaves "
+"Kit PDF report on the first day of each month."
+msgstr ""
+"Các địa chỉ email, phân tách bằng dấu phẩy, nhận báo cáo PDF Nextwaves Kit "
+"của tháng trước vào ngày đầu mỗi tháng."
+
+#. module: nwos_rfid_bod
+#. nwos-javascript
+#: code:addons/nwos_rfid_bod/static/src/rfid_bod.xml:0
+msgid "Commercial"
+msgstr "Kinh doanh"
+
+#. module: nwos_rfid_bod
+#: model:ir.model,name:nwos_rfid_bod.model_res_company
+msgid "Companies"
+msgstr "Công ty"
+
+#. module: nwos_rfid_bod
+#: model:ir.model,name:nwos_rfid_bod.model_res_config_settings
+msgid "Config Settings"
+msgstr "Thiết lập cấu hình"
+
+#. module: nwos_rfid_bod
+#. nwos-javascript
+#: code:addons/nwos_rfid_bod/static/src/rfid_bod.xml:0
+msgid "Delivery & Quality"
+msgstr "Giao hàng và chất lượng"
+
+#. module: nwos_rfid_bod
+#: model:ir.model.fields,field_description:nwos_rfid_bod.field_bod_dashboard__display_name
+#: model:ir.model.fields,field_description:nwos_rfid_bod.field_res_company__display_name
+#: model:ir.model.fields,field_description:nwos_rfid_bod.field_res_config_settings__display_name
+msgid "Display Name"
+msgstr "Tên hiển thị"
+
+#. module: nwos_rfid_bod
+#. nwos-javascript
+#: code:addons/nwos_rfid_bod/static/src/rfid_bod.xml:0
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_bod.report_rfid_bod_monthly
+msgid "Estimated gross margin"
+msgstr "Lợi nhuận gộp ước tính"
+
+#. module: nwos_rfid_bod
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_bod.report_rfid_bod_monthly
+msgid ""
+"Estimated gross margin uses standard product costs for lines marked Kit "
+"Item. Subscription invoices are created as drafts for Finance review."
+msgstr ""
+"Lợi nhuận gộp ước tính sử dụng giá vốn sản phẩm tiêu chuẩn cho các dòng được"
+" đánh dấu là Hàng Kit. Hóa đơn đăng ký được tạo ở trạng thái nháp để bộ phận"
+" Tài chính kiểm tra."
+
+#. module: nwos_rfid_bod
+#. nwos-javascript
+#: code:addons/nwos_rfid_bod/static/src/rfid_bod.xml:0
+msgid "Exceptions & Support"
+msgstr "Ngoại lệ và hỗ trợ"
+
+#. module: nwos_rfid_bod
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_bod.report_rfid_bod_monthly
+msgid "Executive KPIs"
+msgstr "Chỉ số điều hành"
+
+#. module: nwos_rfid_bod
+#. nwos-javascript
+#: code:addons/nwos_rfid_bod/static/src/rfid_bod.xml:0
+msgid "Executive Overview"
+msgstr "Tổng quan điều hành"
+
+#. module: nwos_rfid_bod
+#: model:ir.model.fields,field_description:nwos_rfid_bod.field_bod_dashboard__id
+#: model:ir.model.fields,field_description:nwos_rfid_bod.field_res_company__id
+#: model:ir.model.fields,field_description:nwos_rfid_bod.field_res_config_settings__id
+msgid "ID"
+msgstr "ID"
+
+#. module: nwos_rfid_bod
+#. nwos-javascript
+#: code:addons/nwos_rfid_bod/static/src/rfid_bod.xml:0
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_bod.report_rfid_bod_monthly
+msgid "Kit Item revenue"
+msgstr "Doanh thu Hàng Kit"
+
+#. module: nwos_rfid_bod
+#. nwos-javascript
+#: code:addons/nwos_rfid_bod/static/src/rfid_bod.xml:0
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_bod.report_rfid_bod_monthly
+msgid "MRR"
+msgstr "MRR"
+
+#. module: nwos_rfid_bod
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_bod.res_config_settings_view_form_rfid_bod
+msgid "Monthly BOD report recipients"
+msgstr "Người nhận báo cáo BOD hàng tháng"
+
+#. module: nwos_rfid_bod
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_bod.report_rfid_bod_monthly
+msgid "New activations"
+msgstr "Kích hoạt mới"
+
+#. module: nwos_rfid_bod
+#. nwos-javascript
+#: code:addons/nwos_rfid_bod/static/src/rfid_bod.xml:0
+#: model:ir.actions.client,name:nwos_rfid_bod.action_bod_dashboard_rfid
+#: model:ir.ui.menu,name:nwos_rfid_bod.menu_bod_dashboard_rfid
+msgid "Nextwaves Kit"
+msgstr "Nextwaves Kit"
+
+#. module: nwos_rfid_bod
+#. nwos-javascript
+#: code:addons/nwos_rfid_bod/static/src/rfid_bod.js:0
+msgid "Nextwaves Kit Implementation Tasks"
+msgstr "Công việc triển khai Nextwaves Kit"
+
+#. module: nwos_rfid_bod
+#. nwos-javascript
+#: code:addons/nwos_rfid_bod/static/src/rfid_bod.js:0
+#: model:ir.actions.report,name:nwos_rfid_bod.action_report_rfid_bod_monthly
+msgid "Nextwaves Kit Monthly Report"
+msgstr "Báo cáo Nextwaves Kit hàng tháng"
+
+#. module: nwos_rfid_bod
+#. nwos-python
+#: code:addons/nwos_rfid_bod/models/res_company.py:0
+msgid "Nextwaves Kit Monthly Report - %s"
+msgstr "Báo cáo Nextwaves Kit hàng tháng - %s"
+
+#. module: nwos_rfid_bod
+#: model:ir.model.fields,field_description:nwos_rfid_bod.field_res_company__rfid_bod_recipient_emails
+#: model:ir.model.fields,field_description:nwos_rfid_bod.field_res_config_settings__rfid_bod_recipient_emails
+msgid "Nextwaves Kit Report Recipients"
+msgstr "Người nhận báo cáo Nextwaves Kit"
+
+#. module: nwos_rfid_bod
+#. nwos-javascript
+#: code:addons/nwos_rfid_bod/static/src/rfid_bod.js:0
+msgid "Nextwaves Kit Sites"
+msgstr "Địa điểm Nextwaves Kit"
+
+#. module: nwos_rfid_bod
+#. nwos-javascript
+#: code:addons/nwos_rfid_bod/static/src/rfid_bod.js:0
+msgid "Nextwaves Kit Subscriptions"
+msgstr "Đăng ký Nextwaves Kit"
+
+#. module: nwos_rfid_bod
+#. nwos-javascript
+#: code:addons/nwos_rfid_bod/static/src/rfid_bod.js:0
+msgid "Nextwaves Kit Support Tickets"
+msgstr "Phiếu hỗ trợ Nextwaves Kit"
+
+#. module: nwos_rfid_bod
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_bod.report_rfid_bod_monthly
+msgid "Nextwaves Kit — Monthly BOD Report"
+msgstr "Nextwaves Kit — Báo cáo BOD hàng tháng"
+
+#. module: nwos_rfid_bod
+#. nwos-javascript
+#: code:addons/nwos_rfid_bod/static/src/rfid_bod.xml:0
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_bod.report_rfid_bod_monthly
+msgid "On-time acceptance"
+msgstr "Nghiệm thu đúng hạn"
+
+#. module: nwos_rfid_bod
+#. nwos-javascript
+#: code:addons/nwos_rfid_bod/static/src/rfid_bod.xml:0
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_bod.report_rfid_bod_monthly
+msgid "On-time delivery"
+msgstr "Giao hàng đúng hạn"
+
+#. module: nwos_rfid_bod
+#. nwos-javascript
+#: code:addons/nwos_rfid_bod/static/src/rfid_bod.xml:0
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_bod.report_rfid_bod_monthly
+msgid "Open tickets"
+msgstr "Phiếu hỗ trợ đang mở"
+
+#. module: nwos_rfid_bod
+#. nwos-javascript
+#: code:addons/nwos_rfid_bod/static/src/rfid_bod.xml:0
+msgid "Overdue implementation tasks"
+msgstr "Công việc triển khai quá hạn"
+
+#. module: nwos_rfid_bod
+#. nwos-javascript
+#: code:addons/nwos_rfid_bod/static/src/rfid_bod.xml:0
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_bod.report_rfid_bod_monthly
+msgid "Overdue subscriptions"
+msgstr "Đăng ký quá hạn"
+
+#. module: nwos_rfid_bod
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_bod.report_rfid_bod_monthly
+msgid "Overdue tasks"
+msgstr "Công việc quá hạn"
+
+#. module: nwos_rfid_bod
+#. nwos-javascript
+#: code:addons/nwos_rfid_bod/static/src/rfid_bod.xml:0
+msgid "Previous Month PDF"
+msgstr "PDF tháng trước"
+
+#. module: nwos_rfid_bod
+#: model:ir.actions.server,name:nwos_rfid_bod.ir_cron_rfid_bod_monthly_ir_actions_server
+msgid "RFID: Email monthly BOD report"
+msgstr "RFID: Gửi báo cáo BOD hàng tháng qua email"
+
+#. module: nwos_rfid_bod
+#. nwos-javascript
+#: code:addons/nwos_rfid_bod/static/src/rfid_bod.xml:0
+msgid "Recurring Revenue"
+msgstr "Doanh thu định kỳ"
+
+#. module: nwos_rfid_bod
+#. nwos-javascript
+#: code:addons/nwos_rfid_bod/static/src/rfid_bod.xml:0
+msgid "Revenue/Sales by Salesman"
+msgstr "Doanh thu / bán hàng theo nhân viên kinh doanh"
+
+#. module: nwos_rfid_bod
+#. nwos-javascript
+#: code:addons/nwos_rfid_bod/static/src/rfid_bod.xml:0
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_bod.report_rfid_bod_monthly
+msgid "SLA breaches"
+msgstr "Vi phạm SLA"
+
+#. module: nwos_rfid_bod
+#. nwos-javascript
+#: code:addons/nwos_rfid_bod/static/src/rfid_bod.xml:0
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_bod.report_rfid_bod_monthly
+msgid "Site pipeline"
+msgstr "Tiến độ địa điểm"
+
+#. module: nwos_rfid_bod
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_bod.report_rfid_bod_monthly
+msgid "Sites"
+msgstr "Địa điểm"
+
+#. module: nwos_rfid_bod
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_bod.report_rfid_bod_monthly
+msgid "Stage"
+msgstr "Giai đoạn"
+
+#. module: nwos_rfid_bod
+#. nwos-javascript
+#: code:addons/nwos_rfid_bod/static/src/rfid_bod.xml:0
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_bod.report_rfid_bod_monthly
+msgid "Technician hours"
+msgstr "Giờ kỹ thuật viên"
+
+#. module: nwos_rfid_bod
+#. nwos-javascript
+#: code:addons/nwos_rfid_bod/static/src/rfid_bod.xml:0
+msgid "Total Kit sites"
+msgstr "Tổng số địa điểm Kit"
+
+#. module: nwos_rfid_bod
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_bod.report_rfid_bod_monthly
+msgid "Total sites"
+msgstr "Tổng số địa điểm"
+
+#. module: nwos_rfid_bod
+#. nwos-javascript
+#: code:addons/nwos_rfid_bod/static/src/rfid_bod.xml:0
+msgid "activated this period"
+msgstr "được kích hoạt trong kỳ"
+
+#. module: nwos_rfid_bod
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_bod.res_config_settings_view_form_rfid_bod
+msgid "bod@example.com, operations@example.com"
+msgstr "bod@example.com, operations@example.com"
+
+#. module: nwos_rfid_bod
+#. nwos-javascript
+#: code:addons/nwos_rfid_bod/static/src/rfid_bod.xml:0
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_bod.report_rfid_bod_monthly
+msgid "days"
+msgstr "ngày"
+
+#. module: nwos_rfid_bod
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_bod.report_rfid_bod_monthly
+msgid "to"
+msgstr "đến"

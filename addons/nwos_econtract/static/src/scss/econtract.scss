@@ -1,0 +1,50 @@
+// IBM Carbon-flavored polish for eContract
+@font-face {
+    font-family: 'IBM Plex Serif';
+    src: url('/nwos_econtract/static/fonts/IBMPlexSerif-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'IBM Plex Serif';
+    src: url('/nwos_econtract/static/fonts/IBMPlexSerif-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'IBM Plex Serif';
+    src: url('/nwos_econtract/static/fonts/IBMPlexSerif-Italic.woff2') format('woff2');
+    font-weight: 400;
+    font-style: italic;
+}
+@font-face {
+    font-family: 'IBM Plex Serif';
+    src: url('/nwos_econtract/static/fonts/IBMPlexSerif-BoldItalic.woff2') format('woff2');
+    font-weight: 700;
+    font-style: italic;
+}
+.o_econtract_preview_paper {
+    max-width: 860px;
+    margin: 16px auto;
+    padding: 48px 56px;
+    background: #ffffff;
+    border: 1px solid #e0e0e0; // carbon gray-20
+    box-shadow: 0 1px 3px rgba(22, 22, 22, 0.08);
+
+    table {
+        width: 100%;
+    }
+
+    // match the printed contract: IBM Plex Serif
+    font-family: 'IBM Plex Serif', 'Times New Roman', serif;
+    font-size: 12pt;
+    color: #000;
+    line-height: 1.45;
+
+    h1, h2, h3, h4 {
+        font-family: inherit;
+        font-size: 13pt;
+        font-weight: bold;
+        color: #000;
+    }
+}

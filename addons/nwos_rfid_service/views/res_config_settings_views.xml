@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nwos>
+    <record id="res_config_settings_view_form_rfid" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.nextwaves.kit</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="project.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//app[@name='project']" position="inside">
+                <block title="Nextwaves Kit" id="rfid_operations">
+                    <setting string="Require payment before delivery" company_dependent="1"
+                        help="Block Kit deliveries and installation tasks until all Kit Item invoices are fully paid. Disable this to release them immediately after sales order confirmation.">
+                        <field name="rfid_require_payment_before_delivery"/>
+                    </setting>
+                    <setting string="Default installation project template" company_dependent="1"
+                        help="Used when a Kit Item does not specify its own project template.">
+                        <field name="rfid_project_template_id"/>
+                    </setting>
+                    <setting string="Support team" company_dependent="1"
+                        help="Default Helpdesk team for Nextwaves Kit tickets.">
+                        <field name="rfid_helpdesk_team_id"/>
+                    </setting>
+                </block>
+            </xpath>
+        </field>
+    </record>
+</nwos>

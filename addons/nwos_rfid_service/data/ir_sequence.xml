@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nwos noupdate="1">
+    <record id="seq_rfid_service_site" model="ir.sequence">
+        <field name="name">Nextwaves Kit Site</field>
+        <field name="code">rfid.service.site</field>
+        <field name="prefix">RFID/SITE/</field>
+        <field name="padding">5</field>
+        <field name="company_id" eval="False"/>
+    </record>
+    <record id="seq_rfid_subscription" model="ir.sequence">
+        <field name="name">Nextwaves Kit Subscription</field>
+        <field name="code">rfid.subscription</field>
+        <field name="prefix">RFID/SUB/</field>
+        <field name="padding">5</field>
+        <field name="company_id" eval="False"/>
+    </record>
+</nwos>

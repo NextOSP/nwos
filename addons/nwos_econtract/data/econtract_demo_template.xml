@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nwos>
+    <data noupdate="1">
+        <record id="econtract_template_sales_agreement" model="econtract.template">
+            <field name="name">Sales Agreement</field>
+            <field name="note">Starter template — edit freely. Maps to Sales Order fields.</field>
+            <field name="body_html" type="html">
+                <div>
+                    <h2 style="text-align:center;">SALES AGREEMENT</h2>
+                    <p>This Sales Agreement is entered into on <strong>{{Order Date:date}}</strong>
+                       between the Seller and <strong>{{Customer Name}}</strong> ("the Customer").</p>
+                    <p>It covers the goods and services described in order reference
+                       <strong>{{Order Reference}}</strong>, for a total agreed amount of
+                       <strong>{{Total Amount:monetary}}</strong>.</p>
+                    <p>The Customer agrees to the terms and conditions attached to the referenced order.</p>
+                    <p>By signing below, the Customer confirms acceptance of this agreement.</p>
+                    <table style="width:100%;margin-top:32px;">
+                        <tr>
+                            <td style="width:50%;vertical-align:bottom;">
+                                <p><strong>Customer</strong></p>
+                                <p>{{Signature:signature}}</p>
+                                <p>{{Customer Name}}</p>
+                            </td>
+                            <td style="width:50%;vertical-align:bottom;">
+                                <p><strong>For the Seller</strong></p>
+                                <br/><br/>
+                                <p>_____________________</p>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </field>
+            <field name="field_ids" eval="[
+                (0, 0, {'name': 'order_date', 'label': 'Order Date', 'field_type': 'date', 'mapping': 'date_order', 'sequence': 10}),
+                (0, 0, {'name': 'customer_name', 'label': 'Customer Name', 'field_type': 'text', 'mapping': 'partner_id.name', 'sequence': 20}),
+                (0, 0, {'name': 'order_reference', 'label': 'Order Reference', 'field_type': 'text', 'mapping': 'name', 'sequence': 30}),
+                (0, 0, {'name': 'total_amount', 'label': 'Total Amount', 'field_type': 'monetary', 'mapping': 'amount_total', 'sequence': 40}),
+                (0, 0, {'name': 'signature', 'label': 'Signature', 'field_type': 'signature', 'sequence': 50}),
+            ]"/>
+        </record>
+    </data>
+</nwos>

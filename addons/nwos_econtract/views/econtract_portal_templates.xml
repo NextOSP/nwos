@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nwos>
+    <!-- Add a "Contracts" card on the /my portal home -->
+    <template id="portal_my_home_econtract" inherit_id="portal.portal_my_home"
+              name="Portal My Home: Contracts" priority="40">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="title">Contracts</t>
+                <t t-set="url" t-value="'/my/contracts'"/>
+                <t t-set="text">Review and sign your contracts</t>
+                <t t-set="config_card" t-value="True"/>
+                <t t-set="placeholder_count" t-value="'econtract_count'"/>
+            </t>
+        </xpath>
+    </template>
+
+    <template id="portal_my_contracts" name="My Contracts">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Contracts</t>
+            </t>
+            <t t-if="not contracts">
+                <div class="alert alert-info">There are no contracts for your account.</div>
+            </t>
+            <t t-if="contracts" t-call="portal.portal_table">
+                <thead>
+                    <tr class="active">
+                        <th>Reference</th>
+                        <th>Title</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr t-foreach="contracts" t-as="contract">
+                        <td>
+                            <a t-att-href="contract.get_portal_url()">
+                                <span t-field="contract.name"/>
+                            </a>
+                        </td>
+                        <td><span t-field="contract.title"/></td>
+                        <td><span t-field="contract.create_date" t-options="{'widget': 'date'}"/></td>
+                        <td>
+                            <span t-if="contract.state == 'signed'" class="badge text-bg-success">Signed</span>
+                            <span t-elif="contract.state == 'sent'" class="badge text-bg-warning">To sign</span>
+                            <span t-elif="contract.state == 'cancelled'" class="badge text-bg-secondary">Cancelled</span>
+                            <span t-else="" class="badge text-bg-info">Draft</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </t>
+        </t>
+    </template>
+
+    <template id="portal_econtract_page" name="Contract Signing Page">
+        <t t-call="portal.portal_layout">
+            <div class="container o_econtract_portal py-3">
+                <div t-if="message == 'signed'" class="alert alert-success">
+                    Thank you — your signature has been recorded.
+                </div>
+                <div t-if="message == 'missing'" class="alert alert-danger">
+                    Please enter your name and draw your signature.
+                </div>
+                <div t-if="message == 'invalid'" class="alert alert-danger">
+                    The signature could not be read. Please try again.
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h3 class="mb-0"><span t-field="contract.title"/></h3>
+                    <div class="d-flex align-items-center gap-2">
+                        <a t-att-href="'/econtract/%s/word?access_token=%s' % (contract.id, access_token or '')"
+                           class="btn btn-sm btn-outline-secondary">
+                            <i class="fa fa-file-word-o me-1"/>Word
+                        </a>
+                        <span t-if="contract.state == 'signed'" class="badge text-bg-success">Signed</span>
+                        <span t-else="" class="badge text-bg-warning">Awaiting signature</span>
+                    </div>
+                </div>
+
+                <div class="o_econtract_body card p-4 mb-4 bg-white">
+                    <t t-out="contract._render_body()"/>
+                </div>
+
+                <t t-if="contract.state != 'signed'">
+                    <form t-att-action="'/my/econtract/%s/sign' % contract.id"
+                          method="post" class="o_econtract_sign_form card p-4">
+                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                        <input type="hidden" name="access_token" t-att-value="access_token or ''"/>
+                        <input type="hidden" name="signature" class="o_sign_data"/>
+                        <h5>Sign this document</h5>
+                        <div class="mb-3 col-md-6 ps-0">
+                            <label class="form-label" for="signer_name">Full name</label>
+                            <input type="text" name="signer_name" id="signer_name"
+                                   class="form-control"
+                                   t-att-value="contract.partner_id.name or ''" required="required"/>
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label">Draw your signature</label>
+                            <div class="o_sign_pad_wrapper border rounded bg-white">
+                                <canvas class="o_sign_pad" width="500" height="180"></canvas>
+                            </div>
+                            <button type="button" class="btn btn-link btn-sm o_sign_clear ps-0">
+                                Clear
+                            </button>
+                        </div>
+                        <button type="submit" class="btn btn-primary o_sign_submit">
+                            Accept &amp; Sign
+                        </button>
+                    </form>
+                </t>
+                <t t-else="">
+                    <div class="alert alert-success">
+                        Signed by <strong t-field="contract.signed_by"/>
+                        on <span t-field="contract.signed_on"/>.
+                    </div>
+                </t>
+            </div>
+        </t>
+    </template>
+</nwos>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nwos>
+    <!-- Contact action: Create Contract from the res.partner cog menu -->
+    <record id="action_partner_create_econtract" model="ir.actions.server">
+        <field name="name">Create Contract</field>
+        <field name="model_id" ref="base.model_res_partner"/>
+        <field name="binding_model_id" ref="base.model_res_partner"/>
+        <field name="binding_view_types">form</field>
+        <field name="state">code</field>
+        <field name="code">action = record.action_create_econtract()</field>
+    </record>
+
+    <menuitem id="menu_econtract_root" name="eContract"
+              sequence="95"
+              groups="group_econtract_user"/>
+
+    <menuitem id="menu_econtract_contracts" name="Contracts"
+              parent="menu_econtract_root"
+              action="econtract_contract_action"
+              sequence="10"/>
+
+    <menuitem id="menu_econtract_templates" name="Templates"
+              parent="menu_econtract_root"
+              action="econtract_template_action"
+              sequence="20"
+              groups="group_econtract_manager"/>
+</nwos>

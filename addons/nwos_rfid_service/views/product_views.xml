@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nwos>
+    <record id="product_template_form_rfid" model="ir.ui.view">
+        <field name="name">product.template.form.nextwaves</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <field name="type" position="after">
+                <field name="rfid_offer_type" groups="nwos_rfid_service.group_rfid_manager"/>
+                <field name="rfid_billing_interval_months"
+                    invisible="rfid_offer_type != 'subscription'"
+                    required="rfid_offer_type == 'subscription'"/>
+                <field name="rfid_project_template_id"
+                    invisible="rfid_offer_type != 'starter_kit'"
+                    domain="[('is_template', '=', True)]"/>
+                <div class="text-muted" invisible="rfid_offer_type == 'standard'">
+                    This is only the default. Salespeople can change the item type on each sales order line.
+                </div>
+            </field>
+        </field>
+    </record>
+</nwos>

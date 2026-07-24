@@ -1,0 +1,1692 @@
+# Translation of NWOS Server.
+# This file contains the translation of the following modules:
+# 	* nwos_rfid_service
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: NWOS Server 4.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-21 16:09+0000\n"
+"PO-Revision-Date: 2026-07-21 16:09+0000\n"
+"Last-Translator: Nextwaves\n"
+"Language-Team: Vietnamese\n"
+"Language: vi_VN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. module: nwos_rfid_service
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_service.report_rfid_acceptance
+msgid "% / Actual:"
+msgstr "% / Thực tế:"
+
+#. module: nwos_rfid_service
+#. nwos-python
+#: code:addons/nwos_rfid_service/models/rfid_site.py:0
+msgid "%(order)s - %(site)s"
+msgstr "%(order)s - %(site)s"
+
+#. module: nwos_rfid_service
+#. nwos-python
+#: code:addons/nwos_rfid_service/models/rfid_subscription.py:0
+msgid "%(plan)s - %(site)s (%(start)s to %(end)s)"
+msgstr "%(plan)s - %(site)s (%(start)s đến %(end)s)"
+
+#. module: nwos_rfid_service
+#: model:ir.actions.report,print_report_name:nwos_rfid_service.action_report_rfid_acceptance
+msgid "'Nextwaves Kit Acceptance - %s' % object.name"
+msgstr "'Biên bản nghiệm thu Nextwaves Kit - %s' % object.name"
+
+#. module: nwos_rfid_service
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_service.view_rfid_site_form
+msgid "<span class=\"o_stat_text\">Project</span>"
+msgstr "<span class=\"o_stat_text\">Dự án</span>"
+
+#. module: nwos_rfid_service
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_service.report_rfid_acceptance
+msgid "<strong>Accepted by customer</strong><br/>"
+msgstr "<strong>Khách hàng đã nghiệm thu</strong><br/>"
+
+#. module: nwos_rfid_service
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_service.report_rfid_acceptance
+msgid "<strong>Commissioning notes:</strong>"
+msgstr "<strong>Ghi chú chạy thử:</strong>"
+
+#. module: nwos_rfid_service
+#: model:ir.model.constraint,message:nwos_rfid_service.constraint_rfid_subscription_source_line_unique
+msgid "A Nextwaves Kit subscription already exists for this sales order line."
+msgstr "Đã tồn tại đăng ký Nextwaves Kit cho dòng đơn bán hàng này."
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,help:nwos_rfid_service.field_sale_order_line__rfid_line_role
+msgid ""
+"A Normal Item follows the standard sales workflow. A Kit Item triggers "
+"delivery, installation, and payment controls. Subscription billing begins "
+"after customer acceptance."
+msgstr ""
+"Hàng thông thường tuân theo quy trình bán hàng tiêu chuẩn. Hàng Kit kích "
+"hoạt quy trình giao hàng, lắp đặt và kiểm soát thanh toán. Việc tính phí "
+"đăng ký bắt đầu sau khi khách hàng nghiệm thu."
+
+#. module: nwos_rfid_service
+#: model:ir.model.constraint,message:nwos_rfid_service.constraint_rfid_subscription_period_period_unique
+msgid "A subscription billing period already exists for this date."
+msgstr "Đã tồn tại kỳ tính phí đăng ký cho ngày này."
+
+#. module: nwos_rfid_service
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_service.view_rfid_site_form
+msgid "Accept & Activate"
+msgstr "Nghiệm thu và kích hoạt"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_service_site__acceptance_photo_ids
+msgid "Acceptance Photos / Documents"
+msgstr "Ảnh / tài liệu nghiệm thu"
+
+#. module: nwos_rfid_service
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_service.report_rfid_acceptance
+msgid "Acceptance checklist"
+msgstr "Danh sách kiểm tra nghiệm thu"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_service_site__accepted_by
+msgid "Accepted By"
+msgstr "Người nghiệm thu"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_service_site__accepted_on
+msgid "Accepted On"
+msgstr "Thời điểm nghiệm thu"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_service_site__message_needaction
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_subscription__message_needaction
+msgid "Action Needed"
+msgstr "Cần xử lý"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_helpdesk_ticket__rfid_activation_date
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_service_site__activation_date
+msgid "Activation Date"
+msgstr "Ngày kích hoạt"
+
+#. module: nwos_rfid_service
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_service.report_rfid_acceptance
+msgid "Activation date"
+msgstr "Ngày kích hoạt"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields.selection,name:nwos_rfid_service.selection__rfid_service_site__state__active
+#: model:ir.model.fields.selection,name:nwos_rfid_service.selection__rfid_subscription__state__active
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_service.view_rfid_site_search
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_service.view_rfid_subscription_search
+msgid "Active"
+msgstr "Đang hoạt động"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_service_site__activity_ids
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_subscription__activity_ids
+msgid "Activities"
+msgstr "Hoạt động"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_service_site__activity_exception_decoration
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_subscription__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr "Đánh dấu ngoại lệ hoạt động"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_service_site__activity_state
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_subscription__activity_state
+msgid "Activity State"
+msgstr "Trạng thái hoạt động"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_service_site__activity_type_icon
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_subscription__activity_type_icon
+msgid "Activity Type Icon"
+msgstr "Biểu tượng loại hoạt động"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_service_site__actual_delivery_date
+msgid "Actual Delivery Date"
+msgstr "Ngày giao hàng thực tế"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_service_site__actual_read_rate
+msgid "Actual Read Rate (%)"
+msgstr "Tỷ lệ đọc thực tế (%)"
+
+#. module: nwos_rfid_service
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_service.report_rfid_acceptance
+msgid "Address"
+msgstr "Địa chỉ"
+
+#. module: nwos_rfid_service
+#: model:res.groups,name:nwos_rfid_service.group_rfid_manager
+msgid "Administrator"
+msgstr "Quản trị viên"
+
+#. module: nwos_rfid_service
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_service.report_rfid_acceptance
+msgid "All site deliveries completed"
+msgstr "Đã hoàn tất mọi đợt giao hàng đến địa điểm"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_subscription_period__amount
+msgid "Amount"
+msgstr "Số tiền"
+
+#. module: nwos_rfid_service
+#. nwos-python
+#: code:addons/nwos_rfid_service/models/sale_order.py:0
+msgid "An order line can only target a site on the same sales order."
+msgstr ""
+"Dòng đơn hàng chỉ có thể được gán cho địa điểm thuộc cùng đơn bán hàng."
+
+#. module: nwos_rfid_service
+#. nwos-python
+#: code:addons/nwos_rfid_service/models/sale_order.py:0
+msgid "Assign Kit Item '%s' to an installation site."
+msgstr "Hãy gán hàng Kit '%s' cho một địa điểm lắp đặt."
+
+#. module: nwos_rfid_service
+#. nwos-python
+#: code:addons/nwos_rfid_service/models/sale_order.py:0
+msgid ""
+"Assign every Subscription line to an installation site on this sales order."
+msgstr ""
+"Hãy gán mọi dòng đăng ký cho một địa điểm lắp đặt trong đơn bán hàng này."
+
+#. module: nwos_rfid_service
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_service.view_rfid_site_form
+msgid "Assigned Items"
+msgstr "Hàng hóa đã gán"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_service_site__sale_line_ids
+msgid "Assigned Order Lines"
+msgstr "Dòng đơn hàng đã gán"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_service_site__message_attachment_count
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_subscription__message_attachment_count
+msgid "Attachment Count"
+msgstr "Số tệp đính kèm"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields.selection,name:nwos_rfid_service.selection__rfid_service_site__state__awaiting_acceptance
+msgid "Awaiting Acceptance"
+msgstr "Chờ nghiệm thu"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields.selection,name:nwos_rfid_service.selection__rfid_service_site__state__awaiting_payment
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_service.view_rfid_site_search
+msgid "Awaiting Payment"
+msgstr "Chờ thanh toán"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_product_product__rfid_billing_interval_months
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_product_template__rfid_billing_interval_months
+msgid "Billing Interval"
+msgstr "Chu kỳ tính phí"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_subscription__billing_interval_months
+msgid "Billing Interval Months"
+msgstr "Số tháng trong chu kỳ tính phí"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_subscription_period__billing_months
+msgid "Billing Months"
+msgstr "Số tháng tính phí"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_subscription__period_ids
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_service.view_rfid_subscription_form
+msgid "Billing Periods"
+msgstr "Các kỳ tính phí"
+
+#. module: nwos_rfid_service
+#: model:ir.model.constraint,message:nwos_rfid_service.constraint_rfid_subscription_positive_interval
+msgid "Billing interval must be 1, 3, 6 or 12 months."
+msgstr "Chu kỳ tính phí phải là 1, 3, 6 hoặc 12 tháng."
+
+#. module: nwos_rfid_service
+#: model:res.groups,comment:nwos_rfid_service.group_rfid_manager
+msgid "Can configure and manage all Nextwaves Kit operations and billing."
+msgstr ""
+"Có thể cấu hình và quản lý toàn bộ hoạt động và thanh toán Nextwaves Kit."
+
+#. module: nwos_rfid_service
+#: model:res.groups,comment:nwos_rfid_service.group_rfid_user
+msgid ""
+"Can operate Nextwaves Kit sales, deliveries, installations and "
+"subscriptions."
+msgstr ""
+"Có thể vận hành bán hàng, giao hàng, lắp đặt và đăng ký Nextwaves Kit."
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields.selection,name:nwos_rfid_service.selection__rfid_service_site__state__cancelled
+#: model:ir.model.fields.selection,name:nwos_rfid_service.selection__rfid_subscription_period__state__cancelled
+msgid "Cancelled"
+msgstr "Đã hủy"
+
+#. module: nwos_rfid_service
+#. nwos-python
+#: code:addons/nwos_rfid_service/models/rfid_site.py:0
+msgid "Capture the customer name and signature before acceptance."
+msgstr "Hãy ghi nhận tên và chữ ký khách hàng trước khi nghiệm thu."
+
+#. module: nwos_rfid_service
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_service.view_rfid_site_form
+msgid "Check Payment"
+msgstr "Kiểm tra thanh toán"
+
+#. module: nwos_rfid_service
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_service.view_rfid_subscription_form
+msgid "Close"
+msgstr "Đóng"
+
+#. module: nwos_rfid_service
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_service.view_rfid_subscription_form
+msgid "Close this subscription?"
+msgstr "Đóng đăng ký này?"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields.selection,name:nwos_rfid_service.selection__rfid_service_site__state__closed
+#: model:ir.model.fields.selection,name:nwos_rfid_service.selection__rfid_subscription__state__closed
+msgid "Closed"
+msgstr "Đã đóng"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_subscription__collection_state
+msgid "Collection State"
+msgstr "Trạng thái thu tiền"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields.selection,name:nwos_rfid_service.selection__project_task__rfid_task_kind__commissioning
+msgid "Commissioning"
+msgstr "Chạy thử"
+
+#. module: nwos_rfid_service
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_service.view_rfid_site_form
+msgid "Commissioning & Acceptance"
+msgstr "Chạy thử và nghiệm thu"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_service_site__commissioning_notes
+msgid "Commissioning Notes"
+msgstr "Ghi chú chạy thử"
+
+#. module: nwos_rfid_service
+#: model:ir.model,name:nwos_rfid_service.model_res_company
+msgid "Companies"
+msgstr "Công ty"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_service_site__company_id
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_subscription__company_id
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_subscription_period__company_id
+msgid "Company"
+msgstr "Công ty"
+
+#. module: nwos_rfid_service
+#. nwos-python
+#: code:addons/nwos_rfid_service/models/rfid_site.py:0
+msgid "Complete all implementation tasks before acceptance."
+msgstr "Hãy hoàn tất mọi công việc triển khai trước khi nghiệm thu."
+
+#. module: nwos_rfid_service
+#. nwos-python
+#: code:addons/nwos_rfid_service/models/rfid_site.py:0
+msgid "Complete all site deliveries before acceptance."
+msgstr "Hãy hoàn tất mọi đợt giao hàng đến địa điểm trước khi nghiệm thu."
+
+#. module: nwos_rfid_service
+#. nwos-python
+#: code:addons/nwos_rfid_service/models/rfid_site.py:0
+msgid "Complete configuration testing and customer training."
+msgstr "Hãy hoàn tất kiểm thử cấu hình và đào tạo khách hàng."
+
+#. module: nwos_rfid_service
+#: model:ir.model,name:nwos_rfid_service.model_res_config_settings
+msgid "Config Settings"
+msgstr "Thiết lập cấu hình"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields.selection,name:nwos_rfid_service.selection__project_task__rfid_task_kind__configuration
+#: model:ir.ui.menu,name:nwos_rfid_service.menu_rfid_configuration
+msgid "Configuration"
+msgstr "Cấu hình"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_service_site__configuration_tested
+msgid "Configuration / Connectivity Tested"
+msgstr "Đã kiểm thử cấu hình / kết nối"
+
+#. module: nwos_rfid_service
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_service.report_rfid_acceptance
+msgid "Configuration and connectivity tested"
+msgstr "Đã kiểm thử cấu hình và kết nối"
+
+#. module: nwos_rfid_service
+#. nwos-python
+#: code:addons/nwos_rfid_service/models/rfid_site.py:0
+msgid ""
+"Core site allocation fields cannot be changed after order confirmation."
+msgstr ""
+"Không thể thay đổi các trường phân bổ địa điểm chính sau khi xác nhận đơn "
+"hàng."
+
+#. module: nwos_rfid_service
+#. nwos-python
+#: code:addons/nwos_rfid_service/models/sale_order.py:0
+msgid "Create at least one installation site on the sales order."
+msgstr "Hãy tạo ít nhất một địa điểm lắp đặt trên đơn bán hàng."
+
+#. module: nwos_rfid_service
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_service.view_rfid_site_form
+msgid "Create sites from the Kit Installation Sites tab of a Sales Order."
+msgstr "Hãy tạo địa điểm từ tab Địa điểm lắp đặt Kit trên đơn bán hàng."
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_service_site__create_uid
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_subscription__create_uid
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_subscription_period__create_uid
+msgid "Created by"
+msgstr "Được tạo bởi"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_service_site__create_date
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_subscription__create_date
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_subscription_period__create_date
+msgid "Created on"
+msgstr "Được tạo lúc"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_subscription__currency_id
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_subscription_period__currency_id
+msgid "Currency"
+msgstr "Tiền tệ"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields.selection,name:nwos_rfid_service.selection__rfid_subscription__collection_state__current
+msgid "Current"
+msgstr "Hiện tại"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_service_site__partner_id
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_subscription__partner_id
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_service.report_rfid_acceptance
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_service.view_rfid_site_search
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_service.view_rfid_subscription_search
+msgid "Customer"
+msgstr "Khách hàng"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields.selection,name:nwos_rfid_service.selection__project_task__rfid_task_kind__acceptance
+msgid "Customer Acceptance"
+msgstr "Nghiệm thu của khách hàng"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_service_site__acceptance_signature
+msgid "Customer Signature"
+msgstr "Chữ ký khách hàng"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_service_site__training_completed
+msgid "Customer Training Completed"
+msgstr "Đã đào tạo khách hàng"
+
+#. module: nwos_rfid_service
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_service.report_rfid_acceptance
+msgid "Customer signature"
+msgstr "Chữ ký khách hàng"
+
+#. module: nwos_rfid_service
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_service.report_rfid_acceptance
+msgid "Customer training completed"
+msgstr "Đã đào tạo khách hàng"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_subscription_period__date_end
+msgid "Date End"
+msgstr "Ngày kết thúc"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_subscription_period__date_start
+msgid "Date Start"
+msgstr "Ngày bắt đầu"
+
+#. module: nwos_rfid_service
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_service.res_config_settings_view_form_rfid
+msgid "Default Helpdesk team for Nextwaves Kit tickets."
+msgstr "Nhóm hỗ trợ mặc định cho phiếu hỗ trợ Nextwaves Kit."
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_res_company__rfid_project_template_id
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_res_config_settings__rfid_project_template_id
+msgid "Default Installation Project Template"
+msgstr "Mẫu dự án lắp đặt mặc định"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_product_product__rfid_offer_type
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_product_template__rfid_offer_type
+msgid "Default Item Type"
+msgstr "Loại hàng mặc định"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_res_company__rfid_helpdesk_team_id
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_res_config_settings__rfid_helpdesk_team_id
+msgid "Default Nextwaves Kit Helpdesk Team"
+msgstr "Nhóm hỗ trợ Nextwaves Kit mặc định"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_product_product__rfid_project_template_id
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_product_template__rfid_project_template_id
+msgid "Default Project Template"
+msgstr "Mẫu dự án mặc định"
+
+#. module: nwos_rfid_service
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_service.res_config_settings_view_form_rfid
+msgid "Default installation project template"
+msgstr "Mẫu dự án lắp đặt mặc định"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,help:nwos_rfid_service.field_product_product__rfid_offer_type
+#: model:ir.model.fields,help:nwos_rfid_service.field_product_template__rfid_offer_type
+msgid ""
+"Default item type proposed when this product is added to a sales order. The "
+"salesperson can change it on each order line."
+msgstr ""
+"Loại hàng mặc định được đề xuất khi thêm sản phẩm vào đơn bán hàng. Nhân "
+"viên kinh doanh có thể thay đổi trên từng dòng đơn hàng."
+
+#. module: nwos_rfid_service
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_service.view_rfid_site_form
+msgid "Deliveries"
+msgstr "Giao hàng"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_service_site__delivery_completed
+msgid "Delivery Completed"
+msgstr "Đã hoàn tất giao hàng"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields.selection,name:nwos_rfid_service.selection__project_task__rfid_task_kind__delivery
+msgid "Delivery Coordination"
+msgstr "Điều phối giao hàng"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_subscription__discount
+msgid "Discount"
+msgstr "Chiết khấu"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_account_move__display_name
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_account_move_line__display_name
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_helpdesk_ticket__display_name
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_product_template__display_name
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_project_project__display_name
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_project_task__display_name
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_res_company__display_name
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_res_config_settings__display_name
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_service_site__display_name
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_subscription__display_name
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_subscription_period__display_name
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_sale_order__display_name
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_sale_order_line__display_name
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_stock_move__display_name
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_stock_picking__display_name
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_stock_rule__display_name
+msgid "Display Name"
+msgstr "Tên hiển thị"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields.selection,name:nwos_rfid_service.selection__rfid_service_site__state__draft
+msgid "Draft Order"
+msgstr "Đơn nháp"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields.selection,name:nwos_rfid_service.selection__rfid_subscription_period__state__due
+msgid "Due"
+msgstr "Đến hạn"
+
+#. module: nwos_rfid_service
+#. nwos-python
+#: code:addons/nwos_rfid_service/models/sale_order.py:0
+msgid ""
+"Each installation site must have at least one order line marked as a Kit "
+"Item: %s"
+msgstr ""
+"Mỗi địa điểm lắp đặt phải có ít nhất một dòng đơn hàng được đánh dấu là Hàng"
+" Kit: %s"
+
+#. module: nwos_rfid_service
+#. nwos-python
+#: code:addons/nwos_rfid_service/models/sale_order.py:0
+msgid ""
+"Enter the promised delivery date and planned installation date for every "
+"installation site."
+msgstr ""
+"Hãy nhập ngày giao hàng cam kết và ngày lắp đặt dự kiến cho mọi địa điểm lắp"
+" đặt."
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields.selection,name:nwos_rfid_service.selection__product_template__rfid_billing_interval_months__12
+msgid "Every 12 Months"
+msgstr "Mỗi 12 tháng"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields.selection,name:nwos_rfid_service.selection__product_template__rfid_billing_interval_months__3
+msgid "Every 3 Months"
+msgstr "Mỗi 3 tháng"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields.selection,name:nwos_rfid_service.selection__product_template__rfid_billing_interval_months__6
+msgid "Every 6 Months"
+msgstr "Mỗi 6 tháng"
+
+#. module: nwos_rfid_service
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_service.report_rfid_acceptance
+msgid "Evidence / notes"
+msgstr "Bằng chứng / ghi chú"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_service_site__message_follower_ids
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_subscription__message_follower_ids
+msgid "Followers"
+msgstr "Người theo dõi"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_service_site__message_partner_ids
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_subscription__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Người theo dõi (đối tác)"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,help:nwos_rfid_service.field_rfid_service_site__activity_type_icon
+#: model:ir.model.fields,help:nwos_rfid_service.field_rfid_subscription__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr "Biểu tượng Font Awesome, ví dụ: fa-tasks"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields.selection,name:nwos_rfid_service.selection__project_task__rfid_task_kind__installation
+msgid "Hardware Installation"
+msgstr "Lắp đặt phần cứng"
+
+#. module: nwos_rfid_service
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_service.report_rfid_acceptance
+msgid "Hardware serial numbers recorded"
+msgstr "Đã ghi nhận số sê-ri thiết bị"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_service_site__has_message
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_subscription__has_message
+msgid "Has Message"
+msgstr "Có tin nhắn"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_sale_order__has_rfid_starter_kit
+msgid "Has Nextwaves Kit"
+msgstr "Có Nextwaves Kit"
+
+#. module: nwos_rfid_service
+#: model:ir.model,name:nwos_rfid_service.model_helpdesk_ticket
+msgid "Helpdesk Ticket"
+msgstr "Phiếu hỗ trợ"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_service_site__ticket_ids
+msgid "Helpdesk Tickets"
+msgstr "Phiếu hỗ trợ"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_account_move__id
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_account_move_line__id
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_helpdesk_ticket__id
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_product_template__id
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_project_project__id
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_project_task__id
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_res_company__id
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_res_config_settings__id
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_service_site__id
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_subscription__id
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_subscription_period__id
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_sale_order__id
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_sale_order_line__id
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_stock_move__id
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_stock_picking__id
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_stock_rule__id
+msgid "ID"
+msgstr "ID"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_service_site__activity_exception_icon
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_subscription__activity_exception_icon
+msgid "Icon"
+msgstr "Biểu tượng"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,help:nwos_rfid_service.field_rfid_service_site__activity_exception_icon
+#: model:ir.model.fields,help:nwos_rfid_service.field_rfid_subscription__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr "Biểu tượng cho biết hoạt động ngoại lệ."
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,help:nwos_rfid_service.field_rfid_service_site__message_needaction
+#: model:ir.model.fields,help:nwos_rfid_service.field_rfid_subscription__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "Nếu được chọn, tin nhắn mới cần bạn xử lý."
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,help:nwos_rfid_service.field_rfid_service_site__message_has_error
+#: model:ir.model.fields,help:nwos_rfid_service.field_rfid_service_site__message_has_sms_error
+#: model:ir.model.fields,help:nwos_rfid_service.field_rfid_subscription__message_has_error
+#: model:ir.model.fields,help:nwos_rfid_service.field_rfid_subscription__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr "Nếu được chọn, một số tin nhắn gặp lỗi gửi."
+
+#. module: nwos_rfid_service
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_service.view_rfid_site_search
+msgid "Implementation"
+msgstr "Triển khai"
+
+#. module: nwos_rfid_service
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_service.sale_order_form_rfid
+msgid ""
+"In <strong>Order Lines</strong>, leave tag/inlay or other normal sales as\n"
+"                        <strong>Normal Item</strong>. Select <strong>Kit Item</strong> for equipment that\n"
+"                        needs delivery and installation, or <strong>Subscription</strong> for recurring service.\n"
+"                        Save the quotation, create its installation site(s) below, save again, then return to\n"
+"                        Order Lines and assign an <strong>Installation Site</strong> to every Kit Item and Subscription.\n"
+"                        Finally, review the suggested <strong>Project Template</strong>. Select one manually if\n"
+"                        different Kit Items propose different templates."
+msgstr ""
+"Trong <strong>Dòng đơn hàng</strong>, giữ tag/inlay hoặc hàng bán thông thường ở loại\n"
+"                        <strong>Hàng thông thường</strong>. Chọn <strong>Hàng Kit</strong> cho thiết bị cần\n"
+"                        giao và lắp đặt, hoặc <strong>Đăng ký</strong> cho dịch vụ định kỳ.\n"
+"                        Lưu báo giá, tạo địa điểm lắp đặt bên dưới, lưu lại, sau đó quay về Dòng đơn hàng\n"
+"                        và gán <strong>Địa điểm lắp đặt</strong> cho mọi Hàng Kit và Đăng ký.\n"
+"                        Cuối cùng, kiểm tra <strong>Mẫu dự án</strong> được đề xuất. Hãy chọn thủ công nếu\n"
+"                        các Hàng Kit đề xuất những mẫu khác nhau."
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields.selection,name:nwos_rfid_service.selection__rfid_service_site__state__in_delivery
+msgid "In Delivery"
+msgstr "Đang giao hàng"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields.selection,name:nwos_rfid_service.selection__rfid_service_site__state__in_installation
+msgid "In Installation"
+msgstr "Đang lắp đặt"
+
+#. module: nwos_rfid_service
+#. nwos-python
+#: code:addons/nwos_rfid_service/models/rfid_site.py:0
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_helpdesk_ticket__rfid_project_id
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_service_site__installation_project_id
+msgid "Installation Project"
+msgstr "Dự án lắp đặt"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_sale_order_line__rfid_site_id
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_service.sale_order_form_rfid
+msgid "Installation Site"
+msgstr "Địa điểm lắp đặt"
+
+#. module: nwos_rfid_service
+#: model:ir.actions.act_window,name:nwos_rfid_service.action_rfid_site
+#: model:ir.ui.menu,name:nwos_rfid_service.menu_rfid_sites
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_service.sale_order_form_rfid
+msgid "Installation Sites"
+msgstr "Địa điểm lắp đặt"
+
+#. module: nwos_rfid_service
+#. nwos-python
+#: code:addons/nwos_rfid_service/models/rfid_site.py:0
+msgid "Installation accepted and site activated."
+msgstr "Đã nghiệm thu lắp đặt và kích hoạt địa điểm."
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_service_site__installation_address_id
+msgid "Installation and Delivery Address"
+msgstr "Địa chỉ lắp đặt và giao hàng"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_helpdesk_ticket__rfid_installed_lot_ids
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_service_site__installed_lot_ids
+msgid "Installed Serials / Lots"
+msgstr "Sê-ri / lô đã lắp đặt"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_subscription_period__invoice_id
+msgid "Invoice"
+msgstr "Hóa đơn"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_subscription__invoice_count
+msgid "Invoice Count"
+msgstr "Số hóa đơn"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_subscription_period__invoice_line_id
+msgid "Invoice Line"
+msgstr "Dòng hóa đơn"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields.selection,name:nwos_rfid_service.selection__rfid_subscription_period__state__invoiced
+msgid "Invoiced"
+msgstr "Đã lập hóa đơn"
+
+#. module: nwos_rfid_service
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_service.view_rfid_subscription_form
+msgid "Invoices"
+msgstr "Hóa đơn"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_service_site__message_is_follower
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_subscription__message_is_follower
+msgid "Is Follower"
+msgstr "Là người theo dõi"
+
+#. module: nwos_rfid_service
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_service.report_rfid_acceptance
+msgid "Item"
+msgstr "Hàng hóa"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_sale_order_line__rfid_line_role
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_service.sale_order_form_rfid
+msgid "Item Type"
+msgstr "Loại hàng"
+
+#. module: nwos_rfid_service
+#: model:ir.model,name:nwos_rfid_service.model_account_move
+msgid "Journal Entry"
+msgstr "Bút toán"
+
+#. module: nwos_rfid_service
+#: model:ir.model,name:nwos_rfid_service.model_account_move_line
+msgid "Journal Item"
+msgstr "Chi tiết bút toán"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_account_move_line__rfid_subscription_period_id
+msgid "Kit Billing Period"
+msgstr "Kỳ tính phí Kit"
+
+#. module: nwos_rfid_service
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_service.sale_order_form_rfid
+msgid "Kit Installation Sites"
+msgstr "Địa điểm lắp đặt Kit"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields.selection,name:nwos_rfid_service.selection__product_template__rfid_offer_type__starter_kit
+#: model:ir.model.fields.selection,name:nwos_rfid_service.selection__sale_order_line__rfid_line_role__starter_kit
+msgid "Kit Item"
+msgstr "Hàng Kit"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_service_site__kit_sale_line_ids
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_service.report_rfid_acceptance
+msgid "Kit Items"
+msgstr "Hàng Kit"
+
+#. module: nwos_rfid_service
+#. nwos-python
+#: code:addons/nwos_rfid_service/models/sale_order.py:0
+msgid ""
+"Kit Items suggest different project templates for these sites: %s. Select "
+"one project template for each site."
+msgstr ""
+"Các Hàng Kit đề xuất những mẫu dự án khác nhau cho các địa điểm sau: %s. Hãy"
+" chọn một mẫu dự án cho mỗi địa điểm."
+
+#. module: nwos_rfid_service
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_service.view_rfid_site_form
+msgid ""
+"Kit Items suggest different project templates. Select the template to use\n"
+"                        for this installation site before confirming the Sales Order."
+msgstr ""
+"Các Hàng Kit đề xuất những mẫu dự án khác nhau. Hãy chọn mẫu sẽ sử dụng\n"
+"                        cho địa điểm lắp đặt này trước khi xác nhận Đơn bán hàng."
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_stock_picking__rfid_payment_blocked
+msgid "Kit Payment Blocked"
+msgstr "Thanh toán Kit đang bị chặn"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_service_site__payment_released
+msgid "Kit Payment Released"
+msgstr "Đã giải phóng thanh toán Kit"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_service_site__kit_payment_state
+msgid "Kit Payment State"
+msgstr "Trạng thái thanh toán Kit"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_service_site__kit_product_ids
+msgid "Kit Products"
+msgstr "Sản phẩm Kit"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_account_move_line__rfid_subscription_id
+msgid "Kit Subscription"
+msgstr "Đăng ký Kit"
+
+#. module: nwos_rfid_service
+#: model:ir.actions.act_window,name:nwos_rfid_service.action_rfid_subscription
+msgid "Kit Subscriptions"
+msgstr "Đăng ký Kit"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_project_task__rfid_task_kind
+msgid "Kit Task Type"
+msgstr "Loại công việc Kit"
+
+#. module: nwos_rfid_service
+#. nwos-python
+#: code:addons/nwos_rfid_service/models/stock.py:0
+msgid "Kit payment has not been released for site(s): %s"
+msgstr "Thanh toán Kit chưa được giải phóng cho địa điểm: %s"
+
+#. module: nwos_rfid_service
+#. nwos-python
+#: code:addons/nwos_rfid_service/models/project.py:0
+msgid "Kit payment has not been released for: %s"
+msgstr "Thanh toán Kit chưa được giải phóng cho: %s"
+
+#. module: nwos_rfid_service
+#. nwos-python
+#: code:addons/nwos_rfid_service/models/rfid_site.py:0
+msgid "Kit payment has not been released."
+msgstr "Thanh toán Kit chưa được giải phóng."
+
+#. module: nwos_rfid_service
+#. nwos-python
+#: code:addons/nwos_rfid_service/models/rfid_site.py:0
+msgid "Kit payment verified; delivery and installation released."
+msgstr ""
+"Đã xác minh thanh toán Kit; quy trình giao hàng và lắp đặt được giải phóng."
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_service_site__write_uid
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_subscription__write_uid
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_subscription_period__write_uid
+msgid "Last Updated by"
+msgstr "Cập nhật lần cuối bởi"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_service_site__write_date
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_subscription__write_date
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_subscription_period__write_date
+msgid "Last Updated on"
+msgstr "Cập nhật lần cuối lúc"
+
+#. module: nwos_rfid_service
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_service.view_rfid_subscription_form
+msgid "Locked Commercial Terms"
+msgstr "Điều khoản thương mại đã khóa"
+
+#. module: nwos_rfid_service
+#. nwos-python
+#: code:addons/nwos_rfid_service/models/project.py:0
+msgid "Log technician time before completing Kit task '%s'."
+msgstr ""
+"Hãy ghi nhận thời gian kỹ thuật viên trước khi hoàn tất công việc Kit '%s'."
+
+#. module: nwos_rfid_service
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_service.view_rfid_subscription_list
+msgid "MRR"
+msgstr "MRR"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_service_site__message_has_error
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_subscription__message_has_error
+msgid "Message Delivery error"
+msgstr "Lỗi gửi tin nhắn"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_service_site__message_ids
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_subscription__message_ids
+msgid "Messages"
+msgstr "Tin nhắn"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields.selection,name:nwos_rfid_service.selection__product_template__rfid_billing_interval_months__1
+msgid "Monthly"
+msgstr "Hàng tháng"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_subscription__mrr
+msgid "Mrr"
+msgstr "MRR"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_service_site__my_activity_date_deadline
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_subscription__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr "Hạn hoạt động của tôi"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_subscription__name
+msgid "Name"
+msgstr "Tên"
+
+#. module: nwos_rfid_service
+#. nwos-python
+#: code:addons/nwos_rfid_service/models/rfid_site.py:0
+#: code:addons/nwos_rfid_service/models/rfid_subscription.py:0
+msgid "New"
+msgstr "Mới"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_service_site__activity_calendar_event_id
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_subscription__activity_calendar_event_id
+msgid "Next Activity Calendar Event"
+msgstr "Sự kiện lịch cho hoạt động tiếp theo"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_service_site__activity_date_deadline
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_subscription__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr "Hạn hoạt động tiếp theo"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_service_site__activity_summary
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_subscription__activity_summary
+msgid "Next Activity Summary"
+msgstr "Tóm tắt hoạt động tiếp theo"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_service_site__activity_type_id
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_subscription__activity_type_id
+msgid "Next Activity Type"
+msgstr "Loại hoạt động tiếp theo"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_subscription__next_invoice_date
+msgid "Next Invoice Date"
+msgstr "Ngày lập hóa đơn tiếp theo"
+
+#. module: nwos_rfid_service
+#: model:ir.ui.menu,name:nwos_rfid_service.menu_rfid_root
+#: model:res.groups.privilege,name:nwos_rfid_service.res_groups_privilege_rfid
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_service.res_config_settings_view_form_rfid
+msgid "Nextwaves Kit"
+msgstr "Nextwaves Kit"
+
+#. module: nwos_rfid_service
+#: model:ir.actions.report,name:nwos_rfid_service.action_report_rfid_acceptance
+msgid "Nextwaves Kit Acceptance"
+msgstr "Nghiệm thu Nextwaves Kit"
+
+#. module: nwos_rfid_service
+#: model:project.project,name:nwos_rfid_service.rfid_installation_project_template
+msgid "Nextwaves Kit Implementation"
+msgstr "Triển khai Nextwaves Kit"
+
+#. module: nwos_rfid_service
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_service.report_rfid_acceptance
+msgid "Nextwaves Kit Installation Acceptance"
+msgstr "Nghiệm thu lắp đặt Nextwaves Kit"
+
+#. module: nwos_rfid_service
+#: model:ir.model,name:nwos_rfid_service.model_rfid_service_site
+msgid "Nextwaves Kit Installation Site"
+msgstr "Địa điểm lắp đặt Nextwaves Kit"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_account_move_line__rfid_site_id
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_helpdesk_ticket__rfid_site_id
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_project_project__rfid_site_id
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_project_task__rfid_site_id
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_stock_move__rfid_site_id
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_stock_picking__rfid_site_id
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_service.view_rfid_site_form
+msgid "Nextwaves Kit Site"
+msgstr "Địa điểm Nextwaves Kit"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_sale_order__rfid_site_ids
+msgid "Nextwaves Kit Sites"
+msgstr "Địa điểm Nextwaves Kit"
+
+#. module: nwos_rfid_service
+#: model:ir.model,name:nwos_rfid_service.model_rfid_subscription
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_service.view_rfid_subscription_form
+msgid "Nextwaves Kit Subscription"
+msgstr "Đăng ký Nextwaves Kit"
+
+#. module: nwos_rfid_service
+#: model:ir.model,name:nwos_rfid_service.model_rfid_subscription_period
+msgid "Nextwaves Kit Subscription Billing Period"
+msgstr "Kỳ tính phí đăng ký Nextwaves Kit"
+
+#. module: nwos_rfid_service
+#: model:helpdesk.team,name:nwos_rfid_service.rfid_helpdesk_team
+msgid "Nextwaves Kit Support"
+msgstr "Hỗ trợ Nextwaves Kit"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields.selection,name:nwos_rfid_service.selection__product_template__rfid_offer_type__standard
+#: model:ir.model.fields.selection,name:nwos_rfid_service.selection__sale_order_line__rfid_line_role__standard
+msgid "Normal Item"
+msgstr "Hàng thông thường"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields.selection,name:nwos_rfid_service.selection__rfid_service_site__kit_payment_state__not_invoiced
+msgid "Not Invoiced"
+msgstr "Chưa lập hóa đơn"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_service_site__message_needaction_counter
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_subscription__message_needaction_counter
+msgid "Number of Actions"
+msgstr "Số hành động"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_service_site__message_has_error_counter
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_subscription__message_has_error_counter
+msgid "Number of errors"
+msgstr "Số lỗi"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,help:nwos_rfid_service.field_rfid_service_site__message_needaction_counter
+#: model:ir.model.fields,help:nwos_rfid_service.field_rfid_subscription__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr "Số tin nhắn cần xử lý"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,help:nwos_rfid_service.field_rfid_service_site__message_has_error_counter
+#: model:ir.model.fields,help:nwos_rfid_service.field_rfid_subscription__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "Số tin nhắn gửi lỗi"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields.selection,name:nwos_rfid_service.selection__rfid_subscription__collection_state__overdue
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_service.view_rfid_subscription_search
+msgid "Overdue"
+msgstr "Quá hạn"
+
+#. module: nwos_rfid_service
+#. nwos-python
+#: code:addons/nwos_rfid_service/models/rfid_subscription.py:0
+msgid "Overdue Nextwaves Kit subscription invoice"
+msgstr "Hóa đơn đăng ký Nextwaves Kit quá hạn"
+
+#. module: nwos_rfid_service
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_service.report_rfid_acceptance
+msgid "PASS"
+msgstr "ĐẠT"
+
+#. module: nwos_rfid_service
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_service.report_rfid_acceptance
+msgid "PENDING"
+msgstr "CHỜ"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields.selection,name:nwos_rfid_service.selection__rfid_service_site__kit_payment_state__paid
+msgid "Paid"
+msgstr "Đã thanh toán"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields.selection,name:nwos_rfid_service.selection__rfid_service_site__kit_payment_state__partial
+msgid "Partially Paid"
+msgstr "Thanh toán một phần"
+
+#. module: nwos_rfid_service
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_service.view_rfid_subscription_form
+msgid "Pause"
+msgstr "Tạm dừng"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields.selection,name:nwos_rfid_service.selection__rfid_subscription__state__paused
+msgid "Paused"
+msgstr "Đã tạm dừng"
+
+#. module: nwos_rfid_service
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_service.view_rfid_site_form
+msgid "Payment & Delivery"
+msgstr "Thanh toán và giao hàng"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_project_task__rfid_payment_blocked
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_service_site__payment_blocked
+msgid "Payment Blocked"
+msgstr "Thanh toán bị chặn"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_subscription__payment_term_id
+msgid "Payment Term"
+msgstr "Điều khoản thanh toán"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields.selection,name:nwos_rfid_service.selection__rfid_subscription__state__pending
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_service.view_rfid_subscription_search
+msgid "Pending Activation"
+msgstr "Chờ kích hoạt"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_service_site__picking_count
+msgid "Picking Count"
+msgstr "Số phiếu giao nhận"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_service_site__planned_installation_date
+msgid "Planned Installation Date"
+msgstr "Ngày lắp đặt dự kiến"
+
+#. module: nwos_rfid_service
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_service.view_rfid_site_form
+msgid "Planning"
+msgstr "Lên kế hoạch"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_subscription__price_unit
+msgid "Price Unit"
+msgstr "Đơn giá"
+
+#. module: nwos_rfid_service
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_service.view_rfid_site_form
+msgid "Print Acceptance"
+msgstr "In biên bản nghiệm thu"
+
+#. module: nwos_rfid_service
+#: model:ir.model,name:nwos_rfid_service.model_product_template
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_subscription__product_id
+msgid "Product"
+msgstr "Sản phẩm"
+
+#. module: nwos_rfid_service
+#: model:ir.model,name:nwos_rfid_service.model_project_project
+msgid "Project"
+msgstr "Dự án"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_service_site__project_template_id
+msgid "Project Template"
+msgstr "Mẫu dự án"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_service_site__project_template_conflict
+msgid "Project Template Conflict"
+msgstr "Xung đột mẫu dự án"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_service_site__project_template_manual
+msgid "Project Template Manual"
+msgstr "Chọn mẫu dự án thủ công"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_service_site__planned_delivery_date
+msgid "Promised Delivery Date"
+msgstr "Ngày giao hàng cam kết"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_service_site__sale_order_id
+msgid "Quotation or Sales Order"
+msgstr "Báo giá hoặc đơn bán hàng"
+
+#. module: nwos_rfid_service
+#: model:project.project,name:nwos_rfid_service.rfid_survey_project
+msgid "RFID Site Surveys"
+msgstr "Khảo sát địa điểm RFID"
+
+#. module: nwos_rfid_service
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_service.report_rfid_acceptance
+msgid "RFID read rate target"
+msgstr "Mục tiêu tỷ lệ đọc RFID"
+
+#. module: nwos_rfid_service
+#: model:ir.actions.server,name:nwos_rfid_service.ir_cron_rfid_subscription_invoice_ir_actions_server
+msgid "RFID: Generate subscription draft invoices"
+msgstr "RFID: Tạo hóa đơn nháp cho đăng ký"
+
+#. module: nwos_rfid_service
+#: model:ir.actions.server,name:nwos_rfid_service.ir_cron_rfid_payment_release_ir_actions_server
+msgid "RFID: Release paid Starter Kits"
+msgstr "RFID: Giải phóng Starter Kit đã thanh toán"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_service_site__rating_ids
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_subscription__rating_ids
+msgid "Ratings"
+msgstr "Đánh giá"
+
+#. module: nwos_rfid_service
+#: model:ir.model.constraint,message:nwos_rfid_service.constraint_rfid_service_site_read_rate_range
+msgid "Read rates must be between 0 and 100 percent."
+msgstr "Tỷ lệ đọc phải nằm trong khoảng từ 0 đến 100 phần trăm."
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields.selection,name:nwos_rfid_service.selection__rfid_service_site__state__ready
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_service.view_rfid_site_search
+msgid "Ready"
+msgstr "Sẵn sàng"
+
+#. module: nwos_rfid_service
+#. nwos-python
+#: code:addons/nwos_rfid_service/models/rfid_site.py:0
+msgid "Record all required device serial numbers on the site delivery."
+msgstr ""
+"Hãy ghi nhận đầy đủ số sê-ri thiết bị bắt buộc trên phiếu giao hàng đến địa "
+"điểm."
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_service_site__requested_delivery_date
+msgid "Requested Delivery Date"
+msgstr "Ngày giao hàng yêu cầu"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,help:nwos_rfid_service.field_sale_order_line__rfid_site_id
+msgid "Required for Kit Items and Subscriptions; optional for Normal Items."
+msgstr ""
+"Bắt buộc đối với Hàng Kit và Đăng ký; không bắt buộc đối với Hàng thông "
+"thường."
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_service_site__activity_user_id
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_subscription__activity_user_id
+msgid "Responsible User"
+msgstr "Người phụ trách"
+
+#. module: nwos_rfid_service
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_service.report_rfid_acceptance
+msgid "Result"
+msgstr "Kết quả"
+
+#. module: nwos_rfid_service
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_service.view_rfid_subscription_form
+msgid "Resume"
+msgstr "Tiếp tục"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_sale_order__rfid_site_count
+msgid "Rfid Site Count"
+msgstr "Số địa điểm RFID"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_service_site__message_has_sms_error
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_subscription__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr "Lỗi gửi SMS"
+
+#. module: nwos_rfid_service
+#: model:ir.model,name:nwos_rfid_service.model_sale_order
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_helpdesk_ticket__rfid_sale_order_id
+msgid "Sales Order"
+msgstr "Đơn bán hàng"
+
+#. module: nwos_rfid_service
+#: model:ir.model,name:nwos_rfid_service.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Dòng đơn bán hàng"
+
+#. module: nwos_rfid_service
+#: model:ir.actions.act_window,name:nwos_rfid_service.action_nextwaves_kit_orders
+#: model:ir.ui.menu,name:nwos_rfid_service.menu_rfid_orders
+msgid "Sales Orders"
+msgstr "Đơn bán hàng"
+
+#. module: nwos_rfid_service
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_service.report_rfid_acceptance
+msgid "Sales order"
+msgstr "Đơn bán hàng"
+
+#. module: nwos_rfid_service
+#. nwos-python
+#: code:addons/nwos_rfid_service/models/rfid_site.py:0
+msgid "Select a project template for the installation site %s."
+msgstr "Hãy chọn mẫu dự án cho địa điểm lắp đặt %s."
+
+#. module: nwos_rfid_service
+#. nwos-python
+#: code:addons/nwos_rfid_service/models/sale_order.py:0
+msgid "Select a project template for these installation sites: %s."
+msgstr "Hãy chọn mẫu dự án cho các địa điểm lắp đặt sau: %s."
+
+#. module: nwos_rfid_service
+#: model:ir.ui.menu,name:nwos_rfid_service.menu_rfid_settings
+msgid "Settings"
+msgstr "Thiết lập"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_subscription__site_id
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_subscription_period__site_id
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_service.report_rfid_acceptance
+msgid "Site"
+msgstr "Địa điểm"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_service_site__contact_id
+msgid "Site Contact"
+msgstr "Liên hệ tại địa điểm"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_service_site__picking_ids
+msgid "Site Deliveries"
+msgstr "Giao hàng đến địa điểm"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_service_site__site_name
+msgid "Site Name"
+msgstr "Tên địa điểm"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_service_site__name
+msgid "Site Reference"
+msgstr "Mã địa điểm"
+
+#. module: nwos_rfid_service
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_service.report_rfid_acceptance
+msgid "Site reference"
+msgstr "Mã địa điểm"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_subscription__source_sale_line_id
+msgid "Source Sale Line"
+msgstr "Dòng bán hàng nguồn"
+
+#. module: nwos_rfid_service
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_service.view_rfid_site_search
+msgid "Stage"
+msgstr "Giai đoạn"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_subscription__start_date
+msgid "Start Date"
+msgstr "Ngày bắt đầu"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_service_site__state
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_subscription__state
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_subscription_period__state
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_service.view_rfid_subscription_search
+msgid "State"
+msgstr "Trạng thái"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,help:nwos_rfid_service.field_rfid_service_site__activity_state
+#: model:ir.model.fields,help:nwos_rfid_service.field_rfid_subscription__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+"Trạng thái dựa trên hoạt động\n"
+"Quá hạn: Ngày đến hạn đã qua\n"
+"Hôm nay: Ngày hoạt động là hôm nay\n"
+"Đã lên kế hoạch: Hoạt động trong tương lai."
+
+#. module: nwos_rfid_service
+#: model:ir.model,name:nwos_rfid_service.model_stock_move
+msgid "Stock Move"
+msgstr "Dịch chuyển kho"
+
+#. module: nwos_rfid_service
+#: model:ir.model,name:nwos_rfid_service.model_stock_rule
+msgid "Stock Rule"
+msgstr "Quy tắc kho"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_subscription_period__subscription_id
+#: model:ir.model.fields.selection,name:nwos_rfid_service.selection__product_template__rfid_offer_type__subscription
+#: model:ir.model.fields.selection,name:nwos_rfid_service.selection__sale_order_line__rfid_line_role__subscription
+msgid "Subscription"
+msgstr "Đăng ký"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_service_site__subscription_count
+msgid "Subscription Count"
+msgstr "Số đăng ký"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_service_site__subscription_ids
+#: model:ir.ui.menu,name:nwos_rfid_service.menu_rfid_subscriptions
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_service.view_rfid_site_form
+msgid "Subscriptions"
+msgstr "Đăng ký"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,help:nwos_rfid_service.field_product_product__rfid_project_template_id
+#: model:ir.model.fields,help:nwos_rfid_service.field_product_template__rfid_project_template_id
+msgid ""
+"Suggested for the installation site when this product is used as a Kit Item."
+" The salesperson can override the template for each site."
+msgstr ""
+"Được đề xuất cho địa điểm lắp đặt khi sản phẩm này được dùng làm Hàng Kit. "
+"Nhân viên kinh doanh có thể thay đổi mẫu cho từng địa điểm."
+
+#. module: nwos_rfid_service
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_service.view_rfid_site_form
+msgid "Support"
+msgstr "Hỗ trợ"
+
+#. module: nwos_rfid_service
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_service.res_config_settings_view_form_rfid
+msgid "Support team"
+msgstr "Nhóm hỗ trợ"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields.selection,name:nwos_rfid_service.selection__rfid_service_site__state__suspended
+msgid "Suspended"
+msgstr "Tạm ngưng"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_service_site__target_read_rate
+msgid "Target Read Rate (%)"
+msgstr "Tỷ lệ đọc mục tiêu (%)"
+
+#. module: nwos_rfid_service
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_service.report_rfid_acceptance
+msgid "Target:"
+msgstr "Mục tiêu:"
+
+#. module: nwos_rfid_service
+#: model:ir.model,name:nwos_rfid_service.model_project_task
+msgid "Task"
+msgstr "Công việc"
+
+#. module: nwos_rfid_service
+#: model:project.project,label_tasks:nwos_rfid_service.rfid_installation_project_template
+#: model:project.project,label_tasks:nwos_rfid_service.rfid_survey_project
+msgid "Tasks"
+msgstr "Công việc"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_subscription__tax_ids
+msgid "Taxes"
+msgstr "Thuế"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,help:nwos_rfid_service.field_rfid_service_site__project_template_id
+msgid ""
+"Template used to create this site project, including its tasks, subtasks, "
+"and checklist content. Kit Item defaults are suggested automatically and can"
+" be overridden before confirmation."
+msgstr ""
+"Mẫu được dùng để tạo dự án cho địa điểm này, bao gồm công việc, công việc "
+"con và nội dung danh sách kiểm tra. Mẫu mặc định của Hàng Kit được tự động "
+"đề xuất và có thể thay đổi trước khi xác nhận."
+
+#. module: nwos_rfid_service
+#. nwos-python
+#: code:addons/nwos_rfid_service/models/product.py:0
+msgid "The Subscription item type can only be used with a service product."
+msgstr "Loại hàng Đăng ký chỉ có thể dùng với sản phẩm dịch vụ."
+
+#. module: nwos_rfid_service
+#. nwos-python
+#: code:addons/nwos_rfid_service/models/rfid_site.py:0
+msgid "The actual RFID read rate is below the approved target."
+msgstr "Tỷ lệ đọc RFID thực tế thấp hơn mục tiêu đã phê duyệt."
+
+#. module: nwos_rfid_service
+#. nwos-python
+#: code:addons/nwos_rfid_service/models/rfid_site.py:0
+msgid "The installation address must belong to the site customer."
+msgstr "Địa chỉ lắp đặt phải thuộc khách hàng của địa điểm."
+
+#. module: nwos_rfid_service
+#. nwos-python
+#: code:addons/nwos_rfid_service/models/rfid_subscription.py:0
+msgid ""
+"The installation site must be active before activating its subscription."
+msgstr "Địa điểm lắp đặt phải hoạt động trước khi kích hoạt đăng ký."
+
+#. module: nwos_rfid_service
+#. nwos-python
+#: code:addons/nwos_rfid_service/models/rfid_site.py:0
+msgid ""
+"The project template must belong to the same company as the installation "
+"site."
+msgstr "Mẫu dự án phải thuộc cùng công ty với địa điểm lắp đặt."
+
+#. module: nwos_rfid_service
+#. nwos-python
+#: code:addons/nwos_rfid_service/models/product.py:0
+msgid "The selected default project must be a project template."
+msgstr "Dự án mặc định được chọn phải là một mẫu dự án."
+
+#. module: nwos_rfid_service
+#. nwos-python
+#: code:addons/nwos_rfid_service/models/rfid_site.py:0
+msgid "The selected project is not a project template."
+msgstr "Dự án được chọn không phải là mẫu dự án."
+
+#. module: nwos_rfid_service
+#. nwos-python
+#: code:addons/nwos_rfid_service/models/rfid_site.py:0
+msgid "The site customer must match the quotation customer."
+msgstr "Khách hàng của địa điểm phải trùng với khách hàng trên báo giá."
+
+#. module: nwos_rfid_service
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_service.stock_picking_form_rfid
+msgid ""
+"This Nextwaves Kit delivery is blocked until all Kit Item invoices are fully"
+" paid."
+msgstr ""
+"Phiếu giao Nextwaves Kit này bị chặn cho đến khi mọi hóa đơn Hàng Kit được "
+"thanh toán đầy đủ."
+
+#. module: nwos_rfid_service
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_service.product_template_form_rfid
+msgid ""
+"This is only the default. Salespeople can change the item type on each sales"
+" order line."
+msgstr ""
+"Đây chỉ là giá trị mặc định. Nhân viên kinh doanh có thể thay đổi loại hàng "
+"trên từng dòng đơn bán hàng."
+
+#. module: nwos_rfid_service
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_service.project_task_form_rfid
+msgid "This task is waiting for full Kit payment."
+msgstr "Công việc này đang chờ thanh toán đầy đủ cho Kit."
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_service_site__ticket_count
+msgid "Ticket Count"
+msgstr "Số phiếu hỗ trợ"
+
+#. module: nwos_rfid_service
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_service.view_rfid_site_form
+msgid "Tickets"
+msgstr "Phiếu hỗ trợ"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_project_task__rfid_timesheet_required
+msgid "Timesheet Required"
+msgstr "Bắt buộc chấm công"
+
+#. module: nwos_rfid_service
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_service.view_rfid_site_form
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_service.view_rfid_subscription_form
+msgid "Total"
+msgstr "Tổng cộng"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields.selection,name:nwos_rfid_service.selection__project_task__rfid_task_kind__training
+msgid "Training"
+msgstr "Đào tạo"
+
+#. module: nwos_rfid_service
+#: model:ir.model,name:nwos_rfid_service.model_stock_picking
+msgid "Transfer"
+msgstr "Điều chuyển"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,help:nwos_rfid_service.field_rfid_service_site__activity_exception_decoration
+#: model:ir.model.fields,help:nwos_rfid_service.field_rfid_subscription__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr "Loại hoạt động ngoại lệ trên bản ghi."
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields.selection,name:nwos_rfid_service.selection__rfid_service_site__kit_payment_state__unpaid
+msgid "Unpaid"
+msgstr "Chưa thanh toán"
+
+#. module: nwos_rfid_service
+#. nwos-python
+#: code:addons/nwos_rfid_service/models/rfid_subscription.py:0
+msgid "Unsupported collection status search."
+msgstr "Không hỗ trợ điều kiện tìm kiếm trạng thái thu tiền này."
+
+#. module: nwos_rfid_service
+#. nwos-python
+#: code:addons/nwos_rfid_service/models/sale_order.py:0
+msgid "Use one Subscription line per installation site."
+msgstr "Mỗi địa điểm lắp đặt chỉ sử dụng một dòng Đăng ký."
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,help:nwos_rfid_service.field_project_task__display_name
+msgid ""
+"Use these keywords in the title to set new tasks:\n"
+"\n"
+"        30h Allocate 30 hours to the task\n"
+"        #tags Set tags on the task\n"
+"        @user Assign the task to a user\n"
+"        ! Set the task a medium priority\n"
+"        !! Set the task a high priority\n"
+"        !!! Set the task a urgent priority\n"
+"\n"
+"        Make sure to use the right format and order e.g. Improve the configuration screen 5h #feature #v16 @Mitchell !"
+msgstr ""
+"Sử dụng các từ khóa sau trong tiêu đề để tạo nhiệm vụ mới:\n"
+"\n"
+"        30h Phân bổ 30 giờ cho nhiệm vụ\n"
+"        #tags Gắn thẻ cho nhiệm vụ\n"
+"        @user Giao nhiệm vụ cho người dùng\n"
+"        ! Đặt mức ưu tiên trung bình cho nhiệm vụ\n"
+"        !! Đặt mức ưu tiên cao cho nhiệm vụ\n"
+"        !!! Đặt mức ưu tiên khẩn cấp cho nhiệm vụ\n"
+"\n"
+"        Đảm bảo sử dụng đúng định dạng và thứ tự. Ví dụ: Cải thiện màn hình cấu hình 5h #feature #v16 @Mitchell !"
+
+#. module: nwos_rfid_service
+#: model_terms:ir.ui.view,arch_db:nwos_rfid_service.res_config_settings_view_form_rfid
+msgid "Used when a Kit Item does not specify its own project template."
+msgstr "Được sử dụng khi Hàng Kit không chỉ định mẫu dự án riêng."
+
+#. module: nwos_rfid_service
+#: model:res.groups,name:nwos_rfid_service.group_rfid_user
+msgid "User"
+msgstr "Người dùng"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_service_site__website_message_ids
+#: model:ir.model.fields,field_description:nwos_rfid_service.field_rfid_subscription__website_message_ids
+msgid "Website Messages"
+msgstr "Tin nhắn website"
+
+#. module: nwos_rfid_service
+#: model:ir.model.fields,help:nwos_rfid_service.field_rfid_service_site__website_message_ids
+#: model:ir.model.fields,help:nwos_rfid_service.field_rfid_subscription__website_message_ids
+msgid "Website communication history"
+msgstr "Lịch sử trao đổi qua website"

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nwos noupdate="1">
+    <record id="rfid_installation_project_template" model="project.project">
+        <field name="name">Nextwaves Kit Implementation</field>
+        <field name="company_id" eval="False"/>
+        <field name="is_template" eval="True"/>
+        <field name="privacy_visibility">employees</field>
+        <field name="allow_timesheets" eval="True"/>
+    </record>
+    <record id="rfid_task_delivery" model="project.task">
+        <field name="name">1. Site Delivery</field>
+        <field name="project_id" ref="rfid_installation_project_template"/>
+        <field name="rfid_task_kind">delivery</field>
+        <field name="rfid_timesheet_required" eval="True"/>
+    </record>
+    <record id="rfid_task_installation" model="project.task">
+        <field name="name">2. Hardware Installation</field>
+        <field name="project_id" ref="rfid_installation_project_template"/>
+        <field name="rfid_task_kind">installation</field>
+        <field name="rfid_timesheet_required" eval="True"/>
+    </record>
+    <record id="rfid_task_configuration" model="project.task">
+        <field name="name">3. Configuration and Integration</field>
+        <field name="project_id" ref="rfid_installation_project_template"/>
+        <field name="rfid_task_kind">configuration</field>
+        <field name="rfid_timesheet_required" eval="True"/>
+    </record>
+    <record id="rfid_task_commissioning" model="project.task">
+        <field name="name">4. Commissioning and Read Rate Test</field>
+        <field name="project_id" ref="rfid_installation_project_template"/>
+        <field name="rfid_task_kind">commissioning</field>
+        <field name="rfid_timesheet_required" eval="True"/>
+    </record>
+    <record id="rfid_task_training" model="project.task">
+        <field name="name">5. Customer Training</field>
+        <field name="project_id" ref="rfid_installation_project_template"/>
+        <field name="rfid_task_kind">training</field>
+        <field name="rfid_timesheet_required" eval="True"/>
+    </record>
+    <record id="rfid_task_acceptance" model="project.task">
+        <field name="name">6. Customer Acceptance</field>
+        <field name="project_id" ref="rfid_installation_project_template"/>
+        <field name="rfid_task_kind">acceptance</field>
+        <field name="rfid_timesheet_required" eval="True"/>
+    </record>
+
+    <record id="rfid_helpdesk_team" model="helpdesk.team">
+        <field name="name">Nextwaves Kit Support</field>
+        <field name="company_id" eval="False"/>
+    </record>
+</nwos>

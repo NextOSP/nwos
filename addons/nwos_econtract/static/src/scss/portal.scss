@@ -1,0 +1,27 @@
+.o_econtract_portal {
+    .o_econtract_body {
+        max-height: 60vh;
+        overflow-y: auto;
+
+        table {
+            width: 100%;
+        }
+        img.econtract-signature {
+            max-height: 90px;
+            max-width: 320px;
+        }
+    }
+
+    .o_sign_pad_wrapper {
+        display: inline-block;
+        touch-action: none;
+
+        .o_sign_pad {
+            display: block;
+            width: 100%;
+            max-width: 500px;
+            height: 180px;
+            cursor: crosshair;
+        }
+    }
+}

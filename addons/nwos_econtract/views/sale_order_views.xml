@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nwos>
+    <record id="sale_order_form_econtract" model="ir.ui.view">
+        <field name="name">sale.order.form.econtract</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="action_view_econtracts" type="object" class="oe_stat_button"
+                        icon="fa-file-text-o" invisible="econtract_count == 0">
+                    <field name="econtract_count" widget="statinfo" string="Contracts"/>
+                </button>
+            </xpath>
+            <xpath expr="//button[@name='action_confirm']" position="before">
+                <button name="action_create_econtract" type="object" string="Create Contract"/>
+            </xpath>
+        </field>
+    </record>
+</nwos>

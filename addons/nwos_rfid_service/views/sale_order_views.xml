@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nwos>
+    <record id="sale_order_form_rfid" model="ir.ui.view">
+        <field name="name">sale.order.form.nextwaves.kit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="action_view_rfid_sites" type="object"
+                    class="oe_stat_button" icon="fa-map-marker"
+                    invisible="rfid_site_count == 0">
+                    <field name="rfid_site_count" widget="statinfo" string="Installation Sites"/>
+                </button>
+            </xpath>
+            <xpath expr="//sheet/notebook" position="inside">
+                <page string="Kit Installation Sites" name="rfid_sites"
+                    invisible="not has_rfid_starter_kit and not rfid_site_ids">
+                    <div class="alert alert-info" role="alert" invisible="state not in ('draft', 'sent')">
+                        In <strong>Order Lines</strong>, leave tag/inlay or other normal sales as
+                        <strong>Normal Item</strong>. Select <strong>Kit Item</strong> for equipment that
+                        needs delivery and installation, or <strong>Subscription</strong> for recurring service.
+                        Save the quotation, create its installation site(s) below, save again, then return to
+                        Order Lines and assign an <strong>Installation Site</strong> to every Kit Item and Subscription.
+                        Finally, review the suggested <strong>Project Template</strong>. Select one manually if
+                        different Kit Items propose different templates.
+                    </div>
+                    <field name="rfid_site_ids"
+                        context="{'default_partner_id': partner_id, 'default_company_id': company_id}">
+                        <list editable="bottom" decoration-danger="project_template_conflict">
+                            <field name="name" readonly="1"/>
+                            <field name="site_name"/>
+                            <field name="installation_address_id"
+                                domain="[('id', 'child_of', parent.partner_id)]"/>
+                            <field name="planned_delivery_date"/>
+                            <field name="planned_installation_date"/>
+                            <field name="project_template_id"
+                                domain="[('is_template', '=', True)]"/>
+                            <field name="project_template_conflict" column_invisible="True"/>
+                            <field name="kit_product_ids" widget="many2many_tags" readonly="1"/>
+                            <field name="state" readonly="1" widget="badge"/>
+                        </list>
+                    </field>
+                </page>
+            </xpath>
+            <xpath expr="//field[@name='order_line']//list//field[@name='product_uom_qty']" position="after">
+                <field name="rfid_line_role" string="Item Type" optional="show"/>
+                <field name="rfid_site_id" string="Installation Site" optional="show"
+                    domain="[('sale_order_id', '=', parent.id)]"/>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/form//field[@name='product_id']" position="after">
+                <field name="rfid_line_role"/>
+                <field name="rfid_site_id"
+                    domain="[('sale_order_id', '=', parent.id)]"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="action_nextwaves_kit_orders" model="ir.actions.act_window">
+        <field name="name">Sales Orders</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_mode">list,kanban,form,calendar,pivot,graph,activity</field>
+        <field name="domain">[('order_line.rfid_line_role', '=', 'starter_kit')]</field>
+        <field name="context">{}</field>
+    </record>
+</nwos>

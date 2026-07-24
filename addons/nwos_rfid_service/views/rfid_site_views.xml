@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nwos>
+    <record id="view_rfid_site_list" model="ir.ui.view">
+        <field name="name">nextwaves.kit.site.list</field>
+        <field name="model">rfid.service.site</field>
+        <field name="arch" type="xml">
+            <list create="0" decoration-danger="state == 'suspended'"
+                decoration-success="state == 'active'"
+                decoration-warning="state in ('awaiting_payment', 'awaiting_acceptance')">
+                <field name="name"/>
+                <field name="site_name"/>
+                <field name="partner_id"/>
+                <field name="sale_order_id"/>
+                <field name="kit_product_ids" widget="many2many_tags"/>
+                <field name="planned_delivery_date"/>
+                <field name="planned_installation_date"/>
+                <field name="kit_payment_state" widget="badge"/>
+                <field name="state" widget="badge"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_rfid_site_search" model="ir.ui.view">
+        <field name="name">nextwaves.kit.site.search</field>
+        <field name="model">rfid.service.site</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/><field name="site_name"/>
+                <field name="partner_id"/><field name="sale_order_id"/>
+                <filter name="awaiting_payment" string="Awaiting Payment" domain="[('state', '=', 'awaiting_payment')]"/>
+                <filter name="ready" string="Ready" domain="[('state', '=', 'ready')]"/>
+                <filter name="implementation" string="Implementation" domain="[('state', 'in', ('in_delivery', 'in_installation', 'awaiting_acceptance'))]"/>
+                <filter name="active" string="Active" domain="[('state', '=', 'active')]"/>
+                <separator/>
+                <filter name="customer" string="Customer" context="{'group_by': 'partner_id'}"/>
+                <filter name="state" string="Stage" context="{'group_by': 'state'}"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_rfid_site_form" model="ir.ui.view">
+        <field name="name">nextwaves.kit.site.form</field>
+        <field name="model">rfid.service.site</field>
+        <field name="arch" type="xml">
+            <form string="Nextwaves Kit Site" create="0">
+                <header>
+                    <button name="action_refresh_payment" type="object" string="Check Payment"
+                        class="btn-primary" invisible="state != 'awaiting_payment'"/>
+                    <button name="action_accept_installation" type="object" string="Accept &amp; Activate"
+                        class="btn-primary" invisible="state not in ('in_installation', 'awaiting_acceptance')"/>
+                    <button name="action_print_acceptance" type="object" string="Print Acceptance"
+                        invisible="not accepted_on"/>
+                    <field name="state" widget="statusbar"
+                        statusbar_visible="draft,awaiting_payment,ready,in_delivery,in_installation,awaiting_acceptance,active"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_project" type="object" class="oe_stat_button" icon="fa-tasks" invisible="not installation_project_id"><div class="o_stat_info"><span class="o_stat_text">Project</span></div></button>
+                        <button name="action_view_pickings" type="object" class="oe_stat_button" icon="fa-truck" invisible="picking_count == 0"><field name="picking_count" widget="statinfo" string="Deliveries"/></button>
+                        <button name="action_view_tickets" type="object" class="oe_stat_button" icon="fa-life-ring"><field name="ticket_count" widget="statinfo" string="Tickets"/></button>
+                        <button name="action_view_subscriptions" type="object" class="oe_stat_button" icon="fa-refresh" invisible="subscription_count == 0"><field name="subscription_count" widget="statinfo" string="Subscriptions"/></button>
+                    </div>
+                    <div class="oe_title"><label for="site_name"/><h1><field name="site_name"/></h1><div><field name="name" readonly="1"/></div></div>
+                    <div class="alert alert-info" role="alert" invisible="sale_order_id">
+                        Create sites from the Kit Installation Sites tab of a Sales Order.
+                    </div>
+                    <div class="alert alert-warning" role="alert"
+                        invisible="not project_template_conflict">
+                        Kit Items suggest different project templates. Select the template to use
+                        for this installation site before confirming the Sales Order.
+                    </div>
+                    <group>
+                        <group>
+                            <field name="partner_id" readonly="state != 'draft'"/>
+                            <field name="contact_id" domain="[('id', 'child_of', partner_id)]"/>
+                            <field name="installation_address_id" domain="[('id', 'child_of', partner_id)]"/>
+                            <field name="company_id" groups="base.group_multi_company" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="sale_order_id" readonly="1"/>
+                            <field name="kit_product_ids" widget="many2many_tags" readonly="1"/>
+                            <field name="project_template_id"
+                                readonly="state != 'draft'"
+                                domain="[('is_template', '=', True)]"/>
+                            <field name="project_template_conflict" invisible="1"/>
+                            <field name="installation_project_id" readonly="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Assigned Items" name="kit_items">
+                            <field name="sale_line_ids" readonly="state != 'draft'">
+                                <list>
+                                    <field name="product_id"/><field name="name"/>
+                                    <field name="product_uom_qty"/><field name="rfid_line_role" widget="badge"/>
+                                    <field name="price_subtotal" sum="Total"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Planning" name="planning">
+                            <group>
+                                <group><field name="requested_delivery_date"/><field name="planned_delivery_date"/><field name="actual_delivery_date" readonly="1"/></group>
+                                <group><field name="planned_installation_date"/><field name="activation_date"/><field name="delivery_completed"/></group>
+                            </group>
+                        </page>
+                        <page string="Payment &amp; Delivery" name="payment_delivery">
+                            <group><group><field name="kit_payment_state"/><field name="payment_released"/><field name="payment_blocked"/></group></group>
+                            <field name="picking_ids" readonly="1"><list><field name="name"/><field name="scheduled_date"/><field name="date_done"/><field name="state" widget="badge"/></list></field>
+                        </page>
+                        <page string="Commissioning &amp; Acceptance" name="acceptance">
+                            <group>
+                                <group><field name="configuration_tested"/><field name="training_completed"/><field name="target_read_rate"/><field name="actual_read_rate"/></group>
+                                <group><field name="accepted_by"/><field name="accepted_on"/><field name="acceptance_signature" widget="image"/></group>
+                            </group>
+                            <field name="commissioning_notes"/>
+                            <field name="installed_lot_ids" widget="many2many_tags" readonly="1"/>
+                            <field name="acceptance_photo_ids" widget="many2many_binary"/>
+                        </page>
+                        <page string="Support" name="support"><field name="ticket_ids" readonly="1"><list><field name="ticket_ref"/><field name="name"/><field name="team_id"/><field name="user_id"/><field name="stage_id"/><field name="create_date"/></list></field></page>
+                        <page string="Subscriptions" name="subscriptions"><field name="subscription_ids" readonly="1"><list><field name="name"/><field name="product_id"/><field name="state" widget="badge"/><field name="start_date"/><field name="next_invoice_date"/><field name="collection_state" widget="badge"/></list></field></page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_rfid_site" model="ir.actions.act_window">
+        <field name="name">Installation Sites</field>
+        <field name="res_model">rfid.service.site</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_rfid_site_search"/>
+        <field name="context">{'create': False}</field>
+    </record>
+</nwos>

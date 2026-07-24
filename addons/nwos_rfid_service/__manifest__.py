@@ -1,0 +1,43 @@
+# -*- coding: utf-8 -*-
+{
+    'name': 'Nextwaves Kit',
+    'version': '1.4',
+    'category': 'Services/Project',
+    'summary': 'Sales-order-first Kit delivery, installation, billing and support',
+    'depends': [
+        'sale_management',
+        'sale_stock',
+        'project_stock',
+        'hr_timesheet',
+        'helpdesk',
+        'account',
+        'portal',
+    ],
+    'data': [
+        'security/rfid_security.xml',
+        'security/ir.model.access.csv',
+        'data/ir_sequence.xml',
+        'data/project_template_data.xml',
+        'data/ir_cron_data.xml',
+        'report/rfid_acceptance_report.xml',
+        'views/product_views.xml',
+        'views/sale_order_views.xml',
+        'views/rfid_site_views.xml',
+        'views/rfid_subscription_views.xml',
+        'views/stock_views.xml',
+        'views/project_views.xml',
+        'views/helpdesk_views.xml',
+        'views/res_config_settings_views.xml',
+        'views/rfid_menus.xml',
+    ],
+    'assets': {
+        'web.assets_backend': [
+            'nwos_rfid_service/static/src/scss/sale_order_line.scss',
+        ],
+    },
+    'application': True,
+    'post_init_hook': 'post_init_hook',
+    'installable': True,
+    'license': 'LGPL-3',
+    'author': 'NextOSP',
+}

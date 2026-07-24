@@ -165,12 +165,16 @@
 
     .o_field_many2many_tags {
         .o_field_many2many_selection {
-            .o_input,
+            // Match the specificity of the global single-line input selector
+            // above (including its :not() clauses). Otherwise the focused
+            // autocomplete keeps its own blue outline inside the tags
+            // container, producing the split focus frame shown in forms.
+            input.o_input:not([type="checkbox"]):not([type="radio"]),
             .o-autocomplete--input {
                 background-color: transparent;
                 border: 0 !important;
                 border-bottom: 0 !important;
-                outline: 0;
+                outline: 0 !important;
                 box-shadow: none;
 
                 &:hover,
@@ -178,7 +182,7 @@
                 &:focus-visible {
                     background-color: transparent;
                     border: 0 !important;
-                    outline: 0;
+                    outline: 0 !important;
                     box-shadow: none;
                 }
             }

@@ -154,6 +154,352 @@ body {
         .o_form_button_save { order: 2; }
     }
 
+    // Product configurator — a product preview, option picker, and order
+    // summary need denser information architecture than a generic form modal.
+    // Keep the Carbon visual language, but avoid the global full-bleed action
+    // strip and the equal-width table columns that make the preview oversized.
+    .modal-dialog:has(> .o_sale_product_configurator_dialog) {
+        width: calc(100% - #{$carbon-spacing-08});
+        max-width: 72rem;
+    }
+
+    .modal-content.o_sale_product_configurator_dialog {
+        max-height: min(54rem, calc(100vh - #{$carbon-spacing-08}));
+        background-color: $carbon-layer-01;
+
+        .modal-header {
+            flex: 0 0 auto;
+            padding: $carbon-spacing-06 $carbon-spacing-06 $carbon-spacing-05;
+            border-bottom: 1px solid $carbon-border-subtle;
+
+            .modal-title {
+                font-size: $carbon-font-size-h04;
+                line-height: 1.2;
+            }
+        }
+
+        .modal-body {
+            flex: 1 1 auto;
+            min-height: 0;
+            overflow-y: auto;
+            padding: $carbon-spacing-06 !important;
+        }
+
+        .o_sale_product_configurator_table {
+            table-layout: auto;
+            border-collapse: separate;
+            border-spacing: 0;
+
+            thead th {
+                padding: 0 0 $carbon-spacing-04 !important;
+                color: $carbon-text-helper;
+                font-size: $carbon-font-size-label;
+                font-weight: $carbon-font-weight-semibold;
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+            }
+
+            tbody > tr + tr > td {
+                padding-top: $carbon-spacing-06 !important;
+                border-top: 1px solid $carbon-border-subtle;
+            }
+
+            td {
+                vertical-align: top;
+            }
+        }
+
+        .o_sale_product_configurator_img {
+            width: 15rem !important;
+            padding: 0 $carbon-spacing-06 0 0 !important;
+
+            img {
+                display: block;
+                width: 100% !important;
+                aspect-ratio: 1;
+                padding: $carbon-spacing-05;
+                object-fit: contain;
+                background-color: $carbon-layer-02;
+                border: 1px solid $carbon-border-subtle !important;
+                border-radius: 0 !important;
+            }
+        }
+
+        .product_name_description {
+            width: auto;
+            max-width: none;
+            padding: 0 $carbon-spacing-06 0 0 !important;
+
+            [name="o_sale_product_configurator_name"] {
+                margin-bottom: $carbon-spacing-06 !important;
+
+                > .h5 {
+                    display: block;
+                    margin-bottom: $carbon-spacing-02;
+                    font-size: $carbon-font-size-h03;
+                    font-weight: $carbon-font-weight-semibold;
+                    line-height: 1.3;
+                }
+
+                .text-muted {
+                    color: $carbon-text-secondary !important;
+                    font-size: $carbon-font-size-body;
+                    line-height: 1.45;
+                    white-space: normal;
+                }
+            }
+        }
+
+        div[name="ptal"] {
+            margin-bottom: $carbon-spacing-05;
+
+            > div {
+                gap: $carbon-spacing-03 !important;
+                align-items: stretch !important;
+                margin-bottom: 0 !important;
+
+                > label {
+                    color: $carbon-text-helper;
+                    font-size: $carbon-font-size-label;
+                    font-weight: $carbon-font-weight-semibold !important;
+                    letter-spacing: 0.04em;
+                    text-transform: uppercase;
+                }
+            }
+
+            .list-unstyled {
+                display: grid !important;
+                gap: $carbon-spacing-03 !important;
+            }
+
+            .form-check {
+                position: relative;
+                display: flex;
+                min-height: $carbon-field-height;
+                align-items: center;
+                margin: 0;
+                padding: $carbon-spacing-03 $carbon-spacing-04
+                    $carbon-spacing-03 $carbon-spacing-08;
+                background-color: $carbon-layer-02;
+                border: 1px solid $carbon-border-subtle;
+                transition: background-color 120ms ease, border-color 120ms ease;
+
+                &:hover {
+                    background-color: $carbon-highlight;
+                    border-color: $carbon-border-interactive;
+                }
+
+                &:has(.form-check-input:checked) {
+                    background-color: $carbon-highlight;
+                    border-color: $carbon-border-interactive;
+                    box-shadow: inset 3px 0 0 $carbon-interactive;
+                }
+
+                .form-check-input {
+                    position: absolute;
+                    left: $carbon-spacing-04;
+                    width: 1rem;
+                    height: 1rem;
+                    margin: 0;
+                }
+
+                .form-check-label {
+                    display: flex !important;
+                    width: 100%;
+                    align-items: center;
+                    justify-content: space-between;
+                    gap: $carbon-spacing-04;
+                    color: $carbon-text-primary;
+                    cursor: pointer;
+                }
+            }
+
+            .badge {
+                flex: 0 0 auto;
+                padding: $carbon-spacing-02 $carbon-spacing-03;
+                background-color: $carbon-highlight !important;
+                border: 0 !important;
+                border-radius: 999px !important;
+                color: $carbon-blue-70 !important;
+                font-size: $carbon-font-size-label;
+                font-weight: $carbon-font-weight-semibold;
+            }
+        }
+
+        .o_sale_product_configurator_qty {
+            width: 11rem !important;
+            padding: 0 0 0 $carbon-spacing-06 !important;
+            border-left: 1px solid $carbon-border-subtle;
+
+            .o_configurator_section_label {
+                display: block;
+                margin-bottom: $carbon-spacing-02;
+                color: $carbon-text-helper;
+                font-size: $carbon-font-size-label;
+                font-weight: $carbon-font-weight-semibold;
+                letter-spacing: 0.04em;
+                text-align: left;
+                text-transform: uppercase;
+            }
+
+            [name="sale_product_configurator_formatted_price"] {
+                margin: 0 !important;
+                color: $carbon-text-primary;
+                font-size: $carbon-font-size-h04;
+                font-weight: $carbon-font-weight-semibold;
+                line-height: 1.2;
+                text-align: left !important;
+            }
+
+            [name="quantity_buttons_wrapper"] {
+                width: 100%;
+                justify-content: flex-start !important;
+
+                .btn,
+                .form-control {
+                    height: $carbon-field-height;
+                    border-color: $carbon-border-strong !important;
+                    border-radius: 0 !important;
+                }
+
+                .btn {
+                    flex: 0 0 $carbon-field-height;
+                    justify-content: center !important;
+                    padding: 0 !important;
+                }
+
+                .form-control {
+                    flex: 1 1 auto;
+                    min-width: 3rem;
+                    max-width: none;
+                    background-color: $carbon-layer-02;
+                }
+            }
+        }
+
+        .modal-footer {
+            flex: 0 0 auto;
+            flex-wrap: nowrap !important;
+            justify-content: flex-end !important;
+            align-items: stretch !important;
+            gap: $carbon-spacing-03 !important;
+            padding: $carbon-spacing-05 $carbon-spacing-06 !important;
+            background-color: $carbon-layer-02;
+            border-top: 1px solid $carbon-border-subtle !important;
+
+            .o_configurator_price_total {
+                display: flex;
+                flex: 1 1 auto;
+                flex-direction: column;
+                justify-content: center;
+                min-width: 0;
+                margin: 0 auto 0 0;
+
+                .o_configurator_total_label {
+                    color: $carbon-text-helper;
+                    font-size: $carbon-font-size-label;
+                    font-weight: $carbon-font-weight-semibold;
+                    letter-spacing: 0.04em;
+                    text-transform: uppercase;
+                }
+
+                .o_configurator_total_value {
+                    color: $carbon-text-primary;
+                    font-size: $carbon-font-size-h03;
+                    font-weight: $carbon-font-weight-semibold;
+                    line-height: 1.25;
+                }
+            }
+
+            .btn {
+                flex: 0 0 auto !important;
+                min-width: 8rem !important;
+                max-width: none !important;
+                min-height: $carbon-field-height-lg !important;
+                justify-content: center !important;
+                padding: 0 $carbon-spacing-05 !important;
+            }
+
+            [name="sale_product_configurator_cancel_button"] {
+                order: 1;
+            }
+
+            [name="sale_product_configurator_confirm_button"] {
+                order: 2;
+                min-width: 10rem !important;
+            }
+        }
+    }
+
+    @include media-breakpoint-down(md) {
+        .modal-dialog:has(> .o_sale_product_configurator_dialog) {
+            width: 100%;
+        }
+
+        .modal-content.o_sale_product_configurator_dialog {
+            max-height: 100vh;
+
+            .modal-header,
+            .modal-body {
+                padding-left: $carbon-spacing-05 !important;
+                padding-right: $carbon-spacing-05 !important;
+            }
+
+            .o_sale_product_configurator_table {
+                thead {
+                    display: none;
+                }
+
+                &,
+                tbody,
+                tr,
+                td {
+                    display: block;
+                    width: 100% !important;
+                }
+
+                tbody > tr {
+                    padding-bottom: $carbon-spacing-05;
+                }
+            }
+
+            .o_sale_product_configurator_img {
+                padding: 0 0 $carbon-spacing-05 !important;
+
+                img {
+                    width: min(100%, 16rem) !important;
+                    margin: 0 auto;
+                }
+            }
+
+            .product_name_description {
+                padding: 0 !important;
+            }
+
+            .o_sale_product_configurator_qty {
+                margin-top: $carbon-spacing-05;
+                padding: $carbon-spacing-05 0 0 !important;
+                border-top: 1px solid $carbon-border-subtle;
+                border-left: 0;
+            }
+
+            .modal-footer {
+                flex-wrap: wrap !important;
+                padding: $carbon-spacing-04 $carbon-spacing-05 !important;
+
+                .o_configurator_price_total {
+                    flex-basis: 100%;
+                    margin-bottom: $carbon-spacing-02;
+                }
+
+                .btn {
+                    flex: 1 1 0 !important;
+                    min-width: 0 !important;
+                }
+            }
+        }
+    }
+
     // Buttons rendered inside the modal body (not just the footer) must also be
     // Carbon — overrides web_nwos' `!important` cyan primary (common_style.scss).
     .modal-body {

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nwos>
+    <record id="econtract_generate_wizard_form" model="ir.ui.view">
+        <field name="name">econtract.generate.wizard.form</field>
+        <field name="model">econtract.generate.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Create Contract">
+                <group>
+                    <field name="company_id" invisible="1"/>
+                    <field name="res_model" invisible="1"/>
+                    <field name="res_id" invisible="1"/>
+                    <field name="source_display" string="From"/>
+                    <field name="template_id"/>
+                    <field name="open_after"/>
+                </group>
+                <footer>
+                    <button name="action_generate" string="Create" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</nwos>

@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nwos>
+    <record id="econtract_contract_view_list" model="ir.ui.view">
+        <field name="name">econtract.contract.list</field>
+        <field name="model">econtract.contract</field>
+        <field name="arch" type="xml">
+            <list string="Contracts">
+                <field name="name"/>
+                <field name="title"/>
+                <field name="partner_id"/>
+                <field name="template_id"/>
+                <field name="source_display" string="Source"/>
+                <field name="signed_on" optional="hide"/>
+                <field name="state" widget="badge"
+                       decoration-info="state == 'draft'"
+                       decoration-warning="state == 'sent'"
+                       decoration-success="state == 'signed'"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="econtract_contract_view_form" model="ir.ui.view">
+        <field name="name">econtract.contract.form</field>
+        <field name="model">econtract.contract</field>
+        <field name="arch" type="xml">
+            <form string="Contract">
+                <header>
+                    <button name="action_send" type="object" string="Send for Signature"
+                            class="btn-primary" invisible="state not in ('draft',)"/>
+                    <button name="action_send" type="object" string="Resend Link"
+                            invisible="state != 'sent'"/>
+                    <button name="action_print" type="object" string="Print"/>
+                    <button name="action_download_word" type="object" string="Word"
+                            help="Download as a Microsoft Word (.doc) document."/>
+                    <button name="action_mark_signed" type="object" string="Mark Signed"
+                            invisible="state == 'signed'"
+                            help="Mark as signed (use the backend Signature field for an offline signature)."/>
+                    <button name="action_regenerate_values" type="object" string="Reset from Template"
+                            invisible="state == 'signed'"
+                            confirm="Rebuild the body and re-add missing fields from the template?"/>
+                    <button name="action_cancel" type="object" string="Cancel"
+                            invisible="state in ('signed', 'cancelled')"/>
+                    <button name="action_reset_draft" type="object" string="Set to Draft"
+                            invisible="state != 'cancelled'"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,sent,signed"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_open_source" type="object" class="oe_stat_button"
+                                icon="fa-file-text-o" invisible="not source_display">
+                            <div class="o_stat_info">
+                                <span class="o_stat_value"><field name="source_display"/></span>
+                                <span class="o_stat_text">Source</span>
+                            </div>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <label for="title"/>
+                        <h1><field name="title" placeholder="Contract title"/></h1>
+                        <h3 class="text-muted"><field name="name" readonly="1"/></h3>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="template_id"
+                                   readonly="state == 'signed'"
+                                   options="{'no_create': True}"/>
+                            <field name="partner_id" readonly="state == 'signed'"/>
+                            <field name="user_id"/>
+                        </group>
+                        <group>
+                            <field name="source_display" string="Source Document"
+                                   invisible="not source_display"/>
+                            <field name="currency_id" groups="base.group_multi_currency"/>
+                            <field name="signed_by" invisible="state != 'signed'"/>
+                            <field name="signed_on" invisible="state != 'signed'"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Fields" name="values">
+                            <field name="value_ids" readonly="state == 'signed'">
+                                <list string="Values" editable="bottom" open_form_view="1">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="label" readonly="1" width="280px" class="fw-bold"/>
+                                    <field name="value_char" column_invisible="1"/>
+                                    <field name="value_number" column_invisible="1"/>
+                                    <field name="value_date" column_invisible="1"/>
+                                    <field name="value_datetime" column_invisible="1"/>
+                                    <field name="value_boolean" column_invisible="1"/>
+                                    <field name="value_signature" column_invisible="1"/>
+                                    <field name="display_value" string="Value" widget="econtract_value"
+                                           placeholder="Type the value..."/>
+                                    <field name="field_type" string="Type" readonly="1" widget="badge"
+                                           width="110px" optional="show"/>
+                                    <field name="required" readonly="1" optional="hide"/>
+                                </list>
+                                <form string="Field Value">
+                                    <group>
+                                        <group>
+                                            <field name="label" readonly="1"/>
+                                            <field name="field_type" readonly="1"/>
+                                        </group>
+                                        <group>
+                                            <field name="value_char" string="Value"
+                                                   invisible="field_type not in ('text', 'number')"/>
+                                            <field name="value_number" string="Value"
+                                                   invisible="field_type not in ('number', 'monetary')"/>
+                                            <field name="value_date" string="Value"
+                                                   invisible="field_type != 'date'"/>
+                                            <field name="value_datetime" string="Value"
+                                                   invisible="field_type != 'datetime'"/>
+                                            <field name="value_boolean" string="Value"
+                                                   invisible="field_type != 'boolean'"/>
+                                        </group>
+                                    </group>
+                                    <group invisible="field_type != 'signature'">
+                                        <field name="value_signature" widget="signature" nolabel="1"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                        <page string="Preview" name="preview">
+                            <div class="o_econtract_preview_paper">
+                                <field name="rendered_body" widget="html" readonly="1" nolabel="1"/>
+                            </div>
+                        </page>
+                        <page string="Signature" name="signature" invisible="state != 'signed'">
+                            <group>
+                                <field name="signature" widget="image"
+                                       options="{'size': [320, 90]}"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="econtract_contract_value_view_form" model="ir.ui.view">
+        <field name="name">econtract.contract.value.form</field>
+        <field name="model">econtract.contract.value</field>
+        <field name="arch" type="xml">
+            <form string="Field Value">
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="label" readonly="1"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="contract_id" readonly="1"/>
+                            <field name="field_type" readonly="1"/>
+                            <field name="required" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="value_char" string="Value"
+                                   invisible="field_type not in ('text', 'number')"/>
+                            <field name="value_number" string="Value"
+                                   invisible="field_type not in ('number', 'monetary')"/>
+                            <field name="value_date" string="Value"
+                                   invisible="field_type != 'date'"/>
+                            <field name="value_datetime" string="Value"
+                                   invisible="field_type != 'datetime'"/>
+                            <field name="value_boolean" string="Value"
+                                   invisible="field_type != 'boolean'"/>
+                        </group>
+                    </group>
+                    <group string="Signature" invisible="field_type != 'signature'">
+                        <field name="value_signature" widget="signature" nolabel="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="econtract_contract_view_search" model="ir.ui.view">
+        <field name="name">econtract.contract.search</field>
+        <field name="model">econtract.contract</field>
+        <field name="arch" type="xml">
+            <search string="Contracts">
+                <field name="name"/>
+                <field name="title"/>
+                <field name="partner_id"/>
+                <field name="template_id"/>
+                <filter name="draft" string="Draft" domain="[('state', '=', 'draft')]"/>
+                <filter name="sent" string="Sent" domain="[('state', '=', 'sent')]"/>
+                <filter name="signed" string="Signed" domain="[('state', '=', 'signed')]"/>
+                <separator/>
+                <filter name="my" string="My Contracts" domain="[('user_id', '=', uid)]"/>
+                <group>
+                    <filter name="group_template" string="Template"
+                            context="{'group_by': 'template_id'}"/>
+                    <filter name="group_state" string="Status"
+                            context="{'group_by': 'state'}"/>
+                    <filter name="group_partner" string="Customer"
+                            context="{'group_by': 'partner_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="econtract_contract_action" model="ir.actions.act_window">
+        <field name="name">Contracts</field>
+        <field name="res_model">econtract.contract</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="econtract_contract_view_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Create your first contract</p>
+            <p>Generate a contract from a template, from a Sales Order, a Purchase Order,
+               or a Contact.</p>
+        </field>
+    </record>
+</nwos>

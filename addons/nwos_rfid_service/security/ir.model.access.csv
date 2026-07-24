@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_rfid_site_user,rfid.service.site user,model_rfid_service_site,nwos_rfid_service.group_rfid_user,1,1,1,0
+access_rfid_site_manager,rfid.service.site manager,model_rfid_service_site,nwos_rfid_service.group_rfid_manager,1,1,1,1
+access_rfid_subscription_user,rfid.subscription user,model_rfid_subscription,nwos_rfid_service.group_rfid_user,1,1,0,0
+access_rfid_subscription_manager,rfid.subscription manager,model_rfid_subscription,nwos_rfid_service.group_rfid_manager,1,1,1,1
+access_rfid_subscription_period_user,rfid.subscription.period user,model_rfid_subscription_period,nwos_rfid_service.group_rfid_user,1,0,0,0
+access_rfid_subscription_period_manager,rfid.subscription.period manager,model_rfid_subscription_period,nwos_rfid_service.group_rfid_manager,1,1,1,1

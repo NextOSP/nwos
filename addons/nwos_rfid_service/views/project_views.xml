@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nwos>
+    <record id="project_project_form_rfid" model="ir.ui.view">
+        <field name="name">project.project.form.rfid</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.edit_project"/>
+        <field name="arch" type="xml">
+            <field name="partner_id" position="after"><field name="rfid_site_id" readonly="1"/></field>
+        </field>
+    </record>
+
+    <record id="project_task_form_rfid" model="ir.ui.view">
+        <field name="name">project.task.form.rfid</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_form2"/>
+        <field name="arch" type="xml">
+            <field name="project_id" position="after">
+                <field name="rfid_site_id" readonly="not is_template"/>
+                <field name="rfid_task_kind"/>
+                <field name="rfid_timesheet_required"/>
+                <field name="rfid_payment_blocked" invisible="1"/>
+            </field>
+            <xpath expr="//t[@name='warning_section']" position="after">
+                <div class="alert alert-danger" role="alert" invisible="not rfid_payment_blocked">
+                    This task is waiting for full Kit payment.
+                </div>
+            </xpath>
+        </field>
+    </record>
+</nwos>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nwos>
+    <record id="action_report_rfid_acceptance" model="ir.actions.report">
+        <field name="name">Nextwaves Kit Acceptance</field>
+        <field name="model">rfid.service.site</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">nwos_rfid_service.report_rfid_acceptance</field>
+        <field name="report_file">nwos_rfid_service.report_rfid_acceptance</field>
+        <field name="print_report_name">'Nextwaves Kit Acceptance - %s' % object.name</field>
+        <field name="binding_model_id" ref="model_rfid_service_site"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_rfid_acceptance">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="site">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h2>Nextwaves Kit Installation Acceptance</h2>
+                        <table class="table table-sm table-borderless">
+                            <tr><th>Site reference</th><td><span t-field="site.name"/></td><th>Sales order</th><td><span t-field="site.sale_order_id"/></td></tr>
+                            <tr><th>Customer</th><td><span t-field="site.partner_id"/></td><th>Kit Items</th><td><span t-esc="', '.join(site.kit_product_ids.mapped('display_name'))"/></td></tr>
+                            <tr><th>Site</th><td><span t-field="site.site_name"/></td><th>Activation date</th><td><span t-field="site.activation_date"/></td></tr>
+                            <tr><th>Address</th><td colspan="3"><span t-field="site.installation_address_id" t-options="{'widget': 'contact', 'fields': ['address'], 'no_marker': true}"/></td></tr>
+                        </table>
+
+                        <h4 class="mt-4">Acceptance checklist</h4>
+                        <table class="table table-sm table-bordered">
+                            <thead><tr><th>Item</th><th class="text-center">Result</th><th>Evidence / notes</th></tr></thead>
+                            <tbody>
+                                <tr><td>All site deliveries completed</td><td class="text-center"><span t-if="site.delivery_completed">PASS</span><span t-else="">PENDING</span></td><td><span t-field="site.actual_delivery_date"/></td></tr>
+                                <tr><td>Hardware serial numbers recorded</td><td class="text-center"><span t-if="site.installed_lot_ids">PASS</span><span t-else="">PENDING</span></td><td><span t-esc="', '.join(site.installed_lot_ids.mapped('name'))"/></td></tr>
+                                <tr><td>Configuration and connectivity tested</td><td class="text-center"><span t-if="site.configuration_tested">PASS</span><span t-else="">PENDING</span></td><td/></tr>
+                                <tr><td>Customer training completed</td><td class="text-center"><span t-if="site.training_completed">PASS</span><span t-else="">PENDING</span></td><td/></tr>
+                                <tr><td>RFID read rate target</td><td class="text-center"><span t-if="site.actual_read_rate &gt;= site.target_read_rate">PASS</span><span t-else="">PENDING</span></td><td>Target: <span t-field="site.target_read_rate"/>% / Actual: <span t-field="site.actual_read_rate"/>%</td></tr>
+                            </tbody>
+                        </table>
+                        <p><strong>Commissioning notes:</strong> <span t-field="site.commissioning_notes"/></p>
+
+                        <div class="row mt-5">
+                            <div class="col-6">
+                                <strong>Accepted by customer</strong><br/>
+                                <span t-field="site.accepted_by"/><br/>
+                                <span t-field="site.accepted_on"/>
+                            </div>
+                            <div class="col-6 text-center">
+                                <img t-if="site.acceptance_signature" t-att-src="image_data_uri(site.acceptance_signature)" style="max-height: 100px; max-width: 300px;"/>
+                                <div class="border-top pt-1">Customer signature</div>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</nwos>
