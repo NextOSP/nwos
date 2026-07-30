@@ -22,7 +22,7 @@ from .utils import (
 _lt = LazyTranslate(__name__)
 _logger = logging.getLogger(__name__)
 BACKEND_WEBCLIENT_URL_PREFIX = '/nwos'
-LEGACY_BACKEND_WEBCLIENT_URL_PREFIX = '/nwos'
+LEGACY_BACKEND_WEBCLIENT_URL_PREFIX = '/odoo'
 
 
 # Shared parameters for all login/signup flows

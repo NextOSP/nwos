@@ -10,7 +10,7 @@ import { isNumeric } from "@web/core/utils/strings";
 export const PATH_KEYS = ["resId", "action", "active_id", "model"];
 export const BACKEND_URL_PREFIX = "nwos";
 
-const LEGACY_BACKEND_URL_PREFIX = "nwos";
+const LEGACY_BACKEND_URL_PREFIX = "odoo";
 const SCOPED_APP_URL_PREFIX = "scoped_app";
 const BACKEND_URL_PREFIXES = [BACKEND_URL_PREFIX, LEGACY_BACKEND_URL_PREFIX];
 const WEBCLIENT_URL_PREFIXES = [...BACKEND_URL_PREFIXES, SCOPED_APP_URL_PREFIX];

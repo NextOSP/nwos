@@ -11,7 +11,7 @@ from nwos.tools import file_open, file_path
 from nwos.tools.image import image_process
 
 BACKEND_WEBCLIENT_URL_PREFIX = '/nwos'
-LEGACY_BACKEND_WEBCLIENT_URL_PREFIX = '/nwos'
+LEGACY_BACKEND_WEBCLIENT_URL_PREFIX = '/odoo'
 
 
 class WebManifest(http.Controller):

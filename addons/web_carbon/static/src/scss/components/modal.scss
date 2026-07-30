@@ -164,7 +164,9 @@ body {
     }
 
     .modal-content.o_sale_product_configurator_dialog {
-        max-height: min(54rem, calc(100vh - #{$carbon-spacing-08}));
+        // Keep CSS min() opaque to libsass, which otherwise treats it as the
+        // Sass numeric min() function and rejects the calc() argument.
+        max-height: unquote("min(54rem, calc(100vh - #{$carbon-spacing-08}))");
         background-color: $carbon-layer-01;
 
         .modal-header {
@@ -467,7 +469,7 @@ body {
                 padding: 0 0 $carbon-spacing-05 !important;
 
                 img {
-                    width: min(100%, 16rem) !important;
+                    width: unquote("min(100%, 16rem)") !important;
                     margin: 0 auto;
                 }
             }

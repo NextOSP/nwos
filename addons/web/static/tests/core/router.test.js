@@ -1696,6 +1696,31 @@ describe("Scoped apps", () => {
 })
 
 describe("Retrocompatibility", () => {
+    test("canonical backend urls are not rewritten as legacy urls", () => {
+        redirect("/nwos/purchase/9");
+        createRouter({
+            onReplaceState: () => expect.step("replaceState"),
+        });
+
+        expect(browser.location.href).toBe("https://www.hoot.test/nwos/purchase/9");
+        expect.verifySteps([]);
+    });
+
+    test("legacy backend urls are rewritten to the canonical prefix", () => {
+        redirect("/odoo/purchase/9");
+        createRouter();
+
+        expect(browser.location.href).toBe("https://www.hoot.test/nwos/purchase/9");
+        expect(router.current).toEqual({
+            action: "purchase",
+            actionStack: [
+                { action: "purchase" },
+                { action: "purchase", resId: 9 },
+            ],
+            resId: 9,
+        });
+    });
+
     test("parse an url with hash (key/values)", async () => {
         Object.assign(browser.location, { pathname: "/web" });
         browser.location.hash = "#a=114&k=c.e&f=1&g=91";
