@@ -44,6 +44,9 @@ canvas is never rendered. Same URL, menu and sidebar as the original action.
             'nwos_carbon_dashboard/static/src/**/*.scss',
         ],
     },
+    # Carbon is the default look for dashboards: install as soon as there are
+    # dashboards to render (web_carbon is itself auto_install on web+web_nwos).
+    'auto_install': ['spreadsheet_dashboard'],
     'installable': True,
     'application': False,
     'license': 'LGPL-3',

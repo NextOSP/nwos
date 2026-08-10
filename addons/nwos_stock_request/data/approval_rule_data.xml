@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nwos>
+    <data noupdate="1">
+
+        <!-- Default flow: every submitted request needs one sign-off from the
+             Approver group. Edit or archive it in Approvals > Configuration. -->
+        <record id="approval_rule_stock_request" model="approval.rule">
+            <field name="name">Stock Request Approval</field>
+            <field name="sequence">50</field>
+            <field name="company_id" eval="False"/>
+            <field name="res_model_id" ref="model_stock_request"/>
+            <field name="method_name">action_confirm_request</field>
+            <field name="reject_method_name">action_refuse_from_approval</field>
+            <field name="amount_field_id" ref="field_stock_request__estimated_total"/>
+            <field name="currency_field_id" ref="field_stock_request__currency_id"/>
+            <field name="requester_field_id" ref="field_stock_request__requester_id"/>
+            <field name="department_field_id" ref="field_stock_request__department_id"/>
+            <field name="override_group_id" ref="group_stock_request_manager"/>
+            <field name="mail_template_id" ref="mail_template_stock_request_approved"/>
+        </record>
+
+        <record id="approval_rule_step_stock_request" model="approval.rule.step">
+            <field name="rule_id" ref="approval_rule_stock_request"/>
+            <field name="sequence">10</field>
+            <field name="name">Approval</field>
+            <field name="approver_type">group</field>
+            <field name="group_id" ref="group_stock_request_approver"/>
+            <field name="approval_mode">any</field>
+        </record>
+
+    </data>
+</nwos>

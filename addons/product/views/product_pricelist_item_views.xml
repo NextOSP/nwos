@@ -145,12 +145,12 @@
                                 groups="product.group_product_pricelist"
                             />
                             <label for="fixed_price" invisible="compute_price != 'fixed'"/>
-                            <div class="o_row" invisible="compute_price != 'fixed'" style="width: 60% !important;">
+                            <div class="o_row align-items-center" invisible="compute_price != 'fixed'">
                                 <field name="fixed_price"
                                     widget="monetary"
                                     options="{'currency_field': 'currency_id', 'field_digits': True}"/>
-                                <span class="d-flex gap-2 p-0" invisible="not product_uom_name">per<field
-                                        name="product_uom_name"/></span>
+                                <span class="text-nowrap" invisible="not product_uom_name">per</span>
+                                <field name="product_uom_name" invisible="not product_uom_name"/>
                             </div>
                             <label for="percent_price" string="Discount" invisible="compute_price != 'percentage'"/>
                             <div class="o_row gap-3" invisible="compute_price != 'percentage'">

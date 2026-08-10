@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nwos>
+    <data>
+
+        <menuitem id="menu_approval_root" name="Approvals"
+                  groups="base.group_user" sequence="120"/>
+
+        <menuitem id="menu_approval_my" name="To Approve"
+                  parent="menu_approval_root" action="approval_request_action_my"
+                  sequence="10"/>
+
+        <menuitem id="menu_approval_all" name="All Approvals"
+                  parent="menu_approval_root" action="approval_request_action_all"
+                  groups="group_approval_manager" sequence="20"/>
+
+        <menuitem id="menu_approval_config" name="Configuration"
+                  parent="menu_approval_root" groups="group_approval_manager"
+                  sequence="90"/>
+
+        <menuitem id="menu_approval_rules" name="Approval Rules"
+                  parent="menu_approval_config" action="approval_rule_action"
+                  sequence="10"/>
+
+    </data>
+</nwos>

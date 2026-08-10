@@ -20,17 +20,6 @@
                   sequence="90"
                   groups="nwos_stock_request.group_stock_request_manager"/>
 
-        <menuitem id="menu_stock_request_approval_rule"
-                  name="Approval Rules"
-                  parent="menu_stock_request_config"
-                  action="action_stock_request_approval_rule"
-                  sequence="1"/>
-
-        <menuitem id="menu_stock_request_approval_auto"
-                  name="Auto-Approval"
-                  parent="menu_stock_request_config"
-                  action="action_stock_request_approval_auto"
-                  sequence="2"/>
 
         <menuitem id="menu_stock_request_settings"
                   name="Settings"

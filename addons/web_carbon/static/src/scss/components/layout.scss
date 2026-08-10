@@ -177,8 +177,19 @@
         overflow: hidden;
 
         .oe_stat_button {
+            // 12rem is the *preferred* width — it still sizes the row — but the
+            // button must be allowed to shrink below it. A hard `min-width`
+            // made N buttons demand N * min-width; past the container's
+            // max-width the row overflowed and, because the box is
+            // `justify-content: flex-end` + `overflow: hidden`, it was clipped
+            // on the LEFT — the first button lost its icon and the leading
+            // digits of its value ("0.00 Units" rendered as "00 Units").
+            // `min-width: 0` lets each button compress and ellipsize its own
+            // label instead, so the row always fits. Do NOT set `flex-basis: 0`
+            // here: the box is `flex: 0 1 auto`, so a zero basis collapses it
+            // to icon width and the labels disappear entirely.
             flex: 0 1 12rem;
-            min-width: 8.5rem;
+            min-width: 0;
             max-width: 14rem;
             height: $carbon-field-height-lg;
             padding: 0 $carbon-spacing-04;
@@ -316,7 +327,11 @@
             justify-content: flex-start;
 
             .oe_stat_button {
-                flex-basis: 11rem;
+                // Below lg the row scrolls (`.o_control_panel_actions` is
+                // `overflow-x: auto`), so buttons keep a readable fixed size
+                // rather than compressing.
+                flex: 0 0 11rem;
+                min-width: 0;
             }
         }
 

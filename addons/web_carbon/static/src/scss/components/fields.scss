@@ -203,17 +203,27 @@
     // the trailing text away. These wrappers are flex items, so pin the flex
     // BASIS (width alone loses to the cascade) to a compact box and center the
     // number; the trailing text then sits flush after it.
+    //
+    // Size the box in `ch` so it fits the value rather than a guessed pixel
+    // width: 6 characters ("999.99", "0.00") plus a tight 4px gutter each side.
+    // The default 12px input padding ate ~24px of a 52px box, which clipped
+    // decimals on Weight / Volume in the product form.
     .o_field_widget.o_field_integer.oe_inline,
     .o_field_widget.o_field_float.oe_inline,
     .o_field_widget.o_field_percentage.oe_inline {
-        flex: 0 0 3.25rem !important;
-        width: 3.25rem !important;
+        $inline-number-gutter: $carbon-spacing-02;   // 4px
+        $inline-number-width: calc(6ch + #{$inline-number-gutter} * 2);
+
+        flex: 0 0 $inline-number-width !important;
+        width: $inline-number-width !important;
         min-width: 0 !important;
         max-width: none !important;
 
         input {
             width: 100% !important;
             max-width: 100% !important;
+            padding-left: $inline-number-gutter !important;
+            padding-right: $inline-number-gutter !important;
             text-align: center;
         }
     }

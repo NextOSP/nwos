@@ -22,6 +22,12 @@ class TestStockRequestFlow(TransactionCase):
             'seller_ids': [(0, 0, {'partner_id': cls.vendor.id, 'price': 10.0})],
         })
 
+    def _approval(self, request):
+        return self.env['approval.request'].search([
+            ('res_model', '=', 'stock.request'),
+            ('res_id', '=', request.id),
+        ], order='id desc', limit=1)
+
     def _new_request(self):
         return self.env['stock.request'].create({
             'line_ids': [(0, 0, {
@@ -89,15 +95,41 @@ class TestStockRequestFlow(TransactionCase):
         wizard.action_confirm()
         self.assertEqual(req.state, 'refused')
         self.assertEqual(req.refuse_reason, 'Not needed')
+        self.assertEqual(self._approval(req).state, 'cancel')
+
+    def test_refuse_from_the_approval_banner(self):
+        """Refusing through the framework wizard drives the request state."""
+        req = self._new_request()
+        req.action_submit()
+        approval = self._approval(req)
+        self.env['approval.reject.wizard'].with_user(self.approver).create({
+            'request_id': approval.id,
+            'step_id': approval.current_step_id.id,
+            'reason': 'Budget frozen',
+        }).action_confirm()
+        self.assertEqual(approval.state, 'rejected')
+        self.assertEqual(req.state, 'refused')
+        self.assertEqual(req.refuse_reason, 'Budget frozen')
+
+    def test_reset_to_draft_cancels_the_approval(self):
+        req = self._new_request()
+        req.action_submit()
+        approval = self._approval(req)
+        req.action_reset_to_draft()
+        self.assertEqual(req.state, 'draft')
+        self.assertEqual(approval.state, 'cancel')
 
     def test_default_single_step_approval(self):
-        """No rule -> one default step, approver can approve to completion."""
+        """The shipped rule creates one step; the approver completes it."""
         req = self._new_request()
         req.action_submit()
         self.assertEqual(req.state, 'to_approve')
-        self.assertEqual(len(req.approval_ids), 1)
+        approval = self._approval(req)
+        self.assertEqual(approval.state, 'pending')
+        self.assertEqual(len(approval.step_ids), 1)
         req.with_user(self.approver).action_approve()
         self.assertEqual(req.state, 'approved')
+        self.assertEqual(self._approval(req).state, 'done')
 
     def test_multi_step_sequential_rule(self):
         """A 2-step rule must be approved in order before the request is approved."""
@@ -109,9 +141,12 @@ class TestStockRequestFlow(TransactionCase):
             'name': 'Approver Two', 'login': 'appr2',
             'group_ids': [(4, self.env.ref(
                 'nwos_stock_request.group_stock_request_approver').id)]})
-        self.env['stock.request.approval.rule'].create({
+        self.env['approval.rule'].create({
             'name': 'Two steps',
-            'min_amount': 0.0,
+            'sequence': 1,  # wins over the rule shipped with the module
+            'res_model_id': self.env['ir.model']._get('stock.request').id,
+            'method_name': 'action_confirm_request',
+            'reject_method_name': 'action_refuse_from_approval',
             'step_ids': [
                 (0, 0, {'sequence': 1, 'name': 'Step 1',
                         'approver_type': 'users', 'user_ids': [(6, 0, u1.ids)]}),
@@ -121,19 +156,21 @@ class TestStockRequestFlow(TransactionCase):
         })
         req = self._new_request()
         req.action_submit()
-        self.assertEqual(len(req.approval_ids), 2)
+        steps = self._approval(req).step_ids.sorted('sequence')
+        self.assertEqual(len(steps), 2)
         # Step 2 approver cannot approve before step 1
-        self.assertTrue(req.approval_ids.sorted('sequence')[0].with_user(u1).can_approve)
-        self.assertFalse(req.approval_ids.sorted('sequence')[1].with_user(u2).can_approve)
-        req.approval_ids.sorted('sequence')[0].with_user(u1).action_approve_step()
+        self.assertTrue(steps[0].with_user(u1).can_approve)
+        self.assertFalse(steps[1].with_user(u2).can_approve)
+        steps[0].with_user(u1).action_approve_step()
         self.assertEqual(req.state, 'to_approve')  # step 2 still pending
-        req.approval_ids.sorted('sequence')[1].with_user(u2).action_approve_step()
+        steps[1].with_user(u2).action_approve_step()
         self.assertEqual(req.state, 'approved')
 
     def test_auto_approval_all(self):
         """An auto-approval (scope all) below the amount approves the whole request."""
-        self.env['stock.request.approval.auto'].create({
-            'name': 'Small buys', 'max_amount': 1000.0, 'scope': 'all'})
+        rule = self.env.ref('nwos_stock_request.approval_rule_stock_request')
+        rule.write({'auto_ids': [(0, 0, {
+            'name': 'Small buys', 'max_amount': 1000.0, 'scope': 'all'})]})
         req = self._new_request()  # total 50
         req.action_submit()
         self.assertEqual(req.state, 'approved')

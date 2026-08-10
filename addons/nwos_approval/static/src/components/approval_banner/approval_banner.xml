@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+
+    <t t-name="nwos_approval.ApprovalBanner">
+        <div t-if="visible" class="o_approval_banner alert d-flex align-items-center gap-3 mb-0 rounded-0 border-0 border-bottom"
+             t-att-class="alertClass">
+            <div class="flex-grow-1">
+                <div class="fw-bold">
+                    <i class="fa fa-gavel me-1"/>
+                    <t t-if="data.state === 'pending'">
+                        Awaiting approval<t t-if="currentStep">: <t t-esc="currentStep.name"/></t>
+                    </t>
+                    <t t-elif="data.state === 'approved' or data.state === 'done'">Approved</t>
+                    <t t-elif="data.state === 'rejected'">
+                        Refused<t t-if="data.reject_reason"> — <t t-esc="data.reject_reason"/></t>
+                    </t>
+                    <t t-elif="data.state === 'error'">Approved, but the action failed</t>
+                    <t t-else="">Approval cancelled</t>
+                </div>
+                <div class="o_approval_steps d-flex flex-wrap gap-2 mt-1">
+                    <t t-foreach="data.steps or []" t-as="step" t-key="step.id">
+                        <span class="badge rounded-pill" t-att-class="stepClass(step)"
+                              t-att-title="stepTooltip(step)">
+                            <i t-att-class="stepIcon(step)" class="me-1"/>
+                            <t t-esc="step.name"/>
+                            <small class="ms-1 opacity-75" t-esc="step.approver_names"/>
+                        </span>
+                    </t>
+                </div>
+            </div>
+            <div t-if="data.can_approve" class="d-flex gap-2">
+                <button class="btn btn-success" t-on-click="onApprove">
+                    <i class="fa fa-check me-1"/>Approve
+                </button>
+                <button class="btn btn-outline-danger" t-on-click="onReject">
+                    <i class="fa fa-times me-1"/>Refuse
+                </button>
+            </div>
+        </div>
+    </t>
+
+</templates>

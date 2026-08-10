@@ -15,6 +15,18 @@
                         help="Used when a Kit Item does not specify its own project template.">
                         <field name="rfid_project_template_id"/>
                     </setting>
+                    <setting string="Kit Item products"
+                        help="Products added to a sales order default to Kit Item, triggering delivery, installation, and payment controls. You can still change the Item Type on each order line.">
+                        <field name="rfid_kit_product_ids" widget="many2many_tags"
+                            options="{'no_create': True}"
+                            placeholder="Select the products sold as Kit Items..."/>
+                    </setting>
+                    <setting string="Subscription products"
+                        help="Service products added to a sales order default to Subscription. Billing begins after customer acceptance.">
+                        <field name="rfid_subscription_product_ids" widget="many2many_tags"
+                            options="{'no_create': True}"
+                            placeholder="Select the service products sold as Subscriptions..."/>
+                    </setting>
                     <setting string="Support team" company_dependent="1"
                         help="Default Helpdesk team for Nextwaves Kit tickets.">
                         <field name="rfid_helpdesk_team_id"/>

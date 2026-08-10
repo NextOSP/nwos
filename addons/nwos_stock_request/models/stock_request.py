@@ -56,13 +56,10 @@ class StockRequest(models.Model):
     approved_date = fields.Datetime(string='Approved On', readonly=True, copy=False)
     refuse_reason = fields.Text(string='Refusal Reason', readonly=True, copy=False)
 
-    approval_ids = fields.One2many(
-        'stock.request.approval', 'request_id', string='Approval Steps', copy=False)
-    approval_rule_id = fields.Many2one(
-        'stock.request.approval.rule', string='Applied Rule', readonly=True, copy=False)
-    current_approval_id = fields.Many2one(
-        'stock.request.approval', compute='_compute_current_approval')
-    can_approve = fields.Boolean(compute='_compute_current_approval')
+    awaiting_my_approval = fields.Boolean(
+        compute='_compute_awaiting_my_approval',
+        search='_search_awaiting_my_approval',
+        help="Technical: this request has an approval step waiting for me.")
 
     line_ids = fields.One2many(
         'stock.request.line', 'request_id', string='Items', copy=True)
@@ -105,14 +102,24 @@ class StockRequest(models.Model):
             request.department_id = request.requester_id.employee_id.department_id
 
     @api.depends_context('uid')
-    @api.depends('approval_ids.status')
-    def _compute_current_approval(self):
+    def _compute_awaiting_my_approval(self):
+        waiting = set(self.env['approval.request'].search([
+            ('res_model', '=', 'stock.request'),
+            ('res_id', 'in', self.ids),
+            ('state', '=', 'pending'),
+            ('pending_approver_ids', 'in', self.env.uid),
+        ]).mapped('res_id'))
         for request in self:
-            pending = request.approval_ids.filtered(
-                lambda a: a.status == 'pending').sorted('sequence')
-            current = pending[:1]
-            request.current_approval_id = current
-            request.can_approve = bool(current) and current._user_can_approve()
+            request.awaiting_my_approval = request.id in waiting
+
+    def _search_awaiting_my_approval(self, operator, value):
+        ids = self.env['approval.request'].search([
+            ('res_model', '=', 'stock.request'),
+            ('state', '=', 'pending'),
+            ('pending_approver_ids', 'in', self.env.uid),
+        ]).mapped('res_id')
+        positive = (operator == '=') == bool(value)
+        return [('id', 'in' if positive else 'not in', ids)]
 
     @api.depends('purchase_order_ids')
     def _compute_purchase_orders(self):
@@ -173,131 +180,54 @@ class StockRequest(models.Model):
     # ------------------------------------------------------------------
     # Approval engine
     # ------------------------------------------------------------------
-    def _match_approval_rule(self):
-        """Return the first active rule whose conditions match this request."""
-        self.ensure_one()
-        rules = self.env['stock.request.approval.rule'].search(
-            [('company_id', '=', self.company_id.id)], order='sequence, id')
-        for rule in rules:
-            if rule._matches(self):
-                return rule
-        return self.env['stock.request.approval.rule']
-
-    def _legacy_threshold(self):
-        param = self.env['ir.config_parameter'].sudo().get_param(
-            'nwos_stock_request.approval_amount', default='0.0')
-        try:
-            return float(param)
-        except (TypeError, ValueError):
-            return 0.0
-
-    def _default_step_vals(self):
-        """Fallback single step (Approver group, any) when no rule is defined."""
-        self.ensure_one()
-        group = self.env.ref('nwos_stock_request.group_stock_request_approver')
-        return {
-            'request_id': self.id,
-            'sequence': 10,
-            'name': _("Approval"),
-            'approval_mode': 'any',
-            'approver_ids': [(6, 0, group.all_user_ids.ids)],
-        }
-
-    def _generate_approvals(self):
-        """Build the approval-step records for this request from the matching rule."""
-        self.ensure_one()
-        self.approval_ids.unlink()
-        rule = self._match_approval_rule()
-        self.approval_rule_id = rule
-        Approval = self.env['stock.request.approval']
-        if rule and rule.step_ids:
-            for step in rule.step_ids:
-                approvers = step._resolve_approvers(self)
-                Approval.create({
-                    'request_id': self.id,
-                    'sequence': step.sequence,
-                    'name': step.name,
-                    'approval_mode': step.approval_mode,
-                    'approver_ids': [(6, 0, approvers.ids)],
-                })
-        else:
-            Approval.create(self._default_step_vals())
-
-    def _apply_auto_approval(self):
-        """Auto-approve steps for configured users / global threshold."""
-        self.ensure_one()
-        autos = self.env['stock.request.approval.auto'].search(
-            [('company_id', '=', self.company_id.id)], order='sequence, id')
-        scope = None
-        for auto in autos:
-            if auto._matches(self):
-                scope = auto.scope
-                break
-        # global legacy threshold behaves as a full auto-approval below the amount
-        threshold = self._legacy_threshold()
-        if scope is None and threshold and self.estimated_total < threshold:
-            scope = 'all'
-        if scope is None:
-            return
-        steps = self.approval_ids.sorted('sequence')
-        target = steps if scope == 'all' else steps[:1]
-        for approval in target:
-            approval.write({
-                'status': 'approved',
-                'approved_user_ids': [(4, self.requester_id.id)],
-            })
-        self.message_post(body=_("Auto-approved (%s).",
-                                 dict(autos._fields['scope'].selection).get(scope, scope)))
-
-    def _recompute_approval_state(self):
-        """Advance the request when all steps are approved."""
-        self.ensure_one()
-        if self.state not in ('to_approve',):
-            return
-        if self.approval_ids and all(
-                a.status == 'approved' for a in self.approval_ids):
-            self.write({
-                'state': 'approved',
-                'approver_id': self.env.user.id,
-                'approved_date': fields.Datetime.now(),
-            })
-            self.activity_feedback(['mail.mail_activity_data_todo'])
-            self._notify_buyers()
-        else:
-            self._schedule_current_activity()
-
-    def _schedule_current_activity(self):
-        self.ensure_one()
-        self.activity_feedback(['mail.mail_activity_data_todo'])
-        current = self.current_approval_id
-        for approver in current.approver_ids:
-            self.activity_schedule(
-                'mail.mail_activity_data_todo',
-                note=_("Stock request %(name)s — step '%(step)s' needs your approval.",
-                       name=self.name, step=current.name),
-                user_id=approver.id)
-
     # ------------------------------------------------------------------
     # Workflow
+    #
+    # Approval itself lives in `nwos_approval`: a rule on stock.request gates
+    # `action_confirm_request`, which the framework re-runs once every step is
+    # approved. This model only owns its own state.
     # ------------------------------------------------------------------
     def action_submit(self):
         for request in self:
             if not request.line_ids:
                 raise UserError(_("Add at least one item before submitting."))
             request.state = 'to_approve'
-            request._generate_approvals()
-            request._apply_auto_approval()
-            request._recompute_approval_state()
+        return self.action_confirm_request()
+
+    def action_confirm_request(self):
+        """Move an approved request to 'approved'. Gated by nwos_approval."""
+        self.write({
+            'state': 'approved',
+            'approver_id': self.env.uid,
+            'approved_date': fields.Datetime.now(),
+        })
+        self.activity_feedback(['mail.mail_activity_data_todo'])
+        for request in self:
+            request._notify_buyers()
         return True
 
     def action_approve(self):
-        """Approve the current step for the current user."""
+        """Approve the current step of the pending approval request."""
+        Request = self.env['approval.request']
         for request in self:
             if request.state != 'to_approve':
                 raise UserError(_("Only submitted requests can be approved."))
-            if not request.current_approval_id:
+            approval = Request.search([
+                ('res_model', '=', 'stock.request'),
+                ('res_id', '=', request.id),
+                ('state', '=', 'pending'),
+            ], limit=1)
+            if not approval:
                 raise UserError(_("There is no pending step to approve."))
-            request.current_approval_id.action_approve_step()
+            approval.approval_action_approve()
+        return True
+
+    def action_refuse_from_approval(self):
+        """Called by nwos_approval when an approval is refused."""
+        self.write({
+            'state': 'refused',
+            'refuse_reason': self.env.context.get('approval_reject_reason'),
+        })
         return True
 
     def _notify_buyers(self):
@@ -321,13 +251,14 @@ class StockRequest(models.Model):
 
     def action_cancel(self):
         self.filtered(lambda r: r.state != 'done').write({'state': 'cancel'})
+        self.env['approval.request']._cancel_for(self)
         self.activity_feedback(['mail.mail_activity_data_todo'])
         return True
 
     def action_reset_to_draft(self):
-        self.approval_ids.unlink()
+        self.env['approval.request']._cancel_for(self)
         self.write({'state': 'draft', 'approver_id': False, 'approved_date': False,
-                    'refuse_reason': False, 'approval_rule_id': False})
+                    'refuse_reason': False})
         return True
 
     # ------------------------------------------------------------------
@@ -424,11 +355,10 @@ class StockRequest(models.Model):
             result['my'][state] = self.search_count(
                 my + [('state', '=', state)])
         # requests awaiting the current user's approval (current step)
-        pending = self.env['stock.request.approval'].search(
-            [('status', '=', 'pending'), ('approver_ids', 'in', self.env.uid)])
-        awaiting = pending.filtered(lambda a: a._user_can_approve())
-        result['my']['awaiting'] = len(set(awaiting.request_id.ids))
-        result['global']['awaiting'] = result['my']['awaiting']
+        awaiting = self.env['approval.request']._awaiting_count(
+            res_model='stock.request')
+        result['my']['awaiting'] = awaiting
+        result['global']['awaiting'] = awaiting
         return result
 
     def action_view_pickings(self):
@@ -576,14 +506,11 @@ class StockRequestRefuse(models.TransientModel):
     _description = 'Refuse Stock Request'
 
     request_id = fields.Many2one('stock.request', required=True)
-    approval_id = fields.Many2one('stock.request.approval')
     reason = fields.Text(string='Reason', required=True)
 
     def action_confirm(self):
         self.ensure_one()
-        if self.approval_id:
-            self.approval_id.write({
-                'status': 'rejected', 'reject_reason': self.reason})
+        self.env['approval.request']._cancel_for(self.request_id)
         self.request_id.write({
             'state': 'refused',
             'refuse_reason': self.reason,

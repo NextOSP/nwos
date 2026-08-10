@@ -2,7 +2,7 @@
 # Part of NextOSP. See LICENSE file for full copyright and licensing details.
 {
     'name': 'Stock Request',
-    'version': '1.0',
+    'version': '1.1',
     'category': 'Inventory/Purchase',
     'summary': 'Internal stock requests with approval, feeding Replenishment and Purchase',
     'description': """
@@ -18,11 +18,12 @@ Features
 --------
 * Request header + lines with free-form specification (create the product inline).
 * Draft -> To Approve -> Approved -> Done flow with refuse / cancel.
-* Configurable approval amount threshold (self-approval below it).
+* Approval itself is configured in the Approvals app (nwos_approval).
 * "Generate Purchase" runs procurement and links results back to the request.
 * Dedicated security groups and record rules.
 """,
     'depends': [
+        'nwos_approval',
         'stock',
         'purchase_stock',
         'product',
@@ -36,9 +37,8 @@ Features
         'security/stock_request_security.xml',
         'data/ir_sequence.xml',
         'data/mail_template_data.xml',
-        'views/stock_request_approval_views.xml',
+        'data/approval_rule_data.xml',
         'views/stock_request_views.xml',
-        'views/res_config_settings_views.xml',
         'views/stock_request_menus.xml',
     ],
     'assets': {
