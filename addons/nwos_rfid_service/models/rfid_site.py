@@ -167,6 +167,17 @@ class RfidServiceSite(models.Model):
                 })
         return True
 
+    @api.onchange('sale_order_id')
+    def _onchange_sale_order_id(self):
+        """Fill in what the quotation already knows, so a site can be created
+        from the Installation Sites list without retyping the customer."""
+        for site in self.filtered('sale_order_id'):
+            order = site.sale_order_id
+            site.partner_id = order.partner_id
+            site.company_id = order.company_id
+            if not site.installation_address_id:
+                site.installation_address_id = order.partner_shipping_id or order.partner_id
+
     def _get_kit_invoices(self):
         self.ensure_one()
         return self.kit_sale_line_ids.invoice_lines.move_id.filtered(

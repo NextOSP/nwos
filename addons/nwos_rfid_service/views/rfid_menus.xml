@@ -12,4 +12,44 @@
         sequence="90" groups="nwos_rfid_service.group_rfid_manager"/>
     <menuitem id="menu_rfid_settings" name="Settings" parent="menu_rfid_configuration"
         action="project.project_config_settings_action" sequence="10"/>
+
+    <!-- The implementation task list lives on a project template. Without this
+         entry the only way to change it is to edit the module's XML data file,
+         which is `noupdate` and therefore never re-applied to an installed
+         database. -->
+    <record id="action_rfid_project_template" model="ir.actions.act_window">
+        <field name="name">Installation Project Templates</field>
+        <field name="res_model">project.project</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('is_template', '=', True)]</field>
+        <field name="context">{'default_is_template': True, 'default_allow_timesheets': True}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smart_button">
+                Create an installation project template
+            </p>
+            <p>
+                A template holds the implementation task list (delivery, installation,
+                configuration, commissioning, training, acceptance) copied into every new
+                installation site. Set the <strong>Task Kind</strong> on each task so the site
+                can drive it, then point a Kit product - or the company default in
+                <strong>Settings</strong> - at this template.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_rfid_project_templates" name="Project Templates"
+        parent="menu_rfid_configuration" action="action_rfid_project_template"
+        sequence="20"/>
+
+    <record id="action_rfid_kit_products" model="ir.actions.act_window">
+        <field name="name">Kit &amp; Subscription Products</field>
+        <field name="res_model">product.template</field>
+        <field name="view_mode">list,kanban,form</field>
+        <field name="domain">[('rfid_offer_type', 'in', ('starter_kit', 'subscription'))]</field>
+        <field name="context">{'default_rfid_offer_type': 'starter_kit', 'default_sale_ok': True}</field>
+    </record>
+
+    <menuitem id="menu_rfid_kit_products" name="Kit Products"
+        parent="menu_rfid_configuration" action="action_rfid_kit_products"
+        sequence="30"/>
 </nwos>

@@ -4,7 +4,7 @@
         <field name="name">nextwaves.kit.site.list</field>
         <field name="model">rfid.service.site</field>
         <field name="arch" type="xml">
-            <list create="0" decoration-danger="state == 'suspended'"
+            <list decoration-danger="state == 'suspended'"
                 decoration-success="state == 'active'"
                 decoration-warning="state in ('awaiting_payment', 'awaiting_acceptance')">
                 <field name="name"/>
@@ -43,7 +43,7 @@
         <field name="name">nextwaves.kit.site.form</field>
         <field name="model">rfid.service.site</field>
         <field name="arch" type="xml">
-            <form string="Nextwaves Kit Site" create="0">
+            <form string="Nextwaves Kit Site">
                 <header>
                     <button name="action_refresh_payment" type="object" string="Check Payment"
                         class="btn-primary" invisible="state != 'awaiting_payment'"/>
@@ -63,7 +63,9 @@
                     </div>
                     <div class="oe_title"><label for="site_name"/><h1><field name="site_name"/></h1><div><field name="name" readonly="1"/></div></div>
                     <div class="alert alert-info" role="alert" invisible="sale_order_id">
-                        Create sites from the Kit Installation Sites tab of a Sales Order.
+                        Pick the quotation this site belongs to. The customer and the installation
+                        address are filled in from it; you can also create sites directly from the
+                        <strong>Kit Installation Sites</strong> tab of a quotation.
                     </div>
                     <div class="alert alert-warning" role="alert"
                         invisible="not project_template_conflict">
@@ -78,13 +80,19 @@
                             <field name="company_id" groups="base.group_multi_company" readonly="1"/>
                         </group>
                         <group>
-                            <field name="sale_order_id" readonly="1"/>
+                            <field name="sale_order_id"
+                                readonly="state != 'draft'"
+                                domain="[('state', 'in', ('draft', 'sent'))]"
+                                options="{'no_create': True}"/>
+                            <field name="planned_delivery_date"/>
+                            <field name="planned_installation_date"/>
                             <field name="kit_product_ids" widget="many2many_tags" readonly="1"/>
                             <field name="project_template_id"
                                 readonly="state != 'draft'"
                                 domain="[('is_template', '=', True)]"/>
                             <field name="project_template_conflict" invisible="1"/>
-                            <field name="installation_project_id" readonly="1"/>
+                            <field name="installation_project_id" readonly="1"
+                                invisible="not installation_project_id"/>
                         </group>
                     </group>
                     <notebook>
@@ -99,8 +107,8 @@
                         </page>
                         <page string="Planning" name="planning">
                             <group>
-                                <group><field name="requested_delivery_date"/><field name="planned_delivery_date"/><field name="actual_delivery_date" readonly="1"/></group>
-                                <group><field name="planned_installation_date"/><field name="activation_date"/><field name="delivery_completed"/></group>
+                                <group><field name="requested_delivery_date"/><field name="actual_delivery_date" readonly="1"/></group>
+                                <group><field name="activation_date"/><field name="delivery_completed"/></group>
                             </group>
                         </page>
                         <page string="Payment &amp; Delivery" name="payment_delivery">
@@ -130,6 +138,16 @@
         <field name="res_model">rfid.service.site</field>
         <field name="view_mode">list,form</field>
         <field name="search_view_id" ref="view_rfid_site_search"/>
-        <field name="context">{'create': False}</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smart_button">
+                Create an installation site
+            </p>
+            <p>
+                A site is the place where a Kit is delivered and installed. Pick the
+                quotation it belongs to, then assign its Kit Item lines to it. Sites can
+                also be created straight from the Kit Installation Sites tab of a quotation.
+            </p>
+        </field>
     </record>
 </nwos>
