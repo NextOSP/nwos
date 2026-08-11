@@ -1,3 +1,10 @@
+# TEMPLATE - the paths and user below are placeholders for a checkout at
+# /home/ubuntu/nwos. Do not copy this into /etc/systemd/system by hand; run
+#
+#     sudo sh scripts/install-selfupdate.sh
+#
+# from the repository root, which generates the unit with the real path and user.
+
 [Unit]
 Description=Pull and deploy the latest NWOS image
 After=docker.service network-online.target

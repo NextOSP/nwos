@@ -77,18 +77,21 @@ On a change it: backs up the database → stops `web`/`cron` → runs `-u all` �
 starts the stack → prunes old images. When the digest is unchanged it exits 0
 immediately, so the timer stays green.
 
+From the repository root:
+
 ```bash
-sudo cp scripts/systemd/nwos-selfupdate.* /etc/systemd/system/
-sudo systemctl daemon-reload
-sudo systemctl enable --now nwos-selfupdate.timer
+sudo sh scripts/install-selfupdate.sh    # generates the unit for THIS checkout
 
 systemctl list-timers nwos-selfupdate    # when it next runs
 journalctl -u nwos-selfupdate -f         # watch a rollout
 sudo systemctl start nwos-selfupdate     # force a check now
 ```
 
-The unit assumes `/home/ubuntu/nwos`; edit `WorkingDirectory`/`NWOS_DIR` if you
-cloned elsewhere. Interval is `OnUnitActiveSec=10min` in the timer.
+The installer writes `WorkingDirectory`, `NWOS_DIR`, and `User` from the actual
+checkout path and owner, so it works whether you cloned to `/root/nwos`,
+`/home/ubuntu/nwos`, or anywhere else. Re-run it after moving the checkout.
+Do not copy `scripts/systemd/nwos-selfupdate.service` by hand — it is a template
+with placeholder paths. Interval is `OnUnitActiveSec=10min` in the timer.
 
 The script `git reset --hard`s the checkout so compose/config changes ship with
 the image — **but only when the working tree is clean**. Keep server-specific
