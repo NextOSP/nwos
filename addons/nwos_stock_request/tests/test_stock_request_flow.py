@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # Part of NextOSP. See LICENSE file for full copyright and licensing details.
+from nwos.exceptions import UserError
 from nwos.tests.common import TransactionCase, tagged
 
 
@@ -60,6 +61,36 @@ class TestStockRequestFlow(TransactionCase):
                          "A purchase order should be linked to the request")
         self.assertEqual(req.purchase_order_ids.partner_id, self.vendor)
         self.assertEqual(req.purchase_order_ids.stock_request_id, req)
+
+    def test_generate_purchase_is_idempotent(self):
+        """A second click never duplicates what was already sourced."""
+        req = self._new_request()
+        req.action_submit()
+        req.with_user(self.approver).action_approve()
+        req.action_generate_purchase()
+        self.assertTrue(all(req.line_ids.mapped('is_sourced')))
+        self.assertEqual(req.pending_source_count, 0,
+                         "Nothing left to source -> the button is hidden")
+        with self.assertRaises(UserError):
+            req.action_generate_purchase()
+        self.assertEqual(len(req.purchase_order_ids), 1)
+
+    def test_replenish_line_is_traced_back(self):
+        """A Replenish line links its procurement results back to the request."""
+        self.product.route_ids = [
+            (6, 0, self.env.ref('purchase_stock.route_warehouse0_buy').ids)]
+        req = self._new_request()
+        req.line_ids.source_action = 'replenish'
+        req.action_submit()
+        req.with_user(self.approver).action_approve()
+        req.action_generate_purchase()
+        self.assertEqual(req.state, 'done')
+        self.assertTrue(req.stock_reference_id,
+                        "Replenishment must be tied to a stock reference")
+        # The Buy route turned the procurement into a PO: it belongs to the request
+        self.assertEqual(len(req.purchase_order_ids), 1)
+        self.assertEqual(req.purchase_order_ids.stock_request_id, req)
+        self.assertEqual(req.pending_source_count, 0)
 
     def test_fulfillment_lifecycle(self):
         """Delivery/payment status tracks the linked PO lifecycle."""

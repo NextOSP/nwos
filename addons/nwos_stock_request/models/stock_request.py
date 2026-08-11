@@ -76,6 +76,12 @@ class StockRequest(models.Model):
     picking_ids = fields.Many2many(
         'stock.picking', string='Receipts', compute='_compute_pickings')
     picking_count = fields.Integer(compute='_compute_pickings')
+    stock_reference_id = fields.Many2one(
+        'stock.reference', string='Stock Reference', copy=False, readonly=True,
+        help="Ties the moves created by the Replenish lines back to this request.")
+    pending_source_count = fields.Integer(
+        string='Lines To Source', compute='_compute_pending_source_count',
+        help="Technical: items that still have to be purchased or replenished.")
 
     # Downstream purchase lifecycle (from the linked POs / receipts / bills)
     fulfillment_state = fields.Selection([
@@ -126,22 +132,38 @@ class StockRequest(models.Model):
         for request in self:
             request.purchase_order_count = len(request.purchase_order_ids)
 
-    @api.depends('purchase_order_ids.picking_ids')
+    @api.depends('line_ids.product_qty', 'line_ids.is_sourced')
+    def _compute_pending_source_count(self):
+        for request in self:
+            request.pending_source_count = len(request._lines_to_source())
+
+    @api.depends('purchase_order_ids.picking_ids',
+                 'stock_reference_id.move_ids.picking_id')
     def _compute_pickings(self):
         for request in self:
-            pickings = request.purchase_order_ids.picking_ids
+            pickings = request.purchase_order_ids.picking_ids \
+                | request.stock_reference_id.picking_ids
             request.picking_ids = pickings
             request.picking_count = len(pickings)
 
     @api.depends('purchase_order_ids.state', 'purchase_order_ids.receipt_status',
-                 'purchase_order_ids.invoice_ids.payment_state')
+                 'purchase_order_ids.invoice_ids.payment_state',
+                 'purchase_order_ids.picking_ids.state',
+                 'stock_reference_id.move_ids.picking_id.state')
     def _compute_fulfillment(self):
         for request in self:
             pos = request.purchase_order_ids
             confirmed = pos.filtered(lambda p: p.state == 'purchase')
             # --- delivery progress ---
             if not pos:
-                request.fulfillment_state = False
+                # Replenish-only request: follow the moves it launched instead.
+                pickings = request.picking_ids
+                if not pickings:
+                    request.fulfillment_state = False
+                elif all(pk.state in ('done', 'cancel') for pk in pickings):
+                    request.fulfillment_state = 'received'
+                else:
+                    request.fulfillment_state = 'waiting'
             elif not confirmed:
                 request.fulfillment_state = 'rfq'
             elif all(p.receipt_status == 'full' for p in confirmed):
@@ -264,26 +286,49 @@ class StockRequest(models.Model):
     # ------------------------------------------------------------------
     # Purchase / Replenishment generation (buyer-triggered)
     # ------------------------------------------------------------------
+    def _lines_to_source(self):
+        """Lines that still have to be turned into a PO or a procurement."""
+        self.ensure_one()
+        return self.line_ids.filtered(
+            lambda l: l.product_qty > 0 and not l.is_sourced)
+
+    def _get_stock_reference(self):
+        """The stock.reference tying replenishment moves back to this request."""
+        self.ensure_one()
+        if not self.stock_reference_id:
+            self.stock_reference_id = self.env['stock.reference'].create({
+                'name': self.name,
+            })
+        return self.stock_reference_id
+
     def action_generate_purchase(self):
         """Buyer action.
 
         * Purchase lines  -> a real draft RFQ/PO per vendor, linked back here.
-        * Replenish lines -> procurement through the product's own routes.
+        * Replenish lines -> procurement through the product's own routes, tied
+          to this request by a stock reference so the resulting receipts /
+          manufacturing orders stay visible from here.
 
         A Purchase line needs a vendor (you cannot raise a PO without one);
         lines missing a vendor are reported so nothing is silently skipped.
+        Lines already sourced are skipped, so clicking twice never duplicates.
         """
         self.ensure_one()
         if self.state not in ('approved', 'done'):
             raise UserError(_("Only approved requests can be purchased."))
-        spec_only = self.line_ids.filtered(lambda l: not l.product_id)
+
+        active = self._lines_to_source()
+        if not active:
+            raise UserError(_(
+                "Everything on this request has already been sourced."))
+
+        spec_only = active.filtered(lambda l: not l.product_id)
         if spec_only:
             raise UserError(_(
                 "These lines have no product yet — create the product from the "
                 "specification first:\n%s",
                 "\n".join('- %s' % (l.name or '') for l in spec_only)))
 
-        active = self.line_ids.filtered(lambda l: l.product_qty > 0)
         buy_lines = active.filtered(lambda l: l.source_action == 'buy')
         replenish_lines = active.filtered(lambda l: l.source_action == 'replenish')
 
@@ -298,8 +343,9 @@ class StockRequest(models.Model):
         by_vendor = defaultdict(lambda: self.env['stock.request.line'])
         for line in buy_lines:
             by_vendor[line._effective_vendor()] |= line
+        new_orders = self.env['purchase.order']
         for vendor, lines in by_vendor.items():
-            self.env['purchase.order'].create({
+            new_orders |= self.env['purchase.order'].create({
                 'partner_id': vendor.id,
                 'origin': self.name,
                 'stock_request_id': self.id,
@@ -308,6 +354,7 @@ class StockRequest(models.Model):
 
         # 2) Replenish lines go through their product routes
         if replenish_lines:
+            reference = self._get_stock_reference()
             Procurement = self.env['stock.rule'].Procurement
             procurements = [Procurement(
                 line.product_id,
@@ -320,11 +367,58 @@ class StockRequest(models.Model):
                 line._prepare_procurement_values(route=line.route_id),
             ) for line in replenish_lines]
             self.env['stock.rule'].run(procurements)
+            # A Buy route turns the procurement into a PO: adopt it as well so
+            # the request keeps a single view of everything it triggered.
+            adopted = self.env['purchase.order'].search([
+                ('reference_ids', 'in', reference.ids),
+                ('stock_request_id', '=', False),
+            ])
+            adopted.stock_request_id = self.id
+            new_orders |= adopted
 
-        if not by_vendor and not replenish_lines:
-            raise UserError(_("There is nothing to purchase on this request."))
+        active.is_sourced = True
         self.state = 'done'
-        return self.action_view_purchase_orders()
+        self._post_sourcing_summary(new_orders, replenish_lines)
+        if new_orders:
+            return self.action_view_purchase_orders()
+        if self.picking_ids:
+            return self.action_view_pickings()
+        return self._notify_replenishment_launched()
+
+    def _post_sourcing_summary(self, orders, replenish_lines):
+        """Log what the click actually produced — POs and/or replenishments."""
+        self.ensure_one()
+        parts = []
+        if orders:
+            parts.append(_("Purchase orders: %s",
+                           ", ".join(orders.mapped('name'))))
+        if replenish_lines:
+            parts.append(_("Replenished through product routes:\n%s", "\n".join(
+                '- %s (%s %s)' % (line.name or line.product_id.display_name,
+                                  line.product_qty,
+                                  (line.product_uom or line.product_id.uom_id).name)
+                for line in replenish_lines)))
+        if self.picking_ids:
+            parts.append(_("Transfers: %s",
+                           ", ".join(self.picking_ids.mapped('name'))))
+        if parts:
+            self.message_post(body="<br/>".join(parts))
+
+    def _notify_replenishment_launched(self):
+        """Replenishment produced no document to open (e.g. served from stock)."""
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.client',
+            'tag': 'display_notification',
+            'params': {
+                'title': _("Replenishment launched"),
+                'message': _(
+                    "The request was sourced through the product routes. "
+                    "No purchase order was needed."),
+                'type': 'success',
+                'next': {'type': 'ir.actions.act_window_close'},
+            },
+        }
 
     def action_view_purchase_orders(self):
         self.ensure_one()
@@ -419,6 +513,10 @@ class StockRequestLine(models.Model):
         string='Est. Subtotal', compute='_compute_price_subtotal', store=True)
     currency_id = fields.Many2one(
         related='request_id.currency_id', readonly=True)
+    is_sourced = fields.Boolean(
+        string='Sourced', readonly=True, copy=False,
+        help="This item has already been turned into a purchase order or a "
+             "replenishment; it is skipped by Generate Purchase.")
     route_id = fields.Many2one(
         'stock.route', string='Route',
         domain="[('product_selectable', '=', True)]",
@@ -463,6 +561,7 @@ class StockRequestLine(models.Model):
             'warehouse_id': self.request_id.warehouse_id,
             'route_ids': route or self.route_id,
             'date_planned': self.request_id.date_required or fields.Datetime.now(),
+            'reference_ids': self.request_id._get_stock_reference(),
         }
 
     def _prepare_po_line_vals(self):

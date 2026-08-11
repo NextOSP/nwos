@@ -2,7 +2,7 @@
 # Part of NextOSP. See LICENSE file for full copyright and licensing details.
 {
     'name': 'Stock Request',
-    'version': '1.1',
+    'version': '1.2',
     'category': 'Inventory/Purchase',
     'summary': 'Internal stock requests with approval, feeding Replenishment and Purchase',
     'description': """
