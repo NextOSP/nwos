@@ -37,7 +37,7 @@ services:
     command: ["server", "-c", "/etc/nwos/nwos.conf", "--max-cron-threads=0"]
     volumes:
       - nwos-data:/var/lib/nwos
-      - ./docker/nwos.conf:/etc/nwos/nwos.conf:ro
+      - ${NWOS_CONF:-./docker/nwos.conf}:/etc/nwos/nwos.conf:ro
     healthcheck:
       test: ["CMD-SHELL", "curl -fsS http://localhost:9600/web/login >/dev/null || exit 1"]
       interval: 30s
@@ -61,7 +61,7 @@ services:
     command: ["server", "-c", "/etc/nwos/nwos.conf", "--workers=0", "--max-cron-threads=2", "--no-http"]
     volumes:
       - nwos-data:/var/lib/nwos
-      - ./docker/nwos.conf:/etc/nwos/nwos.conf:ro
+      - ${NWOS_CONF:-./docker/nwos.conf}:/etc/nwos/nwos.conf:ro
     restart: unless-stopped
     networks: [nwos]
 

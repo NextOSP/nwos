@@ -1,0 +1,14 @@
+[Unit]
+Description=Pull and deploy the latest NWOS image
+After=docker.service network-online.target
+Requires=docker.service
+
+[Service]
+Type=oneshot
+User=ubuntu
+WorkingDirectory=/home/ubuntu/nwos
+Environment=NWOS_DIR=/home/ubuntu/nwos
+ExecStart=/bin/sh /home/ubuntu/nwos/scripts/nwos-selfupdate.sh
+TimeoutStartSec=1800
+StandardOutput=journal
+StandardError=journal

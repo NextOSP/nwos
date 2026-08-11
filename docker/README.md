@@ -67,6 +67,34 @@ docker compose pull && docker compose up -d --no-build
 docker compose build && docker compose up -d
 ```
 
+## Self-updating server (pull-based)
+
+`scripts/nwos-selfupdate.sh` on a systemd timer polls GHCR and rolls out a new
+image only when the digest changes. No inbound SSH, no GitHub secrets — the
+server pulls rather than CI pushing.
+
+On a change it: backs up the database → stops `web`/`cron` → runs `-u all` →
+starts the stack → prunes old images. When the digest is unchanged it exits 0
+immediately, so the timer stays green.
+
+```bash
+sudo cp scripts/systemd/nwos-selfupdate.* /etc/systemd/system/
+sudo systemctl daemon-reload
+sudo systemctl enable --now nwos-selfupdate.timer
+
+systemctl list-timers nwos-selfupdate    # when it next runs
+journalctl -u nwos-selfupdate -f         # watch a rollout
+sudo systemctl start nwos-selfupdate     # force a check now
+```
+
+The unit assumes `/home/ubuntu/nwos`; edit `WorkingDirectory`/`NWOS_DIR` if you
+cloned elsewhere. Interval is `OnUnitActiveSec=10min` in the timer.
+
+The script `git reset --hard`s the checkout so compose/config changes ship with
+the image — **but only when the working tree is clean**. Keep server-specific
+settings in the two untracked files (`.env` and `docker/nwos.local.conf`) rather
+than editing tracked ones, or the update will skip the checkout refresh and warn.
+
 ## CI/CD
 
 `.github/workflows/ci.yml` runs on push to `master`:
@@ -74,7 +102,10 @@ docker compose build && docker compose up -d
 1. **sanity** — deps install, CLI starts, YAML/shell/README checks
 2. **container** — builds and pushes `ghcr.io/nextosp/nwos:latest` and `:<sha>`
 3. **deploy** — SSHes to the server, resets the checkout to the built SHA,
-   `docker compose pull && up -d`, runs `-u all`, then health-checks over HTTPS
+   `docker compose pull && up -d`, runs `-u all`, then health-checks over HTTPS.
+   Skipped automatically when `DEPLOY_HOST` is unset — leave it that way if you
+   use the pull-based self-update timer above, and pick one or the other rather
+   than running both.
 
 Required repository secrets:
 

@@ -60,6 +60,8 @@ pnpm-debug.log*
 /data/
 /logs/
 /backups/
+docker/nwos.local.conf
+docker-compose.override.yml
 /False
 *.log
 *.pid
