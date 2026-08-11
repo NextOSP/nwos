@@ -630,6 +630,9 @@ class Database(http.Controller):
                     ('company_logo', 'logo'),
                     ('company_logo_white', 'logo_white'),
                 ):
+                    # logo_white only exists when web_carbon is installed
+                    if company_field not in env['res.company']._fields:
+                        continue
                     upload = post.get(upload_name)
                     if upload and hasattr(upload, 'read'):
                         image_data = upload.read(5 * 1024 * 1024 + 1)

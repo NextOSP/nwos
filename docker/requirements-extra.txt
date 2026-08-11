@@ -1,6 +1,7 @@
 # Runtime deps imported by addons but not listed in the top-level requirements.txt.
 # Installed by the Dockerfile on top of requirements.txt.
 cbor2            # auth_passkey (vendored webauthn)
+asn1crypto       # auth_passkey (vendored webauthn, android-key attestation)
 openpyxl         # xlsx import/export
 phonenumbers     # phone_validation
 pdfminer.six     # PDF text extraction (account/documents)

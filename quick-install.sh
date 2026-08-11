@@ -335,6 +335,8 @@ deploy_native() {
   python3 -m venv "$NWOS_DIR/venv"
   "$NWOS_DIR/venv/bin/pip" install -q --upgrade pip wheel setuptools
   "$NWOS_DIR/venv/bin/pip" install -q -r "$NWOS_DIR/requirements.txt"
+  # Runtime deps imported by addons (auth_passkey, base_import, ...) but not in requirements.txt
+  "$NWOS_DIR/venv/bin/pip" install -q -r "$NWOS_DIR/docker/requirements-extra.txt"
 
   write_nwos_conf "/etc/nwos/nwos.conf" "$NWOS_DIR/addons,$NWOS_DIR/nwos/addons" "$NWOS_DATA_DIR" "localhost"
   sed -i "s#^logfile.*#logfile = /var/log/nwos/nwos.log#" /etc/nwos/nwos.conf 2>/dev/null || \
