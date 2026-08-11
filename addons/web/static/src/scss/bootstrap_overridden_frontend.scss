@@ -5,8 +5,13 @@
 // customization (eg. form-range)
 
 // gray-color-variables
+// Declared here (from the $o-* palette, which is loaded by primary_variables.scss)
+// because BS' own _variables.scss only comes later in the frontend bundle.
 $white: #fff !default;
+$gray-200: $o-gray-200 !default;
 $gray-400: #ced4da !default;
+$gray-900: $o-gray-900 !default;
+$black: $o-black !default;
 
 // color-variables
 $blue: #0d6efd !default;
