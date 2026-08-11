@@ -133,15 +133,28 @@ duration. Narrow it to the modules you actually changed if that matters.
 `proxy_mode = True` is already set in `docker/nwos.conf`, so NPM must send
 `X-Forwarded-For` / `X-Forwarded-Proto` (it does by default).
 
+Attach the NPM container to this stack's network so you can proxy by container
+name and keep the host ports private:
+
+```bash
+docker network ls | grep nwos          # <project>_nwos, e.g. nwos_nwos
+docker network connect nwos_nwos <npm-container-name>
+```
+
 **Details tab**
 
-- Scheme: `http`
-- Forward Hostname / IP: the Docker host IP (or `web` if NPM shares this compose network — see the `networks:` note at the bottom of `docker-compose.yml`)
-- Forward Port: `9600`
-- Websockets Support: **on**
-- Block Common Exploits: on
+| Field | Value |
+| ----- | ----- |
+| Domain Names | your hostname |
+| Scheme | `http` |
+| Forward Hostname / IP | `web` (or the Docker host IP if NPM is not on this network) |
+| Forward Port | `9600` |
+| Websockets Support | **on** |
+| Block Common Exploits | on |
 
-**Advanced tab** — route the websocket to the gevent port and lift the upload limit:
+**Advanced tab** — route the websocket to the gevent port and lift the upload
+limit. Do **not** add a `location /` block here: NPM generates one from the
+Details tab and a second makes nginx fail with `duplicate location "/"`.
 
 ```nginx
 client_max_body_size 500m;
@@ -150,27 +163,34 @@ proxy_connect_timeout 720s;
 proxy_send_timeout 720s;
 
 location /websocket {
-    proxy_pass http://<host-ip>:9601;
+    proxy_pass http://web:9601;
     proxy_http_version 1.1;
     proxy_set_header Upgrade $http_upgrade;
-    proxy_set_header Connection $connection_upgrade;
+    proxy_set_header Connection "upgrade";
     proxy_set_header Host $host;
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_read_timeout 720s;
 }
 
-location / {
-    proxy_pass http://<host-ip>:9600;
+location /longpolling {
+    proxy_pass http://web:9601;
     proxy_set_header Host $host;
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     proxy_set_header X-Forwarded-Proto $scheme;
-    proxy_redirect off;
 }
 ```
 
-Replace `<host-ip>` with the same value used in the Details tab. Getting the
-`/websocket` block right is what makes NextBot's realtime streaming and Discuss
-work — without it the bus falls back to polling.
+If NPM is not on this network, replace `web` with the Docker host IP in both
+`proxy_pass` lines. Getting the `/websocket` block right is what makes NextBot's
+realtime streaming and Discuss work — without it the bus falls back to polling.
+
+Verify:
+
+```bash
+curl -s -o /dev/null -w "%{http_code}\n" https://<your-host>/web/login
+curl -s -o /dev/null -w "%{http_code}\n" https://<your-host>/websocket/health
+```
 
 ## Notes
 
