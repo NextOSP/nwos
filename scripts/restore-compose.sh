@@ -8,4 +8,4 @@ fi
 
 backup_file="$1"
 docker compose exec -T db pg_restore --clean --if-exists --no-owner --no-acl \
-    -U "${POSTGRES_USER:-nwos}" -d "${POSTGRES_DB:-nwos}" < "${backup_file}"
+    -U "${POSTGRES_USER:-nwos}" -d "${NWOS_DB_NAME:-nwos}" < "${backup_file}"

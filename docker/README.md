@@ -13,14 +13,25 @@ Runs the whole stack: Postgres + NWOS web workers + a separate cron worker.
 All three are overridable in `.env` (`NWOS_HTTP_PORT`, `NWOS_GEVENT_PORT`, `POSTGRES_HOST_PORT`).
 The *container-internal* ports stay 9600/9601 and are set in `docker/nwos.conf`.
 
-## First run
+## First run — server (uses the CI-built image)
 
 ```bash
 cp .env.example .env          # adjust ports/credentials if needed
 $EDITOR docker/nwos.conf      # change admin_passwd
-docker compose build
+
+echo "$GHCR_TOKEN" | docker login ghcr.io -u <github-user> --password-stdin
+docker compose pull
 docker compose up -d
 docker compose logs -f web
+```
+
+## First run — local dev (builds from source)
+
+```bash
+cp .env.example .env
+sed -i '' 's|^NWOS_IMAGE=.*|NWOS_IMAGE=nwos:local|' .env
+docker compose build
+docker compose up -d
 ```
 
 Then open `http://<host>:9600` and create a database from the manager.
@@ -49,9 +60,39 @@ docker compose exec db psql -U nwos -d nwos
 docker compose exec db pg_dump -U nwos -Fc nwos > nwos.dump
 docker run --rm -v flectra_nwos-data:/data -v "$PWD:/out" alpine tar czf /out/filestore.tgz -C /data .
 
-# rebuild after code changes
+# deploy the latest CI image by hand (same thing the CD job does)
+docker compose pull && docker compose up -d --no-build
+
+# rebuild locally after code changes
 docker compose build && docker compose up -d
 ```
+
+## CI/CD
+
+`.github/workflows/ci.yml` runs on push to `master`:
+
+1. **sanity** — deps install, CLI starts, YAML/shell/README checks
+2. **container** — builds and pushes `ghcr.io/nextosp/nwos:latest` and `:<sha>`
+3. **deploy** — SSHes to the server, resets the checkout to the built SHA,
+   `docker compose pull && up -d`, runs `-u all`, then health-checks over HTTPS
+
+Required repository secrets:
+
+| Secret | Value |
+| ------ | ----- |
+| `DEPLOY_HOST` | server IP / hostname |
+| `DEPLOY_USER` | ssh user (e.g. `ubuntu`) |
+| `DEPLOY_SSH_KEY` | private key whose public half is in the server's `authorized_keys` |
+| `GHCR_READ_TOKEN` | GitHub PAT with `read:packages`, used by the server to pull |
+| `DEPLOY_HEALTH_HOST` | public hostname the health check curls (the NPM domain) |
+
+Server prerequisites: Docker + compose plugin installed, the repo cloned to
+`~/nwos` (or set `DEPLOY_PATH`), and `.env` + `docker/nwos.conf` already
+configured. Those two files are **not** in git, so they survive `git reset --hard`.
+
+The deploy runs `-u all`, which upgrades every installed module. It is the safe
+default but it is slow on a large database and it takes the site down for the
+duration. Narrow it to the modules you actually changed if that matters.
 
 ## Nginx Proxy Manager
 

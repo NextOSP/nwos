@@ -19,7 +19,7 @@ services:
     networks: [nwos]
 
   web:
-    image: ${NWOS_IMAGE:-nwos:local}
+    image: ${NWOS_IMAGE:-ghcr.io/nextosp/nwos:latest}
     build:
       context: .
     depends_on:
@@ -48,7 +48,7 @@ services:
     networks: [nwos]
 
   cron:
-    image: ${NWOS_IMAGE:-nwos:local}
+    image: ${NWOS_IMAGE:-ghcr.io/nextosp/nwos:latest}
     build:
       context: .
     depends_on:
