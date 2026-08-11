@@ -145,7 +145,26 @@ jobs:
       cancel-in-progress: false
 
     steps:
+      - name: Check deploy configuration
+        id: cfg
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_HEALTH_HOST: ${{ secrets.DEPLOY_HEALTH_HOST }}
+        run: |
+          if [ -n "${DEPLOY_HOST}" ]; then
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::DEPLOY_HOST is not set - skipping deploy. See docker/README.md for the required secrets."
+          fi
+          if [ -n "${DEPLOY_HEALTH_HOST}" ]; then
+            echo "health=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "health=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Deploy over SSH
+        if: steps.cfg.outputs.enabled == 'true'
         uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.DEPLOY_HOST }}
@@ -178,6 +197,7 @@ jobs:
           GHCR_TOKEN: ${{ secrets.GHCR_READ_TOKEN }}
 
       - name: Health check
+        if: steps.cfg.outputs.enabled == 'true' && steps.cfg.outputs.health == 'true'
         run: |
           for i in $(seq 1 30); do
             code=$(curl -s -o /dev/null -w '%{http_code}' \
