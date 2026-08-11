@@ -38,6 +38,7 @@
                         </div>
                     </div>
                     <div class="o_nextbot_chat_header__end">
+                        <span class="visually-hidden" role="status" aria-live="polite" t-esc="liveAnnouncement"/>
                         <span t-if="state.runConnection === 'reconnecting'" class="o_nextbot_connection_notice" role="status">
                             Reconnecting…
                         </span>
@@ -99,7 +100,7 @@
                         </div>
                     </section>
 
-                    <section t-else="" class="o_nextbot_messages" aria-live="polite" aria-relevant="additions text">
+                    <section t-else="" class="o_nextbot_messages" aria-label="Conversation">
                         <div class="o_nextbot_history_loader">
                             <button t-if="state.hasMoreMessages" type="button" class="o_nextbot_secondary_button"
                                     t-att-disabled="state.loadingOlder || isRunning"
@@ -130,6 +131,7 @@
                     attachments="state.attachments"
                     running="isRunning"
                     sending="state.sending"
+                    focusToken="state.composerFocusToken"
                     onInput.bind="(value) => state.draft = value"
                     onFiles.bind="addFiles"
                     onRemoveAttachment.bind="removeAttachment"

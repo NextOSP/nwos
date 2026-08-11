@@ -1,6 +1,6 @@
 /** @odoo-module **/
 
-import { Component, useRef, useState } from "@nwos/owl";
+import { Component, useEffect, useRef, useState } from "@nwos/owl";
 
 import {
     eventKind,
@@ -482,7 +482,14 @@ export class MessageBubble extends Component {
     }
 
     get body() {
-        return safeMarkdown(this.props.message?.content || "");
+        // Every streaming delta re-renders the whole visible list, so without
+        // this the markdown of every settled message is re-parsed dozens of
+        // times a second. Only the message actually receiving text pays.
+        const content = this.props.message?.content || "";
+        if (this._body?.content !== content) {
+            this._body = { content, html: safeMarkdown(content) };
+        }
+        return this._body.html;
     }
 
     get time() {
@@ -572,6 +579,27 @@ export class ActivityInspector extends Component {
         "onOpenRecord",
     ];
 
+    get tabs() {
+        return [
+            { id: "activity", label: "Activity", count: this.props.events.length },
+            { id: "tools", label: "Tools", count: this.props.tools.length },
+            { id: "sources", label: "Sources", count: this.props.sources.length },
+            { id: "artifacts", label: "Artifacts", count: this.props.artifacts.length },
+        ];
+    }
+
+    /** Arrow keys move between tabs, as the tablist pattern expects. */
+    onTabKeydown(event) {
+        const step = { ArrowRight: 1, ArrowLeft: -1 }[event.key];
+        if (!step) return;
+        event.preventDefault();
+        const ids = this.tabs.map((tab) => tab.id);
+        const index = ids.indexOf(this.props.tab);
+        const next = ids[(index + step + ids.length) % ids.length];
+        this.props.onSelectTab(next);
+        event.currentTarget.querySelector(`#o_nextbot_tab_${next}`)?.focus();
+    }
+
     get items() {
         if (this.props.tab === "tools") return this.props.tools;
         if (this.props.tab === "sources") return this.props.sources;
@@ -641,6 +669,7 @@ export class NextBotComposer extends Component {
         "running",
         "sending",
         "disabled?",
+        "focusToken?",
         "onInput",
         "onFiles",
         "onRemoveAttachment",
@@ -652,6 +681,32 @@ export class NextBotComposer extends Component {
         this.state = useState({ dragging: false });
         this.inputRef = useRef("input");
         this.fileRef = useRef("files");
+
+        // The textarea auto-grows as you type, but the draft also changes from
+        // outside: cleared after a send, filled by a welcome starter. Without
+        // this the box kept the height of the message that was just sent, or
+        // stayed one line high around a three-line starter prompt.
+        useEffect(
+            () => this.resizeInput(),
+            () => [this.props.draft]
+        );
+        // The workspace bumps focusToken whenever the caret belongs back in the
+        // composer (starter clicked, message sent) — putting focus and caret at
+        // the end of the draft so typing continues without a click.
+        useEffect(
+            (token) => {
+                if (token) this.focusInput();
+            },
+            () => [this.props.focusToken]
+        );
+    }
+
+    focusInput() {
+        const element = this.inputRef.el;
+        if (!element || element.disabled) return;
+        element.focus();
+        const end = element.value.length;
+        element.setSelectionRange(end, end);
     }
 
     formatBytes(value) {

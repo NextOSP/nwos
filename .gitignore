@@ -12,6 +12,7 @@ Thumbs.db
 # Local environment and secrets
 .env
 .env.*
+!.env.example
 *.secret
 /nwos.conf
 /start.sh

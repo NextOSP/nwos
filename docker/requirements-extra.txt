@@ -1,0 +1,9 @@
+# Runtime deps imported by addons but not listed in the top-level requirements.txt.
+# Installed by the Dockerfile on top of requirements.txt.
+cbor2            # auth_passkey (vendored webauthn)
+openpyxl         # xlsx import/export
+phonenumbers     # phone_validation
+pdfminer.six     # PDF text extraction (account/documents)
+beautifulsoup4   # html parsing in mail / web_editor
+python-magic     # mimetype sniffing
+websocket-client # bus/websocket tests + iot connectors

@@ -57,7 +57,9 @@
                 </label>
             </div>
             <div class="o_nextbot_history__label">Recent</div>
-            <div class="o_nextbot_conversation_list" role="listbox" aria-label="Recent conversations">
+            <!-- Plain list, not a listbox: every row holds two buttons and a
+                 menu, and `option` may not contain interactive descendants. -->
+            <div class="o_nextbot_conversation_list" role="list" aria-label="Recent conversations">
                 <t t-if="props.loading">
                     <div t-foreach="[1, 2, 3, 4, 5]" t-as="skeleton" t-key="skeleton" class="o_nextbot_conversation_skeleton" aria-hidden="true">
                         <span/><span/>
@@ -73,7 +75,7 @@
                 </t>
                 <div t-foreach="props.conversations" t-as="conversation" t-key="conversation.id"
                      t-attf-class="o_nextbot_conversation {{conversation.id === props.activeId ? 'is-active' : ''}}"
-                     role="option" t-att-aria-selected="conversation.id === props.activeId ? 'true' : 'false'">
+                     role="listitem">
                     <t t-if="conversation.id === props.renamingId">
                         <label class="o_nextbot_conversation__rename">
                             <span class="visually-hidden">Conversation title</span>
@@ -86,6 +88,7 @@
                     </t>
                     <t t-else="">
                         <button class="o_nextbot_conversation__select" type="button"
+                                t-att-aria-current="conversation.id === props.activeId ? 'true' : undefined"
                                 t-on-click="() => props.onSelect(conversation.id)">
                             <span class="o_nextbot_conversation__title" t-esc="conversation.title"/>
                             <span class="o_nextbot_conversation__meta">
@@ -355,25 +358,20 @@
                     <CarbonIcon name="'close'"/>
                 </button>
             </header>
-            <nav class="o_nextbot_inspector_tabs" aria-label="Run detail categories">
-                <button t-att-class="props.tab === 'activity' ? 'is-active' : ''" type="button"
-                        t-att-aria-selected="props.tab === 'activity' ? 'true' : 'false'" t-on-click="() => props.onSelectTab('activity')">
-                    Activity <span t-esc="props.events.length"/>
-                </button>
-                <button t-att-class="props.tab === 'tools' ? 'is-active' : ''" type="button"
-                        t-att-aria-selected="props.tab === 'tools' ? 'true' : 'false'" t-on-click="() => props.onSelectTab('tools')">
-                    Tools <span t-esc="props.tools.length"/>
-                </button>
-                <button t-att-class="props.tab === 'sources' ? 'is-active' : ''" type="button"
-                        t-att-aria-selected="props.tab === 'sources' ? 'true' : 'false'" t-on-click="() => props.onSelectTab('sources')">
-                    Sources <span t-esc="props.sources.length"/>
-                </button>
-                <button t-att-class="props.tab === 'artifacts' ? 'is-active' : ''" type="button"
-                        t-att-aria-selected="props.tab === 'artifacts' ? 'true' : 'false'" t-on-click="() => props.onSelectTab('artifacts')">
-                    Artifacts <span t-esc="props.artifacts.length"/>
+            <nav class="o_nextbot_inspector_tabs" role="tablist" aria-label="Run detail categories"
+                 t-on-keydown="onTabKeydown">
+                <button t-foreach="tabs" t-as="tab" t-key="tab.id" type="button" role="tab"
+                        t-att-id="'o_nextbot_tab_' + tab.id"
+                        t-att-class="props.tab === tab.id ? 'is-active' : ''"
+                        t-att-aria-selected="props.tab === tab.id ? 'true' : 'false'"
+                        aria-controls="o_nextbot_inspector_panel"
+                        t-att-tabindex="props.tab === tab.id ? 0 : -1"
+                        t-on-click="() => props.onSelectTab(tab.id)">
+                    <t t-esc="tab.label"/> <span t-esc="tab.count"/>
                 </button>
             </nav>
-            <div class="o_nextbot_inspector__body">
+            <div class="o_nextbot_inspector__body" id="o_nextbot_inspector_panel" role="tabpanel"
+                 t-att-aria-labelledby="'o_nextbot_tab_' + props.tab">
                 <div t-if="props.running &amp;&amp; props.tab === 'activity'" class="o_nextbot_run_live" role="status">
                     <span class="o_nextbot_live_dot"/> Run in progress
                 </div>

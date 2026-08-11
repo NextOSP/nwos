@@ -101,6 +101,7 @@ export class NextBotWorkspace extends Component {
             inspectorTab: "activity",
             historyOpen: false,
             conversationMenuId: null,
+            composerFocusToken: 0,
             renamingConversationId: null,
             renameDraft: "",
             eventTransport: "cursor_polling",
@@ -123,6 +124,7 @@ export class NextBotWorkspace extends Component {
         this.stickToBottom = true;
         this.busConnected = false;
         this._globalKeydown = (event) => this.onGlobalKeydown(event);
+        this._globalClick = (event) => this.onGlobalClick(event);
         this._onBusRunEvent = (payload) => this.onBusRunEvent(payload);
         this._onBusConnect = () => this.onBusConnectionChange(true);
         this._onBusDisconnect = () => this.onBusConnectionChange(false);
@@ -130,6 +132,7 @@ export class NextBotWorkspace extends Component {
         onWillStart(() => this.bootstrap());
         onMounted(() => {
             browser.addEventListener("keydown", this._globalKeydown);
+            browser.addEventListener("click", this._globalClick);
             this.busService.subscribe(BUS_RUN_EVENT, this._onBusRunEvent);
             this.busService.addEventListener("BUS:CONNECT", this._onBusConnect);
             this.busService.addEventListener("BUS:RECONNECT", this._onBusConnect);
@@ -189,6 +192,24 @@ export class NextBotWorkspace extends Component {
             waiting_approval: "Waiting for approval",
             verifying: "Verifying the result",
         }[this.state.activeRun?.status] || "Working on your task";
+    }
+
+    /**
+     * Single, stable sentence for the screen-reader live region in the header.
+     * The message list itself is NOT a live region: streaming rewrites the
+     * assistant bubble on every delta, which made a reader re-read the whole
+     * answer several times a second. Announcing the run's state instead speaks
+     * once per transition, which is what a listener actually needs.
+     */
+    get liveAnnouncement() {
+        if (this.state.sending) return "Sending your message";
+        if (this.isRunning) return this.runStatusLabel;
+        const last = this.state.messages.at(-1);
+        if (!last || last.role === "user") return "";
+        return {
+            cancelled: "Response stopped",
+            error: "The response could not be completed",
+        }[last.status] || "NextBot answered";
     }
 
     get activityEvents() {
@@ -586,6 +607,7 @@ export class NextBotWorkspace extends Component {
             this.clearAttachments();
             this.beginRun(run, conversation.id, { steering });
             this.scrollToBottom(true);
+            this.focusComposer();
         } catch (error) {
             this.state.error = this.errorMessage(error, "Your message could not be sent.");
             for (const attachment of this.state.attachments) {
@@ -1227,6 +1249,11 @@ export class NextBotWorkspace extends Component {
 
     useStarter(prompt) {
         this.state.draft = prompt;
+        this.focusComposer();
+    }
+
+    focusComposer() {
+        this.state.composerFocusToken += 1;
     }
 
     onMessageScroll(event) {
@@ -1256,6 +1283,15 @@ export class NextBotWorkspace extends Component {
         if (browser.innerWidth < 1200) this.state.inspectorOpen = false;
     }
 
+    onGlobalClick(event) {
+        if (!this.state.conversationMenuId) return;
+        // The overflow toggle stops propagation, so a click on it never reaches
+        // here and keeps toggling normally. Anything else outside the open menu
+        // dismisses it, as every other popover in the web client does.
+        if (event.target?.closest?.(".o_nextbot_conversation_menu")) return;
+        this.state.conversationMenuId = null;
+    }
+
     closePanels() {
         this.state.historyOpen = false;
         this.state.inspectorOpen = false;
@@ -1280,6 +1316,7 @@ export class NextBotWorkspace extends Component {
         if (this.deltaFrame) browser.cancelAnimationFrame(this.deltaFrame);
         if (this.scrollFrame) browser.cancelAnimationFrame(this.scrollFrame);
         browser.removeEventListener("keydown", this._globalKeydown);
+        browser.removeEventListener("click", this._globalClick);
         this.clearAttachments();
     }
 }

@@ -15,6 +15,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         git \
         libjpeg-dev \
         libldap2-dev \
+        libmagic1 \
         libpq-dev \
         libsasl2-dev \
         libxml2-dev \
@@ -27,8 +28,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt .
+COPY docker/requirements-extra.txt .
 RUN python -m pip install --upgrade pip wheel setuptools \
-    && python -m pip install -r requirements.txt
+    && python -m pip install -r requirements.txt \
+    && python -m pip install -r requirements-extra.txt
 
 COPY . .
 RUN mkdir -p /etc/nwos /var/lib/nwos /var/log/nwos \
@@ -40,7 +43,7 @@ COPY docker/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 USER nwos
-EXPOSE 7073
+EXPOSE 9600 9601
 
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["server", "-c", "/etc/nwos/nwos.conf"]

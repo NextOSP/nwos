@@ -2,20 +2,24 @@ services:
   db:
     image: postgres:16-alpine
     environment:
-      POSTGRES_DB: nwos
-      POSTGRES_USER: nwos
-      POSTGRES_PASSWORD: nwos
+      POSTGRES_DB: ${POSTGRES_DB:-postgres}
+      POSTGRES_USER: ${POSTGRES_USER:-nwos}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-nwos}
+      PGDATA: /var/lib/postgresql/data/pgdata
     volumes:
       - postgres-data:/var/lib/postgresql/data
+    ports:
+      - "${POSTGRES_HOST_PORT:-9632}:5432"
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U nwos -d nwos"]
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-nwos} -d ${POSTGRES_DB:-postgres}"]
       interval: 10s
       timeout: 5s
       retries: 5
     restart: unless-stopped
+    networks: [nwos]
 
   web:
-    image: ${NWOS_IMAGE:-ghcr.io/nextosp/nwos:latest}
+    image: ${NWOS_IMAGE:-nwos:local}
     build:
       context: .
     depends_on:
@@ -24,17 +28,27 @@ services:
     environment:
       NWOS_DB_HOST: db
       NWOS_DB_PORT: "5432"
-      NWOS_DB_USER: nwos
+      NWOS_DB_USER: ${POSTGRES_USER:-nwos}
     ports:
-      - "7073:7073"
+      # HTTP - point Nginx Proxy Manager here
+      - "${NWOS_HTTP_PORT:-9600}:9600"
+      # websocket / longpolling (gevent worker)
+      - "${NWOS_GEVENT_PORT:-9601}:9601"
     command: ["server", "-c", "/etc/nwos/nwos.conf", "--max-cron-threads=0"]
     volumes:
       - nwos-data:/var/lib/nwos
       - ./docker/nwos.conf:/etc/nwos/nwos.conf:ro
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:9600/web/login >/dev/null || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
     restart: unless-stopped
+    networks: [nwos]
 
   cron:
-    image: ${NWOS_IMAGE:-ghcr.io/nextosp/nwos:latest}
+    image: ${NWOS_IMAGE:-nwos:local}
     build:
       context: .
     depends_on:
@@ -43,13 +57,22 @@ services:
     environment:
       NWOS_DB_HOST: db
       NWOS_DB_PORT: "5432"
-      NWOS_DB_USER: nwos
-    command: ["server", "-c", "/etc/nwos/nwos.conf", "--workers=0", "--max-cron-threads=2"]
+      NWOS_DB_USER: ${POSTGRES_USER:-nwos}
+    command: ["server", "-c", "/etc/nwos/nwos.conf", "--workers=0", "--max-cron-threads=2", "--no-http"]
     volumes:
       - nwos-data:/var/lib/nwos
       - ./docker/nwos.conf:/etc/nwos/nwos.conf:ro
     restart: unless-stopped
+    networks: [nwos]
 
 volumes:
   postgres-data:
   nwos-data:
+
+networks:
+  nwos:
+    driver: bridge
+    # To let an Nginx Proxy Manager container reach `web` directly by hostname,
+    # replace the two lines above with:
+    #   external: true
+    #   name: <the network NPM runs on>
